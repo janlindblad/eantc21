@@ -1,0 +1,26 @@
+module ciena-mef-frame-to-cos-map-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-frame-to-cos-map-show";
+    prefix ciena-mef-frame-to-cos-map-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-frame-to-cos-map";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case frame-to-cos-map{
+            leaf frame-to-cos-map{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

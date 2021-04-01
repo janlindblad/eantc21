@@ -1,0 +1,78 @@
+module openconfig-interfaces-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/openconfig-interfaces-show";
+    prefix openconfig-interfaces-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for openconfig-interfaces";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case ip{
+            leaf ip{
+                type empty;
+            }
+         
+            leaf interface{
+                type empty;
+            }
+         
+            leaf neighbor{
+                type empty;
+            }
+         
+            leaf route{
+                type empty;
+            }
+        }
+        
+        case lldp{
+            leaf lldp{
+type string;
+
+            }
+        }
+        
+        case eoam{
+            leaf eoam{
+type string;
+
+            }
+        }
+        
+       /*case ettp-state{
+            leaf ettp-state{
+type string;
+
+            }
+        }*/
+        
+        case aggregation{
+            leaf aggregation{
+type string;
+
+            }
+        }
+        
+        /*case ettp-statistics{
+            leaf ettp-statistics{
+type string;
+
+            }
+        }*/
+        
+        case ettp{
+            leaf ettp{
+type string;
+
+            }
+        }
+         
+    }
+}

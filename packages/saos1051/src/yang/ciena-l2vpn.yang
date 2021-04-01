@@ -1,0 +1,158 @@
+module ciena-l2vpn {
+    namespace   "http://ciena.com/ns/yang/ciena-l2vpn";
+    prefix "l2vpn";
+
+    import ietf-pseudowires {
+        prefix pw;
+    }
+
+    import ciena-mef-fd {
+        prefix "mef-fd";
+    }
+
+    import ciena-l3-types {
+        prefix cn-l3-types;
+    }
+
+    import yuma-ncx {
+        prefix ncx;
+    }
+
+    organization
+        "Ciena Corporation";
+
+    contact
+       "Web URL: http://www.ciena.com/
+        E-mail:  yang@ciena.com
+        Postal:  7035 Ridge Road
+                  Hanover, Maryland 21076
+                      U.S.A.
+        Phone:   +1 800-921-1144
+        Fax:     +1 410-694-5750";
+
+    description
+         "This YANG module defines Ciena's specific l2vpn
+          protocol
+
+         Copyright (c) 2018  Ciena Corporation.  All rights
+         reserved.
+
+         All information contained herein is, and remains the
+         property of Ciena Corporation. Dissemination of this
+         information or reproduction of this material is strictly
+         forbidden unless prior written permission is obtained
+         from Ciena Corporation.";
+
+    revision "2018-11-12" {
+         description
+               "Initial version of ciena-l2vpn config and state yang model";
+    }
+
+    typedef protocol-type {
+        type enumeration {
+            enum 'ldp' {
+               description
+                     "protocol type is ldp signaling";
+            }
+        }
+    }
+
+    /* groupings */
+    grouping l2vpn-common-parameters-grp {
+        description
+              "L2VPN common parameters";
+
+        leaf mtu {
+           type uint16 {
+              range "576..16000";
+           }
+           default "1500";
+           units bytes;
+           description
+                 "This attribute sets the Maximum Transmission Unit(MTU) for a L2VPN service";
+        }
+
+        leaf service-type {
+           ncx:user-write "create";
+           type cn-l3-types:mpls-vpls-type;
+           default ethernet;
+           description
+                 "The service type as Vlan or Ethernet, Ethernet is default.";
+        }
+
+        leaf signaling-type {
+            ncx:user-write "create";
+            type protocol-type;
+            description
+                  "The signaling type to be used for L2VPN signaling.";
+        }
+    }
+
+    /* L2VPN YANG MODEL */
+    container l2vpn-services {
+        list l2vpn {
+           key "name";
+
+           leaf name {
+               type  string {
+                   length "1..255";
+               }
+               description
+                     "L2vpn-services instance name";
+           }
+
+           uses l2vpn-common-parameters-grp;
+
+           leaf forwarding-domain {
+               ncx:user-write "create";
+               type leafref {
+                   path "/mef-fd:fds/mef-fd:fd/mef-fd:name";
+               }
+               description
+                     "Mention the forwarding domain name";
+           }
+
+           leaf-list pseudowire {
+               type pw:pseudowire-ref;
+               description
+                     "Mention the pseudowire names required for l2vpn service";
+           }
+
+           leaf vc-mode-revertive {
+              type  boolean;
+              default "false";
+              description
+                   "If TRUE, vc-mode-revertive is enabled.";
+           }
+
+           leaf control-word {
+              type boolean;
+              default "false";
+              description
+                 "If true, control-word is enabled";
+           }
+        }
+    }
+
+    rpc vc-switchover {
+        input {
+            leaf from {
+               type pw:pseudowire-ref;
+                  description
+                     "name of pseudowire in use.";
+            }
+            leaf to {
+               type pw:pseudowire-ref;
+               description
+                  "name of pseudowire to be switched to.";
+            }
+        }
+        output {
+            leaf response {
+               type string;
+               description
+                   "The response could be 'success', or the reason for isis-clear-ip-route failure";
+            }
+        }
+    }
+}

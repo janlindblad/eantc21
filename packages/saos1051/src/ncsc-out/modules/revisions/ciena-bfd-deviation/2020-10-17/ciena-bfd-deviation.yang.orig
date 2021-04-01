@@ -1,0 +1,52 @@
+module ciena-bfd-deviation {
+  yang-version 1.1;
+  namespace
+    "http://ciena.com/ns/yang/ciena-bfd-deviation";
+  prefix
+    "bfd-deviation";
+
+  import ciena-bfd {
+    prefix "bfd";
+  }
+  
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+
+  description
+    "This YANG module defines Ciena proprietary YANG deviations
+     of BFD protocol.
+
+     Copyright (c) 2020  Ciena Corporation.  All rights
+     reserved.
+
+     All information contained herein is, and remains the
+     property of Ciena Corporation. Dissemination of this
+     information or reproduction of this material is strictly
+     forbidden unless prior written permission is obtained
+     from Ciena Corporation.";
+
+  revision "2020-10-17" {
+    description
+      "Initial Version of bfd deviation model.";
+  }
+
+
+  //For bfd container
+  deviation /bfd:bfd/bfd:global {
+    deviate add {
+      must "admin-down != 'true'" {
+        error-message
+          "admin-down must be set to false.";
+      }
+    }
+  }
+}

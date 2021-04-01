@@ -1,0 +1,91 @@
+module ciena-nfvi-virtual-interface {
+  namespace "http://www.ciena.com/ns/yang/ciena-nfvi-virtual-interface";
+  prefix ciena-nfvi-vintf;
+
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+
+  description
+    "This YANG module defines Ciena's global configuration for virtual interfaces settings.
+
+     Copyright (c) 2019 Ciena Corporation.  All rights 
+     reserved.
+
+     All information contained herein is, and remains
+     the property of Ciena Corporation. Dissemination of this 
+     information or reproduction of this material is strictly 
+     forbidden unless prior written permission is obtained from 
+     Ciena Corporation.";
+
+  revision 2019-05-15 {
+    description 
+      "Initial version";
+    reference
+      "RFC 6020: YANG - A Data Modeling Language for
+       the Network Configuration Protocol (NETCONF).
+       No specific reference; standard not available.";
+  }
+
+  typedef nfvi-virtual-interface-type {
+    type enumeration {
+      enum vhost-user {
+        description
+          "NFVi virtual interface type vhost";
+      }
+    }
+  }
+
+  typedef nfvi-virtual-interface-name-type {
+    type string {
+      length "1..255";
+      pattern "[A-Za-z]+([A-Za-z0-9_-]*[A-Za-z0-9]+)?";
+    }
+    description 
+      "The NFVI virtual interface name can be start 
+       with letters, and ends with letters or digits. 
+       It can contains letters, digits and '-' and '_'
+       character in the middle.";
+  }
+
+  container nfvi-virtual-interfaces {
+    description
+      "The virtual interfaces created for NFVi.";
+    list nfvi-virtual-interface {
+      key "name";
+      leaf name {
+        type nfvi-virtual-interface-name-type;
+        description
+          "The name of the NFVi virtual interface.";
+      }
+      leaf type {
+        type nfvi-virtual-interface-type;
+        description
+          "The type of the NFVi virtual interface.";
+      }
+      container state {
+        config false;
+        description
+          "Operational state of the NFVi virtual interface";
+        leaf ettp {
+          type string;
+          description
+            "The corresponding ettp name of the NFVi virtual interface.";
+        }
+        leaf logical-port {
+          type string;
+          description
+            "The corresponding logical port name of the NFVi virtual interface.";
+        }
+      }
+    }
+  }
+}

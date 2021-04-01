@@ -1,0 +1,57 @@
+module ciena-vrf {
+    namespace   "urn:ciena:params:xml:ns:yang:ciena:ciena-vrf";
+    prefix "vrf";
+
+    organization
+        "Ciena Corporation";
+
+    contact
+        "Web URL: http://www.ciena.com/
+         E-mail:  yang@ciena.com
+         Postal:  7035 Ridge Road
+                  Hanover, Maryland 21076
+                      U.S.A.
+         Phone:   +1 800-921-1144
+         Fax:     +1 410-694-5750";
+
+    description
+        "This YANG module defines Ciena's VPN Routing/Forwarding model.
+
+         Copyright (c) 2018  Ciena Corporation.  All rights
+         reserved.
+
+         All information contained herein is, and remains the
+         property of Ciena Corporation. Dissemination of this
+         information or reproduction of this material is strictly
+         forbidden unless prior written permission is obtained
+         from Ciena Corporation.";
+
+
+    revision "2016-10-29" {
+        description "Modifications to auto-generate clis.";
+    }
+
+    grouping vrf-grouping {
+         list vrf {
+            key "vrfName";
+            max-elements 129;
+            description
+               "Virtual Routing Forwarding Instance";
+            leaf vrfName  {
+               type  string {
+                  length "1..15";
+               }
+               description "Routing Forwarding Instance Name";
+            }
+
+            leaf description  {
+               type  string {
+                  length "0..255";
+               }
+               description "description of vrf";
+            }
+        }
+    }
+
+    uses vrf-grouping;
+}

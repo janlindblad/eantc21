@@ -1,0 +1,42 @@
+module ciena-mef-access-flow-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-access-flow-show";
+    prefix ciena-mef-access-flow-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-access-flow";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case acl-action{
+            leaf acl-action{
+                type union{
+                    type string;
+                }
+            }
+        }
+        
+        case access-flow{
+            leaf access-flow{
+                type union{
+                    type string;
+                }
+            }
+        }
+        
+        case acl-custom-destinations{
+            leaf acl-custom-destinations{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

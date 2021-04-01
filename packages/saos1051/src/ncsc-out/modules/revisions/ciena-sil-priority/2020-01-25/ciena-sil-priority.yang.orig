@@ -1,0 +1,836 @@
+module ciena-sil-priority {
+  yang-version "1";
+  namespace "http://ciena.com/silpriority/yang/ciena-sil-priority";
+  prefix "ciena-sil-priority";
+
+  import yumaworks-extensions {
+    prefix ywx; 
+  }
+
+  import ciena-bw-calculation-mode {
+    prefix ciena-bw-calculation-mode;
+  }
+
+  import ciena-mef-access-flow {
+    prefix acl;
+  }
+
+  import ciena-mef-classifier {
+    prefix classifier;
+  }
+  
+  import ciena-mef-cos-to-frame-map {
+    prefix ctf;
+  }
+  
+  import ciena-mef-egress-qos {
+    prefix mef-egress-qos;
+  }
+  
+  import ciena-mef-egress-qos-binding {
+    prefix mef-egress-qos-binding;
+  }
+  
+  import ciena-mef-fd {
+    prefix mef-fd;
+  }
+  
+  import ciena-mef-flood-containment-profile {
+    prefix mef-fc;
+  }
+  
+  import ciena-mef-fp {
+    prefix mef-fp;
+  }
+  
+  import ciena-mef-frame-to-cos-map {
+    prefix ftc;
+  }
+  
+  import ciena-mef-l2cp-profile {
+    prefix mef-l2cp;
+  }
+  
+  import ciena-mef-logical-port {
+    prefix mef-logical-port;
+  }
+
+  import ciena-mef-mac-management {
+    prefix mef-mac-management;
+  }
+  
+  import ciena-mef-meter-profile {
+    prefix meter;
+  }
+//import ciena-mef-mirror-session {
+//  prefix mef-mirror-session;
+//}
+ 
+  import ciena-mef-pfg-profile {
+    prefix mef-pfg;
+  }
+
+//import ciena-mef-qos-flow {
+//  prefix flow;
+//}
+  
+  import ciena-vrf {
+    prefix vrf;
+  }
+  
+  import openconfig-interfaces {
+    prefix oc-if;
+  }
+
+  import ciena-routing-policy {
+    prefix "rt-pol";
+  }
+
+  import ciena-pon-ctrl {
+    prefix pon-ctrl;
+  }
+
+  import ciena-sync {
+    prefix sync;
+  }
+
+  import ciena-sync-ptp {
+    prefix sync-ptp;
+  }
+
+  import ciena-sat {
+    prefix ciena-sat;
+  }
+
+  import ciena-flexe {
+    prefix ciena-flexe;
+  }
+
+  import openconfig-platform {
+    prefix oc-platform;
+  }
+
+  import ciena-packet-xcvr {
+    prefix cn-xcvr;
+  }
+
+  import ciena-packet-ptp {
+    prefix cn-ptp;
+  }
+
+  import ciena-packet-otn-port {
+    prefix cn-otn-port;
+  }
+
+  import ciena-of-vfsi {
+    prefix "of-vfsis";
+  }
+
+  import ciena-of-flow-tables {
+    prefix "of-flow-tables";
+  }
+
+  import ciena-of-group-tables {
+    prefix "of-group-tables";
+  }
+  
+  import ciena-te {
+    prefix te;
+  }
+
+  import ciena-sr-policy {
+    prefix cnsr;
+  }
+  import ietf-pseudowires {
+    prefix pw;
+  }
+
+  import ciena-l2vpn {
+    prefix l2vpn;
+  }
+
+  import ciena-pkix {
+    prefix pkix;
+  }
+
+  import ciena-tls {
+    prefix tls;
+  }
+
+  import ciena-tls-service-profile {
+    prefix tls-svc-pfl;
+  }
+
+  import ciena-evpn {                                        
+    prefix cnevpn;                                              
+  }                                                          
+                                                              
+  import ciena-sr {
+    prefix sr;
+  }                                                             
+
+  import ciena-tdm-global {
+    prefix tdm-global;
+  }
+
+  import ciena-packet-tdm-port {
+    prefix tdm-port;
+  }
+
+  import ciena-tdm-pseudowire {
+    prefix tdm-pw;
+  }
+
+  import ciena-packet-pm {
+    prefix cn-pm;
+  }
+
+  import ciena-vdisk-mgmt {
+     prefix vdisk-mgmt;
+  }
+
+  import ciena-file-mgmt {
+     prefix file-mgmt;
+  }
+
+  import ciena-sf {
+     prefix sf;
+  }
+
+  import ciena-sfc {
+     prefix sfc;
+  }
+
+  import ciena-nat {
+    prefix cn-nat;
+  }
+
+  import ciena-subsystem-resource {
+     prefix cn-sub-res;
+  }
+
+  import ciena-rss-queue {
+     prefix cn-rss;
+  }
+
+  import ciena-mpls-tp-corouted {
+     prefix tp-tunnel;
+  }
+
+  import ciena-bfd {
+    prefix "bfd";
+  }
+
+  import ciena-bfd-ip-sh {
+   prefix bfd-ip-sh;
+  }
+
+  import ciena-bfd-ip-mh {
+   prefix bfd-ip-mh;
+  }
+
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+
+  description
+    "This module contains the Ciena proprietary SIL priorities 
+     for all the Ciena YANG files.
+
+     Copyright (c) 2017 Ciena Corporation.  All rights reserved.
+
+     All information contained herein is, and remains
+     the property of Ciena Corporation. Dissemination of this
+     information or reproduction of this material is strictly
+     forbidden unless prior written permission is obtained from
+     Ciena Corporation.";
+
+  revision "2020-01-25" {
+    description
+      "SIL priority for DNFVi yang models, vdisk, file-mgmt, sf, sfc, Subsystems, RSS Queue and Access Flow Yang models, \
+       Tp Tunnel yang models";
+    reference
+      "";
+  }
+
+  revision "2020-01-21" {
+    description
+      "SIL priority for xcvrs, ptps, otn-ports, pms, Evpn, Segment Routing, ciena-mef-qos-flow, \
+       TLS service profiles, and removing sil-priority for ciena-mef-mirror-session. \
+       Deleted cn-xcvr:properties and cn-xcvr:state";
+    reference
+      "";
+  }
+
+  revision "2019-09-12" {
+    description
+      "Added SIL priority for newly added container for cos-to-queue-map-associations in egress-qos module.";
+    reference
+      "";
+  }
+
+  revision "2018-09-04" {
+    description
+      "Initial version";
+    reference
+      "";
+  }
+
+  //Level 10
+
+  deviation /oc-platform:components {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+
+  //Level 15
+
+  // Needs to be before xcvrs which trigger TDM port creation
+  deviation /tdm-global:tdm-global {
+    deviate add {
+      ywx:sil-priority 15;
+    }
+  }
+
+  //Level 20
+
+  deviation /ciena-bw-calculation-mode:bw-calculation-mode {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /ctf:cos-to-frame-maps {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /mef-l2cp:l2cp-profiles {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /mef-pfg:pfg-profiles {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /mef-fc:flood-containment-profiles {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /acl:access-profiles {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /ftc:frame-to-cos-maps {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /meter:meter-profiles {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /mef-mac-management:mac-management {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+
+  deviation /cn-xcvr:xcvrs {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+
+  // level 25
+
+  deviation /cn-ptp:ptps {
+    deviate add {
+      ywx:sil-priority 25;
+    }
+  }
+
+  // level 26
+
+  deviation /cn-otn-port:otn-ports {
+    deviate add {
+      ywx:sil-priority 26;
+    }
+  }
+
+  deviation /ciena-flexe:flexe-ports {
+    deviate add {
+      ywx:sil-priority 26;
+    }
+  }
+
+  // level 27
+
+  deviation /cn-pm:pm {
+    deviate add {
+      ywx:sil-priority 27;
+    }
+  }
+
+  //Level 30
+
+  deviation /mef-fd:fds {
+    deviate add {
+      ywx:sil-priority 30;
+    }
+  }
+  deviation /vrf:vrf {
+    deviate add {
+          ywx:sil-priority 30;
+    }
+  }
+
+  //Level 35
+
+  deviation /tls:hello-params{
+    deviate add {
+      ywx:sil-priority 35;
+    }
+  }
+
+  deviation /pkix:pkix{
+    deviate add {
+      ywx:sil-priority 35;
+    }
+  }
+
+  deviation /ciena-flexe:flexe-groups {
+    deviate add {
+      ywx:sil-priority 35;
+    }
+  }
+
+  //Level 40
+
+  deviation /tls-svc-pfl:tls-service-profiles{
+    deviate add {
+      ywx:sil-priority 40;
+    }
+  }
+
+  deviation /ciena-flexe:flexe-channels {
+    deviate add {
+      ywx:sil-priority 40;
+    }
+  }
+
+  //Level 50
+
+  deviation /oc-if:interfaces {
+    deviate add {
+      ywx:sil-priority 50;
+    }
+  }
+  deviation /rt-pol:routing-policy {
+    deviate add {
+      ywx:sil-priority 51;
+    }
+  }
+
+  //Level 60
+
+  deviation /classifier:classifiers {
+    deviate add {
+      ywx:sil-priority 60;
+    }
+  }
+  deviation /acl:acl-actions {
+    deviate add {
+      ywx:sil-priority 60;
+    }
+  }
+  deviation /mef-logical-port:logical-ports {
+    deviate add {
+      ywx:sil-priority 60;
+    }
+  }
+  deviation /cn-nat:nat {
+    deviate add {
+      ywx:sil-priority 60;
+    }
+  }
+
+  //Level 70
+
+  deviation /mef-egress-qos:egress-qos {
+    deviate add {
+      ywx:sil-priority 70;
+    }
+  }
+
+  deviation /ciena-flexe:flexe-cross-connects {
+    deviate add {
+      ywx:sil-priority 70;
+    }
+  }
+
+  //priority of mef-egress-qos objects relative to each other 
+
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:cos-queue-map {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:congestion-avoidance-profile {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:scheduler-profile {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:queue-group-profile {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:scheduler {
+    deviate add {
+      ywx:sil-priority 30;
+    }
+  }
+  deviation /mef-egress-qos:egress-qos/mef-egress-qos:queue-group {
+    deviate add {
+      ywx:sil-priority 40;
+    }
+  }
+
+  deviation /of-vfsis:of-vfsis {
+    deviate add {
+      ywx:sil-priority 70;
+    }
+  }
+
+  //Level 80
+
+  deviation /mef-egress-qos:cos-to-queue-map-associations {
+    deviate add {
+         ywx:sil-priority 80;
+    }
+  }
+
+  deviation /mef-egress-qos-binding:interface-qos-binding {
+    deviate add {
+      ywx:sil-priority 80;
+    }
+  }
+
+  deviation /mef-mac-management:fdbs {
+    deviate add {
+      ywx:sil-priority 80;
+    }
+  }
+
+  deviation /of-group-tables:of-group-tables {
+    deviate add {
+      ywx:sil-priority 80;
+    }
+  }
+
+  // priority of of-group-tables objects relative to each other
+
+  deviation /of-group-tables:of-group-tables/of-group-tables:of-group-table {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+
+  deviation /of-group-tables:of-group-tables/of-group-tables:of-group-table-entry {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+
+  deviation /tdm-port:tdm-ports {
+    deviate add {
+      ywx:sil-priority 80;
+    }
+  }
+
+  //Level 90
+
+  deviation /mef-fp:fps {
+    deviate add {
+      ywx:sil-priority 90;
+    }
+  }
+
+  deviation /of-flow-tables:of-flow-tables {
+    deviate add {
+      ywx:sil-priority 90;
+    }
+  }
+
+  //priority of of-flow-tables objects relative to each other
+
+  deviation /of-flow-tables:of-flow-tables/of-flow-tables:of-flow-table {
+    deviate add {
+      ywx:sil-priority 10;
+    }
+  }
+
+  deviation /of-flow-tables:of-flow-tables/of-flow-tables:of-flow-table-entry {
+    deviate add {
+      ywx:sil-priority 20;
+    }
+  }
+
+  //Level 100
+
+  deviation /acl:acl-custom-destinations {
+    deviate add {
+      ywx:sil-priority 100;
+    }
+  }
+
+//deviation /flow:qos-flows {
+//  deviate add {
+//    ywx:sil-priority 100;
+//  }
+//}
+  deviation /mef-mac-management:static-macs {
+    deviate add {
+      ywx:sil-priority 100;
+    }
+  }
+
+  deviation /vdisk-mgmt:vdisks {
+    deviate add {
+      ywx:sil-priority 100;
+    }
+  }
+
+  deviation /cn-sub-res:subsystems {
+    deviate add {
+      ywx:sil-priority 100;
+    }
+  }
+
+  //Level 101
+  deviation /file-mgmt:files {
+    deviate add {
+      ywx:sil-priority 101;
+    }
+  }
+
+  //Level 103
+  deviation /sfc:sffs {
+    deviate add {
+      ywx:sil-priority 103;
+    }
+  }
+
+  //Level 110
+
+  deviation /acl:access-flows {
+    deviate add {
+      ywx:sil-priority 110;
+    }
+  }
+//deviation /mef-mirror-session:mirror-sessions {
+//  deviate add {
+//    ywx:sil-priority 110;
+//  }
+//}
+
+  //Level 120
+
+  deviation /ciena-sat:sat/ciena-sat:emix-sequence {
+    deviate add {
+      ywx:sil-priority 120;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:kpi-profile {
+    deviate add {
+      ywx:sil-priority 120;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:bw-alloc-profile {
+    deviate add {
+      ywx:sil-priority 120;
+    }
+  }
+
+  //Level 130
+
+  deviation /sync:sync/sync:global {
+    deviate add {
+      ywx:sil-priority 130;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:sat-global {
+    deviate add {
+      ywx:sil-priority 130;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:test-profile {
+    deviate add {
+      ywx:sil-priority 130;
+    }
+  }
+
+  deviation /pon-ctrl:pon-ctrl/pon-ctrl:olts {
+    deviate add {
+      ywx:sil-priority 130;
+    }
+  }
+
+  deviation /pon-ctrl:pon-ctrl/pon-ctrl:sla-profiles {
+    deviate add {
+      ywx:sil-priority 130;
+    }
+  }
+
+  //Level 140
+
+  deviation /sync:sync/sync-ptp:ptp-global {
+    deviate add {
+      ywx:sil-priority 140;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:entity {
+    deviate add {
+      ywx:sil-priority 140;
+    }
+  }
+
+  deviation /pon-ctrl:pon-ctrl/pon-ctrl:onus {
+    deviate add {
+      ywx:sil-priority 140;
+    }
+  }
+
+  //Level 150
+
+  deviation /sync:sync/sync:input-references {
+    deviate add {
+      ywx:sil-priority 150;
+    }
+  }
+
+  deviation /ciena-sat:sat/ciena-sat:test-instance {
+    deviate add {
+      ywx:sil-priority 150;
+    }
+  }
+
+  deviation /cn-rss:rss-queue-config {
+    deviate add {
+      ywx:sil-priority 150;
+    }
+  }
+
+  //Level 160
+
+  deviation /sync:sync/sync:protection-groups {
+    deviate add {
+      ywx:sil-priority 160;
+    }
+  }
+
+  //Level 170
+
+  deviation /sync:sync/sync:output-references {
+    deviate add {
+      ywx:sil-priority 170;
+    }
+  }
+
+  //Level 175
+
+  deviation /te:te {
+    deviate add {
+       ywx:sil-priority 175;
+    }
+  }
+
+  deviation /cnsr:segment-routing-traffic-engineering {
+    deviate add {
+       ywx:sil-priority 175;
+    }
+  }
+
+  deviation /tp-tunnel:tp-corouted-tunnels {
+    deviate add {
+       ywx:sil-priority 175;
+    }
+  }
+
+  //Level 176
+
+  deviation /sr:segment-routing {
+    deviate add {
+       ywx:sil-priority 176;
+    }
+  } 
+ 
+  //Level 180
+
+  deviation /pw:pseudowires {
+    deviate add {
+      ywx:sil-priority 180;
+    }
+  }
+
+  deviation /tdm-pw:tdm-pseudowires {
+    deviate add {
+      ywx:sil-priority 180;
+    }
+  }
+
+  //Level 190
+
+  deviation /l2vpn:l2vpn-services {
+    deviate add {
+      ywx:sil-priority 190;
+    }
+  }
+
+  //Level 200                        
+                                                              
+  deviation /cnevpn:evpn {           
+    deviate add {                    
+      ywx:sil-priority 200;                                     
+    }                                
+  }
+
+  //Level 210
+
+  deviation /bfd:bfd/bfd-ip-sh:ip-sh {
+    deviate add {
+      ywx:sil-priority 210;
+    }
+  }
+
+  deviation /bfd:bfd/bfd-ip-mh:ip-mh {
+    deviate add {
+      ywx:sil-priority 210;
+    }
+  }
+}
+

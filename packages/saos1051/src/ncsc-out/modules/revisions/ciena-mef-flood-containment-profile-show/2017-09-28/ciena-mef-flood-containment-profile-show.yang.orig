@@ -1,0 +1,26 @@
+module ciena-mef-flood-containment-profile-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-flood-containment-profile-show";
+    prefix ciena-mef-flood-containment-profile-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-flood-containment-profile";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case flood-containment-profile{
+            leaf flood-containment-profile{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

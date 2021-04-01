@@ -1,0 +1,34 @@
+module ciena-mef-fp-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-fp-show";
+    prefix ciena-mef-fp-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-fp";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        /*case flow-point-statistics{
+            leaf flow-point-statistics{
+                type union{
+                    type string;
+                }
+            }
+        }*/
+        
+        case flow-point{
+            leaf flow-point{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

@@ -1,0 +1,26 @@
+module ciena-mef-classifier-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-classifier-show";
+    prefix ciena-mef-classifier-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-classifier";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case classifier{
+            leaf classifier{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

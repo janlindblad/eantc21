@@ -1,0 +1,1585 @@
+/*
+* File name : ciena-l3-types.yang
+*/
+
+module ciena-l3-types {
+
+    namespace   "urn:ciena:params:xml:ns:yang:ciena:ciena-types";
+    prefix "cn-l3-types";
+
+    import ietf-inet-types {
+        prefix inet;
+    }
+
+    organization
+        "Ciena Corporation";
+
+    contact
+        "Web URL: http://www.ciena.com/
+         E-mail:  yang@ciena.com
+         Postal:  7035 Ridge Road
+                  Hanover, Maryland 21076
+                     U.S.A.
+         Phone:   +1 800-921-1144
+         Fax:     +1 410-694-5750";
+
+    revision "2020-08-31" {
+        description
+            "Added IPv6 enum in mode type to support IPv6 prefix-list.
+             Added ISIS topology type enum.
+             Added AFI/SAFI types for bgp table-map test.";
+    }
+
+    revision "2020-02-10" {
+        description
+            "Supporting OSPF SR-Extensions, LDP IGP sync, TI-LFA and  RLFA
+             Added Changes for Ospf Virtual link feature
+             Adding local-as options types: no-prepend
+             Adding support for BGP/OSPF route redistribution
+             Added Changes for Ospf Virtual link feature.
+             Supporting OSPF LDP IGP sync and remote LFA.
+             Supporting OSPF specific match and set filters for Route Map.
+             Changing bit values to start from 0 as per RFC-7950.
+             Adding sr policy enum for tunnel type.";
+    }
+    
+    revision "2020-01-23" {
+        description
+            "Supporting extended area-id as per IETF.
+             Added protocol enum type for prefix-lists.";
+    }
+
+    revision "2018-04-05" {
+        description
+            "Initial version of ciena data types.";
+    }
+    /* BGP data types */
+    typedef cluster-id {
+        type union{
+
+            type inet:ipv4-address {
+
+            }
+            type uint32 {
+                range "1..4294967295";
+
+            }
+        }
+    }
+
+    typedef bgp-med-type {
+        type enumeration {
+            enum confed { value 0;    }
+        }
+    }
+
+    typedef bgp-add-path-type {
+        type bits {
+            bit receive { position 0;  }
+            bit send { position 1;  }
+        }
+    }
+
+    typedef bgp-peer-add-path-type {
+        type enumeration {
+            enum receive { value 1;    }
+            enum send { value 2;    }
+            enum send-receive { value 3;    }
+            enum disable { value 4;    }
+        }
+    }
+
+    typedef bgp-redistribute-type {
+        type enumeration {
+            enum kernel { value 1;    }
+            enum connected { value 2;    }
+            enum static { value 3;    }
+            enum rip { value 4;    }
+            enum isis { value 6;    }
+            enum ospf {
+               description
+                 "Redistribute OSPF into BGP.";
+               value 5;
+            }
+        }
+    }
+
+    typedef redist-ospf-type {
+        type enumeration {
+            enum ospf { value 5;    }
+        }
+    }
+
+    typedef afi-type {
+        type enumeration {
+            enum ipv4 { value 1;    }
+            enum ipv6 { value 2;    }
+            enum vpnv4 { value 3;    }
+            enum vpnv6 { value 4;    }
+            enum rtfilter { value 5;    }
+            enum l2vpn { value 25;    }
+            enum link-state {value 16388;   }
+        }
+    }
+
+    typedef safi-type {
+        type enumeration {
+            enum unicast { value 1;    }
+            enum multicast { value 2;    }
+            enum labeled-unicast { value 4;    }
+            enum l2vpn-vpls { value 65;    }
+            enum evpn { value 70;    }
+            enum vpn-unicast { value 128;    }
+            enum rtfilter-unicast { value 132;    }
+            enum link-state { value 71;   }
+        }
+    }
+
+    typedef vrf-afi-type {
+        type enumeration {
+            enum ipv4 { value 1;    }
+            enum ipv6 { value 2;    }
+        }
+    }
+
+    typedef vrf-safi-type {
+        type enumeration {
+            enum unicast { value 1;    }
+        }
+    }
+
+    typedef adjacency-table-type {
+       type enumeration {
+           enum none { value 0;  }
+           enum in { value 1;   }
+           enum out { value 2;   }
+           enum all { value 3;   }
+       }
+    }
+
+    typedef clear-type {
+       type enumeration {
+           enum all { value 0;   }
+           enum peer { value 1;   }
+           enum group { value 2;   }
+           enum external { value 3;   }
+           enum as { value 4;   }
+           enum rfd { value 5;  }
+           enum prefix { value 6;  }
+       }
+    }
+
+    typedef clear-soft {
+       type enumeration {
+           enum none { value 1;   }
+           enum out { value 2;   }
+           enum in { value 3;   }
+           enum both { value 4;   }
+           enum in-orf-prefix { value 5;   }
+           enum table-map { value 6;  }
+           enum rfd-damp { value 7;  }
+           enum rfd-flap-stat { value 8;  }
+       }
+    }
+    typedef aigp-metric-cost {
+        type enumeration {
+            enum pre-bestpath { value 128;    }
+            enum igp-cost { value 129;    }
+        }
+    }
+
+    typedef bgp-send-community-type {
+        type bits {
+            bit standard { position 0;  }
+            bit extended { position 1;  }
+            bit both { position 2;  }
+        }
+    }
+
+    typedef attr-unchanged-type {
+        type bits {
+            bit as-path { position 0;  }
+            bit next-hop { position 1;  }
+            bit med { position 2;  }
+        }
+    }
+
+    typedef bgp-orf-prefix-type {
+        type enumeration {
+            enum both { value 0;    }
+            enum receive { value 1;    }
+            enum send { value 2;    }
+        }
+    }
+
+    typedef bgp-rmap-direction {
+        type enumeration {
+            enum in { value 0;    }
+            enum out { value 1;    }
+        }
+    }
+
+    typedef bgp-distribute-list-action {
+        type bits {
+            bit in { position 0;  }
+            bit out { position 1;  }
+        }
+    }
+
+    typedef bgp-community-list-action {
+        type enumeration {
+            enum deny { value 1;    }
+            enum permit { value 2;    }
+        }
+    }
+
+     typedef bgp-rd {
+       type string {
+         pattern
+           '(0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]):(429496729[0-5]|42949672[0-8]\d|'
+         + '4294967[01]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|'
+         + '4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|'
+         + '[0-3]?\d{1,8}\d|[1-9]))|'
+         + '(1:(((\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|'
+         + '1\d{2}|2[0-4]\d|25[0-5])):(6553[0-5]|655[0-2]\d|'
+         + '65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{1,3}\d|[1-9]))|'
+         + '(2:(429496729[0-5]|42949672[0-8]\d|4294967[01]\d{2}|'
+         + '429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|'
+         + '429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|[0-3]?\d{1,8}\d|[1-9]):'
+         + '(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]))|'
+         + '(([3-9a-fA-F]|[1-9a-fA-F][\da-fA-F]{1,3}):'
+         + '[\da-fA-F]{1,12})';
+       }
+       description
+         "A route distinguisher is an 8-octet value used to distinguish
+          routes from different BGP VPNs (RFC 4364). A route
+          distinguisher consists of three fields: A 2-octet type field,
+          an administrator field, and an assigned number field.
+          According to the data formats for type 0, 1, and 2 defined in
+          RFC4364, the encoding pattern is defined as:
+
+          0:2-octet-asn:4-octet-number
+          1:4-octet-ipv4addr:2-octet-number
+          2:4-octet-asn:2-octet-number.
+          2-octet-other-hex-number:6-octet-hex-number
+
+          Some valid examples are: 0:100:100, 1:1.1.1.1:100, and
+          2:1234567890:203.";
+       reference
+         "RFC4364: BGP/MPLS IP Virtual Private Networks (VPNs).";
+     }
+
+     typedef bgp-rt {
+       type string {
+         pattern
+           '(0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]):(429496729[0-5]|42949672[0-8]\d|'
+         + '4294967[01]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|'
+         + '4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|'
+         + '[0-3]?\d{1,8}\d|[1-9]))|'
+         + '(1:(((\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|'
+         + '1\d{2}|2[0-4]\d|25[0-5])):(6553[0-5]|655[0-2]\d|'
+         + '65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{1,3}\d|[1-9]))|'
+         + '(2:(429496729[0-5]|42949672[0-8]\d|4294967[01]\d{2}|'
+         + '429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|'
+         + '429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|[0-3]?\d{1,8}\d|[1-9]):'
+         + '(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]))';
+       }
+       description
+         "A route target is an 8-octet BGP extended community
+          initially identifying a set of sites in a BGP
+          VPN (RFC 4364). However, it has since taken on a more
+          general role in BGP route filtering.
+          A route target consists of three fields:
+          a 2-octet type field, an administrator field,
+          and an assigned number field.
+          According to the data formats for type 0, 1, and 2 defined in
+          RFC4360 and RFC5668, the encoding pattern is defined as:
+
+          0:2-octet-asn:4-octet-number
+          1:4-octet-ipv4addr:2-octet-number
+          2:4-octet-asn:2-octet-number.
+          Some valid examples are: 0:100:100, 1:1.1.1.1:100, and
+          2:1234567890:203.";
+       reference
+         "RFC4360: BGP Extended Communities Attribute.
+          RFC5668: 4-Octet AS Specific BGP Extended Community.";
+     }
+
+    typedef bgp-gr-mode {
+        type enumeration {
+            enum disable { value 0;    }
+            enum enable { value 1;    }
+        }
+    }
+
+    typedef bgp-local-as-types {
+        type bits {
+            bit no-prepend { position 0;  }
+        }
+        description
+            "Local-as types no-prepend, to not allow prepending local-as 
+             from the as path updates.";
+    }
+
+    /* ISIS Datatypes */
+    typedef system-id {
+        type string {
+            pattern
+                '[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}';
+            }
+            description
+                "This type defines IS-IS system-id using pattern,
+               An example system-id is 0143.0438.AeF0";
+    }
+
+    typedef net {
+        type string {
+            pattern
+               '[0-9A-Fa-f]{2}(\.[0-9A-Fa-f]{4}){0,6}.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0]{2}';
+            }
+            description
+                "This type defines IS-IS net using pattern";
+    }
+
+	 typedef  sr-enable-disable{
+        type enumeration {
+            enum disable { value 0;    }
+            enum enable { value 1;    }
+        }
+     }
+
+	 typedef  isis-address-ipv6{
+        type enumeration {
+            enum ipv6 { value 1;    }
+        }
+    }
+
+    typedef  isis-origin-type{
+        type enumeration {
+            enum originate { value 4;    }
+            enum originate-always { value 32;    }
+        }
+    }
+
+
+    typedef  protocol-name {
+         type enumeration {
+            enum connected { value 1;    }
+            enum static { value 2;    }
+            enum ospf { value 3;    }
+            enum bgp { value 4;    }
+         }
+     }
+
+
+    typedef  type {
+         type enumeration {
+            enum 1to2 { value 1;    }
+            enum 2to1 { value 2;    }
+         }
+     }
+
+
+	 typedef  isis-summary-level{
+        type enumeration {
+            enum level-1 { value 1;    }
+            enum level-2 { value 2;    }
+            enum level-1-2 { value 3;    }
+        }
+    }
+
+    typedef  isis-level-types{
+        type enumeration {
+            enum level-1 { value 1;    }
+            enum level-2 { value 2;    }
+            enum level-1-2 { value 3;    }
+        }
+    }
+
+    typedef  metric-style{
+        type enumeration {
+            enum wide { value 1;    }
+        }
+    }
+
+    typedef  isis-level-type{
+        type enumeration {
+            enum level-1 { value 1;    }
+            enum level-2 { value 2;    }
+        }
+    }
+
+    typedef  isis-auth-mode{
+        type enumeration {
+            enum md5 { value 1;    }
+            enum text { value 2;    }
+        }
+    }
+
+    typedef  isis-snp{
+        type enumeration {
+            enum send-only { value 1;    }
+            enum validate { value 2;    }
+        }
+    }
+
+    typedef  isis-level-proto{
+        type enumeration {
+            enum ipv4 { value 1;    }
+            enum ipv6 { value 2;    }
+        }
+    }
+
+    typedef  isis-ip-address-family {
+        type enumeration {
+            enum ipv4 { value 1;    }
+// not for 10.2  enum ipv6 { value 2;    }
+        }
+    }
+
+    typedef  isis-frr-enum{
+        type enumeration {
+            enum all { value 1;    }
+        }
+    }
+
+    typedef  isis-frr-tie-breaker {
+        type enumeration {
+            enum primary-path { value 1; }
+            enum node-protecting { value 3; }
+            enum secondary-path { value 5; }
+            enum downstream-path { value 6; }
+        }
+    }
+
+    typedef  isis-rlfa-protection-type {
+        type enumeration {
+            enum downstream-protection { value 1; }
+        }
+    }
+
+    typedef  isis-suppress{
+        type enumeration {
+            enum external { value 1;    }
+            enum interlevel { value 2;    }
+            enum external-interlevel { value 3;    }
+            enum interlevel-external { value 4;    }
+        }
+    }
+
+    typedef  isis-onstartup{
+        type enumeration {
+            enum wait-for-bgp { value 1;    }
+		      enum time-out { value 2;    }
+          }
+    }
+
+    typedef  isis-state{
+        type enumeration {
+            enum Down { value 0;    }
+            enum Init { value 1;    }
+            enum Up { value 2;    }
+        }
+    }
+
+    typedef  isis-nbr-adj{
+        type enumeration {
+            enum Suppress { value 1;    }
+            enum Advertise { value 2;    }
+        }
+    }
+
+    typedef  isis-iflevel{
+        type enumeration {
+            enum level-1 { value 1;    }
+            enum level-2 { value 2;    }
+            enum p2p { value 3;    }
+        }
+    }
+
+    typedef  isis-interface-type{
+        type enumeration {
+            enum broadcast { value 1;    }
+            enum point-to-point { value 2;    }
+        }
+    }
+
+    typedef  mesh-blocked{
+        type enumeration {
+            enum blocked { value 0;    }
+        }
+    }
+
+    typedef  isis-mesh-type{
+        type union{
+
+            type mesh-blocked {
+
+            }
+            type uint32 {
+                range "1..4294967295";
+
+            }
+        }
+    }
+
+    typedef  isis-sync-type{
+        type enumeration {
+            enum level-1 { value 1;    }
+            enum level-2 { value 2;    }
+            enum level-1-2 { value 3;    }
+        }
+    }
+
+	typedef  isis-route-type{
+		type enumeration {
+			enum redistribution {
+				value 1;
+				description "Clear ISIS IP local redistribution routes";
+			}
+			enum all {
+				value 2;
+				description "all of the IS-IS routing table";
+			}
+		}
+	}
+
+    typedef isis-distribute-type{
+        type enumeration {
+            enum bgp-ls {
+                value 1;
+                description "Link State distribution to BGP";
+            }
+        }
+    }
+
+    typedef isis-topology-type {
+        type enumeration {
+            enum single-topology { 
+               description
+                  "IS-IS single topology running.";
+               value 1;
+            }
+            enum multi-topology {
+               description
+                  "IS-IS multi topology running.";
+               value 2; 
+            }
+        }
+    }
+
+	 typedef  ipv4-addr{
+        type inet:ipv4-address;
+    }
+
+    typedef  ipv6-addr{
+        type inet:ipv6-address;
+    }
+
+    typedef  ip-addr{
+        type union{
+
+            type ipv4-addr {
+
+            }
+            type ipv6-addr {
+
+            }
+        }
+    }
+
+    typedef  isis-debug{
+        type bits {
+            bit ifsm { position 0;  }
+            bit nfsm { position 1;  }
+            bit pdu { position 2;  }
+            bit lsp { position 3;  }
+            bit spf { position 4;  }
+            bit events { position 5;  }
+            bit nsm { position 6;  }
+            bit checksum { position 7;  }
+            bit authentication { position 8;  }
+            bit local-updates { position 9;  }
+            bit protocol-errors { position 10;  }
+            bit bfd { position 12;  }
+            bit mpls { position 13;  }
+            bit rib { position 14;  }
+            bit sr { position 15;  }
+            bit lfa { position 16;  }
+            bit spf-trace { position 17;  }
+        }
+    }
+
+    typedef  isis-cspf-debug{
+        type bits {
+            bit events { position 0;  }
+            bit hexdump { position 1;  }
+        }
+    }
+
+   typedef  rt-direction{
+        type enumeration {
+            enum import { value 0;    }
+            enum export { value 1;    }
+            enum both { value 2;    }
+        }
+    }
+
+    typedef isis-afi-type {
+        type enumeration {
+            enum ipv4 {
+              value 1;
+              description
+                "IS-IS Address-family IPv4 support";
+            }
+            enum ipv6 {
+              value 2;
+              description
+                "IS-IS Address-family IPv6 support";
+            }
+        }
+        description
+           "IS-IS Address-family type";
+    }
+
+    typedef isis-safi-type {
+        type enumeration {
+            enum unicast {
+              value 1;
+              description
+                "IS-IS Sub-Address-family Unicast support";
+            }
+        }
+        description
+           "IS-IS Sub-Address-family type";
+    }
+    
+    typedef  isis-v6-origin-type{
+        type enumeration {
+            enum originate {
+                value 4;
+                description
+                  "Originate reachability information to Default destination into LSP";
+            }
+        }
+    }
+
+ /* MPLS-LDP Data Types */
+
+    typedef  ldp-session-state{
+        type enumeration {
+            enum non-existent { 
+                value 0;
+                description
+                  "Non-existent state. Transport disconnected.";
+            }
+            enum initialized { 
+                value 1;
+                description
+                  "Initialized state.";
+            }
+            enum openrec {
+                value 2;
+                description
+                  "Openrec state. Open to receiving from peer.";
+            }
+            enum opensent {
+                value 3;
+                description
+                  "Opensent state.";
+            }
+            enum operational {
+                value 4;
+                description
+                  "Operational state.";
+            }
+            enum helper-mode {
+                value 5;
+                description
+                  "Graceful-restart helper mode.";
+            }
+            enum restarting {
+                value 6;
+                description
+                  "Restarting state.";
+            }
+            enum gr-disabled { 
+                value 7;
+                description
+                  "Graceful-restart disabled.";
+            }
+            enum unknown {
+                value 8;
+                description
+                  "Unknown state.";
+            }
+            enum error {
+                value 9;
+                description
+                  "Error state.";
+            }
+        }
+    }
+
+    typedef  ldp-label-advertisement-mode{
+        type enumeration {
+            enum downstream-unsolicited { value 0;    }
+            enum downstream-on-demand { value 1;    }
+        }
+    }
+
+    typedef  ldp-label-retention-mode{
+        type enumeration {
+            enum liberal { value 0;    }
+            enum conservative { value 1;    }
+        }
+    }
+
+    typedef  ldp-merge-capability{
+        type enumeration {
+            enum merge-capable { value 0;    }
+            enum non-merge-capable { value 1;    }
+        }
+    }
+
+    typedef  ldp-ipv4-state{
+        type enumeration {
+            enum disable-ldp { value 0;    }
+            enum enable-ldp { value 1;    }
+        }
+    }
+
+    typedef  ldp-ipv6-state{
+        type enumeration {
+            enum disable-ldp { value 0;    }
+            enum enable-ldp { value 1;    }
+        }
+    }
+
+    typedef  ldp-igp-sync{
+        type enumeration {
+            enum igp-sync { value 0;    }
+            enum no-igp-sync { value 1;    }
+        }
+    }
+
+    typedef  ldp-instance{
+        type enumeration {
+            enum ldp { value 1;    }
+        }
+    }
+
+    typedef  ldp-debug{
+        type bits {
+            bit events { position 0;  }
+            bit fsm { position 1;  }
+            bit hexdump { position 2;  }
+            bit dsm { position 3;  }
+            bit usm { position 4;  }
+            bit tsm { position 5;  }
+            bit qos { position 6;  }
+            bit nsm { position 7;  }
+            bit advertise-labels { position 8;  }
+            bit cspf { position 9;  }
+            bit vc-usm { position 10;  }
+            bit vc-dsm { position 11;  }
+            bit graceful-restart { position 12;  }
+            bit rib { position 13;  }
+            bit ha { position 14;  }
+            bit inter-area { position 15;  }
+        }
+    }
+
+    typedef  ldp-debug-packet{
+        type bits {
+            bit notification { position 0;  }
+            bit hello { position 1;  }
+            bit initialization { position 2;  }
+            bit keepalive { position 3;  }
+            bit address { position 4;  }
+            bit label { position 5;  }
+        }
+    }
+
+    typedef  ldp-failure{
+        type enumeration {
+            enum restart { value 0;    }
+        }
+    }
+
+    typedef  ldp-cspf{
+        type enumeration {
+            enum no-cspf { value 0;    }
+            enum cspf { value 1;    }
+        }
+    }
+
+    typedef  ldp-loose{
+        type enumeration {
+            enum strict { value 0;    }
+            enum loose { value 1;    }
+        }
+    }
+
+    typedef  ldp-trunk-admin-group{
+        type enumeration {
+            enum exclude-any { value 0;    }
+            enum include-any { value 1;    }
+        }
+    }
+
+    typedef  ldp-helper-mode{
+        type enumeration {
+            enum disable { value 0;    }
+            enum enable { value 1;    }
+        }
+    }
+
+    typedef  ldp-label-control-mode{
+        type enumeration {
+            enum independent { value 0;    }
+            enum ordered { value 1;    }
+        }
+    }
+
+
+    typedef  mpls-tunnel-direction-type{
+        type enumeration {
+            enum forward { value 0;    }
+            enum reverse { value 1;    }
+        }
+    }
+
+    typedef  mpls-tpid{
+        type enumeration {
+            enum 88a8 { value 34984;    }
+            enum 9100 { value 37120;    }
+        }
+    }
+
+    typedef  mpls-vpls-ftn-entry{
+        type enumeration {
+            enum secondary { value 0;    }
+            enum primary { value 1;    }
+        }
+    }
+
+    typedef  mpls-row-status{
+        type enumeration {
+            enum active { value 1;    }
+            enum not-in-service { value 2;    }
+            enum not-ready { value 3;    }
+            enum create-go { value 4;    }
+            enum create-wait { value 5;    }
+            enum destroy { value 6;    }
+        }
+    }
+
+    typedef  mpls-opcode{
+        type enumeration {
+            enum swap { value 3;    }
+            enum pop { value 4;    }
+        }
+    }
+
+    typedef  mpls-module{
+        type enumeration {
+            enum rsvp { value 0;    }
+            enum ldp { value 1;    }
+            enum bgp { value 4;    }
+        }
+    }
+
+    typedef  l2vpn-protocol{
+        type enumeration {
+            enum none { value 1;    }
+            enum bgp { value 2;    }
+            enum ldp { value 4;    }
+            enum ldp-autodiscovery-bgp { value 8;    }
+        }
+    }
+
+    typedef  mpls-vpls-type{
+        type enumeration {
+            enum vlan { value 4;    }
+            enum ethernet { value 5;    }
+        }
+    }
+
+    typedef  mpls-vpls-vc-spoke-type{
+        type enumeration {
+            enum vlan { value 4;    }
+            enum ethernet { value 5;    }
+        }
+    }
+
+    typedef  cml-mpls-admn-status{
+        type enumeration {
+            enum up { value 1;    }
+            enum down { value 2;    }
+            enum testing { value 3;    }
+        }
+    }
+
+    typedef  mpls-opr-status{
+        type enumeration {
+            enum up { value 1;    }
+            enum down { value 2;    }
+            enum testing { value 3;    }
+            enum dormant { value 4;    }
+            enum not-persent { value 5;    }
+            enum ll-down { value 6;    }
+        }
+    }
+
+    typedef  mpls-bfd-flag{
+        type enumeration {
+            enum configured { value 0;    }
+            enum enabled { value 1;    }
+            enum disable { value 2;    }
+        }
+    }
+
+    typedef  mpls-stats-role{
+        type enumeration {
+            enum ingress { value 0;    }
+        }
+    }
+
+    typedef  mpls-stats-owner{
+        type enumeration {
+            enum ldp { value 0;    }
+            enum bgp { value 1;    }
+            enum bgp_lu {value 2;  }
+            enum sr  { value 3;    }
+        }
+    }
+
+    typedef  mpls-protocols{
+        type enumeration {
+            enum ldp {
+                 value 0;
+                 description
+                    "LDP Protocol label-range ";
+            }
+            enum bgp {
+                 value 1;
+                 description
+                    "BGP Protocol label-range";
+            }
+            enum default {
+                 value 15;
+                 description
+                    "Default label-range";
+            }
+        }
+    }
+
+  /* OSPF Data Types */
+
+    typedef ospf-link-metric {
+      type uint16 {
+        range "1 .. 65535";
+      }
+      description
+        "OSPF Link Metric - 16-bit unsigned integer.";
+    }
+
+    typedef  ospf-metric-type {
+       type enumeration {
+           enum type-1 { value 1;    }
+           enum type-2 { value 2;    }
+       }
+   }
+
+   typedef ospf-route-source {
+      type enumeration {
+         enum static  { value 1;     }
+         enum connected { value 2;     }
+         enum bgp {
+            description
+               "Redistribute BGP into OSPF.";
+            value 3;
+         }
+      }
+   }
+
+  typedef  ospf-auth-type{
+       type enumeration {
+           enum none { value 0;    }
+           enum message-digest { value 2;    }
+       }
+   }
+
+   typedef  ospf-message-digest-type {
+       type enumeration {
+           enum md5 { value 1;    }
+       }
+   }
+
+   typedef  ospf-if-state {
+        type enumeration {
+            enum ospf-api-status-enabled { value 1;    }
+            enum ospf-api-status-disabled { value 2;    }
+        }
+    }
+
+    typedef  ospf-network-type {
+        type enumeration {
+            enum point-to-point {
+               value 1;
+               description
+                  "Specify OSPF point-to-point network.";
+            }
+            enum broadcast {
+               value 2;
+               description
+                  "Specify OSPF broadcast multi-access network.";
+            }
+        }
+    }
+
+    typedef  ospf-prefix-filter{
+        type enumeration {
+            enum filter-in { value 1;    }
+            enum filter-out { value 2;    }
+        }
+    }
+
+    typedef  ospf-range-advertise{
+        type enumeration {
+            enum not-advertise { value 1;    }
+            enum advertise { value 2;    }
+        }
+    }
+
+   typedef ospf-intf-state-type {
+      type enumeration {
+         enum down { value 1;    }
+         enum loopback { value 2;    }
+         enum waiting { value 3;    }
+         enum point-to-point { value 4;    }
+         enum dr-other { value 5;    }
+         enum backup { value 6;    }
+         enum designated-router { value 7;    }
+      }
+   }
+
+   typedef ospf-route-type{
+      type enumeration {
+        enum unspecified {
+           value "0";
+           description 
+             "Unspecified.";
+        }
+        enum intra-area {
+           value "1";
+           description 
+             "OSPF intra-area route.";
+        }
+        enum inter-area {
+           value "3";
+           description 
+             "OSPF inter-area route.";
+        }
+        enum external {
+           value "5";
+           description 
+             "OSPF External route.";
+        }
+        enum nssa {
+           value "7";
+           description 
+             "OSPF NSSA external route.";
+         }
+       }
+    }
+
+    typedef ospf-router-link-type {
+       type enumeration {
+         enum unspecified {
+           value "0";
+           description 
+             "Unspecified.";
+         }
+         enum point-to-point {
+           value "1";
+           description
+             "Point-to-Point link to Router";
+         }
+         enum transit-network {
+           value "2";
+           description
+             "Link to transit network identified by
+              Designated-Router (DR)";
+         }
+         enum stub-network {
+           value "3";
+           description
+             "Link to stub network identified by subnet";
+         }
+         enum virtual {
+           value "4";
+           description
+             "Virtual link across transit area";
+         }
+       }
+       description
+         "OSPF Router Link Type.";
+   }
+
+   typedef ospf-nbr-state-type {
+       type enumeration {
+         enum down {
+           value "1";
+           description
+             "Neighbor down state.";
+         }
+         enum attempt {
+           value "2";
+           description
+             "Neighbor attempt state.";
+         }
+         enum init {
+           value "3";
+           description
+             "Neighbor init state.";
+         }
+         enum 2-way {
+           value "4";
+           description
+             "Neighbor 2-Way state.";
+         }
+         enum exstart {
+           value "5";
+           description
+             "Neighbor exchange start state.";
+         }
+         enum exchange {
+           value "6";
+           description
+             "Neighbor exchange state.";
+         }
+         enum loading {
+           value "7";
+           description
+             "Neighbor loading state.";
+
+         }
+         enum full {
+           value "8";
+           description
+             "Neighbor full state.";
+         }
+       }
+       description
+         "OSPF neighbor state type.";
+   }
+
+   typedef ospf-vlink-state-type {
+      type enumeration {
+        enum down {
+          value "1";
+          description
+            "Vlink is down";
+        }
+        enum up {
+          value "0";
+          description
+            "Vlink is up";
+        }
+      }
+    }
+   // generic types
+    typedef string-max-256 {
+        type string{
+           length 1..256;
+        }
+    }
+
+    typedef ip-prefix {
+        type union {
+           type inet:ipv4-prefix;
+           type inet:ipv6-prefix;
+        }
+       description
+            "The ip-prefix type represents an IP prefix and is IP
+             version neutral.  The format of the textual representations
+             implies the IP version.";
+    }
+
+    // Routing Policy types
+    typedef  addpath-all{
+        type enumeration {
+            enum all { value 4; }
+        }
+        description
+           "Set additional paths value as all";
+    }
+
+    typedef  addpath-best{
+        type uint8 {
+             range "2..3";
+        }
+        description
+           "Set best additional paths as 2 or 3";
+    }
+
+    typedef  additional-paths-type{
+        type union{
+            type addpath-best;
+            type addpath-all;
+        }
+        description
+           "Set additional paths as best value[2/3] or all";
+    }
+
+    typedef  origin-type{
+        type enumeration {
+            enum egp { value 1;    }
+            enum igp { value 2;    }
+            enum incomplete { value 3;    }
+        }
+        description
+           "Route origin eg. IGP or EGP or incomplete.";
+    }
+
+    typedef  policy-level-types{
+        type enumeration {
+            enum level-1 { value 1;   }
+            enum level-2 { value 2;   }
+            enum level-1-2 { value 3; }
+        }
+        description
+           "ISIS level-type for routing policy";
+    }
+
+    typedef  action {
+        type enumeration {
+            enum deny { value 1; }
+            enum permit { value 2; }
+        }
+        description
+           "Action to permit or deny prefix-list, as-path list etc.";
+    }
+
+    typedef std-community-type {
+            type string {
+                pattern '((6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{1,3}\d|[1-9])(:'
+                        + '(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{1,3}\d|[1-9])){0,}\s?)+';
+                length 1..320;
+            }
+        description
+          "Type definition for standard commmunity attributes";
+    }
+
+    typedef well-known-community-type {
+        type bits {
+            bit no-export { position 0;  }
+            bit no-advertise { position 1;  }
+            bit local-AS { position 2;  }
+            bit internet { position 3;  }
+        }
+        description
+          "Type definition for well-known commmunity attributes";
+    }
+
+    typedef prefix-list-mode
+    {
+        type enumeration {
+            enum ipv4 {
+            description
+                "Prefix set contains IPv4 prefixes only";
+            }
+            enum ipv6 {
+            description
+                "Prefix set contains IPv6 prefixes only";
+            }
+
+        }
+    }
+
+    typedef community-append
+    {
+        type enumeration {
+            enum replace { value 1;   }
+            enum append { value 2;   }
+        }
+    }
+
+    typedef ext-comm-rt {
+       type string {
+         pattern
+           '(0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]):(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+         + '[0-5]?\d{1,3}\d|[1-9]))';
+       }
+       description
+         "route target is an AA:NN 8-octet BGP extended community
+          RFC4360 and RFC5668, the encoding pattern is defined as:
+          Some valid examples are: 0:100:100, 0:65535:65535";
+
+       reference
+         "RFC4360: BGP Extended Communities Attribute.
+          RFC5668: 4-Octet AS Specific BGP Extended Community.";
+    }
+
+    typedef pseudowire-mode {
+        type enumeration {
+            enum 'mesh' {
+                description
+                      "pw mode type is mesh";
+            }
+            enum 'spoke' {
+                description
+                      "pw mode type is spoke";
+            }
+        }
+
+    }
+
+    typedef  l2vpn-protection-type{
+        type enumeration {
+           enum active { value 0;    }
+           enum passive { value 1;    }
+        }
+    }
+
+    typedef mpls-afi-type {
+        type enumeration {
+            enum ipv4 { value 1;    }
+            enum ipv6 { value 2;    }
+        }
+    }
+
+    typedef ospf-lsa-source {
+        type union {
+            type inet:ipv4-address;
+            type string;
+        }
+    }
+
+    typedef ospf-lsa-type {
+        type enumeration {
+            enum unknown { value 0;    }
+            enum router  { value 1;    }
+            enum network { value 2;    }
+            enum summary { value 3;    }
+            enum asbr-summary { value 4;    }
+            enum as-external { value 5;    }
+            enum multicast { value 6;   }
+            enum nssa-external { value 7;    }
+            enum external-attribute { value 8;    }
+            enum link-opaque { value 9;    }
+            enum area-opaque { value 10;    }
+            enum as-opaque { value 11;    }
+        }
+    }
+
+    typedef tunnel-type {
+        type enumeration {
+            enum static-ingress-corouted { value 1;    }
+            enum static-transit-corouted { value 2;    }
+            enum static-egress-corouted  { value 3;    }  
+            enum rsvp-ingress-corouted   { value 4;    }
+            enum rsvp-transit-corouted   { value 5;    }
+            enum rsvp-egress-corouted    { value 6;    }
+            enum sr-policy               { value 7;    }
+        }
+    }
+
+    typedef ldp-igp-sync-holddown {
+      description
+         "OSPF LDP IGP sync hold down timer value";
+      type union{
+         type uint32 {
+            range "1..69999";
+         }
+
+         type enumeration {
+            enum none {
+               description
+                  "no LDP IGP sync hold timer";
+               value 0;
+            }
+            enum infinite {
+               description
+                  "Infinite LDP IGP sync hold timer";
+               value 70000;
+            }
+         }
+      }
+   }
+
+   typedef  ospf-rlfa-protection-type {
+      description
+         "OSPF RLFA protection type enumeration";
+      type enumeration {
+         enum downstream-protection {
+            description
+               "RLFA downstream protection";
+            value 1;
+         }
+      }
+   }
+
+   typedef sr-status {
+     description
+       "SR oper/admin status enumeration";
+     type enumeration {
+       enum Up {
+         description
+           "oper/admin status is up.";
+         value 1;
+       }
+       enum Down {
+         description
+           "oper/admin status is down.";
+         value 2;
+       }
+     }
+   }
+
+   typedef policy-metric-type {
+      description
+         "Route Map Set  metric-type enumeration.";
+       type enumeration {
+          enum external {
+             description
+                 "IS-IS external metric type.";
+             value 1;
+          }
+          enum internal {
+             description
+                 "IS-IS internal metric type.";
+             value 2;
+          }
+          enum type-1 {
+             description
+                 "OSPF external type 1 metric.";
+             value 3;
+          }
+          enum type-2 {
+             description
+                 "OSPF external type 2 metric.";
+             value 4;
+         }
+      }
+   }
+
+   typedef policy-route-type {
+      description
+         "Route Map match route-type enumeration.";
+       type enumeration {
+          enum type-1 {
+             description
+                 "OSPF External Type 1 metric.";
+             value 1;
+          }
+           enum type-2 {
+              description
+                  "OSPF External Type 2 metric.";
+              value 2;
+          }
+       }
+   }
+   typedef  prefix-list-proto {
+      description
+         "Prefix list protocol enumeration.";
+       type enumeration {
+           enum bgp {
+               description
+                   "Prefix-list protocol type BGP.";
+               value 1;
+           }
+           enum ospf {
+               description
+                   "Prefix-list protocol type OSPF.";
+               value 2;
+           }
+       }
+   }
+
+   typedef ospf-inst-state-type {
+       type enumeration {
+         enum created {
+           value "1";
+           description
+             "State for creation.";
+         }
+         enum deleted {
+           value "2";
+           description
+             "State for deletion.";
+         }
+         enum modified {
+           value "3";
+           description
+             "State for modification.";
+         }
+      }
+   }
+
+   typedef isis-inst-state-type {
+       type enumeration {
+         enum created {
+           value "1";
+           description
+             "State for creation.";
+         }
+         enum deleted {
+           value "2";
+           description
+             "State for deletion.";
+         }
+         enum modified {
+           value "3";
+           description
+             "State for modification.";
+         }
+      }
+   }
+   typedef mpls-next-hop-type {
+      type enumeration {
+         enum primary {
+            value "1";
+            description
+               "Primary next-hop";
+         }
+         enum backup {
+            value "2";
+            description
+               "Backup next-hop";
+         }
+       }
+   }
+
+   typedef bgp-test-afi {
+       type enumeration {
+         enum ipv4 {
+            value 1;
+            description
+               "BGP IPv4 address family.";
+         }
+         enum ipv6 {
+            value 2;
+            description
+               "BGP IPv6 address family.";
+         }
+       }
+   }
+
+   typedef bgp-test-safi {
+       type enumeration {
+         enum unicast {
+            value 1;
+            description
+               "BGP unicast sub-address family.";
+         }
+       }
+   }
+}

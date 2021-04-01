@@ -1,0 +1,267 @@
+module ciena-software-mgmt-augmentation {
+  namespace "http://www.ciena.com/ns/yang/ciena-software-mgmt-aug";
+  prefix "ciena-software-management-aug";
+
+  import ciena-software-mgmt { prefix software-mgmt; }
+  import ietf-yang-types { prefix yang; }
+  import ciena-packet-xcvr { prefix xcvr; }
+
+  revision 2020-02-17 {
+     description
+       "Defined swtype-id grouping and added into software download,
+        activate, install, remove rpcs.
+        Defined xcvr-id-leafref-type typedef.
+        Added leaf-list xcvr-id into software activate and install rpcs.
+        Defined software-upgrade-status typedef.
+        Added software-state-cfp2-dco-firmware container to software-state.
+        Added software-state-pon-ctrl-onu-firmware container to software-state.
+        Added description to the package-verification-data grouping.
+        Added description to the hash-algorithm leaf.";
+  }
+
+  revision 2019-09-30 {
+     description "Initial revision.";
+  }
+
+  typedef software-upgrade-status {
+    type enumeration {
+      enum invalid {
+        description
+          "Invalid";
+      }
+      enum idle {
+        description
+          "Idle";
+      }
+      enum not-applicable {
+        description
+          "Not applicable";
+      }
+      enum upgrading {
+        description
+          "Upgrading";
+      }
+      enum verification-failure {
+        description
+          "Verification failure";
+      }
+      enum upgrade-successful {
+        description
+          "Upgrade successful";
+      }
+      enum upgrade-failure {
+        description
+          "Upgrade failure";
+      }
+    }
+    description
+      "Software upgrade state";
+  }
+
+  identity hash-algorithm {
+    description
+      "A base identity for hash algorithm verification.";
+  }
+
+  identity sha-256 {
+    base hash-algorithm;
+    description
+      "The SHA-256 algorithm.";
+    reference
+      "RFC 6234: US Secure Hash Algorithms";
+  }
+
+  grouping package-verification-data {
+    leaf hash-algorithm {
+       type identityref {
+          base hash-algorithm;
+       }
+       default sha-256;
+       description
+         "Hash algorithm corresponding to the hash-value.";
+    }
+    leaf hash-value {
+       type yang:hex-string;
+       description
+         "Hex-encoded hash value used to verify the the package.";
+    }
+    description
+      "Grouping of data containing hash verification data used by s/w operations.";
+  }
+
+  augment /software-mgmt:software-download/software-mgmt:input {
+    description
+      "Augmentation of software-download to include package-verification-data
+       to support validation of package file downloads.";
+    uses package-verification-data;
+  }
+
+  augment /software-mgmt:software-install/software-mgmt:input {
+    description
+      "Augmentation of software-install to include package-verification-data
+       to support validation of package file downloads.";
+    uses package-verification-data;
+  }
+
+  typedef software-type {
+    type enumeration {
+      enum package-manifest {
+        description
+          "Device software package manifest.";
+      }
+      enum cfp2-dco-firmware {
+        description
+          "Firmware for CFP2 DCO transceiver.";
+      }
+      enum pon-ctrl-onu-firmware {
+        description
+          "Firmware for PON ONU module.";
+      }
+    }
+    description
+      "Enumerated value identifying the type of software being specified in an rpc.";
+  }
+
+  grouping swtype-id {
+    leaf sw-type {
+       type software-type;
+       default package-manifest;
+       description
+         "Type of software used by the rpc";
+    }
+    description
+      "Grouping of software identifier information used by an rpc.";
+  }
+
+  typedef xcvr-id-leafref-type {
+    type leafref {
+      path "/xcvr:xcvrs" +
+           "/xcvr:xcvr" +
+           "/xcvr:xcvr-id";
+    }
+    description
+      "Software xcvr-id leafref type.";
+  }
+
+  augment /software-mgmt:software-state {
+    description
+      "Augmentation of the software-state container to add a container
+       that contains state information specific to cfp2-dco-firmware.";
+
+    container software-state-cfp2-dco-firmware {
+      description
+        "Software information related to the management of firmware
+         associated with cfp2-dco-firmware swtype.";
+
+      list xcvr-software-state {
+        key "xcvr-id";
+        leaf xcvr-id {
+           type xcvr-id-leafref-type;
+         description
+           "Reference to xcvr-id.";
+        }
+        leaf running-image-version {
+          type string;
+          description
+            "Version of cfp2-dco-firmware currently running on the xcvr.";
+        }
+        leaf upgrade-status {
+          type ciena-software-management-aug:software-upgrade-status;
+          description
+            "The current status of firmware upgrade operation on the xcvr.";
+        }
+        leaf upgrade-image {
+          type string;
+          description
+            "Name of cfp2-dco-firmware image corresponding to the upgrade-status of the xcvr.";
+        }
+
+        description
+          "List of xcvrs providing current firmware version and upgrade status.";
+      }
+
+      leaf-list downloaded-image {
+        type string;
+        description
+          "Name of downloaded cfp2-dco-firmware image.";
+      }
+
+      leaf-list preloaded-image {
+        type string;
+        description
+          "Name of pre-loaded cfp2-dco-firmware image.";
+      }
+    }
+  }
+
+  augment /software-mgmt:software-state {
+    description
+      "Augmentation of the software-state container to add a container
+       that contains state information specific to pon-ctrl-onu-firmware.";
+
+    container software-state-pon-ctrl-onu-firmware {
+      description
+        "Software information related to the management of firmware
+         associated with pon-ctrl-onu-firmware swtype.";
+
+      leaf-list downloaded-image {
+        type string;
+        description
+          "Name of downloaded pon-ctrl-onu-firmware image.";
+      }
+    }
+  }
+
+  augment /software-mgmt:software-activate/software-mgmt:input {
+    description
+      "Augmentation of software-activate rpc to include additional input
+       parameters that are specific to the type of software that is being
+       activated.";
+    uses swtype-id;
+
+    leaf-list xcvr-id {
+      when "/software-mgmt:software-activate/ciena-software-management-aug:sw-type = 'cfp2-dco-firmware'" {
+        description
+          "Xcvr-id used for cfp2-dco-firmware activation.";
+      }
+      type xcvr-id-leafref-type;
+      description
+        "Reference to xcvr-id.";
+    }
+  }
+
+  augment /software-mgmt:software-download/software-mgmt:input {
+    description
+      "Augmentation of software-download rpc to include additional input
+       parameters that are specific to the type of software that is being
+       downloaded.";
+    uses swtype-id;
+  }
+
+  augment /software-mgmt:software-install/software-mgmt:input {
+    description
+      "Augmentation of software-install rpc to include additional input
+       parameters that are specific to the type of software that is being
+       installed.";
+    uses swtype-id;
+
+    leaf-list xcvr-id {
+      when "/software-mgmt:software-install/ciena-software-management-aug:sw-type = 'cfp2-dco-firmware'" +
+           "and /software-mgmt:software-install/software-mgmt:defer-activation='false'" {
+        description
+          "Xcvr-id used for cfp2-dco-firmware activation.";
+      }
+      type xcvr-id-leafref-type;
+      description
+        "Reference to xcvr-id.";
+    }
+  }
+
+  augment /software-mgmt:software-remove/software-mgmt:input {
+    description
+      "Augmentation of software-remove rpc to include additional input
+       parameters that are specific to the type of software that is being
+       removed.";
+    uses swtype-id;
+  }
+}

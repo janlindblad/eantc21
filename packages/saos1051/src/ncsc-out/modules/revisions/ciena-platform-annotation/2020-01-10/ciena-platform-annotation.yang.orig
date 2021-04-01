@@ -1,0 +1,44 @@
+module ciena-platform-annotation {
+   namespace "http://www.ciena.com/ns/yang/ciena-platform-annotation";
+   prefix "ciena-ocp-annotation";
+
+   import openconfig-platform { prefix "oc-platform"; }
+   import ciena-platform { prefix "ciena-ocp"; }
+   import yumaworks-extensions { prefix "ywx"; }
+
+   organization
+      "Ciena Corporation";
+
+   contact
+      "Web URL: http://www.ciena.com/
+      E-mail: yang@ciena.com
+      Postal: 7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+      Phone: +1 800-921-1144
+      Fax:   +1 410-694-5750";
+
+   description
+      "This YANG module defines Ciena's annotation to ciena-platform model.
+
+      Copyright (c) 2020 Ciena Corporation. All rights reserved.
+
+      All information contained herein is, and remains
+      the property of Ciena Corporation. Dissemination of this
+      information or reproduction of this material is strictly
+      forbidden unless prior written permission is obtained from
+      Ciena Corporation.";
+
+   revision 2020-01-10 {
+      description
+         "Adding annotation for ciena-platform.yang";
+      reference
+         "";
+   }
+
+   deviation /oc-platform:components/oc-platform:component/ciena-ocp:usb-properties {
+      deviate add {
+         ywx:sil-test-get-when true;     
+      }
+   }
+}

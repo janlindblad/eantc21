@@ -1,0 +1,18 @@
+module saos1051-nc {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/saos1051-nc";
+  prefix saos1051-nc;
+
+  import tailf-common {
+    prefix tailf;
+  }
+
+  import tailf-ncs-ned {
+    prefix ned;
+  }
+
+  identity saos1051-nc {
+    tailf:abstract;
+    base ned:netconf-ned-id;
+  }
+}

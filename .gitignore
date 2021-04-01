@@ -1,3 +1,15 @@
+# Project specific ignores
+connections/
+logs/
+ncs-cdb/*.cdb
+old/
+old-packages/
+state/
+storedstate
+target/
+*.fxs
+*.jar
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

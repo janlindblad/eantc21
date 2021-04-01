@@ -1,0 +1,34 @@
+module ciena-mef-logical-port-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-logical-port-show";
+    prefix ciena-mef-logical-port-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-logical-port";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case logical-port{
+            leaf logical-port{
+                type union{
+                    type string;
+                }
+            }
+        }
+        
+        case logical-port-state{
+            leaf logical-port-state{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

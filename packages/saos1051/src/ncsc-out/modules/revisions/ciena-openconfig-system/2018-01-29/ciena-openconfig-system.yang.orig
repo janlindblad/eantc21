@@ -1,0 +1,64 @@
+module ciena-openconfig-system {
+  namespace "http://www.ciena.com/ns/yang/ciena-openconfig-system";
+  prefix "ciena-oc-sys";
+
+  import openconfig-system { prefix oc-sys; }
+  import yuma-ncx { prefix ncx; }
+  import ietf-yang-types { prefix yang; }
+
+  organization
+    "Ciena Corporation";
+  
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+      
+  description
+    "This YANG module defines Ciena's augmentations to openconfig-system.
+
+      Copyright (c) 2018 Ciena Corporation.  All rights 
+      reserved.
+
+      All information contained herein is, and remains
+      the property of Ciena Corporation. Dissemination of this 
+      information or reproduction of this material is strictly 
+      forbidden unless prior written permission is obtained from 
+      Ciena Corporation.";
+  
+  revision 2018-01-29 {
+    description 
+      "Initial version";
+    reference
+      "RFC 6020: YANG - A Data Modeling Language for
+       the Network Configuration Protocol (NETCONF).
+       No specific reference; standard not available.";
+  }
+
+  augment "/oc-sys:system/oc-sys:aaa/oc-sys:authentication/oc-sys:users/oc-sys:user/oc-sys:config" {
+    leaf password {
+      type string;
+      ncx:password;
+      description
+        "The user password in cleartext, only the hashed
+        value will be stored";
+    }
+  }
+
+  augment "/oc-sys:system/oc-sys:aaa/oc-sys:authentication/oc-sys:users/oc-sys:user/oc-sys:state" {
+    leaf lockout-time {
+      type uint16;
+      description
+        "Amount of time left before the lockout ends";
+    }
+    leaf last-failure {
+       type yang:date-and-time;
+       description
+          "Last timestamp of user login failure";
+    }
+  }
+}

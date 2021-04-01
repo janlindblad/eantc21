@@ -1,0 +1,30 @@
+module ietf-system-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ietf-system-show";
+    prefix ietf-system-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ietf-system";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case hostname{
+            leaf hostname{
+                type empty;
+            }
+        }
+        
+        case clock{
+            leaf clock{
+                type empty;
+            }
+        }
+         
+    }
+}

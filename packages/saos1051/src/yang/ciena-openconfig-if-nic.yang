@@ -1,0 +1,67 @@
+module ciena-openconfig-if-nic {
+  namespace "http://www.ciena.com/ns/yang/ciena-openconfig-if-nic";
+  prefix "cn-oc-if-nic";
+
+  import openconfig-interfaces {
+    prefix oc-if;
+  }
+
+  import ciena-openconfig-interfaces {
+    prefix cn-oc-if;
+  }
+
+  import yuma-ncx {
+    prefix ncx;
+  }
+
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+    E-mail:  yang@ciena.com
+    Postal:  7035 Ridge Road
+             Hanover, Maryland 21076
+             U.S.A.
+    Phone:   +1 800-921-1144
+    Fax:     +1 410-694-5750";
+
+  description
+    "This YANG module defines data for the management of
+     Network Interface Controller (NIC).
+    
+    Copyright (c) 2020 Ciena Corporation.  All rights reserved.
+
+    All information contained herein is, and remains
+    the property of Ciena Corporation. Dissemination of this 
+    information or reproduction of this material is strictly 
+    forbidden unless prior written permission is obtained from 
+    Ciena Corporation.";  
+
+  revision 2020-03-02 {
+    description
+      "Initial version.";
+    reference
+      "RFC 6020: YANG - A Data Modeling Language for
+       the Network Configuration Protocol (NETCONF).
+       No specific reference; standard not available.";
+  }
+
+  augment "/oc-if:interfaces/"
+          + "oc-if:interface/"
+          + "oc-if:config" {
+    when "cn-oc-if:type = 'ettp'";
+    description
+      "Augmenting socket id to ETTP interface configuration.";
+
+    leaf numa-node {
+      ncx:user-write "create";
+      type uint8 {
+        range "0..3";
+      }
+      description
+        "NUMA (Non-Uniform Memory Access) node to which the physical
+         interface is attached.";
+    }
+  } // end augment "/oc-if:interfaces/oc-if:interface/oc-if:config"
+}

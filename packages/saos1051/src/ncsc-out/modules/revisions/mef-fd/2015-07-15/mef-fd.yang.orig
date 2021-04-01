@@ -1,0 +1,160 @@
+module mef-fd {
+    namespace "http://metroethernetforum.org/ns/yang/mef-fd";
+    prefix "mef-fd";
+
+    organization
+        "Ciena Corporation";
+
+    contact
+        "Web URL: http://www.ciena.com/
+         E-mail:  yang@ciena.com
+         Postal:  7035 Ridge Road
+                  Hanover, Maryland 21076
+                  U.S.A.
+         Phone:   +1 800-921-1144
+         Fax:     +1 410-694-5750";
+
+    description
+        "This YANG module defines Ciena's configuration of
+         the Forwarding Domain (Bridge Domain, Virtual Switch,
+         VPLS representation for the NETCONF protocol).";
+
+    revision "2015-07-15" {
+        description 
+            "Initial version";
+    }
+
+    /*
+     * Identities
+     */
+    identity fd-type {
+        description
+            "Base identity from which specific forwarding domain types are
+             derived.";
+    }
+
+    /*
+     * Features
+     */
+
+    /*
+     * Configuration data nodes
+     */
+    container fds {
+
+        list fd {
+            key "mode name";
+
+            description
+                "The list of configured forwarding domains on the device.
+                 
+                 The operational state of a forwarding domain is available
+                 in the /fds-state/fd list.";
+
+            leaf name {
+                type string {
+                    length "1..1024";
+                }
+                description
+                    "An administratively assigned string, which may be used
+                     to identify the forwarding domain.";
+            }
+            
+            leaf label {
+                type string;
+            }
+            
+            leaf description {
+                type string;
+                description
+                    "This is string used to describe the Forwarding Domain.";
+            }
+            
+            leaf mode {
+                type enumeration {
+                    enum vlan;
+                    enum vpls;
+                    enum vpws;
+                }
+            }
+
+            leaf vlan-id {
+                type uint16 {
+                    range "1..4094";
+                }
+                mandatory true;
+                when "../mode='vlan'";
+            }
+            
+            leaf mac-learning {
+                type enumeration {
+                    enum enabled;
+                    enum disabled;
+                }
+            }
+            
+            /*
+             * Cannot create a flow-point list here, as flow-point is
+             * creating a reference to a mef-fd. That would create a
+             * circular dependency on creation. At best, one can have
+             * entry in operational data to give a back pointer to a
+             * list of flow-points.
+             */
+            
+            leaf ce-vlan-id-preservation {
+                type boolean;
+                description
+                    "Preserve the customer VLAN id as it traverses across 
+                     the network.";
+            }
+            
+            leaf ce-vlan-cos-preservation {
+                type boolean;
+                description
+                    "Preserve the customer VLAN CoS as it traverses the
+                     network..";
+            }
+            
+            leaf l2cp-profile {
+                type string;
+                description
+                    "Reference to a Layer 2 Control Protocol Tunneling 
+                     Profile. Should be changed to a leafref when l2cp-profile
+                     is defined.";
+            }         
+            
+            leaf private-forwarding-profile {
+                type string;
+                description
+                    "Reference to Private Forwarding Profile.";
+            }
+
+            leaf type {
+                type identityref {
+                    base fd-type;
+                }
+                mandatory true;
+                description
+                    "The type of forwarding domain.
+
+                     When a forwarding domain entry is created, a server MAY
+                     initialize the type leaf with a valid value, e.g. if it
+                     is possible to derive the type from the name of the
+                     forwarding domain.
+
+                     If a client tries to set the type of a forwarding domain to a
+                     value that can never be used by the system, e.g., if the
+                     type is not supported or if the type does not match the
+                     name of the forwarding domain, the server MUST reject the request.
+                     A NETCONF server MUST reply with an rpc-error with the
+                     error-tag 'invalid-value' in this case.";
+            }
+            
+            leaf flood-containment-profile {
+                type string;
+                description
+                    "Reference to a Flood Containment Profile definition.";
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+module ciena_mef_mac_management-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena_mef_mac_management-show";
+    prefix ciena_mef_mac_management-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena_mef_mac_management";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case mac{
+            leaf mac{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

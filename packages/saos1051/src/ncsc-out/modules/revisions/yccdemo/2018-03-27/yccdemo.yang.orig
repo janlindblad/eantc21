@@ -1,0 +1,692 @@
+module yccdemo {
+    namespace "http://www.ciena.com/ns/yang/yccdemo";
+    prefix "yccdemo";
+    
+    import ietf-inet-types {
+       prefix inet;
+     }
+    
+    
+    revision "2018-03-27";
+    
+    typedef int-type {
+     type int32 {
+       range "0..7777";
+     }
+    }
+
+    typedef union-type {
+      type union {
+        type int-type;
+        type enum-type;
+        type string;
+      }   
+    }
+    
+    typedef enum-type {
+      type enumeration {
+        enum zero ;
+        enum one ;
+        enum two;
+        enum three;
+        enum four;
+        enum five;
+        enum six;
+      }      
+    }
+
+
+    typedef season-enum {
+        type enumeration {
+            enum spring;
+            enum summer;
+            enum fall;
+            enum winter;
+        }
+    }
+	typedef bits-type {
+	   type bits {
+	       bit zero;
+	       bit one;
+	       bit two {
+	           position 2;
+	    }
+	       bit after_two;
+            bit four;
+            bit five;
+            bit six;
+            bit seven;
+            bit eight;
+            bit nine;
+            bit ten;
+            bit alpha;
+            bit beta;
+            bit charlie;
+            bit delta;
+            bit echo;
+            bit foxtrot;
+            bit golf;
+            bit hotel;
+            bit india;
+            bit juliett;
+            bit kilo;
+            bit lima;
+            bit mike;
+            bit november;
+            bit oscar;
+            bit papa;
+            bit quebec;
+            bit romeo;
+            bit sierra;
+            bit tango;
+            bit uniform;
+            bit victor;
+            bit whiskey;
+            bit xray;
+            bit yankee;
+            bit zulu;
+        }
+        description "Basic type is bits(zero one two etc)";
+    }
+    identity id;
+    
+    identity id1 {
+        base id;
+    }
+    
+    identity id2 {
+        base id;
+    }
+    
+    identity id3 {
+        base id;
+    }
+    
+    identity id2.1 {
+        base id2;
+    }
+    
+    identity id2.2 {
+        base id2;
+    }
+    
+    typedef id-type {
+        type identityref {
+            base id;
+        }
+        description "Basic type is identityref(id1 id2 id2.1 id2.2 id3)";
+    }
+    
+    grouping all-type-leaves {
+        leaf int8-leaf { 
+            type int8; 
+        }
+        leaf int16-leaf { 
+            type int16; 
+        }
+        leaf int32-leaf { 
+            type int32; 
+        }
+        leaf int64-leaf {
+            type int64;
+        }
+        leaf uint8-leaf { 
+            type uint8; 
+        }
+        leaf uint16-leaf { 
+            type uint16; 
+        }
+        leaf uint32-leaf { 
+            type uint32; 
+        }
+        leaf uint64-leaf {
+            type uint64;
+        }
+        leaf decimal64-leaf { 
+            type decimal64 {
+            	fraction-digits 2;
+            } 
+        }
+        leaf string-leaf { 
+            type string; 
+        }
+        leaf boolean-leaf { 
+            type boolean;
+        }
+        leaf enumeration-leaf {    
+            type season-enum;
+        }    
+        leaf bits-leaf { 
+            type bits-type; 
+        }
+//        leaf binary-leaf {
+//            type binary;
+//        }
+        leaf identityref-leaf {
+        	type id-type;
+        }
+        leaf empty-leaf {
+            type empty;
+        }
+        leaf leafref-string {
+            type leafref {
+                path "../string-leaf";
+            }
+        }
+        leaf leafref-boolean {
+           type leafref {
+               path "../boolean-leaf";
+         }
+     }
+    }
+
+    grouping all-type-leaf-lists {
+        leaf-list int8-leaflist { 
+            type int8; 
+        }
+        leaf-list int16-leaflist { 
+            type int16; 
+        }
+        leaf-list int32-leaflist { 
+            type int32; 
+        }
+        leaf-list int64-leaflist{
+        	type int64;
+        }
+        leaf-list uint8-leaflist { 
+            type uint8; 
+        }
+        leaf-list uint16-leaflist { 
+            type uint16; 
+        }
+        leaf-list uint32-leaflist { 
+            type uint32; 
+        }
+        leaf-list uint64-leaflist {
+            type uint64;
+        }
+        leaf-list decimal64-leaflist { 
+            type decimal64 {
+            	fraction-digits 2;
+         	} 
+        }
+        leaf-list string-leaflist { 
+            type string; 
+        }
+        leaf-list boolean-leaflist {
+            type boolean;
+        }
+        leaf-list enumeration-leaflist {
+            type season-enum;
+        }
+        leaf-list bits-leaflist { 
+            type bits-type; 
+        }
+//        leaf-list binary-leaflist {
+//            type binary;
+//        }
+        leaf-list identityref-leaflist {
+        	type id-type;
+        }
+        
+    }
+    
+    
+    grouping all-type-union-leaf{
+    	
+    	leaf union-leaf-int8{
+    		type union{
+    			type int8;
+    			type string;
+    		}    	
+    	}  
+    	
+    	leaf union-leaf-int16{
+    		type union{
+    			type int16;
+    			type string;
+    		}    	
+    	}     	
+    	
+    	leaf union-leaf-int32{
+    		type union{
+    			type int32;
+    			type string;
+    		}    	
+    	}    
+    	
+    	leaf union-leaf-int64{
+    		type union{
+    			type int64;
+    			type string;
+    		}    	
+    	}   
+    	
+    	leaf union-leaf-uint8{
+    		type union{
+    			type uint8;
+    			type string;
+    		}    	
+    	}     	  
+    	
+    	leaf union-leaf-uint16{
+    		type union{
+    			type uint16;
+    			type string;
+    		}    	
+    	}     
+    	
+    	leaf union-leaf-uint32{
+    		type union{
+    			type uint32;
+    			type string;
+    		}    	
+    	}     	
+    	
+    			 	
+    	leaf union-leaf-uint64{
+    		type union{
+    			type uint64;
+    			type string;
+    		}    	
+    	}   	
+    	
+//    	leaf union-leaf-decimal64{
+//    		type union{
+//    			type decimal64 {fraction-digits 8;}
+//    			type string;
+//    		}    	
+//    	} 
+    	    	
+    	leaf union-leaf-enumeration{
+    		type union{
+    			type enumeration{
+    				enum one;
+    				enum two;
+    				enum three;   			
+    			}
+    			type string;
+    		}    	
+    	} 
+    	
+//    	leaf union-leaf-bits{
+//    		type union{
+//    			type bits{
+//    				bit alpha;
+//    				bit beta;
+//    				bit gamma;
+//    			}
+//    			type string;
+//    		}    	
+//    	} 
+    	
+    	leaf union-leaf-identityref{
+    		type union{
+    			type id-type;
+    			type string;
+    		}    	
+    	}
+    	
+//    	leaf union-leaf-binary{
+//    		type union{
+//    			type binary;
+//    			type string;
+//    		}    	
+//    	}      	    
+    	
+    	leaf union-leaf-boolean{
+    		type union{
+    			type boolean;
+    			type string;
+    		}    	
+    	}      		
+    	
+    	leaf union-leaf-string{
+    		type union{
+    			type string;
+    			type int8;
+    		}
+    	}    	
+    }      	 		    	
+
+	grouping all-type-union-leaflist{
+	
+		leaf-list union-leaflist1{
+				type union {		  
+					type boolean;  
+					type uint64;
+					type int64;
+					type id-type;
+					type decimal64 {fraction-digits 8;}
+					type enumeration {
+						enum red;
+						enum blue;
+						enum voilet;
+					}					
+			    	type bits {
+		      		   bit zero;
+				 	   bit one;
+					}			
+					type string;	    
+	        	}		
+		}	
+				
+		leaf-list union-leaflist-integer8{
+			type union{
+				type uint8;
+				type int8;
+			}
+		}
+		
+		leaf-list union-leaflist-integer16{
+			type union{
+				type uint16;
+				type int16;
+			}
+		}
+		
+		leaf-list union-leaflist-integer32{
+			type union{
+				type uint32;
+				type int32;
+			}
+		}		
+
+//		leaf-list union-leaflist-binary{
+//			type union{
+//				type binary;
+//				type int32;
+//			}
+//		}					
+	}
+
+
+//   ----------------------
+//    Configuration Nodes
+//   ----------------------
+
+    container config-nodes {
+    	description "For testing Edit-ConfigData for basic types";
+      uses all-type-leaves;
+//        uses all-type-leaf-lists;
+      uses all-type-union-leaf;
+//        uses all-type-union-leaflist;
+//        leaf set-defaults { 
+//            type boolean; 
+//        }
+
+    }
+  
+    container level1 {
+        leaf level1leaf {
+            type bits-type;
+        }
+        list level2 {
+            key "level2keyleaf";
+            leaf level2keyleaf {
+                type int8;
+            }
+
+            leaf level2leaf    {
+                type bits-type;
+            }
+            list level3 {
+                key "level3keyleaf";
+                leaf level3keyleaf {
+                    type int8;
+                }
+
+                leaf level3leaf {
+                    type bits-type;
+                }
+            }
+        }
+    }
+
+// Union leaf-ref as key
+    list lrefUnionKeyList {
+        key 'leaf-ref-key';
+        leaf leaf-ref-key {
+            type leafref {
+            path "/yccdemo:config-nodes/yccdemo:union-leaf-int8";
+      }
+    }
+  }
+
+
+    list U {
+       key "u1";
+
+       leaf u1{
+          type union-type;
+       }
+
+       leaf u2 { type string; }
+
+       list V {
+          key "v1";
+
+          leaf v1 {
+             type union-type;
+          }
+
+          leaf v2 {type string; }
+
+          list W {
+             key "w1";
+
+             leaf w1 {
+                type union-type;
+             }
+
+             leaf w2 {type string; }
+
+             leaf wbool-leafref {
+                type leafref {
+                    path "/yccdemo:config-nodes/boolean-leaf";
+                }
+             }
+          }
+       }
+
+       list Boo {
+           key "w1";
+
+           leaf w1 {
+               type union-type;
+           }
+
+          leaf bool-keyref {
+             type leafref {
+                 path "/yccdemo:config-nodes/boolean-leaf";
+             }
+          }
+       }
+    }
+
+    container parent-container{
+	description "For testing Edit nodes with container and nested container";
+        leaf alpha{type string;}
+        leaf-list beta{type string;}
+        leaf omega {
+            type decimal64{
+            	fraction-digits 4;
+            }
+        }
+        leaf-list kappa{type uint8;}
+
+        list child-list{
+                key gama;
+                leaf gama{type string;}
+                leaf delta{type int8;}
+                leaf-list theta{type string;}
+                leaf-list lambda{type uint8;}
+        }
+
+        list dec64-list{
+        		key decimal64-leaf;
+		        leaf decimal64-leaf{
+		            type decimal64{
+		            	fraction-digits 2;
+		            }
+		        }
+		        leaf phi{type int8;}		
+        }
+        list enumList {
+            key "enum-leaf";
+            leaf enum-leaf {type season-enum;}
+        }
+
+    }
+
+
+//   -------------------
+//    Operational Nodes
+//   -------------------
+
+    list operlevel1 {
+       config false;
+       key "operlevel1keyleaf";
+       leaf operlevel1keyleaf {
+         type int8;
+       }
+       leaf operlevel1leaf {
+         type bits-type;
+       }
+
+       list operlevel2 {
+          key "operlevel2keyleaf";
+          leaf operlevel2keyleaf {
+             type int8;
+          }
+          leaf operlevel2leaf {
+                type bits-type;
+          }
+
+          list operlevel3 {
+             key "operlevel3keyleaf";
+             leaf operlevel3keyleaf {
+                type int8;
+             }
+             leaf operlevel3leaf {
+                type bits-type;
+             } 
+
+          }
+       }
+   } 
+
+
+
+    container oper-nodes {
+       config false;
+  
+       uses all-type-leaves;
+       uses all-type-union-leaf;
+       
+//       uses all-type-leaf-lists;
+       
+       leaf-list uint8-leaflist {
+          type uint8;
+       }
+       
+       leaf-list string-leaflist {
+          type string;
+       }       
+    }
+
+    list oper-AList {
+       config false;
+       key "union-enum-key-leaf";
+      
+       leaf union-enum-key-leaf {
+         type union-type;
+       }
+       
+       list BList {
+          key "union-ip-key-leaf";
+      
+          leaf union-ip-key-leaf {
+             type inet:ip-address;
+          }
+          
+          //leaf-list under a Basic-message for all types support. 
+          leaf-list uint8-bleaflist {
+             type uint8;
+          }
+          
+          leaf-list string-bleaflist {
+             type string;
+          }          
+          
+          list CList {
+             key "union-c-leaf";
+             
+             leaf union-c-leaf {
+                type union-type;
+             }
+             
+             //leaf-list under a NESTED Basic-message for all types support. 
+             leaf-list uint8-cleaflist {
+                type uint8;
+             }
+             
+             leaf-list string-cleaflist {
+                type string;
+             }             
+          }
+       }
+    }
+    
+    container oper-P {
+       config false;
+       
+       leaf int8-leaf {
+          type int8;
+       }
+
+       list QList {
+          key "address";
+          
+          leaf address {
+             type inet:ip-address;
+          }
+          
+          leaf string-leaf{
+             type string;
+          }
+             
+       }
+   }    
+
+   //Oper enumeration 
+    list operEnum1 {
+	    config false;
+	    key "operEnum1KeyLeaf";
+	    leaf operEnum1KeyLeaf {
+		    type enum-type;
+	    }
+	    leaf enum1leaf {
+		    type season-enum;
+	    }
+	    list operEnum2 {
+		    key "operEnum2KeyLeaf";
+		    leaf operEnum2KeyLeaf {
+			    type enum-type;
+		    }
+
+		    leaf enum2leaf {
+			    type season-enum;
+		    }
+		    list operEnum3 {
+			    key  "operEnum3KeyLeaf";
+			    leaf  operEnum3KeyLeaf {
+				    type enum-type;
+			    }
+			    leaf enum3leaf {
+				    type season-enum;
+			    }
+		    }
+	    }
+    }
+}

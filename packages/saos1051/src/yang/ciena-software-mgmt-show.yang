@@ -1,0 +1,30 @@
+module ciena-software-mgmt-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-software-mgmt-show";
+    prefix ciena-software-mgmt-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-software-mgmt";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case software{
+            leaf software{
+                type empty;
+            }
+        }
+        
+        case version{
+            leaf version{
+                type empty;
+            }
+        }
+         
+    }
+}

@@ -1,0 +1,225 @@
+module ciena-sfc {
+
+   namespace "urn:ciena:params:xml:ns:yang:ciena-pn::ciena-sfc";
+   prefix sfc;
+
+   import ciena-mef-classifier {
+      prefix classifier;
+   }
+
+   import ciena-mef-fp {
+      prefix fp;
+   }
+   
+   import ciena-mef-logical-port {
+      prefix "mef-logical-port";
+   }
+
+   organization                                                                     
+      "Ciena Corporation";                                                         
+
+   contact                                                                          
+      "Web URL: http://www.ciena.com/                                              
+      E-mail:  yang@ciena.com                                                      
+      Postal:  7035 Ridge Road                                                     
+      Hanover, Maryland 21076                                             
+      U.S.A.                                                          
+      Phone:   +1 800-921-1144                                                     
+      Fax:     +1 410-694-5750";                                                   
+
+      description                                                                      
+      "This YANG module defines data for management of service function chaining";                                             
+
+   revision "2020-02-04" {
+      description
+         "Updated description field";
+   }
+
+   revision "2019-04-05" {
+      description
+         "Add tx statistics for Service function forwarder interface
+          Add rpc sff-clear-statistics to clear sffs statistics";
+   }
+
+   revision "2016-07-28" {                                                          
+      description                                                                  
+         "1.0";                                                        
+   }
+
+   container sffs {
+
+      description
+         "Service function forwarder (sff) is responsible for delivering
+         traffic from network to a connected service function (SF) or from 
+         a SF to another SF";
+
+      list sff {
+
+         key "sff-name";
+         description
+            "List of all sff and its configuration";
+
+         leaf sff-name {
+            type string;
+            description
+               "Name of sff";
+         }
+
+         leaf sff-mode {
+            type enumeration {
+               enum vpls {
+                  description
+                     "Virtual private LAN service";
+               }
+               enum vpws {
+                  description
+                     "Virtual private wired service";
+               }
+            }
+            description
+               "Sff mode";
+            default vpws;
+         }
+
+         list interface {
+            key "name";
+            description 
+               "List of interface that are part of this sff";
+
+            leaf name { 
+               type string;
+               description
+                  "String used to identify a interface";
+            }
+
+            leaf logical-port {
+               type mef-logical-port:logical-port-ref;
+               mandatory true;
+               description
+                  "Text string that is used to identify a logical port";
+            }
+
+            leaf-list classifier-list {
+               type classifier:classifier-ref;
+               description
+                  "List of classifiers";
+            }
+
+            leaf stats-enabled {
+               type boolean;
+               default false;
+               description
+                  "Enable statistics collection on this interface in the hardware";
+            }
+
+            list ingress-transform {               
+               key "ingress-name";                                                  
+
+               leaf ingress-name {                                                  
+                  type string;                                                     
+                  description  
+                     "Name of ingress transform";
+               }                        
+               description
+                  "List of ingress transforms";
+
+               uses fp:transform;                                                      
+            }
+
+            list egress-transform {               
+               key "egress-name";                                                   
+
+               leaf egress-name {                                                   
+                  type string;                                                     
+                  description 
+                     "Name of egress transform";
+               }                                                                    
+               description
+                  "List of egress transforms";
+
+               uses fp:transform;                                                      
+            }
+
+            container statistics {
+               config false;
+
+               description
+                  "A collection of SFF interface related statistics objects.";
+
+               leaf rxBytes {
+                  type uint64;
+                  description
+                     "Ingress byte count";
+               }
+
+               leaf rxPkts {
+                  type uint64;
+                  description
+                     "Ingress packet count";
+               }
+
+               leaf droppedBytes {
+                  type uint64;
+                  description
+                     "Ingress dropped byte count";
+               }
+
+               leaf txBytes {
+                  type uint64;
+                  description
+                     "Egress byte count";
+               }
+
+               leaf txPkts {
+                  type uint64;
+                  description
+                     "Egress packet count";
+               }
+            }
+         } //interface                                                                    
+      } //sff                                                 
+   }
+
+   rpc sff-clear-statistics{
+      description
+         "RPC command to clear sffs statistics";
+      
+      input{
+         choice clear-scope{
+            case instance{
+               leaf sff{
+                  type leafref{
+                     path "/sffs/sff/sff-name";
+                  }
+                  description
+                     "Name of sff";
+               }
+
+               leaf sff-interface{
+                  mandatory true;
+                  type leafref{
+                     path "/sffs/sff[sff-name=current()/../sff]/interface/name";
+                  }
+                  description
+                     "Name of sff-interface";
+               }
+            }
+            case all{
+               leaf all{
+                  type empty;
+               }
+               description
+                     "Clear all sff-interface stats";
+            }
+         }
+      }
+
+      output {
+         leaf status{
+            type string;
+            description
+               "Status of the clear stats operation";
+         }
+      }
+   }//end rpc clear-stats
+}

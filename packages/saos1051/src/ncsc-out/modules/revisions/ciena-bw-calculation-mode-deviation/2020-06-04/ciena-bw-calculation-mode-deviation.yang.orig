@@ -1,0 +1,46 @@
+module ciena-bw-calculation-mode-deviation {
+   namespace "http://www.ciena.com/ns/yang/ciena-bw-calculation-mode-deviation";
+   prefix "ciena-bw-calculation-mode-deviation";
+
+   import ciena-bw-calculation-mode {
+      prefix "ciena-bw-calculation-mode";
+   }
+
+   organization
+      "Ciena Corporation";
+
+   contact
+      "Web URL: http://www.ciena.com/
+      E-mail:  yang@ciena.com
+      Postal:  7035 Ridge Road
+               Hanover, Maryland 21076
+               U.S.A.
+
+      Phone:   +1 800-921-1144
+      Fax:     +1 410-694-5750";
+
+   description
+      "This YANG module defines the nodes for
+       BW Calculation Mode Deviation.
+
+       Copyright (c) 2020 Ciena Corporation.  All rights
+       reserved.
+
+       All information contained herein is, and remains
+       the property of Ciena Corporation. Dissemination of this
+       information or reproduction of this material is strictly
+       forbidden unless prior written permission is obtained from
+       Ciena Corporation.";
+
+   revision "2020-06-04" {
+      description
+         "Initial version";
+   }
+
+   deviation /ciena-bw-calculation-mode:bw-calculation-mode/ciena-bw-calculation-mode:iqos-bw-calculation-mode {
+      deviate replace {
+         default payload;
+      }
+   }
+}
+

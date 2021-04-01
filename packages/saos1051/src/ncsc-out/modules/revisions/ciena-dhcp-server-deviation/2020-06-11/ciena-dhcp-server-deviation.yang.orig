@@ -1,0 +1,34 @@
+module ciena-dhcp-server-deviation {
+
+  namespace "http://www.ciena.com/dhcpServer/yang/ciena-dhcp-server-dev";
+  prefix cds-dev;
+
+  import ciena-dhcp-server {
+    prefix cds;
+  }
+
+  revision 2020-06-11 {
+    description
+     "Initial Revision";
+  }
+
+  deviation /cds:dhcp-server/cds:dhcp-ip-pool/cds:lease-time {
+    deviate not-supported;
+  }
+
+  deviation /cds:dhcp-server/cds:dhcp-ip-pool/cds:manual-allocation {
+    deviate not-supported;
+  }
+
+  deviation /cds:dhcp-server/cds:dhcp-ip-pool/cds:option {
+    deviate not-supported;
+  }
+
+  deviation /cds:dhcp-server-state/cds:dhcp-ip-pool/cds:packet-statistics {
+    deviate not-supported;
+  }
+
+  deviation /cds:clean-dhcp-server-statistics {
+    deviate not-supported;
+  }
+}

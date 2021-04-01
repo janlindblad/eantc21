@@ -1,0 +1,28 @@
+module openconfig-aaa-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/openconfig-aaa-show";
+    prefix openconfig-aaa-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for openconfig-aaa";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case aaa{
+            leaf aaa{
+                type empty;
+            }
+         
+            leaf server-groups{
+                type empty;
+            }
+        }
+         
+    }
+}

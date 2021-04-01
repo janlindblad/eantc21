@@ -1,0 +1,24 @@
+module ciena-cfm-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-cfm-show";
+    prefix ciena-cfm-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-cfm";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case cfm{
+            leaf cfm{
+                type empty;
+            }
+        }
+         
+    }
+}

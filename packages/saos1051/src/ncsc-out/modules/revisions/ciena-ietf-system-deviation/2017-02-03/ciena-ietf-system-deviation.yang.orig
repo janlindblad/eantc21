@@ -1,0 +1,117 @@
+module ciena-ietf-system-deviation {
+  namespace "http://www.ciena.com/ns/yang/ciena-ietf-system-dev";
+  prefix "sys-dev";
+
+  import ietf-system {
+    prefix "sys";
+  }
+
+  organization
+    "Ciena Corporation";
+  
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+      
+  description
+    "This YANG module defines Ciena's deviations from the standard system model..
+
+      Copyright (c) 2016 Ciena Corporation.  All rights 
+      reserved.
+
+      All information contained herein is, and remains
+      the property of Ciena Corporation. Dissemination of this 
+      information or reproduction of this material is strictly 
+      forbidden unless prior written permission is obtained from 
+      Ciena Corporation.";
+  
+  revision 2017-02-03 {
+    description 
+      "Initial version";
+    reference
+      "RFC 6020: YANG - A Data Modeling Language for
+       the Network Configuration Protocol (NETCONF).
+       No specific reference; standard not available.";
+  }
+
+  //
+  // Configuration deviations
+  //
+
+  deviation /sys:system/sys:contact {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:hostname {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:location {
+    deviate not-supported;
+  }              
+
+  deviation /sys:system/sys:dns-resolver {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:ntp {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:radius {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:clock {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:authentication/sys:user-authentication-order {
+    deviate not-supported;
+  }
+
+  deviation /sys:system/sys:authentication/sys:user/sys:password {
+    deviate not-supported; 
+  }
+
+  deviation /sys:system/sys:authentication/sys:user/sys:authorized-key {
+    deviate not-supported;
+  }
+
+  //
+  // Operational deviations
+  //
+
+  deviation /sys:system-state/sys:platform {
+    deviate not-supported;
+  }
+
+  deviation /sys:system-state/sys:clock {
+    deviate not-supported;
+  }
+
+  deviation /sys:system-state {
+    deviate not-supported;
+  }
+
+  //
+  // RCP deviations
+  //
+
+  deviation /sys:set-current-datetime {
+    deviate not-supported;
+  }
+
+  deviation /sys:system-restart {
+    deviate not-supported;
+  }
+
+  deviation /sys:system-shutdown {
+    deviate not-supported;
+  }
+}

@@ -1,0 +1,26 @@
+module ciena-mef-l2cp-profile-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-l2cp-profile-show";
+    prefix ciena-mef-l2cp-profile-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-l2cp-profile";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case l2cp-profile{
+            leaf l2cp-profile{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

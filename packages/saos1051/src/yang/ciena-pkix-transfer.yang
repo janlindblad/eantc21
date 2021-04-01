@@ -1,0 +1,180 @@
+module ciena-pkix-transfer {
+  namespace "http://www.ciena.com/ns/yang/ciena-pkix-transfer";
+  prefix pkix-transfer;
+
+  import ciena-pkix-types {
+    prefix pkix-types;
+  }
+  import ciena-tls-service-profile {
+    prefix ciena-tls-service-profile;
+  }
+organization "Ciena Corporation";
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+              Hanover, Maryland 21076
+              U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+  description
+    "This YANG module defines the nodes for Public Key Infrastructure
+     (PKI) Security Certificates CA (Certificate Authority) and CRL
+     (Certificate Revocation List) for the NETCONF protocol.
+     
+     Copyright (c) 2016-2017 Ciena Corporation.  All rights reserved.
+     
+     All information contained herein is, and remains the property of
+     Ciena Corporation. Dissemination of this information or
+     reproduction of this material is strictly forbidden unless prior
+     written permission is obtained from Ciena Corporation.";
+
+  revision 2018-05-01 {
+    description
+      "Initial version";
+    reference
+      "RFC 6020: YANG - A Data Modeling Language for
+       the Network Configuration Protocol (NETCONF).
+       No specific reference; standard not available.";
+  }
+ rpc pkix-ca-install {
+    description
+      "Install a CA certificate.";
+    input {
+      leaf ca-cert-name {
+        type string;
+        description
+          "The user defined name identifying
+           a particular CA certificate.";
+      }
+      leaf tls-service-profile {
+        type leafref {
+            path "/ciena-tls-service-profile:tls-service-profiles/ciena-tls-service-profile:tls-service-profile-name";
+        }  
+        description
+           "The TLS Service Profile to be used when accepting
+            TLS connections.";
+      }   
+        uses pkix-types:pkix-file-transfer-parameters;
+    }
+  }
+  rpc pkix-ca-uninstall {
+    description
+      "Uninstall a CA certificate.";
+    input {
+      leaf ca-cert-name {
+        type string;
+        mandatory true;
+        description
+          "The name identifying a particular CA certificate.";
+      }
+    }
+  }
+  rpc pkix-certificates-csr-generate {
+    description
+      "Generate a certificate signing request.";
+    input {
+      leaf cert-name {
+        type string;
+        description
+          "The certificate name.";
+      }
+      leaf algorithm-identifier {
+        type identityref {
+          base pkix-types:key-algorithm;
+        }
+        description
+          "Identifies which algorithm is to be used to generate the
+           key.  Also referred to within SAOS as key-type.";
+      }
+      leaf cert-passphrase {
+        type string;
+        description
+          "The passphrase for the certificate.";
+      }
+      leaf tls-service-profile {
+        type leafref {
+            path "/ciena-tls-service-profile:tls-service-profiles/ciena-tls-service-profile:tls-service-profile-name";
+        }  
+        description
+           "The TLS Service Profile to be used when accepting
+            TLS connections.";
+      }
+      uses pkix-types:pkix-file-transfer-parameters;
+    }
+  }
+  rpc pkix-certificates-install {
+    description
+      "Install a device certificate.";
+    input {
+      leaf cert-name {
+        type string;
+        description
+          "The certificate name.";
+      }
+      leaf cert-passphrase {
+        type string;
+        description
+          "The passphrase for the certificate.";
+      }
+      leaf cert-only {
+        type boolean;
+        description
+          "Only install the certificate.";
+      }
+      leaf tls-service-profile {
+        type leafref {
+            path "/ciena-tls-service-profile:tls-service-profiles/ciena-tls-service-profile:tls-service-profile-name";
+        }  
+        description
+           "The TLS Service Profile to be used when accepting
+            TLS connections.";
+      }
+      uses pkix-types:pkix-file-transfer-parameters;
+    }
+  }
+  rpc pkix-certificates-uninstall {
+    description
+      "Uninstall a device  certificate.";
+    input {
+      leaf cert-name {
+        type string;
+        mandatory true;
+        description
+          "The certificate name.";
+      }
+    }
+  }
+  rpc pkix-crl-install {
+    description
+      "Install a CRL.";
+    input {
+      leaf crl-cert-name {
+        type string;
+        description
+          "The user defined name identifying a particular CRL.";
+      }
+      leaf tls-service-profile {
+        type leafref {
+            path "/ciena-tls-service-profile:tls-service-profiles/ciena-tls-service-profile:tls-service-profile-name";
+        }  
+        description
+           "The TLS Service Profile to be used when accepting
+            TLS connections.";
+      }
+      uses pkix-types:pkix-file-transfer-parameters;
+    }
+  }
+  rpc pkix-crl-uninstall {
+    description
+      "Uninstall a CRL.";
+    input {
+      leaf crl-name {
+        type string;
+        mandatory true;
+        description
+          "The name identifying a particular CRL.";
+      }
+    }
+  }
+}

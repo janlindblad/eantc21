@@ -1,0 +1,600 @@
+module ciena-te {
+     namespace   "http://ciena.com/ns/yang/ciena-te";
+     prefix "te";
+
+    import ietf-inet-types {
+        prefix inet;
+    }
+
+    import ietf-te-types {
+      prefix te-types;
+    }
+
+    import ietf-sr-policy-types {
+      prefix ietf-sr-policy-types;
+    }
+
+    organization
+         "Ciena Corporation";
+
+    contact
+        "Web URL: http://www.ciena.com/
+         E-mail:  yang@ciena.com
+         Postal:  7035 Ridge Road
+                  Hanover, Maryland 21076
+                      U.S.A.
+         Phone:   +1 800-921-1144
+         Phone:   +1 408-904-2139
+         Fax:     +1 410-694-5750";
+
+    description
+         "This YANG module defines Ciena's specific Segme/exnt Routing(SR) protocol
+
+         Copyright (c) 2018  Ciena Corporation.  All rights
+         reserved.
+
+         All information contained herein is, and remains the
+         property of Ciena Corporation. Dissemination of this
+         information or reproduction of this material is strictly
+         forbidden unless prior written permission is obtained
+         from Ciena Corporation.";
+
+  revision 2019-05-06 {
+    description
+      "added candidate path in config and oper data";
+        reference
+        "RFC XXXX";
+  }
+
+  revision 2018-10-23 {
+    description
+      "Based off of ciena-te.yang";
+        reference
+        "RFC XXXX";
+  }
+
+
+grouping te-type {
+   choice type {
+        description
+            "The explicit route subobject type";
+        case num-unnum-hop {
+             container num-unnum-hop {
+                 leaf node-id {
+                    type te-types:te-node-id;
+                     description
+                         "The identifier of a node in the TE topology.";
+                 }
+                 leaf link-tp-id {
+                    type te-types:te-tp-id;
+                    description
+                       "TE link termination point identifier. The combination
+                        of TE link ID and the TE node ID is used to identify an
+                        unnumbered TE link.";
+                 }
+                 leaf hop-type {
+                    type te-types:te-hop-type;
+                    default "LOOSE";
+                    description "strict or loose hop";
+                 }
+
+                 leaf direction {
+                    type te-types:te-link-direction;
+                    default INCOMING;
+                    description "Link ERO direction";
+                 }
+
+                 description
+                     "Numbered and Unnumbered link/node explicit route
+                      subobject";
+                      reference
+                          "RFC3209: section 4.3 for EXPLICIT_ROUTE in RSVP-TE
+                           RFC3477: Signalling Unnumbered Links in RSVP-TE";
+               }
+        }
+        case label {
+           container label-hop {
+              leaf te-label {
+                  type uint32 {
+                      range "0..1048575";
+                  }
+                  description "Label value";
+              }
+           }
+        }
+    }
+}
+
+grouping mpls-path-mode {
+    description
+      "Mpls path mode group";
+        list mpls-path {
+            key "name";
+            description
+                "show data for mpls te path";
+
+            leaf name {
+                type  leafref {
+                    path "/te:te/te:globals/te:mpls-paths/te:mpls-path/te:name";
+                }
+                description "MPLS path name";
+            }
+            leaf path-id  {
+                type  uint32;
+                description " Tunnel path id";
+            }
+            leaf hop-count  {
+                type  uint16;
+                description "Tunnel hop count";
+            }
+           list path-hop {
+               key "index";
+                description
+                    "Hop address and type";
+                leaf index {
+                    type uint32;
+                    description "route-object-include-exclude index";
+                }
+
+                leaf node-id {
+                    type te-types:te-node-id;
+                     description
+                         "The identifier of a node in the TE topology.";
+                 }
+
+                 leaf link-tp-id {
+                    type te-types:te-tp-id;
+                    description
+                       "TE link termination point identifier. The combination
+                        of TE link ID and the TE node ID is used to identify an
+                        unnumbered TE link.";
+                 }
+
+                 leaf hop-type {
+                    type te-types:te-hop-type;
+                    description "strict or loose hop";
+                 }
+
+                 leaf te-label {
+                    type uint32;
+                    description "Label value";
+                }
+            }
+	}
+   }
+
+   grouping tunnel-state {
+    description
+      "Mpls tunnel state ";
+        container tunnels {
+         description
+             "TE tunnels count summary";
+         container summary {
+             leaf tunnel-count  {
+                 type  uint16;
+                 description "Tunnel count";
+            }
+         }
+         list tunnel {
+             key "name";
+            description
+                "TE tunnel summary";
+            leaf name {
+               type  leafref {
+                 path "/te:te/te:tunnels/te:tunnel/te:name";
+               }
+                description "Tunnel Name";
+            }
+            leaf identifier {
+                type  uint16;
+                description "Tunnel index";
+            }
+            leaf source  {
+                type  inet:ipv4-address;
+                description " Source ip for the path";
+            }
+            leaf destination  {
+                type  inet:ipv4-address;
+                description " Destination ip for the path";
+            }
+			leaf color {
+               type uint32;
+               description "Color associated with the policy";
+            }
+            leaf in-label{
+                type  uint32;
+                description "Tunnel in label";
+            }
+            leaf out-labels{
+                type  string;
+                description "Tunnel Out labels";
+            }
+            leaf incoming-interface-name  {
+                type  string;
+                description
+                "incoming interface name.";
+            }
+            leaf outgoing-interface-name  {
+                type  string;
+                description
+                "outgoing interface name.";
+                }
+            leaf oper-status{
+                type string {
+                    length "0..255";
+                }
+                description "Tunnel oper status";
+            }
+            leaf admin-status{
+                type string {
+                    length "0..255";
+                }
+                description "Tunnel Admin status";
+            }
+            leaf tunnel-type{
+               type  string {
+                   length "0..255";
+               }
+               description "Tunnel Type";
+            }
+            leaf signaling-type {
+                type string {
+                    length "0..255";
+                }
+                description "Signalling type of tunnel";
+            }
+            leaf create-time {
+                type  string;
+                description "Creation time of tunnel";
+            }
+	    leaf up-time {
+                type  string;
+                description "Tunnel Up time";
+            }
+	    container binding-sid {
+		   leaf alloc-mode{
+		      type  ietf-sr-policy-types:binding-sid-alloc-mode;
+		      description "Binding SID Types";
+	           }
+		   leaf allocated-sid{
+		      type uint32;
+		      description "Allocated SID value for the Binding SID";
+		   }
+	   }
+	   uses candidate-paths-state;
+
+	   container segment-info {
+	        leaf segment-count {
+	           type uint32;
+		   description "Total segment count";
+		}
+	        list active-segment-list {
+                   key "index";
+                   description "Active segment list";
+                   leaf index {
+                      type uint32;
+                      description "Index value of segment list";
+                   }
+		   leaf path-type {
+		      type string;
+		      description "segment list path type";
+		   }
+		   leaf hop-address {
+		      type inet:ipv4-prefix;
+		      description "segment list address";
+		   }
+		   leaf label {
+		      type uint32;
+		      description "segment list label value";
+		   }
+	       }
+            }
+          }
+       }
+     }
+
+    grouping sr-path {
+            description " Segment Routing Path Grouping";
+
+        leaf source  {
+            type  inet:ipv4-address;
+            description " Source ip for the tunnel";
+        }
+
+        leaf destination  {
+            type  inet:ipv4-address;
+            description " Destination ip for the tunnel";
+        }
+    }
+	grouping binding-sid_config {
+       description
+          "Binding SID configuration properties grouping";
+       leaf dataplane {
+         type ietf-sr-policy-types:dataplane-type;
+	     description "Binding SID dataplane type";
+       }
+       leaf value {
+         type ietf-sr-policy-types:sid-value-type;
+         description "Binding SID value";
+      }
+    }
+
+	grouping explicit-path-properties {
+       description
+          "Explicit path properties of the candidate path";
+       container segment-lists {
+          description
+             "Path segment list(s) properties";
+          list segment-list {
+             key "name-ref";
+			 max-elements 1;
+             description "SR policy candidate path segment lists";
+             leaf name-ref {
+                type leafref {
+                   path "/te:te/te:globals/te:mpls-paths/te:mpls-path/te:name";
+                }
+                description "Reference to segment-list name";
+             }
+          }
+       }
+    }
+
+	grouping candidate-path-type {
+       description "Candidate path type grouping";
+       choice type {
+          description
+             "Type of candidate paths";
+          case explicit {
+              description "Candidate path with explicitly defined set/s of segment-lists";
+              uses explicit-path-properties;
+          }
+       }
+    }
+
+	grouping candidate-paths {
+       description "SR policy candidate path grouping";
+       container candidate-paths {
+          description "SR policy candidate path(s) ";
+          list candidate-path {
+             key "protocol-origin originator discriminator";
+			 max-elements 1;
+             description "SR policy Candidate path(s) list entry";
+             leaf protocol-origin {
+               type ietf-sr-policy-types:protocol-origin-type;
+               description
+                   "Instantiation mechanism used to create the candidate path";
+             }
+             leaf originator {
+               type string;
+               description
+                  "Identifier (concatenation of ASN and node-address) of the node
+                  that signalled/instantiated the candidate path on headend";
+             }
+             leaf discriminator {
+               type uint32 {
+			      range "1..65535";
+			   }
+               description "Candidate path distinguisher";
+             }
+             leaf preference {
+               type uint32 {
+                  range "1..100";
+               }
+               mandatory true;
+               description "Candidate path preference";
+             }
+             leaf description {
+                type string;
+                description "Candidate path description";
+             }
+	     leaf isis-tag {
+                type string;
+                mandatory true;
+                description
+                   "ISIS Instance Area Tag";
+	     }
+             uses candidate-path-type;
+          }
+       }
+    }
+
+    grouping candidate-paths-state {
+       description "SR policy candidate path grouping";
+       container candidate-paths {
+          description "SR policy candidate path(s) ";
+          list candidate-path {
+             key "protocol-origin originator discriminator";
+             description "SR policy Candidate path(s) list entry";
+             leaf protocol-origin {
+               type ietf-sr-policy-types:protocol-origin-type;
+               description
+                   "Instantiation mechanism used to create the candidate path";
+             }
+             leaf originator {
+               type string;
+               description
+                  "Identifier (concatenation of ASN and node-address) of the node
+                  that signalled/instantiated the candidate path on headend";
+             }
+             leaf discriminator {
+               type uint32;
+               description "Candidate path distinguisher";
+             }
+             leaf preference {
+               type uint32;
+               description "Candidate path preference";
+             }
+             leaf is-best-candidate-path {
+		type boolean;
+		description "Best candidate path";
+            }
+            leaf type {
+               type string;
+               description
+                  "Type of candidate paths";
+            }
+            container segment-lists {
+                      description
+                         "Path segment list(s) properties";
+                      list segment-list {
+                         key "name-ref";
+                         description "SR policy candidate path segment lists";
+                         leaf name-ref {
+                            type leafref {
+                               path "/te:te/te:globals/te:mpls-paths/te:mpls-path/te:name";
+                            }
+                            description "Reference to segment-list name";
+                         }
+                         leaf is-valid {
+                            type boolean;
+                            description "Segment-list weighted loadshare";
+                         }
+			 leaf hop-count {
+                            type uint32;
+                            description "Candidate path distinguisher";
+                         }
+			 list hop-list {
+                            key "hop-index";
+                            description "SR policy candidate path segment lists";
+                            leaf hop-index {
+                               type uint32;
+                               description "Reference to segment-list name";
+                            }
+			    leaf hop-address {
+                               type inet:ipv4-prefix;
+                               description "Reference to segment-list name";
+                            }
+			    leaf label {
+			       type uint32;
+			       description "segment list label value";
+			    }
+                         }
+                      }
+                  }
+               }
+	   }
+    }
+///Config Data starts
+  container te {
+            description " TE Tunnel  model";
+    container globals {
+            description "Global TE config";
+
+     container mpls-paths {
+            description "Set of mpls paths ";
+            list mpls-path {
+                key "name";
+                description
+                "List of paths for this tunnel.";
+
+            leaf name {
+                type string;
+                description "TE path name";
+            }
+
+      container explicit-route-objects {
+            description
+            "Container for the exclude route objects";
+
+        list route-object-include-exclude {
+          key "index";
+          description
+            "List of explicit route objects to include or
+             exclude in path computation";
+
+            leaf index {
+             type uint32 {
+                range "1..4095";
+                }
+               description "ERO subobject index";
+           }
+
+          leaf explicit-route-usage {
+              type identityref {
+                base te-types:route-usage-type;
+            }
+            description
+              "Explicit-route usage.";
+             }
+            //uses te-types:explicit-route-hop;
+              uses te-type;
+            }
+           }
+          }
+         }
+      }
+    container tunnels {
+        description
+        "TE tunnel configuration data";
+        list tunnel {
+          key "name";
+          description
+          "List for the tunnel.";
+
+        leaf name {
+            type  string {
+                 length "0..255";
+                 pattern 'Tunnel([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-3][0-9][0-9][0-9]|40[0-8][0-9]|409[0-5])';
+            }
+            description "TE Tunnel Names are only in the format of Tunnelx where x is a number from 1-4095.";
+        }
+        leaf identifier {
+            type uint16 {
+                range "1..4095";
+            }
+            description
+            "TE tunnel Identifier.";
+        }
+        leaf description {
+            type  string {
+                 length "0..255";
+            }
+            description
+            "Textual description for this TE tunnel";
+        }
+        uses sr-path;
+
+       leaf signaling-type {
+             type identityref {
+             base te-types:path-signaling-type;
+             }
+           description "Tunnel mode is MPLS Segment-Routing";
+       }
+
+       leaf color {
+         type uint32 {
+            range "0..31";
+         }
+	 default "0";
+         description "Color associated with the policy";
+       }
+
+      // commenting below tunnel-path to check upgrade scenario works or not
+      /*container tunnel-path {
+                description "Tunnel path for te ";
+                    leaf path-name {
+                        type leafref {
+                            path "/te/globals/mpls-paths/mpls-path/name";
+                        }
+                description "Use this attribute to specify an MPLS-TE path to be used ";
+                }
+       }*/
+
+       container binding-sid {
+          description
+             "Binding segment ID";
+          uses binding-sid_config;
+       }
+       uses candidate-paths;
+     }
+   }
+}
+
+container mpls-te-state{
+    config false;
+    description "Mpls-te state container.";
+    uses mpls-path-mode;
+    uses tunnel-state;
+
+}
+}

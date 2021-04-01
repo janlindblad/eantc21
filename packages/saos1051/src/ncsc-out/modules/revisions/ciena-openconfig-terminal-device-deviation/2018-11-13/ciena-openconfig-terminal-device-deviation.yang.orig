@@ -1,0 +1,44 @@
+module ciena-openconfig-terminal-device-deviation {
+  namespace "http://www.ciena.com/ns/yang/ciena-openconfig-terminal-device-deviation";
+  prefix ciena-oc-term-dev-deviation;
+
+  import openconfig-interfaces {
+    prefix oc-if;
+  }
+
+  import openconfig-if-ethernet {
+    prefix oc-if-eth;
+  }
+
+  import openconfig-lldp {
+    prefix oc-lldp;
+  }
+
+  import openconfig-platform-transceiver {
+    prefix oc-platform-xcvr;
+  }
+
+  organization
+    "Ciena Corporation";
+  contact
+    "Web URL: http://www.ciena.com/
+     Postal:  7035 Ridge Road
+             Hanover, Maryland 21076
+             U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+
+
+  revision 2018-11-13 {
+    description
+      "Initial revision";
+  }
+
+  deviation /oc-if:interfaces/oc-if:interface/oc-if-eth:ethernet {
+     deviate not-supported;
+  }
+  deviation /oc-if:interfaces/oc-if:interface/oc-if:state/oc-platform-xcvr:physical-channel {
+     deviate not-supported;
+  }
+}
+

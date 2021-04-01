@@ -1,0 +1,430 @@
+module ciena-nat {
+  namespace "http://www.ciena.com/ns/yang/ciena-nat";
+  prefix cn-nat;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import openconfig-interfaces {
+    prefix "oc-if";
+  }
+
+  import ciena-openconfig-interfaces {
+    prefix cn-if;
+  }
+
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+     E-mail:  yang@ciena.com
+     Postal:  7035 Ridge Road
+     Hanover, Maryland 21076
+     U.S.A.
+     Phone:   +1 800-921-1144
+     Fax:     +1 410-694-5750";
+
+  description
+    "This YANG module contains the schema definition for Ciena's
+     global configuration of Network Address Translations (NAT).";
+
+  revision "2020-03-13" {
+    description
+      "Initial Version.";
+    reference
+      "IEEE Std 8512 .";
+  }
+
+  grouping port-number {
+    description
+      "An individual port number or a range of ports.
+       When only start-port-number is present,
+       it represents a single port number.";
+    leaf start-port-number {
+      type inet:port-number;
+      description
+        "Beginning of the port range.";
+      reference
+        "Section 3.2.9 of RFC 8045";
+    }
+    leaf end-port-number {
+      type inet:port-number;
+      must '. >= ../start-port-number' {
+        error-message
+          "The end-port-number must be greater than or
+           equal to start-port-number.";
+      }
+      description
+        "End of the port range.";
+      reference
+        "Section 3.2.10 of RFC 8045";
+    }
+  }
+
+  grouping mapping-entry-attributes {
+    description
+      "NAT mapping entry.
+
+       If an attribute is not stored in the mapping/session table,
+       it means the corresponding field of a packet that
+       matches this entry is not rewritten by the NAT or this
+       information is not required for NAT filtering purposes.";
+    leaf index {
+      type uint32;
+      description
+        "A unique identifier of a mapping entry that has to be
+         explicitly configured.";
+    }
+    leaf type {
+      type enumeration {
+        enum static {
+          description
+            "The mapping entry represents a static NAT.";
+        }
+        enum dynamic {
+          description
+            "The mapping entry represents a dynamic NAT.";
+        }
+      }
+      description
+        "Indicates the type of a mapping entry.  For example,
+         a mapping can be: static or dynamic.";
+    }
+    leaf transport-protocol {
+      type uint8;
+      description
+        "The upper-layer protocol associated with this mapping.
+         Values are taken from the IANA Protocol Numbers registry:
+         <https://www.iana.org/assignments/protocol-numbers/>.
+
+         For example, this field contains 6 for TCP,
+         17 for UDP, 33 for DCCP, or 132 for SCTP.
+
+         If this leaf is not instantiated, then the mapping
+         applies to any protocol.";
+    }
+    leaf internal-src-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the source IPv4/IPv6 address/prefix
+         of the packet received on an internal interface.";
+    }
+    container internal-src-port {
+      description
+        "Corresponds to the source port of the packet received
+         on an internal interface.
+
+         It is also used to indicate the internal source ICMP
+         identifier.
+
+         As a reminder, all the ICMP Query messages contain
+         an 'Identifier' field, which is referred to in this
+         document as the 'ICMP Identifier'.";
+      uses port-number;
+    }
+    leaf external-src-address {
+      type inet:ip-prefix;
+      description
+        "Source IP address/prefix of the packet sent on an
+         external interface of the NAT.";
+    }
+    container external-src-port {
+      description
+        "Source port of the packet sent on an external
+         interface of the NAT.
+
+         It is also used to indicate the external source ICMP
+         identifier.";
+      uses port-number;
+    }
+    leaf internal-dst-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the destination IP address/prefix
+         of the packet received on an internal interface
+         of the NAT.
+
+         For example, some NAT implementations support
+         the translation of both source and destination
+         addresses and port numbers, sometimes referred to
+         as 'Twice NAT'.";
+    }
+    container internal-dst-port {
+      description
+        "Corresponds to the destination port of the
+         IP packet received on the internal interface.
+
+         It is also used to include the internal
+         destination ICMP identifier.";
+      uses port-number;
+    }
+    leaf external-dst-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the destination IP address/prefix
+         of the packet sent on an external interface
+         of the NAT.";
+    }
+    container external-dst-port {
+      description
+        "Corresponds to the destination port number of
+         the packet sent on the external interface
+         of the NAT.
+
+         It is also used to include the external
+         destination ICMP identifier.";
+      uses port-number;
+    }
+    leaf lifetime {
+      type uint32;
+      units "seconds";
+      description
+        "When specified, it is used to track the connection that is
+         fully formed (e.g., once the three-way handshake
+
+         TCP is completed) or the duration for maintaining
+         an explicit mapping alive.  The mapping entry will be
+         removed by the NAT instance once this lifetime is expired.
+
+         When reported in a get operation, the lifetime indicates
+         the remaining validity lifetime.
+
+         Static mappings may not be associated with a
+         lifetime.  If no lifetime is associated with a
+         static mapping, an explicit action is required to
+         remove that mapping.";
+    }
+  }
+
+  grouping session-entry-attributes {
+    description
+      "NAT session entry.";
+    leaf index {
+      type uint32;
+      description
+        "A unique identifier of an active NAT session entry.";
+    }
+    leaf type {
+      type enumeration {
+        enum static {
+          description
+            "The session entry represents a static NAT.";
+        }
+        enum dynamic {
+          description
+            "The session entry represents a dynamic NAT.";
+        }
+      }
+      description
+        "Indicates the type of a session entry.  For example,
+         a session can be: static or dynamic.";
+    }
+    leaf transport-protocol {
+      type uint8;
+      description
+        "The upper-layer protocol associated with this session.
+         Values are taken from the IANA Protocol Numbers registry:
+         <https://www.iana.org/assignments/protocol-numbers/>.
+
+         For example, this field contains 6 for TCP,
+         17 for UDP, 33 for DCCP, or 132 for SCTP.
+
+         If this leaf is not instantiated, then the session
+         applies to any protocol.";
+    }
+    leaf internal-src-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the source IPv4/IPv6 address/prefix
+         of the packet received on an internal interface.";
+    }
+    container internal-src-port {
+      description
+        "Corresponds to the source port of the packet received
+         on an internal interface.
+
+         It is also used to indicate the internal source ICMP
+         identifier.
+
+         As a reminder, all the ICMP Query messages contain
+         an 'Identifier' field, which is referred to in this
+         document as the 'ICMP Identifier'.";
+      uses port-number;
+    }
+    leaf external-src-address {
+      type inet:ip-prefix;
+      description
+        "Source IP address/prefix of the packet sent on an
+         external interface of the NAT.";
+    }
+    container external-src-port {
+      description
+        "Source port of the packet sent on an external
+         interface of the NAT.
+
+         It is also used to indicate the external source ICMP
+         identifier.";
+      uses port-number;
+    }
+    leaf internal-dst-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the destination IP address/prefix
+         of the packet received on an internal interface
+         of the NAT.
+
+         For example, some NAT implementations support
+         the translation of both source and destination
+         addresses and port numbers, sometimes referred to
+         as 'Twice NAT'.";
+    }
+    container internal-dst-port {
+      description
+        "Corresponds to the destination port of the
+         IP packet received on the internal interface.
+
+         It is also used to include the internal
+         destination ICMP identifier.";
+      uses port-number;
+    }
+    leaf external-dst-address {
+      type inet:ip-prefix;
+      description
+        "Corresponds to the destination IP address/prefix
+         of the packet sent on an external interface
+         of the NAT.";
+    }
+    container external-dst-port {
+      description
+        "Corresponds to the destination port number of
+         the packet sent on the external interface
+         of the NAT.
+
+         It is also used to include the external
+         destination ICMP identifier.";
+      uses port-number;
+    }
+    leaf lifetime {
+      type uint32;
+      units "seconds";
+      description
+        "When specified, it is used to track the connection that is
+         fully formed (e.g., once the three-way handshake
+
+         TCP is completed) or the duration for maintaining
+         an explicit session alive.  The session entry will be
+         removed by the NAT instance once this lifetime is expired.
+
+         When reported in a get operation, the lifetime indicates
+         the remaining validity lifetime.
+
+         Static sessions may not be associated with a
+         lifetime.  If no lifetime is associated with a
+         static session, an explicit action is required to
+         remove that session.";
+    }
+    leaf internal-interface {
+      type string {
+        length "1..256";
+      }
+      description
+        "Name of the internal IP interface.";
+    }
+    leaf external-interface {
+      type string {
+        length "1..256";
+      }
+      description
+        "Name of the external IP interface.";
+    }
+  }
+
+  container nat {
+    description
+      "NAT module";
+    container instances {
+      description
+        "NAT instances";
+      list instance {
+        key "name";
+        max-elements 1;
+        description
+          "A NAT instance. This identifier has to be explicitly configured.";
+        leaf name {
+          type string {
+            length "1..128";
+          }
+          description
+            "A name associated with the NAT instance.";
+        }
+        list interface {
+          description
+            "Identifies the realm of the NAT instance.";
+          key "interface-name";
+          leaf interface-name {
+            type leafref {
+              path "/oc-if:interfaces/oc-if:interface/oc-if:name";
+            }
+            must "/oc-if:interfaces/oc-if:interface[name = current()]" +
+                 "/oc-if:config/cn-if:type[.='loopback' or .='ip']" {
+              error-message
+                "Referenced interface must be of type 'ip' or 'loopback'.";
+            }
+            description
+              "Name of the IP interface.";
+          }
+          leaf type {
+            type enumeration {
+              enum internal {
+                description
+                  "Identifies the realm of NAT interface as Internal.";
+              }
+              enum external {
+                description
+                  "Identifies the realm of NAT interface as External.";
+              }
+            }
+            description
+              "Identifies the realm of NAT interface as Internal or External.";
+          }
+        }
+        container mapping-table {
+          description
+            "NAT mapping table.  Applicable for functions that maintain
+             static and/or dynamic mappings, such as NAT44, Destination
+             NAT, NAT64, or CLAT.";
+          list mapping-entry {
+            key "index";
+            description
+              "NAT mapping entry.";
+            uses mapping-entry-attributes;
+          }
+        }
+      }
+    }
+    container nat-session-state {
+      config false;
+      description
+        "NAT sessions on a live system";
+
+      list instance {
+        key "name";
+        description
+          "NAT instance.";
+        leaf name {
+          type string;
+          description
+            "A name associated with the NAT instance.";
+        }
+        list session-entry {
+          key "index";
+          description
+            "NAT session entry.";
+          uses session-entry-attributes;
+        }
+      }
+    }
+  }
+}

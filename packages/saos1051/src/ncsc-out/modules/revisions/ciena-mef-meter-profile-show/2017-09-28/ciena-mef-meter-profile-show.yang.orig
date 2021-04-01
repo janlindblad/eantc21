@@ -1,0 +1,26 @@
+module ciena-mef-meter-profile-show{
+    yang-version 1.1;
+    namespace "http://www.ciena.com/ns/ciena-mef-meter-profile-show";
+    prefix ciena-mef-meter-profile-show;
+    import yangcli-pro { prefix yp; }
+    
+    description
+       "Show command extensions by ciena for ciena-mef-meter-profile";    
+    
+    revision 2017-09-28 {
+       description
+         "Initial version";
+    }
+    
+    augment "/yp:show/yp:input/yp:showtype" {
+    
+        case meter-profile{
+            leaf meter-profile{
+                type union{
+                    type string;
+                }
+            }
+        }
+         
+    }
+}

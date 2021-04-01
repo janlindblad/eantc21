@@ -1,0 +1,737 @@
+module ciena-flexe {
+   namespace "http://www.ciena.com/ns/yang/ciena-flexe";
+   prefix "ciena-flexe";
+
+   import openconfig-interfaces {
+      prefix "oc-if";
+   }
+
+   import ciena-openconfig-interfaces {
+      prefix cn-oc-if;
+   }
+
+   import ciena-types {
+     prefix ciena;
+   }
+
+   import ciena-packet-typedefs {
+     prefix cntypes;
+   }
+
+   import ciena-packet-ptp {
+      prefix cn-pkt-ptp;
+   }
+
+   organization
+      "Ciena Corporation";
+
+   contact
+      "Web URL: http://www.ciena.com/
+      E-mail:  yang@ciena.com
+      Postal:  7035 Ridge Road
+      Hanover, Maryland 21076
+      U.S.A.
+      Phone:   +1 800-921-1144
+      Fax:     +1 410-694-5750";
+
+   description
+      "This YANG module defines Ciena's data definition for the
+      management of FlexE related parameters.
+
+      Copyright (c) 2020 Ciena Corporation.  All rights
+      reserved.
+
+      All information contained herein is, and remains
+      the property of Ciena Corporation. Dissemination of this
+      information or reproduction of this material is strictly
+      forbidden unless prior written permission is obtained from
+      Ciena Corporation.";
+
+   revision "2020-02-07" {
+      description
+         "Initial Version.";
+      reference
+         "OIF Implementation Agreement Flex Ethernet 2.1";
+   }
+
+   /*
+    * typedefs
+    */
+
+   typedef name-string {
+      type string {
+         length "1..45";
+      }
+      description
+         "A text string of up to 45 characters.";
+   }
+
+   typedef flexe-port-ref {
+      type leafref {
+         path
+         "/ciena-flexe:flexe-ports/ciena-flexe:flexe-port/ciena-flexe:name";
+      }
+      description
+         "This type is used by the data models that needs to reference
+          configured flexe ports.";
+   }
+
+   typedef flexe-group-ref {
+      type leafref {
+         path
+         "/ciena-flexe:flexe-groups/ciena-flexe:flexe-group/ciena-flexe:name";
+      }
+      description
+         "This type is used by the data models that needs to reference
+          configured flexe groups.";
+   }
+
+   typedef flexe-channel-ref {
+      type leafref {
+         path "/ciena-flexe:flexe-channels/ciena-flexe:flexe-channel/ciena-flexe:name";
+      }
+      description
+         "This type is used by the data models that needs to reference
+          configured flexe channels.";
+   }
+
+   grouping flexe-channel-slot {
+      description
+         "Slots allocated for a FlexE channel.";
+
+      leaf phy-number-in-group {
+         type leafref {
+            path
+            "/ciena-flexe:flexe-groups/ciena-flexe:flexe-group[name=current()/../../group-name]" + 
+            "/ciena-flexe:flexe-phys/ciena-flexe:phy-number-in-group";
+         }
+         description
+            "PHY number index from the list of PHYs associated to
+            the FlexE group.
+ 
+            Refer to the clause 6.1 in FlexE IA 2.1.
+            For 100GBASE-R, the FlexE PHY num and the 100G
+            FlexE instance num are the same and in the range
+            [1-254]; For 200GBASE-R, each PHY num is in the
+            range [1-126]. For 400GBASE-R, each PHY num is
+            in the range [1-62]. For 50GBASE-R, each PHY num is
+            in the range [1-126].";
+      }
+ 
+      leaf slot-id {
+         type uint32 {
+            range "1 .. 80";
+         }
+         description
+            "Slot number within the list of slots associated to the PHY.
+            Ex: For 100G PHY range is [1..20]
+                For 200G PHY range is [1..40]
+                For 400G PHY range is [1..80]";
+      }
+   }
+
+   grouping flexe-group-slot {
+      description
+         "Slots allocated for a FlexE channel.";
+
+      leaf phy-number-in-group {
+         type uint32 {
+            range "1 .. 254";
+         }
+         description
+            "PHY number the slot resides in.";
+      }
+ 
+      leaf slot-id {
+         type uint32 {
+            range "1 .. 80";
+         }
+         description
+            "Slot number within the PHY.";
+      }
+
+      leaf associated-flexe-channel {
+         type name-string;
+         description
+            "Name of FlexE channel this slot is associated to.";
+      }
+   }
+
+   container flexe-ports {
+      description
+         "FlexE port configurations";
+
+      list flexe-port {
+         key "name";
+         description
+            "List of FlexE ports.";
+
+         leaf name {
+            type name-string;
+            description
+               "Name for FlexE port.";
+         }
+
+         leaf admin-state {
+            type ciena:admin-state;
+            default enabled;
+            description   
+               "Overall port admin state.";
+         }
+
+         leaf ptp-id {
+            type leafref {
+                path "/cn-pkt-ptp:ptps/cn-pkt-ptp:ptp/cn-pkt-ptp:ptp-id";
+            }
+            mandatory true;
+            description
+               "Unique, access identifier string of the PTP (e.g., '1/1').";
+         }
+
+         leaf port-speed {
+            type enumeration {
+               enum 50Gb {
+                  description
+                     "50 Gbps FlexE";
+               }
+               enum 100Gb {
+                  description
+                     "100 Gbps FlexE";
+               }
+               enum 200Gb {
+                  description
+                     "200 Gbps FlexE";
+               }
+               enum 400Gb {
+                  description
+                     "400 Gbps FlexE";
+               }
+            }
+            mandatory true;
+            description
+               "FlexE port speed.";
+         }
+
+         leaf forward-error-correction {
+            type cntypes:ettp-fec-enum;
+            default auto;
+            description
+               "Forward error correction";
+         }
+      }
+   }
+
+   container flexe-groups {
+      description
+         "FlexE group configurations";
+
+      list flexe-group {
+         key "name";
+         description
+             "List of FlexE groups.";
+
+         leaf name {
+            type name-string;
+            description
+               "Name for FlexE group.";
+         }
+
+         leaf admin-state {
+            type ciena:admin-state;
+            default enabled;
+            description   
+               "Overall FlexE group admin state.";
+         }
+
+         leaf group-number {
+            type uint32 {
+               range "1..254";
+            }
+            mandatory true;
+            description
+              "FlexE group number associated to the FlexE group";
+         }
+
+         leaf calendar-slot-granularity {
+            type enumeration {
+               enum slot-5G {
+                  value 1;
+                  description
+                     "Calendar slot is of 5G granularity";
+               }
+               enum slot-25G {
+                  value 2;
+                  description
+                     "Calendar slot is of 25G granularity";
+               }
+            }
+            default slot-5G;
+            description
+               "The granularity of calendar slot is 5G or 25G";
+            reference
+               "Refer to the clause 6.8 in OIF FlexE IA 2.1";
+         }
+
+         leaf phy-type {
+            type enumeration {
+               enum flexe-phy-50GBASE-R {
+                  value 1;
+                  description
+                     "50GBASE-R PHY";
+               }
+               enum flexe-phy-100GBASE-R {
+                  value 2;
+                  description
+                     "100GBASE-R PHY";
+               }
+               enum flexe-phy-200GBASE-R {
+                  value 3;
+                  description
+                     "200GBASE-R PHY";
+               }
+               enum flexe-phy-400GBASE-R {
+                  value 4;
+                  description
+                     "400GBASE-R PHY";
+               }
+            }
+            mandatory true;
+            description
+               "Type of PHY used in the FlexE group, such as 50/100/200/400GBASE-R.
+                All PHYs in a FlexE group should be of same type";
+            reference
+               "OIF FlexE IA 2.1";
+         }
+
+         leaf calendar {
+            type enumeration {
+               enum calendar-A {
+                  value 0 ;
+                  description
+                  "Set the A calendar configuration.";
+               }
+               enum calendar-B {
+                  value 1 ;
+                  description
+                     "Set the B calendar configuration.";
+               }
+            }
+            default calendar-A;
+            description
+               "Calendar configuration used in FlexE Mux/Demux";
+         }
+
+         leaf calendar-protocol-enable {
+            type boolean;
+            default false;
+            description
+               "Whether calendar negotiation protocol is enabled or not.";
+            reference
+               "OIF Flex 2.1: Section 7.3.4";
+         }
+
+         list flexe-phys {
+            key phy-number-in-group;
+            description
+               "List of the participating PHYs in a FlexE group";
+
+            leaf phy-number-in-group {
+               type uint32 {
+                  range "1 .. 254";
+               }
+               description
+                  "Refer to the clause 6.1 in FlexE IA 2.1.
+                  For 100GBASE-R, the FlexE PHY num and the 100G
+                  FlexE instance num are the same and in the range
+                  [1-254]; For 200GBASE-R, each PHY num is in the
+                  range [1-126]. For 400GBASE-R, each PHY num is
+                  in the range [1-62]. For 50GBASE-R, each PHY num is
+                  in the range [1-126]. PHY num configured in list of
+                  flexe-phys should be in ascending order.";
+            }
+
+            leaf local-interface {
+               type ciena-flexe:flexe-port-ref;
+               mandatory true;
+               description
+                  "Local FlexE port interface related to the current
+                  phy-number in a FlexE group.";
+            }
+         }
+      }
+   }
+
+   container flexe-channels {
+      description
+         "FlexE channel configurations";
+   
+      list flexe-channel {
+         key "name";
+         description
+             "List of FlexE channels.";
+
+         leaf name {
+            type name-string;
+            description
+               "Name for FlexE channel.";
+         }
+
+         leaf channel-number {
+            type uint32 {
+               range "1..65534";
+            }
+            mandatory true;
+            description
+               "Channel number associated to the FlexE channel.";
+         }
+
+         leaf group-name {
+            type ciena-flexe:flexe-group-ref;
+            mandatory true;
+            description
+               "Name of FlexE group to which this FlexE channel will be associated to.";
+         }
+
+         leaf channel-mapping {
+            type enumeration {
+               enum L1-mapped {
+                  value 1 ;
+                  description
+                     "L1 switching between faceplate ETTP and FlexE MAC ETTP at matched rate or
+                      2 FlexE channels.";
+               }
+               enum L2-L3-mapped {
+                  value 2 ;
+                  description
+                     "L2/L3 forwarding between Logical port/flowpoints created over faceplate ETTPs/FlexE MAC ETTPs";
+               }
+            }
+            default L1-mapped;
+            description
+               "FlexE Datapath, traffic mapped at L1/L2/L3";
+         }
+
+         list calendar-A-slots-list {
+            key "phy-number-in-group slot-id";
+
+            description
+               "List of slots allocated on Calendar A for a FlexE channel. 
+               Number of slots allocated for a FlexE channel is based on 
+               the bandwidth allocated for it. Ex: For a system with 
+               calendar slot granularity of 5G, a 10G FlexE channel 
+               would be allocated 2 slots (10G/5G)";
+
+            uses flexe-channel-slot;
+         }
+
+         list calendar-B-slots-list {
+            key "phy-number-in-group slot-id";
+
+            description
+               "List of slots allocated on Calendar B for a FlexE channel. 
+               Number of slots allocated for a FlexE channel is based on 
+               the bandwidth allocated for it. Ex: For a system with 
+               calendar slot granularity of 5G, a 10G FlexE-channel
+               would be allocated 2 slots (10G/5G)";
+
+            uses flexe-channel-slot;
+         }
+      }
+   }
+            
+   container flexe-cross-connects {
+      description
+         "FlexE cross connect configurations";
+
+      list flexe-cross-connect {
+         key "name";
+         description
+             "List of FlexE cross-connects.
+              FlexE cross-connect can be between Faceplate standard ethernet ETTP 
+              and FlexE MAC ETTP or two FlexE channels";
+
+         leaf name {
+            type name-string;
+            description
+               "Name for FlexE cross-connect.";
+         }
+
+         choice end-point-a-type {
+            mandatory true;
+            description
+               "Type of cross-connect member for end-point-a";
+
+            case ettp {
+               leaf ettp-end-point-a {
+                  type leafref {
+                     path "/oc-if:interfaces/oc-if:interface/oc-if:name";
+                  }
+                  must "/oc-if:interfaces/oc-if:interface[name = current()]" +
+                       "/oc-if:config/cn-oc-if:type = 'ettp'" {
+                          error-message
+                             "Referenced interface must be of type 'ettp'.";
+                  }
+                  description
+                     "ETTP endpoint.";
+               }
+            }
+            case flexe-channel {
+               leaf flexe-channel-end-point-a {
+                  type ciena-flexe:flexe-channel-ref;
+                  description
+                     "FlexE channel endpoint.";
+               }
+            }
+         }
+
+         choice end-point-b-type {
+            mandatory true;
+            description
+               "Type of cross-connect member for end-point-b";
+
+            case ettp {
+               leaf ettp-end-point-b {
+                  type leafref {
+                     path "/oc-if:interfaces/oc-if:interface/oc-if:name";
+                  }
+                  must "/oc-if:interfaces/oc-if:interface[name = current()]" +
+                       "/oc-if:config/cn-oc-if:type = 'ettp'" {
+                          error-message
+                             "Referenced interface must be of type 'ettp'.";
+                  }
+                  description
+                     "ETTP endpoint.";
+               }
+            }
+            case flexe-channel {
+               leaf flexe-channel-end-point-b {
+                  type ciena-flexe:flexe-channel-ref;
+                  description
+                     "FlexE channel endpoint.";
+               }
+            }
+         }
+      }
+   }
+      
+
+   grouping flexe-group-oh-status-grouping {
+      description
+         "FlexE group Overhead status";
+
+      leaf flexe-calendar-mismatch {
+         type boolean;
+         default false;
+         description
+            "FlexE group Calendar mismatch";
+      }
+
+      leaf group-id-mismatch {
+         type boolean;
+         default false;
+         description
+            "FlexE group-Id mismatch alarm";
+      }
+
+      leaf group-deskew {
+         type boolean;
+         default false;
+         description
+            "FlexE group deskew error";
+      }
+
+      leaf phy-id-mismatch {
+         type boolean;
+         default false;
+         description
+            "FlexE Phy Id mismatch";
+      }
+
+      leaf phy-map-mismatch {
+         type boolean;
+         default false;
+         description
+            "FlexE Phy map mismatch";
+      }
+
+      leaf loss-of-oh-frame {
+         type boolean;
+         default false;
+         description
+            "Loss of OverHead frame error";
+      }
+
+      leaf loss-of-oh-multi-frame {
+         type boolean;
+         default false;
+         description
+            "Loss of OverHead multi frame error";
+      }
+
+      leaf c-bit-error {
+         type boolean;
+         default false;
+         description
+            "FlexE OverHead has C-bit error";
+      }
+
+      leaf crc-error {
+         type boolean;
+         default false;
+         description
+            "FlexE OverHead CRC-16 error";
+      }
+
+      leaf remote-phy-failure-error {
+         type boolean;
+         default false;
+         description
+            "Remote PHY failure error in FlexE OverHead";
+      }
+   }
+
+   /*
+    * Operational data
+    */
+
+   container flexe-operational-state {
+      config false;
+
+      description
+         "Operational data for FlexE.";
+
+      list flexe-port-status {
+         key "name";
+         description
+            "Operational status related to FlexE ports.";
+         leaf name {
+            type ciena-flexe:flexe-port-ref;
+            description
+               "Name for FlexE port.";
+         }
+         leaf oper-state {
+           type ciena:oper-state;
+           description 
+            "Flexe port operational enable/disable.";
+         }
+      }
+      
+      list flexe-group-status {
+         key "name";
+         description
+            "Operational status related to FlexE group.";
+
+         leaf name {
+            type ciena-flexe:flexe-group-ref;
+            description
+               "Name for FlexE group.";
+         }
+
+         leaf flexe-group-oper-status {
+            type ciena:oper-state;
+            description
+               "Status for a FlexE group. If any PHY is in fault,
+               or any FlexE configuration is mismatched, the FlexE
+               group status is indicated in fault.";
+         }
+
+         leaf total-bandwidth {
+           type uint32;
+           description 
+            "Total bandwidth of FlexE group in Gbps.";
+         }
+
+         leaf available-bandwidth {
+           type uint32;
+           description 
+            "Available bandwidth of FlexE group in Gbps.";
+         }
+
+         leaf allocated-bandwidth {
+           type uint32;
+           description 
+            "Bandwidth in Gbps allocated to channels associated 
+            to the FlexE group in Gbps";
+         }
+
+         leaf total-slots {
+           type uint32;
+           description 
+            "Total number of slots in FlexE group.";
+         }
+
+         leaf available-slots {
+           type uint32;
+           description 
+            "Number of slots available in active calendar of FlexE group.";
+         }
+
+         leaf allocated-slots {
+           type uint32;
+           description 
+            "Number of slots in use by FlexE channels associated to FlexE group.";
+         }
+
+         container flexe-group-oh-status {
+            description
+               "Overhead status related to FlexE group ";
+
+            uses flexe-group-oh-status-grouping;
+         }
+      }
+
+      list flexe-group-slot-map {
+         key "name";
+         description
+            "Operational status related to FlexE group.";
+
+         leaf name {
+            type ciena-flexe:flexe-group-ref;
+            description
+               "Name for FlexE group.";
+         }
+
+         list calendar-A-slot-map {
+            key "phy-number-in-group slot-id";
+
+            description
+               "FlexE channel mapping of Calendar-A slots on FlexE group.";
+
+            uses flexe-group-slot;
+         }
+
+         list calendar-B-slot-map {
+            key "phy-number-in-group slot-id";
+
+            description
+               "FlexE channel mapping of Calendar-B slots on FlexE group.";
+
+            uses flexe-group-slot;
+         }
+      }
+
+      list flexe-channel-status {
+         key "name";
+         description
+            "Operational status related to FlexE group.";
+
+         leaf name {
+            type ciena-flexe:flexe-channel-ref;
+            description
+               "Name for FlexE channel.";
+         }
+
+         leaf flexe-channel-oper-status {
+            type ciena:oper-state;
+            description
+               "Status for a FlexE channel.";
+         }
+
+         leaf active-bandwidth {
+           type uint32;
+           description 
+            "Bandwidth used by FlexE channel.";
+         }
+      }
+   }
+}
