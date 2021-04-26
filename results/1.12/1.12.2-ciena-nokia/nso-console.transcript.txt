@@ -1,0 +1,9 @@
+admin@ncs(config)# 
+System message at 2021-04-26 09:01:54...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-26 09:14:34...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# devices device ciena-6 compare-config
+admin@ncs(config)# devices device ciena-5 compare-config
+admin@ncs(config)# 

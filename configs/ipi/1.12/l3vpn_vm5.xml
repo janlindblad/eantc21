@@ -1,0 +1,410 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+ <device>
+  <name>ipi-31</name>
+  <config
+        xmlns:oc-types="http://openconfig.net/yang/openconfig-types"
+        xmlns:oc-pol-types="http://openconfig.net/yang/policy-types"
+        xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types"
+        xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+
+    <network-instances xmlns="http://openconfig.net/yang/network-instance">
+      <network-instance>
+        <name>VRF1</name>
+        <config>
+          <name>VRF1</name>
+          <type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:L3VRF</type>
+          <enabled>true</enabled>
+          <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</enabled-address-families>
+          <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV6</enabled-address-families>
+          <router-id>1.1.1.1</router-id>
+          <description>"L3VPN Test Instance 1"</description>
+          <route-distinguisher>100:1</route-distinguisher>
+        </config>
+        <protocols>
+          <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+            <name>DIRECTLY_CONNECTED</name>
+            <config>
+              <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+              <name>DIRECTLY_CONNECTED</name>
+              <enabled>true</enabled>
+            </config>
+          </protocol>
+          <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <identifier>oc-pol-types:BGP</identifier>
+            <name>100</name>
+            <bgp>
+              <global>
+                <config>
+                  <as>100</as>
+                </config>
+              </global>
+            </bgp>
+            <config>
+              <identifier>oc-pol-types:BGP</identifier>
+              <name>100</name>
+              <enabled>true</enabled>
+            </config>
+          </protocol>
+        </protocols>
+        <interfaces>
+          <interface>
+            <id>eth2</id>
+            <config>
+              <interface>eth2</interface>
+              <id>eth2</id>
+            </config>
+          </interface>
+        </interfaces>
+        <encapsulation>
+          <config>
+            <label-allocation-mode xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:INSTANCE_LABEL</label-allocation-mode>
+            <encapsulation-type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:MPLS</encapsulation-type>
+          </config>
+        </encapsulation>
+        <tables xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+          <table xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+            <protocol>oc-pol-types:BGP</protocol>
+            <address-family>oc-types:IPV4</address-family>
+            <config>
+              <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:BGP</protocol>
+              <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+            </config>
+          </table>
+          <table xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+            <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+            <address-family>oc-types:IPV4</address-family>
+            <config>
+              <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:DIRECTLY_CONNECTED</protocol>
+              <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+            </config>
+          </table>
+        </tables>
+        <table-connections xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+          <table-connection xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <src-protocol>oc-pol-types:DIRECTLY_CONNECTED</src-protocol>
+            <dst-protocol>oc-pol-types:BGP</dst-protocol>
+            <address-family>oc-types:IPV4</address-family>
+            <config>
+              <dst-protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:BGP</dst-protocol>
+              <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+              <dst-instance xmlns="http://www.ipinfusion.com/yang/ocnos/ipi-oc-ni-augments">100</dst-instance>
+              <default-import-policy>ACCEPT_ROUTE</default-import-policy>
+              <src-protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:DIRECTLY_CONNECTED</src-protocol>
+            </config>
+          </table-connection>
+        </table-connections>
+      </network-instance>
+      <network-instance>
+        <name>default</name>
+        <config>
+          <name>default</name>
+          <type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:DEFAULT_INSTANCE</type>
+          <enabled>true</enabled>
+          <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</enabled-address-families>
+          <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV6</enabled-address-families>
+        </config>
+        <protocols>
+          <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+            <name>DIRECTLY_CONNECTED</name>
+            <config>
+              <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+              <name>DIRECTLY_CONNECTED</name>
+              <enabled>true</enabled>
+            </config>
+          </protocol>
+          <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <identifier>oc-pol-types:OSPF</identifier>
+            <name>0</name>
+            <ospfv2>
+              <global>
+                <config>
+                  <router-id>1.1.1.1</router-id>
+                </config>
+              </global>
+              <areas>
+                <area>
+                  <identifier>0.0.0.0</identifier>
+                  <config>
+                    <identifier>0.0.0.0</identifier>
+                  </config>
+                  <interfaces>
+                    <interface>
+                      <id>eth1</id>
+                      <config>
+                        <id>eth1</id>
+                      </config>
+                      <interface-ref>
+                        <config>
+                          <interface>eth1</interface>
+                        </config>
+                      </interface-ref>
+                    </interface>
+                    <interface>
+                      <id>lo</id>
+                      <config>
+                        <id>lo</id>
+                      </config>
+                      <interface-ref>
+                        <config>
+                          <interface>lo</interface>
+                        </config>
+                      </interface-ref>
+                    </interface>
+                  </interfaces>
+                </area>
+              </areas>
+            </ospfv2>
+            <config>
+              <identifier xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:OSPF</identifier>
+              <name>0</name>
+              <enabled>true</enabled>
+            </config>
+          </protocol>
+          <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <identifier>oc-pol-types:BGP</identifier>
+            <name>100</name>
+            <config>
+              <identifier>oc-pol-types:BGP</identifier>
+              <name>100</name>
+              <enabled>true</enabled>
+            </config>
+            <bgp>
+              <global>
+                <config>
+                  <as>100</as>
+                </config>
+              </global>
+              <neighbors>
+                <neighbor>
+                  <neighbor-address>100.100.100.2</neighbor-address>
+                  <afi-safis>
+                    <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                      <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                      <config>
+                        <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                        <enabled>true</enabled>
+                      </config>
+                      <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                    </afi-safi>
+                    <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                      <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                      <config>
+                        <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                        <enabled>true</enabled>
+                      </config>
+                      <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                    </afi-safi>
+                  </afi-safis>
+                  <config>
+                    <neighbor-address>100.100.100.2</neighbor-address>
+                    <peer-as>100</peer-as>
+                    <peer-type>INTERNAL</peer-type>
+                  </config>
+                </neighbor>
+                <neighbor>
+                  <neighbor-address>2.2.2.2</neighbor-address>
+                  <afi-safis>
+                    <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                      <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                      <config>
+                        <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                        <enabled>true</enabled>
+                      </config>
+                      <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                    </afi-safi>
+                    <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                      <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                      <config>
+                        <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                        <enabled>true</enabled>
+                      </config>
+                      <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                    </afi-safi>
+                  </afi-safis>
+                  <config>
+                    <neighbor-address>2.2.2.2</neighbor-address>
+                    <peer-as>100</peer-as>
+                    <peer-type>INTERNAL</peer-type>
+                  </config>
+                </neighbor>
+              </neighbors>
+            </bgp>
+          </protocol>
+        </protocols>
+        <interfaces>
+          <interface>
+            <id>eth0</id>
+            <config>
+              <interface>eth0</interface>
+              <id>eth0</id>
+            </config>
+          </interface>
+          <interface>
+            <id>eth1</id>
+            <config>
+              <interface>eth1</interface>
+              <id>eth1</id>
+            </config>
+          </interface>
+          <interface>
+            <id>lo</id>
+            <config>
+              <interface>lo</interface>
+              <id>lo</id>
+            </config>
+          </interface>
+        </interfaces>
+        <tables xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+          <table xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <protocol>oc-pol-types:OSPF</protocol>
+            <address-family>oc-types:IPV4</address-family>
+            <config>
+              <protocol>oc-pol-types:OSPF</protocol>
+              <address-family>oc-types:IPV4</address-family>
+            </config>
+          </table>
+          <table xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <protocol>oc-pol-types:BGP</protocol>
+            <address-family>oc-types:IPV4</address-family>
+            <config>
+              <protocol>oc-pol-types:BGP</protocol>
+              <address-family>oc-types:IPV4</address-family>
+            </config>
+          </table>
+        </tables>
+        <mpls>
+          <signaling-protocols>
+            <ldp>
+              <global>
+                <config>
+                  <lsr-id>1.1.1.1</lsr-id>
+                </config>
+              </global>
+            </ldp>
+          </signaling-protocols>
+        </mpls>
+      </network-instance>
+    </network-instances>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>eth1</name>
+        <config>
+          <name>eth1</name>
+          <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+        </config>
+        <subinterfaces>
+          <subinterface>
+            <index>0</index>
+            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <config/>
+              <addresses>
+                <address>
+                  <ip>100.100.100.1</ip>
+                  <config>
+                    <ip>100.100.100.1</ip>
+                    <prefix-length>24</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+            <config>
+              <index>0</index>
+            </config>
+          </subinterface>
+        </subinterfaces>
+      </interface>
+      <interface>
+        <name>eth2</name>
+        <config>
+          <name>eth2</name>
+          <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+        </config>
+        <subinterfaces>
+          <subinterface>
+            <index>0</index>
+            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <config/>
+              <addresses>
+                <address>
+                  <ip>10.10.10.10</ip>
+                  <config>
+                    <ip>10.10.10.10</ip>
+                    <prefix-length>24</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+            <config>
+              <index>0</index>
+            </config>
+          </subinterface>
+        </subinterfaces>
+      </interface>
+      <interface>
+        <name>lo</name>
+        <config>
+          <name>lo</name>
+          <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:softwareLoopback</type>
+        </config>
+        <subinterfaces>
+          <subinterface>
+            <index>0</index>
+            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <config/>
+              <addresses>
+                <address>
+                  <ip>127.0.0.1</ip>
+                  <config>
+                    <ip>127.0.0.1</ip>
+                    <prefix-length>8</prefix-length>
+                  </config>
+                </address>
+                <address>
+                  <ip>1.1.1.1</ip>
+                  <config>
+                    <ip>1.1.1.1</ip>
+                    <prefix-length>32</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+            <config>
+              <index>0</index>
+            </config>
+            <ipv6 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <addresses>
+                <address>
+                  <ip>::1</ip>
+                  <config>
+                    <ip>::1</ip>
+                    <prefix-length>128</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv6>
+          </subinterface>
+        </subinterfaces>
+      </interface>
+    </interfaces>
+    <routing-policy xmlns="http://openconfig.net/yang/routing-policy">
+      <defined-sets>
+        <bgp-defined-sets xmlns="http://openconfig.net/yang/bgp-policy">
+          <ext-community-sets>
+            <ext-community-set>
+              <ext-community-set-name>RT_COMMUNITY_SET_2</ext-community-set-name>
+              <config>
+                <ext-community-set-name>RT_COMMUNITY_SET_2</ext-community-set-name>
+                <ext-community-member>200:1</ext-community-member>
+                <match-set-options>ANY</match-set-options>
+              </config>
+            </ext-community-set>
+          </ext-community-sets>
+        </bgp-defined-sets>
+      </defined-sets>
+    </routing-policy>
+
+  </config>
+ </device>
+</devices>

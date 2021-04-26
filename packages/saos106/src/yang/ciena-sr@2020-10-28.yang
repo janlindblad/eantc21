@@ -1,0 +1,326 @@
+
+module ciena-sr {
+  namespace   "http://ciena.com/ns/yang/ciena-sr";
+  prefix "sr";
+
+  import ietf-sr-cmn {
+    prefix sr-cmn;
+  }
+
+  import ietf-inet-types {
+      prefix inet;
+  }
+
+  import openconfig-interfaces {
+    prefix "oc-if";
+  }
+
+  organization
+    "Ciena Corporation";
+
+  contact
+    "Web URL: http://www.ciena.com/
+    E-mail:  yang@ciena.com
+    Postal:  7035 Ridge Road
+    Hanover, Maryland 21076
+    U.S.A.
+    Phone:   +1 800-921-1144
+    Phone:   +1 408-904-2139
+    Fax:     +1 410-694-5750";
+
+  description
+    "This YANG module defines Ciena's specific Segment Routing(SR) protocol
+
+    Copyright (c) 2018  Ciena Corporation.  All rights
+    reserved.
+
+    All information contained herein is, and remains the
+    property of Ciena Corporation. Dissemination of this
+    information or reproduction of this material is strictly
+    forbidden unless prior written permission is obtained
+    from Ciena Corporation.";
+
+  revision "2020-10-28" {
+    description
+      "Added support for Maximum SID Depth (MSD)
+       Added SR Prefix SID flag grouping";
+
+    reference
+      "IETF-DRAFT: YANG Data Model for Segment Routing.";
+  }
+
+  revision "2020-02-12" {
+    description
+      "Depreacted Global SRGB congifurations";
+  }
+
+  revision "2018-01-11" {
+    description
+      "Initial version";
+    reference
+      "RFC XXXX: YANG Data Model for Segment Routing.";
+  }
+
+  feature mapping-server {
+    description
+      "Support for Segment Routing Mapping Server (SRMS).";
+  }
+
+  feature max-sid-depth {
+    description
+      "Support for signaling MSD (Maximum SID Depth) in IGP.";
+      reference "RFC 8476: Signaling Maximum SID Depth (MSD)
+                 Using OSPF
+                 RFC 8491: Signaling Maximum SID Depth (MSD)
+                 Using IS-IS";
+  }
+
+  grouping sid-label-local-block {
+    description
+      "Grouping for SR Label Range configuration.";
+    leaf lower-bound {
+      status deprecated;
+      type uint32 {
+        range "16000..23999";
+      }
+      description
+        "Lower value in the block.";
+    }
+    leaf upper-bound {
+      status deprecated;
+      type uint32 {
+        range 16000..23999;
+      }
+      description
+        "Upper value in the block.";
+    }
+  }
+  grouping srgb-cfg {
+    description
+      "Grouping for SR Label Range configuration.";
+    list srgb {
+      key "lower-bound upper-bound";
+      max-elements 1;
+      description
+        "List of global blocks to be advertised.";
+      uses sid-label-local-block;
+    }
+  }
+
+  grouping max-sid-depth {
+    description
+      "Maximum SID Depth (MSD) configuration grouping.";
+    leaf node-msd {
+      type uint8 {
+        range "2..12";
+      }
+      description
+        "Node MSD is the lowest MSD supported by the node.";
+    }
+  }
+
+  grouping prefix-sid-flags-cfg {
+    description
+      "Grouping of prefix SID Flags";
+
+    leaf n-flag {
+      type enumeration {
+        enum "enable" {
+          value 0;
+          description
+            "To set the N-flag value as 1";
+        }
+        enum "disable" {
+          value 1;
+          description
+            "To set the N-flag value as 0";
+        }
+      }
+      default "enable";
+      description
+        "Node SID flag settings";
+    }
+  }
+
+  container segment-routing {
+    description
+      "Segment routing global config";
+
+    container msd {
+      if-feature "max-sid-depth";
+      description
+        "MSD configuration.";
+      uses max-sid-depth;
+    }
+
+    container bindings {
+      description
+        "List of bindings.";
+      container mapping-server {
+        if-feature "mapping-server";
+        description
+          "Configuration of mapping-server local entries.";
+        list policy {
+          key "name";
+          max-elements 1;
+          description
+            "List mapping-server policies.";
+          leaf name {
+            type string;
+            description
+              "Name of the mapping policy.";
+          }
+          leaf preference {
+            type uint32 {
+              range "1..255";
+            }
+            default "128";
+            description
+              "SRMS Preference sub-tlv is used in order to
+              associate a preference with SRMS advertisements from a
+              particular source.";
+          }
+          container entries {
+            description
+              "IPv4/IPv6 mapping entries.";
+            list mapping-entry {
+              key "prefix algorithm";
+              description
+                "Mapping entries.";
+              uses sr-cmn:prefix-sid;
+              leaf attached {
+                type boolean;
+                default false;
+                description
+                  "Indicates that the prefixes and SID configured in the mapping entry
+                  and as a result advertised in the SID/Label Binding TLV are directly
+                  connected to their originators.";
+              }
+            }
+          }
+        }
+      }
+    }
+    list connected-prefix-sid-map  {
+      key "prefix";
+      description
+        "List of prefix SID mapped to IPv4 local prefixes.";
+      leaf interface {
+        type leafref {
+          path "/oc-if:interfaces/oc-if:interface/oc-if:name";
+        }
+        description
+          "Interface in which prefix-sid is configured ";
+      }
+      uses sr-cmn:ipv4-sid-cfg;
+      uses sr-cmn:last-hop-behavior;
+      uses prefix-sid-flags-cfg;
+    }
+    uses srgb-cfg;
+  }
+
+  container segment-routing-state {
+    config false;
+    description
+      "segment routing oper config.";
+    list label-blocks {
+      key "lower-bound upper-bound";
+      description
+        "List of labels blocks currently in use.";
+      leaf lower-bound {
+        status deprecated;
+        type uint32;
+        description
+          "Lower bound of the label block.";
+      }
+      leaf upper-bound {
+        status deprecated;
+        type uint32;
+        description
+          "Upper bound of the label block.";
+      }
+      leaf scope {
+        status deprecated;
+        type enumeration {
+          enum "global" {
+            value 0;
+            description
+              "Global sid.";
+          }
+          enum "local" {
+            value 1;
+            description
+              "Local sid.";
+          }
+        }
+        description
+          "Scope of this label block.";
+      }
+    }
+    list connected-prefix-sid-map {
+      key "prefix";
+      description
+        "List of prefix SID mapped to IPv4 local prefixes.";
+      uses sr-cmn:ipv4-sid-cfg;
+      uses sr-cmn:last-hop-behavior;
+      leaf interface {
+        type string;
+        description
+          "Interface in which prefix-sid is configured ";
+      }
+      uses prefix-sid-flags-cfg;
+    }
+    list mapping-server-policy {
+      key "name";
+      description
+        "List mapping-server policies.";
+      leaf name {
+        type string;
+        description
+          "Name of the mapping policy.";
+      }
+      leaf preference {
+        type uint32;
+        description
+          "Segment Routing Mapping Server Preference";
+      }
+      list mapping-entry {
+        key "prefix";
+        description
+          "List of supported transport planes.";
+        leaf prefix {
+          type inet:ip-prefix;
+          description
+            "SRMS Start Prefix ";
+        }
+        leaf start-sid-index {
+          type uint32;
+          description
+            "SRMS Start SID Index";
+        }
+        leaf srms-range {
+          type uint32;
+          description
+            "SRMS Range";
+        }
+        leaf last-prefix {
+          type inet:ip-prefix;
+          description
+            "Prefix";
+        }
+        leaf last-sid-index {
+          type uint32;
+          description
+            "SRMS Last SID Index";
+        }
+        leaf attached {
+          type boolean;
+          description
+            "Indicates that the prefixes and SID configured in the mapping entry
+            and as a result advertised in the SID/Label Binding TLV are directly
+            connected to their originators.";
+        }
+      }
+    }
+  }
+}

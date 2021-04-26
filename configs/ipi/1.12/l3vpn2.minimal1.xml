@@ -1,0 +1,28 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+ <device>
+  <name>ipi-31</name>
+  <config
+        xmlns:oc-types="http://openconfig.net/yang/openconfig-types"
+        xmlns:oc-pol-types="http://openconfig.net/yang/policy-types"
+        xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types"
+        xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+
+    <network-instances xmlns="http://openconfig.net/yang/network-instance">
+      <network-instance>
+        <name>MBH_VPN_S1</name>
+        <config>
+          <name>MBH_VPN_S1</name>
+          <type>oc-ni-types:L3VRF</type>
+          <enabled>true</enabled>
+          <enabled-address-families>oc-types:IPV4</enabled-address-families>
+          <enabled-address-families>oc-types:IPV6</enabled-address-families>
+          <router-id>172.16.1.1</router-id>
+          <description>"Fusion L3VPN S1 TRAFFIC VLAN100"</description>
+          <route-distinguisher>65000:100</route-distinguisher>
+        </config>
+      </network-instance>
+    </network-instances>
+
+  </config>
+ </device>
+</devices>

@@ -1,0 +1,136 @@
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <!--
+          Select the devices from some data structure in the service
+          model. In this skeleton the devices are specified in a leaf-list.
+          Select all devices in that leaf-list:
+      -->
+      <name>5164-RSim-1</name>
+      <config>
+        <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+          <classifier>
+            <name>untagged</name>
+            <filter-entry>
+              <filter-parameter
+                xmlns:classifier="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">classifier:vtag-stack</filter-parameter>
+              <logical-not>false</logical-not>
+              <untagged-exclude-priority-tagged>false</untagged-exclude-priority-tagged>
+            </filter-entry>
+          </classifier>
+        </classifiers>
+        <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+          <fd>
+            <name>20.101.102.0/30</name>
+            <mode>vpls</mode>
+          </fd>
+        </fds>
+        <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+          <fp>
+            <name>p1untagged</name>
+            <fd-name>20.101.102.0/30</fd-name>
+            <logical-port>1</logical-port>
+            <mtu-size>2000</mtu-size>
+            <frame-to-cos-map>default-f2c</frame-to-cos-map>
+            <cos-to-frame-map>default-c2f</cos-to-frame-map>
+            <classifier-list>untagged</classifier-list>
+            <classifier-list-precedence>10</classifier-list-precedence>
+            <stats-collection>on</stats-collection>
+          </fp>
+        </fps>
+        <logical-ports xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-logical-port">
+          <logical-port>
+            <name>1</name>
+            <admin-state>enable</admin-state>
+            <binding>1</binding>
+            <mtu>9216</mtu>
+            <description>IP Interface to RSim-1</description>
+          </logical-port>
+        </logical-ports>
+        <interfaces xmlns="http://openconfig.net/yang/interfaces">
+          <interface>
+            <name>lb0</name>
+              <config>
+                <name>lb0</name>
+                <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+                <role xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces" xmlns:cn-if="http://ciena.com/ns/yang/ciena-openconfig-interfaces">cn-if:data</role>
+                <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">loopback</type>
+                <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
+              </config>
+              <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                  <address>
+                    <ip>10.58.177.21</ip>
+                    <config>
+                      <ip>10.58.177.21</ip>
+                      <prefix-length>32</prefix-length>
+                    </config>
+                  </address>
+                </addresses>
+              </ipv4>
+            </interface>
+          <interface>
+            <name>to16102</name>
+            <config>
+              <name>to16102</name>
+              <mtu>9136</mtu>
+              <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+              <cos-to-frame-map xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default-c2f</cos-to-frame-map>
+              <frame-to-cos-map xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default-f2c</frame-to-cos-map>
+              <role xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces" xmlns:cn-if="http://ciena.com/ns/yang/ciena-openconfig-interfaces">cn-if:data</role>
+              <stats-collection xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">on</stats-collection>
+              <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
+              <underlay-binding xmlns="http://ciena.com/ns/yang/ciena-underlay-binding">
+                <config>
+                  <fd>20.101.102.0/30</fd>
+                </config>
+              </underlay-binding>
+              <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
+            </config>
+            <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+              <addresses>
+                <address>
+                  <ip>20.101.102.1</ip>
+                  <config>
+                    <ip>20.101.102.1</ip>
+                    <prefix-length>30</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+          </interface>
+        </interfaces>
+        <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
+          <instance>
+            <tag>master</tag>
+            <distance>115</distance>
+            <dynamic-hostname>true</dynamic-hostname>
+            <net>49.a001.0100.5817.7101.00</net>
+            <level-type>level-1</level-type>
+            <interfaces>
+              <interface>
+                <name>lb0</name>
+                <interface-type>broadcast</interface-type>
+                <level-type>level-1</level-type>
+              </interface>
+              <interface>
+                <name>to16102</name>
+                <interface-type>point-to-point</interface-type>
+                <level-type>level-1</level-type>
+              </interface>
+            </interfaces>
+            <mpls-te>
+              <router-id>10.58.177.101</router-id>
+              <level-type>level-1</level-type>
+            </mpls-te>
+            <segment-routing>
+              <enabled>true</enabled>
+              <bindings>
+                <advertise>false</advertise>
+                <receive>true</receive>
+              </bindings>
+            </segment-routing>
+          </instance>
+        </isis>
+      </config>
+    </device>
+  </devices>

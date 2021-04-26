@@ -1,0 +1,54 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+ <device>
+  <name>ipi-31</name>
+  <config
+        xmlns:oc-types="http://openconfig.net/yang/openconfig-types"
+        xmlns:oc-pol-types="http://openconfig.net/yang/policy-types"
+        xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types"
+        xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+
+  <network-instances xmlns="http://openconfig.net/yang/network-instance">
+    <network-instance>
+      <name>default</name>
+      <protocols>
+        <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+          <identifier>oc-pol-types:BGP</identifier>
+          <name>100</name>
+          <bgp>
+            <neighbors>
+              <neighbor>
+                <neighbor-address>100.100.100.2</neighbor-address>
+                <afi-safis>
+                  <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                    <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                    <config>
+                      <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                      <enabled>true</enabled>
+                    </config>
+                    <afi-safi-name>oc-bgp-types:IPV4_UNICAST</afi-safi-name>
+                  </afi-safi>
+                  <afi-safi xmlns:oc-bgp-types="http://openconfig.net/yang/bgp-types">
+                    <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                    <config>
+                      <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                      <enabled>true</enabled>
+                    </config>
+                    <afi-safi-name>oc-bgp-types:L3VPN_IPV4_UNICAST</afi-safi-name>
+                  </afi-safi>
+                </afi-safis>
+                <config>
+                  <neighbor-address>100.100.100.2</neighbor-address>
+                  <peer-as>100</peer-as>
+                  <peer-type>INTERNAL</peer-type>
+                </config>
+              </neighbor>
+            </neighbors>
+          </bgp>
+        </protocol>
+      </protocols>
+    </network-instance>
+  </network-instances>
+
+  </config>
+ </device>
+</devices>

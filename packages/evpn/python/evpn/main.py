@@ -80,57 +80,28 @@ class ServiceCallbacks(Service):
 
         for sna in service.site_network_accesses.site_network_access:
             # sna.device_reference .ip_connection .service .vpn_attachment
-            self.log.info(f'Processing site_network_access {sna.site_network_access_id}')
+            self.log.info(f'Processing site_network_access {sna.network_access_id}')
             pe_topo = root.topo[sna.vpn_attachment.vpn_id, sna.device_reference]
             # pe_topo.vpn_name .device_name .connected_to_device .router_id .isis_net_entity .interface .core_address .core_prefixlen
             remote_topo = root.topo[sna.vpn_attachment.vpn_id, pe_topo.connected_to_device]
             self.log.info(f'Configuring pe device {pe_topo.device_name}')
             edge_interface = edge_interface_lookup(pe_topo.device_name)
             self.log.info(f'Conf2 {edge_interface}')
-            apply_template(applier, 'l3vpn-template', 
+            apply_template(applier, 'evpn-template', 
                 DEVICE = t(pe_topo.device_name),
-                VRF_NAME = t(sna.vpn_attachment.vpn_id), # "eantc"
                 VLAN_ID = t(allocate_vlan_id(sna.vpn_attachment.vpn_id)),
-                LOGICAL_PORT = t(pe_topo.interface),#19,
-                SHELF_SLOT = t(pe_topo.shelf_slot),#"1_14",
-                IF_IP = t(sna.ip_connection.ipv4.addresses.provider_address),#"10.19.100.1",
-                AS_NUM = t(pe_topo.as_number),#65432
-                PEER_IP = t(sna.ip_connection.ipv4.addresses.customer_address),#"10.19.100.2",
-                PEER_AS_NUM = t(root.topo[sna.vpn_attachment.vpn_id,pe_topo.connected_to_device].as_number),#"65105"
-                PEER_DEVICE_NAME = t(pe_topo.connected_to_device),#spirent
-                NODE_ID = t(md5_hash(pe_topo.device_name, modulus_val=990)+10),
-                SERVICE_ID = t(allocate_vlan_id(sna.vpn_attachment.vpn_id)),#100
-
-
-                #DEVICE = pe_topo.device_name,
-                #AS = sna.vpn_attachment.vpn_id,
-                #RD = allocate_rd(pe_topo.device_name),
-                #LABEL = allocate_label(pe_topo.device_name),
-                #ISIS_NET_ENTITY = pe_topo.isis_net_entity,
-                #SOURCE_ADDRESS = pe_topo.router_id,
-                #DESTINATION_ADDRESS = remote_topo.router_id,
-                #CORE_INTERFACE = pe_topo.interface,
-                #CORE_ADDRESS = pe_topo.core_address,
-                #CORE_PREFIXLEN = pe_topo.core_prefixlen,
-                #CORE_MASK = prefixlen2mask(pe_topo.core_prefixlen),
-                #EDGE_INTERFACE = edge_interface,
-                #EDGE_SUBINTERFACE = allocate_subif(edge_interface),
-                #EDGE_INTERFACE_TYPE = interface_type(edge_interface),
-                #EDGE_ADDRESS = sna.ip_connection.ipv4.addresses.provider_address,
-                #EDGE_PREFIXLEN = sna.ip_connection.ipv4.addresses.prefix_length,
-                #EDGE_MASK = prefixlen2mask(sna.ip_connection.ipv4.addresses.prefix_length),
-                #EDGE_ADDRESS_IPV6 = sna.ip_connection.ipv6.addresses.provider_address,
-                #EDGE_PREFIXLEN_IPV6 = sna.ip_connection.ipv4.addresses.prefix_length,
-                #PEER_ADDRESS = sna.ip_connection.ipv4.addresses.customer_address,
-                #PEER_ADDRESS_IPV6 = sna.ip_connection.ipv6.addresses.customer_address,
-                #PEER_AS = "110"
+                AS = t(pe_topo.as_number),
+                SVC = t(allocate_vlan_id(sna.vpn_attachment.vpn_id)),
+                PE_INTERFACE = t(pe_topo.interface),
+                PE_ADDRESS = t(pe_topo.shelf_slot),
+                MTU = t(sna.service.svc_mtu),
             )
         self.log.info('Service create done')
 
 class Main(ncs.application.Application):
     def setup(self):
         self.log.info('Main RUNNING')
-        self.register_service('l3vpn-servicepoint', ServiceCallbacks)
+        self.register_service('evpn-servicepoint', ServiceCallbacks)
 
     def teardown(self):
         self.log.info('Main FINISHED')

@@ -1,0 +1,64 @@
+<!--
+  Title:    SE&I EVPN VPWS - Node 1
+  Date:     March 24, 2021
+  Author:   Rob Skingsley, Ciena
+  Version:  1.0
+-->
+<config>
+	<classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+		<classifier>
+			<name>v1001</name>
+			<filter-entry>
+				<filter-parameter xmlns:classifier="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">classifier:vtag-stack</filter-parameter>
+				<vtags>
+					<tag>1</tag>
+					<vlan-id>1001</vlan-id>
+				</vtags>
+			</filter-entry>
+		</classifier>
+	</classifiers>
+	<fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+		<fd>
+			<name>eVPWS.2345</name>
+			<mode>evpn-vpws</mode>
+		</fd>
+	</fds>
+ 	<fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+ 		<fp>
+ 			<name>p19v1001</name>
+ 			<fd-name>eVPWS.2345</fd-name>
+ 			<logical-port>19</logical-port>
+ 			<mtu-size>2000</mtu-size>
+ 			<classifier-list>v1001</classifier-list>
+ 			<stats-collection>on</stats-collection>
+ 		</fp>
+ 	</fps>
+	<evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+		<ethernet-segments>
+			<ethernet-segment>
+				<name>es.019</name>
+				<logical-port>19</logical-port>
+				<ethernet-segment-identifier>
+					<mac-based>
+						<system-mac-address>ac:dc:01:01:01:01</system-mac-address>
+					</mac-based>
+				</ethernet-segment-identifier>
+				<active-mode>single-active-mode</active-mode>
+			</ethernet-segment>
+		</ethernet-segments>
+		<evpn-instances>
+			<evpn-instance>
+				<id>1</id>
+				<vpws-cross-connect-fd>
+					<forwarding-domain>eVPWS.2345</forwarding-domain>
+					<local-service-id>2345</local-service-id>
+					<remote-service-id>2345</remote-service-id>
+				</vpws-cross-connect-fd>
+				<vpn-target>
+					<route-target>0:65098:2345</route-target>
+					<route-target-type>both</route-target-type>
+				</vpn-target>
+			</evpn-instance>
+		</evpn-instances>
+	</evpn>
+</config>

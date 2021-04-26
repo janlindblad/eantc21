@@ -1,0 +1,117 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <!--
+          Select the devices from some data structure in the service
+          model. In this skeleton the devices are specified in a leaf-list.
+          Select all devices in that leaf-list:
+      -->
+      <name>5164-RSim-1</name>
+		<config>
+			<vrf xmlns="urn:ciena:params:xml:ns:yang:ciena:ciena-vrf">
+				<vrfName>eantc</vrfName>
+				<description>L3VPN - eBGP Sprient +Connected</description>
+			</vrf>
+			<classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+				<classifier>
+					<name>vlan100</name>
+					<filter-entry>
+						<filter-parameter xmlns:classifier="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">classifier:vtag-stack</filter-parameter>
+						<vtags>
+							<tag>1</tag>
+							<vlan-id>100</vlan-id>
+						</vtags>
+					</filter-entry>
+				</classifier>
+			</classifiers>
+			<fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+				<fd>
+					<name>eantc.19.100</name>
+					<mode>vpls</mode>
+				</fd>
+			</fds>
+			<fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+				<fp>
+					<name>p19v100</name>
+					<fd-name>eantc.19.100</fd-name>
+					<logical-port>19</logical-port>
+					<mtu-size>2000</mtu-size>
+					<egress-l2-transform>
+						<egress-name>push-0x8100.100</egress-name>
+						<vlan-stack>
+							<tag>1</tag>
+							<push-tpid>tpid-8100</push-tpid>
+							<push-vid>100</push-vid>
+						</vlan-stack>
+					</egress-l2-transform>
+					<classifier-list>vlan100</classifier-list>
+					<stats-collection>on</stats-collection>
+				</fp>
+			</fps>
+			<logical-ports xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-logical-port">
+				<logical-port>
+					<name>19</name>
+					<mtu>9216</mtu>
+				</logical-port>
+			</logical-ports>
+			<interfaces xmlns="http://openconfig.net/yang/interfaces">
+				<interface>
+					<name>stc_1_14_100</name>
+						<config>
+						<name>stc_1_14_100</name>
+						<mtu>9136</mtu>
+						<admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+						<cos-to-frame-map xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default-c2f</cos-to-frame-map>
+						<frame-to-cos-map xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default-f2c</frame-to-cos-map>
+						<role xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"
+							  xmlns:cn-if="http://ciena.com/ns/yang/ciena-openconfig-interfaces">cn-if:data</role>
+						<stats-collection xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">on</stats-collection>
+						<type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
+						<underlay-binding xmlns="http://ciena.com/ns/yang/ciena-underlay-binding">
+						  <config>
+							<fd>eantc.19.100</fd>
+						  </config>
+						</underlay-binding>
+						<vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">eantc</vrfName>
+					  </config>
+					<ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+						<addresses>
+							<address>
+								<ip>10.19.100.1</ip>
+								<config>
+									<ip>10.19.100.1</ip>
+									<prefix-length>30</prefix-length>
+								</config>
+							</address>
+						</addresses>
+					</ipv4>
+				</interface>
+			</interfaces>
+			<bgp xmlns="http://ciena.com/ns/yang/ciena-bgp">
+				<instance>
+					<as>65432</as>
+					<vrf>
+						<name>eantc</name>
+						<route-distinguisher>0:65432:19</route-distinguisher>
+						<route-target>
+							<id>0:65432:19</id>
+							<direction>both</direction>
+						</route-target>
+						<vrf-address-family>
+							<afi>ipv4</afi>
+							<safi>unicast</safi>
+							<peer>
+								<address>10.19.100.2</address>
+								<remote-as>65105</remote-as>
+								<description>Spirent BGP 65105</description>
+								<activate>true</activate>
+							</peer>
+							<redistribute>
+								<protocol>connected</protocol>
+							</redistribute>
+						</vrf-address-family>
+					</vrf>
+				</instance>
+			</bgp>
+		</config>
+    </device>
+</devices>
