@@ -1,0 +1,723 @@
+admin@ncs(config)# load merge configs/l3vpn/cfg-
+Possible completions:
+  <filename/terminal>  cfg-1.12.ciena.3x.xml  cfg-1.12.ciena.xml  cfg-mercury.xml  cfg-neptune.xml  cfg-pet.xml  cfg-sfo.xml  cfg-topo.xml  cfg-uranus.xml  cfg-venus.xml
+admin@ncs(config)#                                      
+admin@ncs(config)# show full-configuration l3vpn-svc 
+% No entries found.
+admin@ncs(config)# load merge configs/l3vpn/cfg-pet.xml 
+Loading.
+2.14 KiB parsed in 0.04 sec (50.37 KiB/sec)
+admin@ncs(config)# load merge configs/l3vpn/cfg-sfo.xml
+Loading.
+2.14 KiB parsed in 0.06 sec (33.13 KiB/sec)
+admin@ncs(config)# show c
+l3vpn-svc vpn-services vpn-service cal
+ customer-name EANTC
+!
+l3vpn-svc vpn-services vpn-service outer
+!
+l3vpn-svc vpn-services vpn-service sol
+!
+l3vpn-svc sites site pet
+ locations location lab
+ !
+ devices device ciena-6
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn cal
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-6
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 40.2.1.1
+  ip-connection ipv4 addresses customer-address 40.2.1.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id cal
+ !
+!
+l3vpn-svc sites site sfo
+ locations location lab
+ !
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn cal
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 30.2.1.1
+  ip-connection ipv4 addresses customer-address 30.2.1.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id cal
+ !
+!
+admin@ncs(config)# commit dry-run 
+cli {
+    local-node {
+        data  devices {
+                  device ciena-5 {
+                      config {
+                          bgp {
+                              instance 65432 {
+             +                    vrf cal {
+             +                        route-distinguisher 0:65432:2794;
+             +                        route-target 0:65432:2794 {
+             +                            direction both;
+             +                        }
+             +                        vrf-address-family ipv4 unicast {
+             +                            synchronization false;
+             +                            network-synchronization false;
+             +                            auto-summary false;
+             +                            peer 30.2.1.2 {
+             +                                remote-as 300;
+             +                                keepalive-interval 30;
+             +                                hold-time 90;
+             +                                ebgp-multihop {
+             +                                    disabled;
+             +                                    multihop-ttl 255;
+             +                                }
+             +                                connect-retry-interval 120;
+             +                                minimum-advertisement-interval 0;
+             +                                description "CE1 BGP 300";
+             +                                passive false;
+             +                                as-override false;
+             +                                bfd {
+             +                                    enable false;
+             +                                }
+             +                                activate true;
+             +                                soft-reconfiguration-inbound false;
+             +                                route-reflector-client false;
+             +                                allow-ebgp-vpn false;
+             +                                prefix-limit {
+             +                                    warning-only false;
+             +                                }
+             +                                remove-private-as false;
+             +                            }
+             +                            redistribute connected;
+             +                        }
+             +                    }
+                              }
+                          }
+                          oc-if:interfaces {
+             +                interface stc_1_1_2794 {
+             +                    config {
+             +                        name stc_1_1_2794;
+             +                        mtu 9136;
+             +                        type ip;
+             +                        admin-status true;
+             +                        role data;
+             +                        vrfName cal;
+             +                        frame-to-cos-map default-f2c;
+             +                        cos-to-frame-map default-c2f;
+             +                        stats-collection on;
+             +                        underlay-binding {
+             +                            config {
+             +                                fd cal.1.2794;
+             +                            }
+             +                        }
+             +                    }
+             +                    ipv4 {
+             +                        addresses {
+             +                            address 30.2.1.1 {
+             +                                config {
+             +                                    ip 30.2.1.1;
+             +                                    prefix-length 30;
+             +                                }
+             +                            }
+             +                        }
+             +                    }
+             +                }
+                          }
+                          classifiers {
+             +                # after classifier untagged
+             +                classifier vlan2794 {
+             +                    filter-entry vtag-stack {
+             +                        logical-not false;
+             +                        vtags 1 {
+             +                            vlan-id 2794;
+             +                        }
+             +                    }
+             +                }
+                          }
+                          logical-ports {
+                              logical-port 1 {
+             -                    mtu 1526;
+             +                    mtu 9216;
+                              }
+                          }
+                          fds {
+             +                fd cal.1.2794 {
+             +                    mode vpls;
+             +                }
+                          }
+                          fps {
+             +                fp p1v2794 {
+             +                    fd-name cal.1.2794;
+             +                    logical-port 1;
+             +                    mtu-size 2000;
+             +                    egress-l2-transform push-0x8100.2794 {
+             +                        vlan-stack 1 {
+             +                            push-tpid tpid-8100;
+             +                            push-vid 2794;
+             +                        }
+             +                    }
+             +                    classifier-list [ vlan2794 ];
+             +                    stats-collection on;
+             +                }
+                          }
+             +            vrf cal {
+             +                description "L3VPN - eBGP CE1";
+             +                sr-policy {
+             +                    fallback enable;
+             +                }
+             +            }
+                      }
+                  }
+                  device ciena-6 {
+                      config {
+                          bgp {
+                              instance 65432 {
+             +                    vrf cal {
+             +                        route-distinguisher 0:65432:2794;
+             +                        route-target 0:65432:2794 {
+             +                            direction both;
+             +                        }
+             +                        vrf-address-family ipv4 unicast {
+             +                            synchronization false;
+             +                            network-synchronization false;
+             +                            auto-summary false;
+             +                            peer 40.2.1.2 {
+             +                                remote-as 300;
+             +                                keepalive-interval 30;
+             +                                hold-time 90;
+             +                                ebgp-multihop {
+             +                                    disabled;
+             +                                    multihop-ttl 255;
+             +                                }
+             +                                connect-retry-interval 120;
+             +                                minimum-advertisement-interval 0;
+             +                                description "CE2 BGP 300";
+             +                                passive false;
+             +                                as-override false;
+             +                                bfd {
+             +                                    enable false;
+             +                                }
+             +                                activate true;
+             +                                soft-reconfiguration-inbound false;
+             +                                route-reflector-client false;
+             +                                allow-ebgp-vpn false;
+             +                                prefix-limit {
+             +                                    warning-only false;
+             +                                }
+             +                                remove-private-as false;
+             +                            }
+             +                            redistribute connected;
+             +                        }
+             +                    }
+                              }
+                          }
+                          oc-if:interfaces {
+             +                interface stc_1_1_2794 {
+             +                    config {
+             +                        name stc_1_1_2794;
+             +                        mtu 9136;
+             +                        type ip;
+             +                        admin-status true;
+             +                        role data;
+             +                        vrfName cal;
+             +                        frame-to-cos-map default-f2c;
+             +                        cos-to-frame-map default-c2f;
+             +                        stats-collection on;
+             +                        underlay-binding {
+             +                            config {
+             +                                fd cal.1.2794;
+             +                            }
+             +                        }
+             +                    }
+             +                    ipv4 {
+             +                        addresses {
+             +                            address 40.2.1.1 {
+             +                                config {
+             +                                    ip 40.2.1.1;
+             +                                    prefix-length 30;
+             +                                }
+             +                            }
+             +                        }
+             +                    }
+             +                }
+                          }
+                          classifiers {
+             +                # after classifier untagged
+             +                classifier vlan2794 {
+             +                    filter-entry vtag-stack {
+             +                        logical-not false;
+             +                        vtags 1 {
+             +                            vlan-id 2794;
+             +                        }
+             +                    }
+             +                }
+                          }
+                          logical-ports {
+                              logical-port 1 {
+             -                    mtu 1526;
+             +                    mtu 9216;
+                              }
+                          }
+                          fds {
+             +                fd cal.1.2794 {
+             +                    mode vpls;
+             +                }
+                          }
+                          fps {
+             +                fp p1v2794 {
+             +                    fd-name cal.1.2794;
+             +                    logical-port 1;
+             +                    mtu-size 2000;
+             +                    egress-l2-transform push-0x8100.2794 {
+             +                        vlan-stack 1 {
+             +                            push-tpid tpid-8100;
+             +                            push-vid 2794;
+             +                        }
+             +                    }
+             +                    classifier-list [ vlan2794 ];
+             +                    stats-collection on;
+             +                }
+                          }
+             +            vrf cal {
+             +                description "L3VPN - eBGP CE2";
+             +                sr-policy {
+             +                    fallback enable;
+             +                }
+             +            }
+                      }
+                  }
+              }
+              l3vpn-svc {
+                  vpn-services {
+             +        vpn-service cal {
+             +            customer-name EANTC;
+             +        }
+             +        vpn-service outer {
+             +        }
+             +        vpn-service sol {
+             +        }
+                  }
+                  sites {
+             +        site pet {
+             +            locations {
+             +                location lab;
+             +            }
+             +            devices {
+             +                device ciena-6 {
+             +                    location lab;
+             +                }
+             +            }
+             +            management {
+             +                type provider-managed;
+             +            }
+             +            vpn-policies {
+             +                vpn-policy vpn1 {
+             +                    entries 1 {
+             +                        vpn cal {
+             +                            site-role any-to-any-role;
+             +                        }
+             +                    }
+             +                }
+             +            }
+             +            site-network-accesses {
+             +                site-network-access 1 {
+             +                    device-reference ciena-6;
+             +                    ip-connection {
+             +                        ipv4 {
+             +                            address-allocation-type static-address;
+             +                            addresses {
+             +                                provider-address 40.2.1.1;
+             +                                customer-address 40.2.1.2;
+             +                                prefix-length 30;
+             +                            }
+             +                        }
+             +                    }
+             +                    service {
+             +                        svc-input-bandwidth 1000;
+             +                        svc-output-bandwidth 1000;
+             +                        svc-mtu 2000;
+             +                    }
+             +                    vpn-attachment {
+             +                        vpn-id cal;
+             +                    }
+             +                }
+             +            }
+             +        }
+             +        site sfo {
+             +            locations {
+             +                location lab;
+             +            }
+             +            devices {
+             +                device ciena-5 {
+             +                    location lab;
+             +                }
+             +            }
+             +            management {
+             +                type provider-managed;
+             +            }
+             +            vpn-policies {
+             +                vpn-policy vpn1 {
+             +                    entries 1 {
+             +                        vpn cal {
+             +                            site-role any-to-any-role;
+             +                        }
+             +                    }
+             +                }
+             +            }
+             +            site-network-accesses {
+             +                site-network-access 1 {
+             +                    device-reference ciena-5;
+             +                    ip-connection {
+             +                        ipv4 {
+             +                            address-allocation-type static-address;
+             +                            addresses {
+             +                                provider-address 30.2.1.1;
+             +                                customer-address 30.2.1.2;
+             +                                prefix-length 30;
+             +                            }
+             +                        }
+             +                    }
+             +                    service {
+             +                        svc-input-bandwidth 1000;
+             +                        svc-output-bandwidth 1000;
+             +                        svc-mtu 2000;
+             +                    }
+             +                    vpn-attachment {
+             +                        vpn-id cal;
+             +                    }
+             +                }
+             +            }
+             +        }
+                  }
+              }
+    }
+}
+admin@ncs(config)# commit        
+Commit complete.
+admin@ncs(config)# load merge configs/l3vpn/cfg-neptune.xml 
+Loading.
+2.10 KiB parsed in 0.04 sec (43.39 KiB/sec)
+admin@ncs(config)# load merge configs/l3vpn/cfg-uranus.xml 
+Loading.
+2.10 KiB parsed in 0.05 sec (36.33 KiB/sec)
+admin@ncs(config)# load merge configs/l3vpn/cfg-venus.xml 
+Loading.
+2.15 KiB parsed in 0.07 sec (27.54 KiB/sec)
+admin@ncs(config)# load merge configs/l3vpn/cfg-mercury.xml 
+Loading.
+2.09 KiB parsed in 0.09 sec (21.20 KiB/sec)
+admin@ncs(config)# show c
+l3vpn-svc sites site mercury
+ locations location lab
+ !
+ devices device ciena-6
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn sol
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-6
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 40.2.2.1
+  ip-connection ipv4 addresses customer-address 40.2.2.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id sol
+ !
+!
+l3vpn-svc sites site neptune
+ locations location lab
+ !
+ devices device ciena-6
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn outer
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-6
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 40.2.3.1
+  ip-connection ipv4 addresses customer-address 40.2.3.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id outer
+ !
+!
+l3vpn-svc sites site uranus
+ locations location lab
+ !
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn outer
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 30.2.3.1
+  ip-connection ipv4 addresses customer-address 30.2.3.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id outer
+ !
+!
+l3vpn-svc sites site venus
+ locations location lab
+ !
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn sol
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 30.2.2.1
+  ip-connection ipv4 addresses customer-address 30.2.2.2
+  ip-connection ipv4 addresses prefix-length 30
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id sol
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# no l3vpn-svc sites site neptune 
+admin@ncs(config)# no l3vpn-svc sites site uranus 
+admin@ncs(config)# show c
+no l3vpn-svc sites site neptune
+no l3vpn-svc sites site uranus
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# no l3vpn-svc sites site sfo   
+admin@ncs(config)# no l3vpn-svc sites site pet
+admin@ncs(config)# show c
+no l3vpn-svc sites site pet
+no l3vpn-svc sites site sfo
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# no l3vpn-svc               
+admin@ncs(config)# show c
+no l3vpn-svc vpn-services vpn-service cal
+no l3vpn-svc vpn-services vpn-service outer
+l3vpn-svc sites site mercury
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn sol
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+l3vpn-svc sites site venus
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn sol
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+no l3vpn-svc vpn-services vpn-service sol
+no l3vpn-svc sites site mercury
+no l3vpn-svc sites site venus
+admin@ncs(config)# revert                  
+All configuration changes will be lost. Proceed? [yes, NO] yes
+admin@ncs(config)# l3vpn-svc sites site venus get-modifications 
+cli {
+    local-node {
+        data  devices {
+                   device ciena-5 {
+                       config {
+                           bgp {
+                               instance 65432 {
+              +                    vrf sol {
+              +                        route-distinguisher 0:65432:2161;
+              +                        route-target 0:65432:2161 {
+              +                            direction both;
+              +                        }
+              +                        vrf-address-family ipv4 unicast {
+              +                            synchronization false;
+              +                            network-synchronization false;
+              +                            auto-summary false;
+              +                            peer 30.2.2.2 {
+              +                                remote-as 301;
+              +                                keepalive-interval 30;
+              +                                hold-time 90;
+              +                                ebgp-multihop {
+              +                                    disabled;
+              +                                    multihop-ttl 255;
+              +                                }
+              +                                connect-retry-interval 120;
+              +                                minimum-advertisement-interval 0;
+              +                                description "CE1 BGP 301";
+              +                                passive false;
+              +                                as-override false;
+              +                                bfd {
+              +                                    enable false;
+              +                                }
+              +                                activate true;
+              +                                soft-reconfiguration-inbound false;
+              +                                route-reflector-client false;
+              +                                allow-ebgp-vpn false;
+              +                                prefix-limit {
+              +                                    warning-only false;
+              +                                }
+              +                                remove-private-as false;
+              +                            }
+              +                            redistribute connected;
+              +                        }
+              +                    }
+                               }
+                           }
+                           oc-if:interfaces {
+              +                interface stc_1_1_2161 {
+              +                    config {
+              +                        name stc_1_1_2161;
+              +                        mtu 9136;
+              +                        type ip;
+              +                        admin-status true;
+              +                        role data;
+              +                        vrfName sol;
+              +                        frame-to-cos-map default-f2c;
+              +                        cos-to-frame-map default-c2f;
+              +                        stats-collection on;
+              +                        underlay-binding {
+              +                            config {
+              +                                fd sol.1.2161;
+              +                            }
+              +                        }
+              +                    }
+              +                    ipv4 {
+              +                        addresses {
+              +                            address 30.2.2.1 {
+              +                                config {
+              +                                    ip 30.2.2.1;
+              +                                    prefix-length 30;
+              +                                }
+              +                            }
+              +                        }
+              +                    }
+              +                }
+                           }
+                           classifiers {
+              +                # after classifier untagged
+              +                classifier vlan2161 {
+              +                    filter-entry vtag-stack {
+              +                        logical-not false;
+              +                        vtags 1 {
+              +                            vlan-id 2161;
+              +                        }
+              +                    }
+              +                }
+                           }
+                           fds {
+              +                fd sol.1.2161 {
+              +                    mode vpls;
+              +                }
+                           }
+                           fps {
+              +                fp p1v2161 {
+              +                    fd-name sol.1.2161;
+              +                    logical-port 1;
+              +                    mtu-size 2000;
+              +                    egress-l2-transform push-0x8100.2161 {
+              +                        vlan-stack 1 {
+              +                            push-tpid tpid-8100;
+              +                            push-vid 2161;
+              +                        }
+              +                    }
+              +                    classifier-list [ vlan2161 ];
+              +                    stats-collection on;
+              +                }
+                           }
+              +            vrf sol {
+              +                description "L3VPN - eBGP CE1";
+              +                sr-policy {
+              +                    fallback enable;
+              +                }
+              +            }
+                       }
+                   }
+               }
+              
+    }
+}
+admin@ncs(config)# no l3vpn-svc 
+admin@ncs(config)# show c
+no l3vpn-svc vpn-services vpn-service cal
+no l3vpn-svc vpn-services vpn-service outer
+l3vpn-svc sites site mercury
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn sol
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+l3vpn-svc sites site venus
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn sol
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+no l3vpn-svc vpn-services vpn-service sol
+no l3vpn-svc sites site mercury
+no l3vpn-svc sites site venus
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# devices device ciena-5 compare-config 
+admin@ncs(config)# devices device ciena-6 compare-config
+admin@ncs(config)# 

@@ -1,0 +1,20 @@
+admin@ncs(config)# 
+System message at 2021-04-27 09:17:12...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-27 09:19:43...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-27 09:22:33...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-27 09:27:33...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-27 09:28:30...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-27 09:29:14...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+

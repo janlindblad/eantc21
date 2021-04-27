@@ -1,0 +1,71 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+ <device>
+  <name>ipi-31</name>
+  <config
+        xmlns:oc-types="http://openconfig.net/yang/openconfig-types"
+        xmlns:oc-pol-types="http://openconfig.net/yang/policy-types"
+        xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types"
+        xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+
+<network-instances xmlns="http://openconfig.net/yang/network-instance">    
+	<network-instance>
+      <name>blue</name>
+      <config>
+        <name>blue</name>
+        <type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:L3VRF</type>
+        <enabled>true</enabled>
+        <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</enabled-address-families>
+        <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV6</enabled-address-families>
+        <route-distinguisher>500:1</route-distinguisher>
+      </config>
+      <protocols>
+        <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+          <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+          <name>DIRECTLY_CONNECTED</name>
+          <config>
+            <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+            <name>DIRECTLY_CONNECTED</name>
+            <enabled>true</enabled>
+          </config>
+        </protocol>
+      </protocols>
+      <tables xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+        <table xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+          <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+          <address-family>oc-types:IPV4</address-family>
+          <config>
+            <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+            <address-family>oc-types:IPV4</address-family>
+          </config>
+        </table>
+        <table xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+          <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+          <address-family>oc-types:IPV6</address-family>
+          <config>
+            <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+            <address-family>oc-types:IPV6</address-family>
+          </config>
+        </table>
+      </tables>
+      <route-targets xmlns="http://www.ipinfusion.com/yang/ocnos/ipi-oc-ni-augments">
+        <route-target>
+          <rt-rd-string>500:1</rt-rd-string>
+          <config>
+            <rt-rd-string>500:1</rt-rd-string>
+            <direction>EXPORT</direction>
+          </config>
+        </route-target>
+        <route-target>
+          <rt-rd-string>600:1</rt-rd-string>
+          <config>
+            <rt-rd-string>600:1</rt-rd-string>
+            <direction>IMPORT</direction>
+          </config>
+        </route-target>
+      </route-targets>
+    </network-instance>
+  </network-instances>
+
+  </config>
+ </device>
+</devices>
