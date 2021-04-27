@@ -9,12 +9,16 @@
       <vrf xmlns="urn:ciena:params:xml:ns:yang:ciena:ciena-vrf">
         <vrfName>{$VRF_NAME}</vrfName>
         <description>L3VPN - eBGP {$PEER_DEVICE_NAME}</description>
+        <sr-policy>
+          <fallback>enable</fallback>
+        </sr-policy>
       </vrf>
       <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
         <classifier>
           <name>vlan{$VLAN_ID}</name>
           <filter-entry>
             <filter-parameter xmlns:classifier="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">classifier:vtag-stack</filter-parameter>
+            <logical-not>false</logical-not>
             <vtags>
               <tag>1</tag>
               <vlan-id>{$VLAN_ID}</vlan-id>
@@ -91,7 +95,7 @@
           <as>{$AS_NUM}</as>
           <vrf>
             <name>{$VRF_NAME}</name>
-            <route-distinguisher>0:{$AS_NUM}:{$NODE_ID}</route-distinguisher>
+            <route-distinguisher>0:{$AS_NUM}:{$VLAN_ID}</route-distinguisher>
             <route-target>
               <id>0:{$AS_NUM}:{$SERVICE_ID}</id>
               <direction>both</direction>
@@ -99,11 +103,34 @@
             <vrf-address-family>
               <afi>ipv4</afi>
               <safi>unicast</safi>
+              <synchronization>false</synchronization>
+              <network-synchronization>false</network-synchronization>
+              <auto-summary>false</auto-summary>
               <peer>
                 <address>{$PEER_IP}</address>
                 <remote-as>{$PEER_AS_NUM}</remote-as>
                 <description>{$PEER_DEVICE_NAME} BGP {$PEER_AS_NUM}</description>
                 <activate>true</activate>
+                <keepalive-interval>30</keepalive-interval>
+                <hold-time>90</hold-time>
+                <ebgp-multihop>
+                  <enabled>false</enabled>
+                  <multihop-ttl>255</multihop-ttl>
+                </ebgp-multihop>
+                <connect-retry-interval>120</connect-retry-interval>
+                <minimum-advertisement-interval>0</minimum-advertisement-interval>
+                <passive>false</passive>
+                <as-override>false</as-override>
+                <bfd>
+                  <enable>false</enable>
+                </bfd>
+                <soft-reconfiguration-inbound>false</soft-reconfiguration-inbound>
+                <route-reflector-client>false</route-reflector-client>
+                <allow-ebgp-vpn>false</allow-ebgp-vpn>
+                <prefix-limit>
+                  <warning-only>false</warning-only>
+                </prefix-limit>
+                <remove-private-as>false</remove-private-as>
               </peer>
               <redistribute>
                 <protocol>connected</protocol>

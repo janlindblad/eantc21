@@ -1,8 +1,8 @@
 # Build a IP Infusion OcNOS ... device NED
 
-NED_NAME = ipi-ocnos3
+NED_NAME = ipi-ocnos4
 BUILD_DIR = yangs
-REPO_DIR = updated-openconfig/openconfig-flat
+REPO_DIR = combined-flat
 EXTRA_DIR = yangs-extra
 LOAD_DIR = $(NED_NAME)/load-dir
 PKGS_DIR = packages

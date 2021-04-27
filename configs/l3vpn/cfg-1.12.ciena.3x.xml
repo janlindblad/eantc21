@@ -22,7 +22,7 @@
         </locations>
         <devices>
           <device>
-            <device-id>ciena-5</device-id>
+            <device-id>ciena-6</device-id>
             <location>lab</location>
           </device>
         </devices>
@@ -43,13 +43,13 @@
         <site-network-accesses>
           <site-network-access>
             <site-network-access-id>1</site-network-access-id>
-            <device-reference>ciena-5</device-reference>
+            <device-reference>ciena-6</device-reference>
             <ip-connection>
               <ipv4>
                 <address-allocation-type>static-address</address-allocation-type>
                 <addresses>
-                  <provider-address>40.2.3.1</provider-address>
-                  <customer-address>40.2.3.2</customer-address>
+                  <provider-address>40.2.2.1</provider-address>
+                  <customer-address>40.2.2.2</customer-address>
                   <prefix-length>30</prefix-length>
                 </addresses>
               </ipv4>
@@ -74,7 +74,7 @@
         </locations>
         <devices>
           <device>
-            <device-id>ciena-5</device-id>
+            <device-id>ciena-6</device-id>
             <location>lab</location>
           </device>
         </devices>
@@ -95,13 +95,13 @@
         <site-network-accesses>
           <site-network-access>
             <site-network-access-id>1</site-network-access-id>
-            <device-reference>ciena-5</device-reference>
+            <device-reference>ciena-6</device-reference>
             <ip-connection>
               <ipv4>
                 <address-allocation-type>static-address</address-allocation-type>
                 <addresses>
-                  <provider-address>40.2.2.2</provider-address>
-                  <customer-address>40.2.2.1</customer-address>
+                  <provider-address>40.2.3.1</provider-address>
+                  <customer-address>40.2.3.2</customer-address>
                   <prefix-length>30</prefix-length>
                 </addresses>
               </ipv4>
@@ -258,8 +258,8 @@
               <ipv4>
                 <address-allocation-type>static-address</address-allocation-type>
                 <addresses>
-                  <provider-address>30.2.3.2</provider-address>
-                  <customer-address>30.2.3.1</customer-address>
+                  <provider-address>30.2.3.1</provider-address>
+                  <customer-address>30.2.3.2</customer-address>
                   <prefix-length>30</prefix-length>
                 </addresses>
               </ipv4>
@@ -311,8 +311,8 @@
               <ipv4>
                 <address-allocation-type>static-address</address-allocation-type>
                 <addresses>
-                  <provider-address>30.2.2.2</provider-address>
-                  <customer-address>30.2.2.1</customer-address>
+                  <provider-address>30.2.2.1</provider-address>
+                  <customer-address>30.2.2.2</customer-address>
                   <prefix-length>30</prefix-length>
                 </addresses>
               </ipv4>
