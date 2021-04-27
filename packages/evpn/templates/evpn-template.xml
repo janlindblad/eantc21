@@ -37,7 +37,7 @@
       <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
         <ethernet-segments>
           <ethernet-segment>
-            <name>es.{$PE_INTERFACE}</name>
+            <name>es.{$PE_INTERFACE}.{$VLAN_ID}</name>
             <evlag>false</evlag>
             <df-election>
               <df-election-method>default</df-election-method>
@@ -57,7 +57,7 @@
         </ethernet-segments>
         <evpn-instances>
           <evpn-instance>
-            <id>1</id>
+            <id>{$VLAN_ID}</id>
             <vpws-cross-connect-fd>
               <forwarding-domain>eVPWS.{$SVC}</forwarding-domain>
               <local-service-id>{$SVC}</local-service-id>

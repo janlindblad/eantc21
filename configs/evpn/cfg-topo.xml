@@ -1,0 +1,152 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>cal</vpn-name>
+    <device-name>CE1</device-name>
+    <as_number>300</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>cal</vpn-name>
+    <device-name>CE2</device-name>
+    <as_number>300</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>cal</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>cal</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn1</vpn-name>
+    <device-name>CE1</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn1</vpn-name>
+    <device-name>CE2</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn1</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:01:01:01:01</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn1</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:02:02:02:02</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn2</vpn-name>
+    <device-name>CE1</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn2</vpn-name>
+    <device-name>CE2</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn2</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:22:22:22:22</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn2</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:23:23:23:23</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn3</vpn-name>
+    <device-name>CE1</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn3</vpn-name>
+    <device-name>CE2</device-name>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn3</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:3f:3f:3f:3f</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>evpn3</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65098</as_number>
+    <shelf_slot>ac:dc:3e:3e:3e:3e</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>outer</vpn-name>
+    <device-name>CE1</device-name>
+    <as_number>302</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>outer</vpn-name>
+    <device-name>CE2</device-name>
+    <as_number>302</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>outer</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>outer</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>sol</vpn-name>
+    <device-name>CE1</device-name>
+    <as_number>301</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>sol</vpn-name>
+    <device-name>CE2</device-name>
+    <as_number>301</as_number>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>sol</vpn-name>
+    <device-name>ciena-5</device-name>
+    <connected-to-device>CE1</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+  <topo xmlns="http://example.com/eantc/topology">
+    <vpn-name>sol</vpn-name>
+    <device-name>ciena-6</device-name>
+    <connected-to-device>CE2</connected-to-device>
+    <as_number>65432</as_number>
+    <shelf_slot>1_1</shelf_slot>
+    <interface>1</interface>
+  </topo>
+</config>
