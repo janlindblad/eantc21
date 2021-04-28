@@ -1,0 +1,105 @@
+<!-- BFD Session Creation 
+   BFD Global admin-down false is the default value
+-->
+
+<devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <!--
+        Select the devices from some data structure in the service
+        model. In this skeleton the devices are specified in a leaf-list.
+        Select all devices in that leaf-list:
+    -->
+    <name>ciena-5</name>
+    <config>
+      <bfd xmlns="http://ciena.com/ns/yang/ciena-bfd">
+        <global>
+          <admin-down>false</admin-down>
+        </global>
+        <ip-sh xmlns="http://ciena.com/ns/yang/ciena-bfd-ip-sh">
+          <sessions>
+            <session>
+              <interface>to16006</interface>
+              <dest-addr>20.5.6.2</dest-addr>
+              <source-addr>20.5.6.1</source-addr>
+              <desired-min-tx-interval>10000</desired-min-tx-interval>
+              <required-min-rx-interval>10000</required-min-rx-interval>
+            </session>
+            <session>
+              <interface>to16006b</interface>
+              <dest-addr>20.5.6.6</dest-addr>
+              <source-addr>20.5.6.5</source-addr>
+              <desired-min-tx-interval>10000</desired-min-tx-interval>
+              <required-min-rx-interval>10000</required-min-rx-interval>
+            </session>
+          </sessions>
+        </ip-sh>
+      </bfd>
+      <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
+        <instance>
+          <tag>master</tag>
+          <interfaces>
+            <interface>
+              <name>to16006</name>
+              <bfd>
+                <enable>true</enable>
+              </bfd>
+            </interface>
+            <interface>
+              <name>to16006b</name>
+              <bfd>
+                <enable>true</enable>
+              </bfd>
+            </interface>
+          </interfaces>
+        </instance>
+      </isis>
+    </config>
+  </device>
+  <device>
+    <name>ciena-6</name>
+    <config>
+      <bfd xmlns="http://ciena.com/ns/yang/ciena-bfd">
+        <global>
+          <admin-down>false</admin-down>
+        </global>
+        <ip-sh xmlns="http://ciena.com/ns/yang/ciena-bfd-ip-sh">
+          <sessions>
+            <session>
+              <interface>to16005</interface>
+              <dest-addr>20.5.6.1</dest-addr>
+              <source-addr>20.5.6.2</source-addr>
+              <desired-min-tx-interval>10000</desired-min-tx-interval>
+              <required-min-rx-interval>10000</required-min-rx-interval>
+            </session>
+            <session>
+              <interface>to16005b</interface>
+              <dest-addr>20.5.6.5</dest-addr>
+              <source-addr>20.5.6.6</source-addr>
+              <desired-min-tx-interval>10000</desired-min-tx-interval>
+              <required-min-rx-interval>10000</required-min-rx-interval>
+            </session>
+          </sessions>
+        </ip-sh>
+      </bfd>
+      <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
+        <instance>
+          <tag>master</tag>
+          <interfaces>
+            <interface>
+              <name>to16005</name>
+              <bfd>
+                <enable>true</enable>
+              </bfd>
+            </interface>
+            <interface>
+              <name>to16005b</name>
+              <bfd>
+                <enable>true</enable>
+              </bfd>
+            </interface>
+          </interfaces>
+        </instance>
+      </isis>
+    </config>
+  </device>
+</devices>

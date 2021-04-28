@@ -1,0 +1,85 @@
+admin@ncs(config)# 
+admin@ncs(config)# load merge configs/ciena/1.13/1.13.1-ciena/cfg-bfd-ciena.xml
+Loading.
+3.29 KiB parsed in 0.01 sec (185.12 KiB/sec)
+admin@ncs(config)# show c
+devices device ciena-5
+ config
+  bfd ip-sh sessions session to16006 20.5.6.2
+   source-addr              20.5.6.1
+   desired-min-tx-interval  10000
+   required-min-rx-interval 10000
+  !
+  bfd ip-sh sessions session to16006b 20.5.6.6
+   source-addr              20.5.6.5
+   desired-min-tx-interval  10000
+   required-min-rx-interval 10000
+  !
+  isis instance master
+   interfaces interface to16006
+    bfd enable true
+   !
+   interfaces interface to16006b
+    bfd enable true
+   !
+  !
+ !
+!
+devices device ciena-6
+ config
+  bfd ip-sh sessions session to16005 20.5.6.1
+   source-addr              20.5.6.2
+   desired-min-tx-interval  10000
+   required-min-rx-interval 10000
+  !
+  bfd ip-sh sessions session to16005b 20.5.6.5
+   source-addr              20.5.6.6
+   desired-min-tx-interval  10000
+   required-min-rx-interval 10000
+  !
+  isis instance master
+   interfaces interface to16005
+    bfd enable true
+   !
+   interfaces interface to16005b
+    bfd enable true
+   !
+  !
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# 
+admin@ncs(config)# rollback c
+admin@ncs(config)# show c
+devices device ciena-5
+ config
+  no bfd ip-sh sessions session to16006 20.5.6.2
+  no bfd ip-sh sessions session to16006b 20.5.6.6
+  isis instance master
+   interfaces interface to16006
+    bfd enable false
+   !
+   interfaces interface to16006b
+    bfd enable false
+   !
+  !
+ !
+!
+devices device ciena-6
+ config
+  no bfd ip-sh sessions session to16005 20.5.6.1
+  no bfd ip-sh sessions session to16005b 20.5.6.5
+  isis instance master
+   interfaces interface to16005
+    bfd enable false
+   !
+   interfaces interface to16005b
+    bfd enable false
+   !
+  !
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# 
