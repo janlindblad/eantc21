@@ -1,0 +1,413 @@
+>>>>out 28-Apr-2021::08:28:34.026 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="4">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <name/>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:34.152 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="4"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::08:28:34.202 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="5">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <state>
+            <counters>
+              <in-octets/>
+              <in-unicast-pkts/>
+              <in-broadcast-pkts/>
+              <in-multicast-pkts/>
+              <in-discards/>
+              <in-errors/>
+              <in-unknown-protos/>
+              <in-fcs-errors/>
+              <out-octets/>
+              <out-unicast-pkts/>
+              <out-broadcast-pkts/>
+              <out-multicast-pkts/>
+              <out-discards/>
+              <out-errors/>
+              <carrier-transitions/>
+              <last-clear/>
+              <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-fragment-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+            </counters>
+          </state>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:34.393 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="5"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+        <state>
+          <counters>
+            <in-octets>149063018721</in-octets>
+            <in-unicast-pkts>189678603</in-unicast-pkts>
+            <in-broadcast-pkts>7095</in-broadcast-pkts>
+            <in-multicast-pkts>2539</in-multicast-pkts>
+            <in-discards>989</in-discards>
+            <in-errors>0</in-errors>
+            <out-octets>149056929466</out-octets>
+            <out-unicast-pkts>189674279</out-unicast-pkts>
+            <out-broadcast-pkts>7095</out-broadcast-pkts>
+            <out-multicast-pkts>2539</out-multicast-pkts>
+            <out-errors>0</out-errors>
+            <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">788669</in-discards-octets>
+            <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</link-flap-events>
+            <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-undersize-pkts>
+            <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2</in-64-octet-pkts>
+            <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">12310215</in-65-to-127-octet-pkts>
+            <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">16063736</in-128-to-255-octet-pkts>
+            <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">32136893</in-256-to-511-octet-pkts>
+            <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">64274123</in-512-to-1023-octet-pkts>
+            <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">62134587</in-1024-to-1518-octet-pkts>
+            <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2761578</in-1519-to-2047-octet-pkts>
+            <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-2048-to-4095-octet-pkts>
+            <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7103</in-4096-to-9216-octet-pkts>
+            <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2762052</out-1519-to-2047-octet-pkts>
+            <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</out-2048-to-4095-octet-pkts>
+            <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7103</out-4096-to-9216-octet-pkts>
+            <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-oversize-pkts>
+            <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-jabber-pkts>
+            <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-crc-error-pkts>
+            <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189688237</in-pkts>
+            <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189683913</out-pkts>
+          </counters>
+        </state>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::08:28:44.447 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="6">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <name/>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:44.575 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="6"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::08:28:44.588 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="7">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <state>
+            <counters>
+              <in-octets/>
+              <in-unicast-pkts/>
+              <in-broadcast-pkts/>
+              <in-multicast-pkts/>
+              <in-discards/>
+              <in-errors/>
+              <in-unknown-protos/>
+              <in-fcs-errors/>
+              <out-octets/>
+              <out-unicast-pkts/>
+              <out-broadcast-pkts/>
+              <out-multicast-pkts/>
+              <out-discards/>
+              <out-errors/>
+              <carrier-transitions/>
+              <last-clear/>
+              <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-fragment-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+            </counters>
+          </state>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:44.728 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="7"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+        <state>
+          <counters>
+            <in-octets>149063028193</in-octets>
+            <in-unicast-pkts>189678605</in-unicast-pkts>
+            <in-broadcast-pkts>7096</in-broadcast-pkts>
+            <in-multicast-pkts>2540</in-multicast-pkts>
+            <in-discards>989</in-discards>
+            <in-errors>0</in-errors>
+            <out-octets>149056938938</out-octets>
+            <out-unicast-pkts>189674281</out-unicast-pkts>
+            <out-broadcast-pkts>7096</out-broadcast-pkts>
+            <out-multicast-pkts>2540</out-multicast-pkts>
+            <out-errors>0</out-errors>
+            <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">788669</in-discards-octets>
+            <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</link-flap-events>
+            <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-undersize-pkts>
+            <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2</in-64-octet-pkts>
+            <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">12310217</in-65-to-127-octet-pkts>
+            <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">16063737</in-128-to-255-octet-pkts>
+            <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">32136893</in-256-to-511-octet-pkts>
+            <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">64274123</in-512-to-1023-octet-pkts>
+            <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">62134587</in-1024-to-1518-octet-pkts>
+            <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2761578</in-1519-to-2047-octet-pkts>
+            <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-2048-to-4095-octet-pkts>
+            <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7104</in-4096-to-9216-octet-pkts>
+            <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2762052</out-1519-to-2047-octet-pkts>
+            <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</out-2048-to-4095-octet-pkts>
+            <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7104</out-4096-to-9216-octet-pkts>
+            <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-oversize-pkts>
+            <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-jabber-pkts>
+            <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-crc-error-pkts>
+            <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189688241</in-pkts>
+            <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189683917</out-pkts>
+          </counters>
+        </state>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::08:28:54.781 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="8">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <name/>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:54.911 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="8"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::08:28:54.927 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="9">
+  <get>
+    <filter>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+          <name>5</name>
+          <state>
+            <counters>
+              <in-octets/>
+              <in-unicast-pkts/>
+              <in-broadcast-pkts/>
+              <in-multicast-pkts/>
+              <in-discards/>
+              <in-errors/>
+              <in-unknown-protos/>
+              <in-fcs-errors/>
+              <out-octets/>
+              <out-unicast-pkts/>
+              <out-broadcast-pkts/>
+              <out-multicast-pkts/>
+              <out-discards/>
+              <out-errors/>
+              <carrier-transitions/>
+              <last-clear/>
+              <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-fragment-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port"/>
+              <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+              <in-dropped-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces"/>
+            </counters>
+          </state>
+        </interface>
+      </interfaces>
+    </filter>
+  </get>
+</rpc>
+
+<<<<in 28-Apr-2021::08:28:55.070 user: admin/971 thandle 14294 hostname cisco-nso device ciena-5 trace-id=90cae904-cd14-4184-aa62-0c883f38de60 session-id=88
+<rpc-reply message-id="9"
+           xmlns:ncx="http://netconfcentral.org/ns/yuma-ncx"
+           ncx:last-modified="2021-04-28T08:29:33Z"
+           ncx:etag="283"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <data>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>5</name>
+        <state>
+          <counters>
+            <in-octets>149063037658</in-octets>
+            <in-unicast-pkts>189678609</in-unicast-pkts>
+            <in-broadcast-pkts>7097</in-broadcast-pkts>
+            <in-multicast-pkts>2540</in-multicast-pkts>
+            <in-discards>989</in-discards>
+            <in-errors>0</in-errors>
+            <out-octets>149056948403</out-octets>
+            <out-unicast-pkts>189674285</out-unicast-pkts>
+            <out-broadcast-pkts>7097</out-broadcast-pkts>
+            <out-multicast-pkts>2540</out-multicast-pkts>
+            <out-errors>0</out-errors>
+            <in-discards-octets xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">788669</in-discards-octets>
+            <link-flap-events xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</link-flap-events>
+            <in-undersize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-undersize-pkts>
+            <in-64-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2</in-64-octet-pkts>
+            <in-65-to-127-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">12310221</in-65-to-127-octet-pkts>
+            <in-128-to-255-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">16063737</in-128-to-255-octet-pkts>
+            <in-256-to-511-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">32136893</in-256-to-511-octet-pkts>
+            <in-512-to-1023-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">64274123</in-512-to-1023-octet-pkts>
+            <in-1024-to-1518-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">62134587</in-1024-to-1518-octet-pkts>
+            <in-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2761578</in-1519-to-2047-octet-pkts>
+            <in-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-2048-to-4095-octet-pkts>
+            <in-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7105</in-4096-to-9216-octet-pkts>
+            <out-1519-to-2047-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">2762052</out-1519-to-2047-octet-pkts>
+            <out-2048-to-4095-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</out-2048-to-4095-octet-pkts>
+            <out-4096-to-9216-octet-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">7105</out-4096-to-9216-octet-pkts>
+            <in-oversize-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-oversize-pkts>
+            <in-jabber-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-jabber-pkts>
+            <in-crc-error-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port">0</in-crc-error-pkts>
+            <in-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189688246</in-pkts>
+            <out-pkts xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">189683922</out-pkts>
+          </counters>
+        </state>
+      </interface>
+    </interfaces>
+  </data>
+</rpc-reply>

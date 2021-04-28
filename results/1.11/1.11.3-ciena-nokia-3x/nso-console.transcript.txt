@@ -1,0 +1,342 @@
+admin@ncs(config)# 
+System message at 2021-04-28 09:00:19...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# sh l2
+                        ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# show full-configuration l2vpn-svc 
+l2vpn-svc vpn-services vpn-service evpn1
+ customer-name            EANTC
+ frame-delivery multicast-gp-port-mapping static-mapping
+ ce-vlan-preservation     false
+ ce-vlan-cos-preservation false
+!
+l2vpn-svc sites site mars
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ locations location lab
+ !
+ vpn-policies vpn-policy vpnp1
+  entries 1
+   vpn evpn1
+    site-role any-to-any-role
+   !
+  !
+ !
+ default-ce-vlan-id 100
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  connection oam md-name provider
+  connection oam md-level 5
+  vpn-attachment vpn-id evpn1
+  service svc-mtu 2000
+ !
+!
+l2vpn-svc sites site neptune
+ devices device ciena-6
+  location lab
+ !
+ management type provider-managed
+ locations location lab
+ !
+ vpn-policies vpn-policy vpnp1
+  entries 1
+   vpn evpn1
+    site-role any-to-any-role
+   !
+  !
+ !
+ default-ce-vlan-id 100
+ site-network-accesses site-network-access 1
+  device-reference ciena-6
+  connection oam md-name provider
+  connection oam md-level 5
+  vpn-attachment vpn-id evpn1
+  service svc-mtu 2000
+ !
+!
+admin@ncs(config)# l2vpn-svc sites site mars get-modifications 
+cli {
+    local-node {
+        data  devices {
+                   device ciena-5 {
+                       config {
+                           evpn {
+                               ethernet-segments {
+              +                    ethernet-segment es.1.3438 {
+              +                        logical-port 1;
+              +                        evlag false;
+              +                        ethernet-segment-identifier {
+              +                            mac-based {
+              +                                system-mac-address ac:dc:01:01:01:01;
+              +                            }
+              +                        }
+              +                        active-mode single-active-mode;
+              +                        df-election {
+              +                            df-election-method default;
+              +                            preference 32767;
+              +                            revertive true;
+              +                            election-wait-time 3;
+              +                            reversion-hold-time 3;
+              +                        }
+              +                    }
+                               }
+                               evpn-instances {
+              +                    evpn-instance 3438 {
+              +                        vpws-cross-connect-fd eVPWS.3438 {
+              +                            control-word true;
+              +                            l2mtu 1500;
+              +                            local-service-id 3438;
+              +                            remote-service-id 3438;
+              +                        }
+              +                        vpn-target 0:65098:3438 {
+              +                            route-target-type both;
+              +                        }
+              +                        sr-policy {
+              +                            fallback enable;
+              +                        }
+              +                    }
+                               }
+                           }
+                           classifiers {
+              +                # after classifier untagged
+              +                classifier v3438 {
+              +                    filter-entry vtag-stack {
+              +                        logical-not false;
+              +                        vtags 1 {
+              +                            vlan-id 3438;
+              +                        }
+              +                    }
+              +                }
+                           }
+                           fds {
+              +                fd eVPWS.3438 {
+              +                    mode evpn-vpws;
+              +                }
+                           }
+                           fps {
+              +                fp p1v3438 {
+              +                    fd-name eVPWS.3438;
+              +                    logical-port 1;
+              +                    mtu-size 2000;
+              +                    classifier-list [ v3438 ];
+              +                    stats-collection on;
+              +                }
+                           }
+                       }
+                   }
+               }
+              
+    }
+}
+admin@ncs(config)# l2vpn-svc sites site neptune  get-modifications
+cli {
+    local-node {
+        data  devices {
+                   device ciena-6 {
+                       config {
+                           evpn {
+                               ethernet-segments {
+              +                    ethernet-segment es.1.3438 {
+              +                        logical-port 1;
+              +                        evlag false;
+              +                        ethernet-segment-identifier {
+              +                            mac-based {
+              +                                system-mac-address ac:dc:02:02:02:02;
+              +                            }
+              +                        }
+              +                        active-mode single-active-mode;
+              +                        df-election {
+              +                            df-election-method default;
+              +                            preference 32767;
+              +                            revertive true;
+              +                            election-wait-time 3;
+              +                            reversion-hold-time 3;
+              +                        }
+              +                    }
+                               }
+                               evpn-instances {
+              +                    evpn-instance 3438 {
+              +                        vpws-cross-connect-fd eVPWS.3438 {
+              +                            control-word true;
+              +                            l2mtu 1500;
+              +                            local-service-id 3438;
+              +                            remote-service-id 3438;
+              +                        }
+              +                        vpn-target 0:65098:3438 {
+              +                            route-target-type both;
+              +                        }
+              +                        sr-policy {
+              +                            fallback enable;
+              +                        }
+              +                    }
+                               }
+                           }
+                           classifiers {
+              +                # after classifier untagged
+              +                classifier v3438 {
+              +                    filter-entry vtag-stack {
+              +                        logical-not false;
+              +                        vtags 1 {
+              +                            vlan-id 3438;
+              +                        }
+              +                    }
+              +                }
+                           }
+                           fds {
+              +                fd eVPWS.3438 {
+              +                    mode evpn-vpws;
+              +                }
+                           }
+                           fps {
+              +                fp p1v3438 {
+              +                    fd-name eVPWS.3438;
+              +                    logical-port 1;
+              +                    mtu-size 2000;
+              +                    classifier-list [ v3438 ];
+              +                    stats-collection on;
+              +                }
+                           }
+                       }
+                   }
+               }
+              
+    }
+}
+admin@ncs(config)# 
+System message at 2021-04-28 09:04:41...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# 
+System message at 2021-04-28 09:05:06...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config)# l2vpn-svc sites site 
+Possible completions:
+  <site-id:string>  europa  io  jupiter  mars  neptune  saturn
+admin@ncs(config)# l2vpn-svc sites site europa 
+Possible completions:
+  access-control-list                   
+  broadcast-unknown-unicast-multicast   
+  bundling-type                         
+  check-sync                            Check if device config is according to the service
+  commit-queue                          
+  deep-check-sync                       Check if device config is according to the service
+  default-ce-vlan-id                    
+  devices                               
+  get-modifications                     Get the data this service created
+  locations                             
+  log                                   
+  mac-loop-prevention                   
+  management                            
+  re-deploy                             Run/Dry-run the service logic again
+  reactive-re-deploy                    Reactive re-deploy of service logic
+  service                               
+  site-diversity                        
+  site-network-accesses                 
+  site-vpn-flavor                       
+  touch                                 Mark the service as changed
+  un-deploy                             Undo the effects of the service
+  vpn-policies                          
+  <cr>                                  
+admin@ncs(config)# sh f l2vpn-svc sites site europa 
+l2vpn-svc sites site europa
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ locations location lab
+ !
+ vpn-policies vpn-policy vpnp1
+  entries 1
+   vpn evpn3
+    site-role any-to-any-role
+   !
+  !
+ !
+ default-ce-vlan-id 100
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  connection oam md-name provider
+  connection oam md-level 5
+  vpn-attachment vpn-id evpn3
+  service svc-mtu 2000
+ !
+!
+admin@ncs(config)# l2vpn-svc sites site europa site-network-accesses site-network-access 1 service svc-mtu 3000
+admin@ncs(config-site-network-access-1)# sh c
+l2vpn-svc sites site europa
+ site-network-accesses site-network-access 1
+  service svc-mtu 3000
+ !
+!
+admin@ncs(config-site-network-access-1)# commit dry-run 
+cli {
+    local-node {
+        data  devices {
+                  device ciena-5 {
+                      config {
+                          fps {
+                              fp p3v3234 {
+             -                    mtu-size 2000;
+             +                    mtu-size 3000;
+                              }
+                          }
+                      }
+                  }
+              }
+              l2vpn-svc {
+                  sites {
+                      site europa {
+                          site-network-accesses {
+                              site-network-access 1 {
+                                  service {
+             -                        svc-mtu 2000;
+             +                        svc-mtu 3000;
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+    }
+}
+admin@ncs(config-site-network-access-1)# commit
+Commit complete.
+admin@ncs(config-site-network-access-1)# 
+System message at 2021-04-28 09:08:37...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config-site-network-access-1)# sh f l2vpn-svc sites site europa                                                            
+l2vpn-svc sites site europa
+ devices device ciena-5
+  location lab
+ !
+ management type provider-managed
+ locations location lab
+ !
+ vpn-policies vpn-policy vpnp1
+  entries 1
+   vpn evpn3
+    site-role any-to-any-role
+   !
+  !
+ !
+ default-ce-vlan-id 100
+ site-network-accesses site-network-access 1
+  device-reference ciena-5
+  connection oam md-name provider
+  connection oam md-level 5
+  vpn-attachment vpn-id evpn3
+  service svc-mtu 2000
+ !
+!
+admin@ncs(config-site-network-access-1)# 
+System message at 2021-04-28 09:13:10...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config-site-network-access-1)# 
+System message at 2021-04-28 09:13:30...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config-site-network-access-1)# 
+System message at 2021-04-28 09:13:38...
+Commit performed by admin via ssh using netconf.
+admin@ncs(config-site-network-access-1)# 

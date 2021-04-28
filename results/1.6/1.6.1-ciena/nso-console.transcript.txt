@@ -1,0 +1,178 @@
+admin@ncs# show devices device ciena-5 live-status oc-if:interfaces interface 5 state counters | repeat
+
+... (stats reset and traffic generator just turned on) ...
+
+state counters in-octets    131867
+state counters in-unicast-pkts 39
+state counters in-broadcast-pkts 14
+state counters in-multicast-pkts 5
+state counters in-discards  0
+state counters in-errors    0
+state counters out-octets   132073
+state counters out-unicast-pkts 40
+state counters out-broadcast-pkts 14
+state counters out-multicast-pkts 5
+state counters out-errors   0
+state counters in-discards-octets 0
+state counters link-flap-events 0
+state counters in-undersize-pkts 0
+state counters in-64-octet-pkts 0
+state counters in-65-to-127-octet-pkts 40
+state counters in-128-to-255-octet-pkts 4
+state counters in-256-to-511-octet-pkts 0
+state counters in-512-to-1023-octet-pkts 0
+state counters in-1024-to-1518-octet-pkts 0
+state counters in-1519-to-2047-octet-pkts 0
+state counters in-2048-to-4095-octet-pkts 0
+state counters in-4096-to-9216-octet-pkts 14
+state counters out-1519-to-2047-octet-pkts 0
+state counters out-2048-to-4095-octet-pkts 0
+state counters out-4096-to-9216-octet-pkts 14
+state counters in-oversize-pkts 0
+state counters in-jabber-pkts 0
+state counters in-crc-error-pkts 0
+state counters in-pkts      58
+state counters out-pkts     59
+
+...
+
+state counters in-octets    8275372053
+state counters in-unicast-pkts 10141422
+state counters in-broadcast-pkts 21
+state counters in-multicast-pkts 9
+state counters in-discards  0
+state counters in-errors    0
+state counters out-octets   8296842691
+state counters out-unicast-pkts 19806293
+state counters out-broadcast-pkts 21
+state counters out-multicast-pkts 9
+state counters out-errors   0
+state counters in-discards-octets 0
+state counters link-flap-events 0
+state counters in-undersize-pkts 0
+state counters in-64-octet-pkts 0
+state counters in-65-to-127-octet-pkts 252291
+state counters in-128-to-255-octet-pkts 895792
+state counters in-256-to-511-octet-pkts 1792140
+state counters in-512-to-1023-octet-pkts 3582878
+state counters in-1024-to-1518-octet-pkts 3464502
+state counters in-1519-to-2047-octet-pkts 153790
+state counters in-2048-to-4095-octet-pkts 0
+state counters in-4096-to-9216-octet-pkts 21
+state counters out-1519-to-2047-octet-pkts 0
+state counters out-2048-to-4095-octet-pkts 0
+state counters out-4096-to-9216-octet-pkts 21
+state counters in-oversize-pkts 0
+state counters in-jabber-pkts 0
+state counters in-crc-error-pkts 0
+state counters in-pkts      10141452
+state counters out-pkts     19806323
+
+...
+
+state counters in-octets    37044209012
+state counters in-unicast-pkts 45397002
+state counters in-broadcast-pkts 44
+state counters in-multicast-pkts 16
+state counters in-discards  0
+state counters in-errors    0
+state counters out-octets   37137133945
+state counters out-unicast-pkts 88659102
+state counters out-broadcast-pkts 44
+state counters out-multicast-pkts 16
+state counters out-errors   0
+state counters in-discards-octets 0
+state counters link-flap-events 0
+state counters in-undersize-pkts 0
+state counters in-64-octet-pkts 0
+state counters in-65-to-127-octet-pkts 1126826
+state counters in-128-to-255-octet-pkts 4009050
+state counters in-256-to-511-octet-pkts 8021523
+state counters in-512-to-1023-octet-pkts 16045094
+state counters in-1024-to-1518-octet-pkts 15505947
+state counters in-1519-to-2047-octet-pkts 688577
+state counters in-2048-to-4095-octet-pkts 0
+state counters in-4096-to-9216-octet-pkts 45
+state counters out-1519-to-2047-octet-pkts 0
+state counters out-2048-to-4095-octet-pkts 0
+state counters out-4096-to-9216-octet-pkts 45
+state counters in-oversize-pkts 0
+state counters in-jabber-pkts 0
+state counters in-crc-error-pkts 0
+state counters in-pkts      45397062
+state counters out-pkts     88659162
+
+... (traffic generator turned off) ...
+
+state counters in-octets    37044227949
+state counters in-unicast-pkts 45397008
+state counters in-broadcast-pkts 46
+state counters in-multicast-pkts 17
+state counters in-discards  0
+state counters in-errors    0
+state counters out-octets   37137152882
+state counters out-unicast-pkts 88659108
+state counters out-broadcast-pkts 46
+state counters out-multicast-pkts 17
+state counters out-errors   0
+state counters in-discards-octets 0
+state counters link-flap-events 0
+state counters in-undersize-pkts 0
+state counters in-64-octet-pkts 0
+state counters in-65-to-127-octet-pkts 1126832
+state counters in-128-to-255-octet-pkts 4009051
+state counters in-256-to-511-octet-pkts 8021523
+state counters in-512-to-1023-octet-pkts 16045094
+state counters in-1024-to-1518-octet-pkts 15505947
+state counters in-1519-to-2047-octet-pkts 688577
+state counters in-2048-to-4095-octet-pkts 0
+state counters in-4096-to-9216-octet-pkts 47
+state counters out-1519-to-2047-octet-pkts 0
+state counters out-2048-to-4095-octet-pkts 0
+state counters out-4096-to-9216-octet-pkts 47
+state counters in-oversize-pkts 0
+state counters in-jabber-pkts 0
+state counters in-crc-error-pkts 0
+state counters in-pkts      45397071
+state counters out-pkts     88659171
+
+Aborted: by user
+admin@ncs#
+
+... (additional check on the end) ...
+
+state counters in-octets    1001910598
+state counters in-unicast-pkts 1101788
+state counters in-broadcast-pkts 55
+state counters in-multicast-pkts 21
+state counters in-discards  0
+state counters in-errors    0
+state counters out-octets   1001910484
+state counters out-unicast-pkts 1101786
+state counters out-broadcast-pkts 55
+state counters out-multicast-pkts 21
+state counters out-errors   0
+state counters in-discards-octets 0
+state counters link-flap-events 0
+state counters in-undersize-pkts 0
+state counters in-64-octet-pkts 0
+state counters in-65-to-127-octet-pkts 147
+state counters in-128-to-255-octet-pkts 20
+state counters in-256-to-511-octet-pkts 550821
+state counters in-512-to-1023-octet-pkts 0
+state counters in-1024-to-1518-octet-pkts 0
+state counters in-1519-to-2047-octet-pkts 550821
+state counters in-2048-to-4095-octet-pkts 0
+state counters in-4096-to-9216-octet-pkts 55
+state counters out-1519-to-2047-octet-pkts 550821
+state counters out-2048-to-4095-octet-pkts 0
+state counters out-4096-to-9216-octet-pkts 55
+state counters in-oversize-pkts 0
+state counters in-jabber-pkts 0
+state counters in-crc-error-pkts 0
+state counters in-pkts      1101864
+state counters out-pkts     1101862
+Aborted: by user
+admin@ncs# 
+
+

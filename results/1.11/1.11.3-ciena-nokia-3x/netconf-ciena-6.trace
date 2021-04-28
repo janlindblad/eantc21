@@ -1,0 +1,1386 @@
+>>>>out 28-Apr-2021::09:00:18.915 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+  </capabilities>
+</hello>
+
+<<<<in 28-Apr-2021::09:00:19.055 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+    <capability>urn:ietf:params:netconf:capability:writable-running:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:xpath:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:notification:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:interleave:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:partial-lock:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=report-all&amp;also-supported=trim,explicit,report-all-tagged</capability>
+    <capability>urn:yumaworks:params:xml:ns:netconf:config-id?id=278</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;revision=2011-06-01&amp;features=writable-running,rollback-on-error,xpath</capability>
+    <capability>http://ciena.com/ns/yang/ciena-arp?module=ciena-arp&amp;revision=2018-07-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd?module=ciena-bfd&amp;revision=2020-08-19&amp;deviations=ciena-bfd-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-mh?module=ciena-bfd-ip-mh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-sh?module=ciena-bfd-ip-sh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls?module=ciena-bfd-mpls&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls-tp?module=ciena-bfd-mpls-tp&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-types?module=ciena-bfd-types&amp;revision=2021-01-20&amp;features=accelerated-bfd</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bgp?module=ciena-bgp&amp;revision=2020-10-12&amp;features=bfd</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-bw-calculation-mode?module=ciena-bw-calculation-mode&amp;revision=2016-12-08</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-cfm?module=ciena-cfm&amp;revision=2020-10-08</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-cpri?module=ciena-cpri-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp?module=ciena-dhcp&amp;revision=2017-06-26&amp;deviations=ciena-dhcp-multi-deviation</capability>
+    <capability>http://ciena.com/dhcpl3relay/yang/ciena-dhcp-l3-relay?module=ciena-dhcp-l3-relay&amp;revision=2018-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi?module=ciena-dhcp-multi&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcpv6-client?module=ciena-dhcpv6-client&amp;revision=2019-07-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dns-client?module=ciena-dns-client&amp;revision=2019-12-11</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x?module=ciena-dot1x&amp;revision=2020-01-20&amp;deviations=ciena-dot1x-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-eoam?module=ciena-eoam&amp;revision=2017-12-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn?module=ciena-evpn&amp;revision=2020-12-22&amp;features=evpn-bgp-params,evpn-pbb-params&amp;deviations=ciena-evpn-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ext-lag?module=ciena-ext-lag&amp;revision=2019-10-02&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-fib-state?module=ciena-fib-state&amp;revision=2020-08-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-file-mgmt?module=ciena-file-mgmt&amp;revision=2019-10-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-file-transfer-types?module=ciena-file-transfer-types&amp;revision=2020-01-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-flexe?module=ciena-flexe&amp;revision=2021-02-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag?module=ciena-ieee-lag&amp;revision=2018-01-24&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-ieee-lldp?module=ciena-ieee-lldp&amp;revision=2018-01-24&amp;features=dot1-extension,dot3-extension&amp;deviations=ciena-ieee-lldp-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee:ns:yang:ieee-port-eoam?module=ciena-ieee-port-eoam&amp;revision=2020-09-24&amp;deviations=ciena-ieee-port-eoam-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp?module=ciena-ieee-rstp&amp;revision=2019-09-05&amp;deviations=ciena-ieee-rstp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-augment?module=ciena-ieee1914-dot3-roe-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms?module=ciena-ietf-alarms&amp;revision=2021-01-08</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires?module=ciena-ietf-pseudowires&amp;revision=2020-09-28&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-te?module=ciena-ietf-te&amp;revision=2020-10-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-ip-neighbor?module=ciena-ip-neighbor&amp;revision=2018-02-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam?module=ciena-ip-oam&amp;revision=2020-01-30&amp;deviations=ciena-ip-oam-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-isis?module=ciena-isis&amp;revision=2020-10-28&amp;features=bfd,ldp-igp-sync,fast-reroute,lfa,remote-lfa,multi-topology,prefix-tag</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft?module=ciena-itut-g8032-draft&amp;revision=2020-09-21&amp;deviations=ciena-itut-g8032-draft-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-l2vpn?module=ciena-l2vpn&amp;revision=2018-11-12</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-types?module=ciena-l3-types&amp;revision=2020-08-31</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-ldp?module=ciena-ldp&amp;revision=2020-09-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing?module=ciena-licensing&amp;revision=2019-06-06&amp;deviations=ciena-licensing-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-local-licensing?module=ciena-local-licensing&amp;revision=2020-12-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-management-plane?module=ciena-management-plane&amp;revision=2020-04-03</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-access-flow?module=ciena-mef-access-flow&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier?module=ciena-mef-classifier&amp;revision=2021-01-27&amp;features=filter-parameters-type,vtag-stack-feature,icmp-feature</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-cos-to-frame-map?module=ciena-mef-cos-to-frame-map&amp;revision=2015-07-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos?module=ciena-mef-egress-qos&amp;revision=2020-11-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos-binding?module=ciena-mef-egress-qos-binding&amp;revision=2017-02-02</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd?module=ciena-mef-fd&amp;revision=2020-04-08&amp;deviations=ciena-mef-fd-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-flood-containment-profile?module=ciena-mef-flood-containment-profile&amp;revision=2016-01-13</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp?module=ciena-mef-fp&amp;revision=2020-01-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-frame-to-cos-map?module=ciena-mef-frame-to-cos-map&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-l2cp-profile?module=ciena-mef-l2cp-profile&amp;revision=2020-10-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-logical-port?module=ciena-mef-logical-port&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-mac-management?module=ciena-mef-mac-management&amp;revision=2019-05-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-meter-profile?module=ciena-mef-meter-profile&amp;revision=2020-11-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-mirror-session?module=ciena-mef-mirror-session&amp;revision=2021-02-10</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-pfg-profile?module=ciena-mef-pfg-profile&amp;revision=2016-05-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow?module=ciena-mef-qos-flow&amp;revision=2020-10-01&amp;deviations=ciena-mef-qos-flow-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-module?module=ciena-module&amp;revision=2019-01-16</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls?module=ciena-mpls&amp;revision=2020-08-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-ping?module=ciena-mpls-ping&amp;revision=2020-01-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-tp-corouted?module=ciena-mpls-tp-corouted&amp;revision=2020-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp?module=ciena-ntp&amp;revision=2020-09-24&amp;deviations=ciena-ntp-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-options?module=ciena-oam-options&amp;revision=2020-12-09</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping?module=ciena-oam-ping&amp;revision=2020-12-04&amp;deviations=ciena-oam-ping-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-controller-data-packets?module=ciena-of-controller-data-packets&amp;revision=2018-09-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-flows-tables?module=ciena-of-flow-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-group-tables?module=ciena-of-group-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-types?module=ciena-of-types&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-vfsi?module=ciena-of-vfsi&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa?module=ciena-openconfig-aaa&amp;revision=2020-10-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa-types?module=ciena-openconfig-aaa-types&amp;revision=2020-10-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port?module=ciena-openconfig-if-ethernet-port&amp;revision=2020-08-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ip?module=ciena-openconfig-if-ip&amp;revision=2020-02-17</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces?module=ciena-openconfig-interfaces&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system?module=ciena-openconfig-system&amp;revision=2020-10-29&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-telemetry?module=ciena-openconfig-telemetry&amp;revision=2020-03-13&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ospf?module=ciena-ospf&amp;revision=2020-08-26&amp;features=bfd,router-id</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-configuration?module=ciena-packet-configuration&amp;revision=2020-03-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-otn-port?module=ciena-packet-otn-port&amp;revision=2021-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp?module=ciena-packet-ptp&amp;revision=2020-04-22&amp;deviations=ciena-packet-ptp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-modem?module=ciena-packet-ptp-modem&amp;revision=2019-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-tdm-port?module=ciena-packet-tdm-port&amp;revision=2021-01-28</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-typedefs?module=ciena-packet-typedefs&amp;revision=2020-04-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr?module=ciena-packet-xcvr&amp;revision=2020-05-11&amp;deviations=ciena-packet-xcvr-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-modem?module=ciena-packet-xcvr-modem&amp;revision=2018-05-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-xcvr-pluggable?module=ciena-packet-xcvr-pluggable&amp;revision=2020-05-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix?module=ciena-pkix&amp;revision=2020-10-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-transfer?module=ciena-pkix-transfer&amp;revision=2020-12-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-types?module=ciena-pkix-types&amp;revision=2018-04-27</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-platform?module=ciena-platform&amp;revision=2020-11-23</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ndpm-data-binning?module=ciena-pm-data-binning&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pm-data-binning-types?module=ciena-pm-data-binning-types&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pon-ctrl?module=ciena-pon-ctrl&amp;revision=2020-11-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ppm?module=ciena-ppm&amp;revision=2020-10-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-pseudowires?module=ciena-pseudowires&amp;revision=2020-09-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-rib?module=ciena-rib&amp;revision=2020-09-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-routing-policy?module=ciena-routing-policy&amp;revision=2020-08-31</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-rstp?module=ciena-rstp&amp;revision=2018-05-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sat?module=ciena-sat&amp;revision=2019-09-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-soam-pm?module=ciena-soam-pm&amp;revision=2020-03-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt?module=ciena-software-mgmt&amp;revision=2020-12-22&amp;features=rolling-upgrade&amp;deviations=ciena-software-mgmt-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-aug?module=ciena-software-mgmt-augmentation&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr?module=ciena-sr&amp;revision=2020-10-28&amp;features=mapping-server,max-sid-depth</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr-policy?module=ciena-sr-policy&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ssh-types?module=ciena-ssh-types&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump?module=ciena-state-dump&amp;revision=2020-02-03&amp;deviations=ciena-state-dump-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-subsystem-resource?module=ciena-subsystem-resource&amp;revision=2020-03-04</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync?module=ciena-sync&amp;revision=2020-03-19</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-external?module=ciena-sync-external&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-gnss?module=ciena-sync-gnss&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-ptp?module=ciena-sync-ptp&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-synce?module=ciena-sync-synce&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog?module=ciena-syslog&amp;revision=2020-10-16</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog-tls?module=ciena-syslog-tls&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-system?module=ciena-system&amp;revision=2021-01-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-system-telemetry?module=ciena-system-telemetry&amp;revision=2020-04-30</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-global?module=ciena-tdm-global&amp;revision=2019-10-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-pseudowire?module=ciena-tdm-pseudowire&amp;revision=2020-09-18</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls?module=ciena-tls&amp;revision=2020-03-23</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-service-profile?module=ciena-tls-service-profile&amp;revision=2019-12-20</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-types?module=ciena-tls-types&amp;revision=2018-02-15</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-twamp-saos?module=ciena-twamp-saos&amp;revision=2020-12-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-types?module=ciena-types&amp;revision=2019-11-22&amp;features=saos-6x,saos-8x,pm,protocol-filters,pwe-module,vpls-fpga,pbt,mpls,max-vc-l2xforms,max-queue-groups,raps,network-sync,bits-timing,gps-timing,ptp-timing,benchmark,benchmark-reflector,benchmark-generator,benchmark-non-fpga-reflector,benchmark-non-fpga-generator</capability>
+    <capability>http://ciena.com/ns/yang/ciena-underlay-binding?module=ciena-underlay-binding&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-vrf?module=ciena-vrf&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ztp?module=ciena-ztp&amp;revision=2019-07-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-bfd-types?module=iana-bfd-types&amp;revision=2018-08-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-crypt-hash?module=iana-crypt-hash&amp;revision=2014-08-06&amp;features=crypt-hash-md5,crypt-hash-sha-256,crypt-hash-sha-512</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-if-type?module=iana-if-type&amp;revision=2017-01-19</capability>
+    <capability>urn:ieee:params:xml:ns:yang:ieee-types?module=ieee-types&amp;revision=2015-09-10</capability>
+    <capability>urn:ieee:std:1914.3:yang:ieee1914-dot3?module=ieee1914-dot3-roe&amp;revision=2020-08-10&amp;features=STRUCTURE-AGNOSTIC-TUNNELING-MODE,STRUCTURE-AGNOSTIC-LINE-CODING-AWARE-MODE,SEQUENCE-NUMBER-MODE,TIMESTAMP-MODE,FRACTIONAL-NANOSECOND-ACCURACY&amp;deviations=ciena-ieee1914-dot3-roe-deviation</capability>
+    <capability>urn:ieee:std:802.1Q:yang:ieee802-dot1q-types?module=ieee802-dot1q-types&amp;revision=2018-03-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-alarms?module=ietf-alarms&amp;revision=2018-02-01&amp;features=operator-actions,alarm-shelving,alarm-history&amp;deviations=ciena-ietf-alarms-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-ethernet-segment?module=ietf-ethernet-segment&amp;revision=2019-03-09&amp;features=ethernet-segment-bgp-params,ethernet-segment-pbb-params</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2018-08-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2013-07-15</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-interfaces?module=ietf-interfaces&amp;revision=2018-02-20&amp;features=arbitrary-names,pre-provisioning,if-mib</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-acm?module=ietf-netconf-acm&amp;revision=2018-02-14</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?module=ietf-netconf-monitoring&amp;revision=2010-10-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?module=ietf-netconf-notifications&amp;revision=2012-02-06</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:partial-lock:1.0?module=ietf-netconf-partial-lock&amp;revision=2009-10-19</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?module=ietf-netconf-with-defaults&amp;revision=2011-06-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-pseudowires?module=ietf-pseudowires&amp;revision=2017-06-26&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf?module=ietf-restconf&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf-monitoring?module=ietf-restconf-monitoring&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-routing-types?module=ietf-routing-types&amp;revision=2017-06-13</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-snmp?module=ietf-snmp&amp;revision=2014-12-10&amp;deviations=ciena-snmp-agent-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-segment-routing-common?module=ietf-sr-cmn&amp;revision=2018-06-25&amp;features=sid-last-hop-behavior</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-sr-policy-types?module=ietf-sr-policy-types&amp;revision=2019-11-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-srv6-types?module=ietf-srv6-types&amp;revision=2017-11-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog?module=ietf-syslog&amp;revision=2016-03-20&amp;features=console-action,buffer-action,buffer-limit-bytes,buffer-limit-messages,file-limit-size,file-limit-duration,terminal-action,terminal-facility-user-logging-config,session-action,session-facility-user-logging-config,selector-sevop-config,selector-match-config,structured-data-config,signed-messages-config&amp;deviations=ciena-ietf-syslog-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog-types?module=ietf-syslog-types&amp;revision=2016-05-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-te-types?module=ietf-te-types&amp;revision=2018-10-08&amp;features=p2mp-te,frr-te,extended-admin-groups,named-path-affinities,named-extended-admin-groups,named-srlg-groups,named-path-constraints,path-optimization-metric,path-optimization-objective-function</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-tls-common?module=ietf-tls-common&amp;revision=2017-10-30&amp;features=tls-1_0,tls-1_1,tls-1_2,tls-ecc,tls-dhe,tls-3des,tls-gcm,tls-sha2</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-twamp?module=ietf-twamp&amp;revision=2017-10-16&amp;features=server,session-reflector&amp;deviations=ciena-ietf-twamp-deviation-saos</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?module=ietf-x509-cert-to-name&amp;revision=2014-12-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-library?module=ietf-yang-library&amp;revision=2016-06-21</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-patch?module=ietf-yang-patch&amp;revision=2017-02-22</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-types?module=ietf-yang-types&amp;revision=2013-07-15</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-cfm?module=mef-cfm&amp;revision=2012-04-16&amp;deviations=mef-cfm-deviation-valimar</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-soam-pm?module=mef-soam-pm&amp;revision=2012-04-16&amp;deviations=mef-soam-pm-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:netmod:notification?module=nc-notifications&amp;revision=2008-07-14</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:notification:1.0?module=notifications&amp;revision=2013-03-15</capability>
+    <capability>http://openconfig.net/yang/aaa?module=openconfig-aaa&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/aaa/types?module=openconfig-aaa-types&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions&amp;revision=2018-10-17</capability>
+    <capability>http://openconfig.net/yang/types/inet?module=openconfig-inet-types&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/interfaces?module=openconfig-interfaces&amp;revision=2017-07-14&amp;deviations=ciena-openconfig-interfaces-deviation</capability>
+    <capability>http://openconfig.net/yang/platform?module=openconfig-platform&amp;revision=2016-12-22&amp;deviations=ciena-openconfig-platform-deviation</capability>
+    <capability>http://openconfig.net/yang/platform-types?module=openconfig-platform-types&amp;revision=2017-08-16</capability>
+    <capability>http://openconfig.net/yang/system/procmon?module=openconfig-procmon&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system?module=openconfig-system&amp;revision=2017-07-06&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://openconfig.net/yang/system/logging?module=openconfig-system-logging&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system/terminal?module=openconfig-system-terminal&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/telemetry?module=openconfig-telemetry&amp;revision=2018-11-21&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://openconfig.net/yang/telemetry-types?module=openconfig-telemetry-types&amp;revision=2018-11-21</capability>
+    <capability>http://openconfig.net/yang/openconfig-types?module=openconfig-types&amp;revision=2018-05-05</capability>
+    <capability>http://openconfig.net/yang/types/yang?module=openconfig-yang-types&amp;revision=2017-07-30</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yang-data-ext?module=yang-data-ext&amp;revision=2017-07-03</capability>
+    <capability>http://netconfcentral.org/ns/yuma-app-common?module=yuma-app-common&amp;revision=2017-07-25</capability>
+    <capability>http://netconfcentral.org/ns/yuma-ncx?module=yuma-ncx&amp;revision=2015-10-16</capability>
+    <capability>http://netconfcentral.org/ns/yuma-time-filter?module=yuma-time-filter&amp;revision=2012-11-15</capability>
+    <capability>http://netconfcentral.org/ns/yuma-types?module=yuma-types&amp;revision=2019-11-29</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-app-common?module=yumaworks-app-common&amp;revision=2019-05-22</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-event-filter?module=yumaworks-event-filter&amp;revision=2014-02-09</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-extensions?module=yumaworks-extensions&amp;revision=2020-03-31</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-getbulk?module=yumaworks-getbulk&amp;revision=2020-10-02</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-ids?module=yumaworks-ids&amp;revision=2014-07-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yumaworks-restconf?module=yumaworks-restconf&amp;revision=2017-07-03</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-system?module=yumaworks-system&amp;revision=2020-10-30</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-term-msg?module=yumaworks-term-msg&amp;revision=2019-05-05</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-types?module=yumaworks-types&amp;revision=2020-03-06</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces-deviation?module=ciena-openconfig-interfaces-deviation&amp;revision=2018-02-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-syslog-deviation?module=ciena-ietf-syslog-deviation&amp;revision=2016-03-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires-deviation?module=ciena-ietf-pseudowires-deviation&amp;revision=2020-09-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:mef-cfm-dev-valimar?module=mef-cfm-deviation-valimar&amp;revision=2020-05-18</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag-deviation?module=ciena-ieee-lag-deviation&amp;revision=2018-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee-lag-dev?module=ciena-ieee-lldp-deviation&amp;revision=2018-04-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp-deviation?module=ciena-ieee-rstp-deviation&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x-deviation?module=ciena-dot1x-deviation&amp;revision=2019-04-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft-deviation?module=ciena-itut-g8032-draft-deviation&amp;revision=2019-05-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-snmp-agent-deviation?module=ciena-snmp-agent-deviation&amp;revision=2021-02-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms-deviation?module=ciena-ietf-alarms-deviation&amp;revision=2018-08-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-deviation?module=ciena-packet-ptp-deviation&amp;revision=2019-10-14</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ietf-twamp-deviation-saos?module=ciena-ietf-twamp-deviation-saos&amp;revision=2015-12-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam-deviation?module=ciena-ip-oam-deviation&amp;revision=2018-11-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping-deviation?module=ciena-oam-ping-deviation&amp;revision=2020-01-29</capability>
+    <capability>http://www.ciena.com/ns/yang/cn-oc-platform-dev?module=ciena-openconfig-platform-deviation&amp;revision=2020-09-25</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn-deviation?module=ciena-evpn-deviation&amp;revision=2020-03-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-dev?module=ciena-packet-xcvr-deviation&amp;revision=2020-09-18</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mef-fd-deviation?module=ciena-mef-fd-deviation&amp;revision=2020-10-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow-deviation?module=ciena-mef-qos-flow-deviation&amp;revision=2021-01-12</capability>
+    <capability>http://www.ciena.com/ns/yang/mef-soam-pm-dev?module=mef-soam-pm-deviation&amp;revision=2020-12-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ieee-port-eoam-dev?module=ciena-ieee-port-eoam-deviation&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-dev?module=ciena-ieee1914-dot3-roe-deviation&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system-dev?module=ciena-openconfig-system-deviation&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp-dev?module=ciena-ntp-deviation&amp;revision=2018-06-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-dev?module=ciena-software-mgmt-deviation&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump-dev?module=ciena-state-dump-deviation&amp;revision=2020-02-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-deviation?module=ciena-bfd-deviation&amp;revision=2020-10-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing-deviation?module=ciena-licensing-deviation&amp;revision=2019-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi-dev?module=ciena-dhcp-multi-deviation&amp;revision=2018-06-26</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-telemetry-deviation?module=ciena-openconfig-telemetry-deviation&amp;revision=2020-03-13</capability>
+    <capability>urn:ietf:params:netconf:capability:yang-library:1.0?revision=2016-06-21&amp;module-set-id=23964</capability>
+  </capabilities>
+  <session-id>59</session-id>
+</hello>
+
+>>>>out 28-Apr-2021::09:00:19.361 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="1">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:00:19.502 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc-reply message-id="1"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:00:19.504 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="2">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment>
+            <name>es.1.3438</name>
+            <active-mode>single-active-mode</active-mode>
+            <ethernet-segment-identifier>
+              <mac-based>
+                <system-mac-address>ac:dc:02:02:02:02</system-mac-address>
+              </mac-based>
+            </ethernet-segment-identifier>
+            <logical-port>1</logical-port>
+            <evlag>false</evlag>
+            <df-election>
+              <election-wait-time>3</election-wait-time>
+              <preference>32767</preference>
+              <reversion-hold-time>3</reversion-hold-time>
+              <df-election-method>default</df-election-method>
+              <revertive>true</revertive>
+            </df-election>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance>
+            <id>3438</id>
+            <vpn-target>
+              <route-target>0:65098:3438</route-target>
+              <route-target-type>both</route-target-type>
+            </vpn-target>
+            <vpws-cross-connect-fd>
+              <forwarding-domain>eVPWS.3438</forwarding-domain>
+              <control-word>true</control-word>
+              <local-service-id>3438</local-service-id>
+              <l2mtu>1500</l2mtu>
+              <remote-service-id>3438</remote-service-id>
+            </vpws-cross-connect-fd>
+            <sr-policy>
+              <fallback>enable</fallback>
+            </sr-policy>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd>
+          <name>eVPWS.3438</name>
+          <mode>evpn-vpws</mode>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp>
+          <name>p1v3438</name>
+          <logical-port>1</logical-port>
+          <mtu-size>2000</mtu-size>
+          <stats-collection>on</stats-collection>
+          <classifier-list>v3438</classifier-list>
+          <fd-name>eVPWS.3438</fd-name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier>
+          <name>v3438</name>
+          <filter-entry>
+            <filter-parameter>vtag-stack</filter-parameter>
+            <vtags>
+              <tag>1</tag>
+              <vlan-id>3438</vlan-id>
+            </vtags>
+            <logical-not>false</logical-not>
+          </filter-entry>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:00:19.506 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="3">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:00:19.893 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc-reply message-id="2"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:00:19.922 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc-reply message-id="3"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:00:50.177 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="4">
+  <close-session/>
+</rpc>
+
+>>>>out 28-Apr-2021::09:00:50.179 user: admin/1085 thandle 14685 hostname cisco-nso device ciena-6 trace-id=066e0edf-debc-4520-93a4-dd35125cbb79 session-id=59 NCS close
+>>>>out 28-Apr-2021::09:04:40.235 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+  </capabilities>
+</hello>
+
+<<<<in 28-Apr-2021::09:04:40.377 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+    <capability>urn:ietf:params:netconf:capability:writable-running:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:xpath:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:notification:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:interleave:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:partial-lock:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=report-all&amp;also-supported=trim,explicit,report-all-tagged</capability>
+    <capability>urn:yumaworks:params:xml:ns:netconf:config-id?id=279</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;revision=2011-06-01&amp;features=writable-running,rollback-on-error,xpath</capability>
+    <capability>http://ciena.com/ns/yang/ciena-arp?module=ciena-arp&amp;revision=2018-07-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd?module=ciena-bfd&amp;revision=2020-08-19&amp;deviations=ciena-bfd-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-mh?module=ciena-bfd-ip-mh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-sh?module=ciena-bfd-ip-sh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls?module=ciena-bfd-mpls&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls-tp?module=ciena-bfd-mpls-tp&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-types?module=ciena-bfd-types&amp;revision=2021-01-20&amp;features=accelerated-bfd</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bgp?module=ciena-bgp&amp;revision=2020-10-12&amp;features=bfd</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-bw-calculation-mode?module=ciena-bw-calculation-mode&amp;revision=2016-12-08</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-cfm?module=ciena-cfm&amp;revision=2020-10-08</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-cpri?module=ciena-cpri-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp?module=ciena-dhcp&amp;revision=2017-06-26&amp;deviations=ciena-dhcp-multi-deviation</capability>
+    <capability>http://ciena.com/dhcpl3relay/yang/ciena-dhcp-l3-relay?module=ciena-dhcp-l3-relay&amp;revision=2018-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi?module=ciena-dhcp-multi&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcpv6-client?module=ciena-dhcpv6-client&amp;revision=2019-07-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dns-client?module=ciena-dns-client&amp;revision=2019-12-11</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x?module=ciena-dot1x&amp;revision=2020-01-20&amp;deviations=ciena-dot1x-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-eoam?module=ciena-eoam&amp;revision=2017-12-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn?module=ciena-evpn&amp;revision=2020-12-22&amp;features=evpn-bgp-params,evpn-pbb-params&amp;deviations=ciena-evpn-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ext-lag?module=ciena-ext-lag&amp;revision=2019-10-02&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-fib-state?module=ciena-fib-state&amp;revision=2020-08-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-file-mgmt?module=ciena-file-mgmt&amp;revision=2019-10-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-file-transfer-types?module=ciena-file-transfer-types&amp;revision=2020-01-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-flexe?module=ciena-flexe&amp;revision=2021-02-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag?module=ciena-ieee-lag&amp;revision=2018-01-24&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-ieee-lldp?module=ciena-ieee-lldp&amp;revision=2018-01-24&amp;features=dot1-extension,dot3-extension&amp;deviations=ciena-ieee-lldp-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee:ns:yang:ieee-port-eoam?module=ciena-ieee-port-eoam&amp;revision=2020-09-24&amp;deviations=ciena-ieee-port-eoam-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp?module=ciena-ieee-rstp&amp;revision=2019-09-05&amp;deviations=ciena-ieee-rstp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-augment?module=ciena-ieee1914-dot3-roe-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms?module=ciena-ietf-alarms&amp;revision=2021-01-08</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires?module=ciena-ietf-pseudowires&amp;revision=2020-09-28&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-te?module=ciena-ietf-te&amp;revision=2020-10-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-ip-neighbor?module=ciena-ip-neighbor&amp;revision=2018-02-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam?module=ciena-ip-oam&amp;revision=2020-01-30&amp;deviations=ciena-ip-oam-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-isis?module=ciena-isis&amp;revision=2020-10-28&amp;features=bfd,ldp-igp-sync,fast-reroute,lfa,remote-lfa,multi-topology,prefix-tag</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft?module=ciena-itut-g8032-draft&amp;revision=2020-09-21&amp;deviations=ciena-itut-g8032-draft-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-l2vpn?module=ciena-l2vpn&amp;revision=2018-11-12</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-types?module=ciena-l3-types&amp;revision=2020-08-31</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-ldp?module=ciena-ldp&amp;revision=2020-09-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing?module=ciena-licensing&amp;revision=2019-06-06&amp;deviations=ciena-licensing-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-local-licensing?module=ciena-local-licensing&amp;revision=2020-12-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-management-plane?module=ciena-management-plane&amp;revision=2020-04-03</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-access-flow?module=ciena-mef-access-flow&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier?module=ciena-mef-classifier&amp;revision=2021-01-27&amp;features=filter-parameters-type,vtag-stack-feature,icmp-feature</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-cos-to-frame-map?module=ciena-mef-cos-to-frame-map&amp;revision=2015-07-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos?module=ciena-mef-egress-qos&amp;revision=2020-11-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos-binding?module=ciena-mef-egress-qos-binding&amp;revision=2017-02-02</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd?module=ciena-mef-fd&amp;revision=2020-04-08&amp;deviations=ciena-mef-fd-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-flood-containment-profile?module=ciena-mef-flood-containment-profile&amp;revision=2016-01-13</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp?module=ciena-mef-fp&amp;revision=2020-01-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-frame-to-cos-map?module=ciena-mef-frame-to-cos-map&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-l2cp-profile?module=ciena-mef-l2cp-profile&amp;revision=2020-10-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-logical-port?module=ciena-mef-logical-port&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-mac-management?module=ciena-mef-mac-management&amp;revision=2019-05-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-meter-profile?module=ciena-mef-meter-profile&amp;revision=2020-11-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-mirror-session?module=ciena-mef-mirror-session&amp;revision=2021-02-10</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-pfg-profile?module=ciena-mef-pfg-profile&amp;revision=2016-05-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow?module=ciena-mef-qos-flow&amp;revision=2020-10-01&amp;deviations=ciena-mef-qos-flow-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-module?module=ciena-module&amp;revision=2019-01-16</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls?module=ciena-mpls&amp;revision=2020-08-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-ping?module=ciena-mpls-ping&amp;revision=2020-01-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-tp-corouted?module=ciena-mpls-tp-corouted&amp;revision=2020-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp?module=ciena-ntp&amp;revision=2020-09-24&amp;deviations=ciena-ntp-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-options?module=ciena-oam-options&amp;revision=2020-12-09</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping?module=ciena-oam-ping&amp;revision=2020-12-04&amp;deviations=ciena-oam-ping-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-controller-data-packets?module=ciena-of-controller-data-packets&amp;revision=2018-09-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-flows-tables?module=ciena-of-flow-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-group-tables?module=ciena-of-group-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-types?module=ciena-of-types&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-vfsi?module=ciena-of-vfsi&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa?module=ciena-openconfig-aaa&amp;revision=2020-10-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa-types?module=ciena-openconfig-aaa-types&amp;revision=2020-10-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port?module=ciena-openconfig-if-ethernet-port&amp;revision=2020-08-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ip?module=ciena-openconfig-if-ip&amp;revision=2020-02-17</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces?module=ciena-openconfig-interfaces&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system?module=ciena-openconfig-system&amp;revision=2020-10-29&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-telemetry?module=ciena-openconfig-telemetry&amp;revision=2020-03-13&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ospf?module=ciena-ospf&amp;revision=2020-08-26&amp;features=bfd,router-id</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-configuration?module=ciena-packet-configuration&amp;revision=2020-03-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-otn-port?module=ciena-packet-otn-port&amp;revision=2021-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp?module=ciena-packet-ptp&amp;revision=2020-04-22&amp;deviations=ciena-packet-ptp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-modem?module=ciena-packet-ptp-modem&amp;revision=2019-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-tdm-port?module=ciena-packet-tdm-port&amp;revision=2021-01-28</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-typedefs?module=ciena-packet-typedefs&amp;revision=2020-04-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr?module=ciena-packet-xcvr&amp;revision=2020-05-11&amp;deviations=ciena-packet-xcvr-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-modem?module=ciena-packet-xcvr-modem&amp;revision=2018-05-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-xcvr-pluggable?module=ciena-packet-xcvr-pluggable&amp;revision=2020-05-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix?module=ciena-pkix&amp;revision=2020-10-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-transfer?module=ciena-pkix-transfer&amp;revision=2020-12-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-types?module=ciena-pkix-types&amp;revision=2018-04-27</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-platform?module=ciena-platform&amp;revision=2020-11-23</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ndpm-data-binning?module=ciena-pm-data-binning&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pm-data-binning-types?module=ciena-pm-data-binning-types&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pon-ctrl?module=ciena-pon-ctrl&amp;revision=2020-11-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ppm?module=ciena-ppm&amp;revision=2020-10-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-pseudowires?module=ciena-pseudowires&amp;revision=2020-09-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-rib?module=ciena-rib&amp;revision=2020-09-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-routing-policy?module=ciena-routing-policy&amp;revision=2020-08-31</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-rstp?module=ciena-rstp&amp;revision=2018-05-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sat?module=ciena-sat&amp;revision=2019-09-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-soam-pm?module=ciena-soam-pm&amp;revision=2020-03-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt?module=ciena-software-mgmt&amp;revision=2020-12-22&amp;features=rolling-upgrade&amp;deviations=ciena-software-mgmt-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-aug?module=ciena-software-mgmt-augmentation&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr?module=ciena-sr&amp;revision=2020-10-28&amp;features=mapping-server,max-sid-depth</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr-policy?module=ciena-sr-policy&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ssh-types?module=ciena-ssh-types&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump?module=ciena-state-dump&amp;revision=2020-02-03&amp;deviations=ciena-state-dump-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-subsystem-resource?module=ciena-subsystem-resource&amp;revision=2020-03-04</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync?module=ciena-sync&amp;revision=2020-03-19</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-external?module=ciena-sync-external&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-gnss?module=ciena-sync-gnss&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-ptp?module=ciena-sync-ptp&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-synce?module=ciena-sync-synce&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog?module=ciena-syslog&amp;revision=2020-10-16</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog-tls?module=ciena-syslog-tls&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-system?module=ciena-system&amp;revision=2021-01-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-system-telemetry?module=ciena-system-telemetry&amp;revision=2020-04-30</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-global?module=ciena-tdm-global&amp;revision=2019-10-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-pseudowire?module=ciena-tdm-pseudowire&amp;revision=2020-09-18</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls?module=ciena-tls&amp;revision=2020-03-23</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-service-profile?module=ciena-tls-service-profile&amp;revision=2019-12-20</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-types?module=ciena-tls-types&amp;revision=2018-02-15</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-twamp-saos?module=ciena-twamp-saos&amp;revision=2020-12-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-types?module=ciena-types&amp;revision=2019-11-22&amp;features=saos-6x,saos-8x,pm,protocol-filters,pwe-module,vpls-fpga,pbt,mpls,max-vc-l2xforms,max-queue-groups,raps,network-sync,bits-timing,gps-timing,ptp-timing,benchmark,benchmark-reflector,benchmark-generator,benchmark-non-fpga-reflector,benchmark-non-fpga-generator</capability>
+    <capability>http://ciena.com/ns/yang/ciena-underlay-binding?module=ciena-underlay-binding&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-vrf?module=ciena-vrf&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ztp?module=ciena-ztp&amp;revision=2019-07-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-bfd-types?module=iana-bfd-types&amp;revision=2018-08-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-crypt-hash?module=iana-crypt-hash&amp;revision=2014-08-06&amp;features=crypt-hash-md5,crypt-hash-sha-256,crypt-hash-sha-512</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-if-type?module=iana-if-type&amp;revision=2017-01-19</capability>
+    <capability>urn:ieee:params:xml:ns:yang:ieee-types?module=ieee-types&amp;revision=2015-09-10</capability>
+    <capability>urn:ieee:std:1914.3:yang:ieee1914-dot3?module=ieee1914-dot3-roe&amp;revision=2020-08-10&amp;features=STRUCTURE-AGNOSTIC-TUNNELING-MODE,STRUCTURE-AGNOSTIC-LINE-CODING-AWARE-MODE,SEQUENCE-NUMBER-MODE,TIMESTAMP-MODE,FRACTIONAL-NANOSECOND-ACCURACY&amp;deviations=ciena-ieee1914-dot3-roe-deviation</capability>
+    <capability>urn:ieee:std:802.1Q:yang:ieee802-dot1q-types?module=ieee802-dot1q-types&amp;revision=2018-03-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-alarms?module=ietf-alarms&amp;revision=2018-02-01&amp;features=operator-actions,alarm-shelving,alarm-history&amp;deviations=ciena-ietf-alarms-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-ethernet-segment?module=ietf-ethernet-segment&amp;revision=2019-03-09&amp;features=ethernet-segment-bgp-params,ethernet-segment-pbb-params</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2018-08-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2013-07-15</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-interfaces?module=ietf-interfaces&amp;revision=2018-02-20&amp;features=arbitrary-names,pre-provisioning,if-mib</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-acm?module=ietf-netconf-acm&amp;revision=2018-02-14</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?module=ietf-netconf-monitoring&amp;revision=2010-10-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?module=ietf-netconf-notifications&amp;revision=2012-02-06</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:partial-lock:1.0?module=ietf-netconf-partial-lock&amp;revision=2009-10-19</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?module=ietf-netconf-with-defaults&amp;revision=2011-06-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-pseudowires?module=ietf-pseudowires&amp;revision=2017-06-26&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf?module=ietf-restconf&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf-monitoring?module=ietf-restconf-monitoring&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-routing-types?module=ietf-routing-types&amp;revision=2017-06-13</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-snmp?module=ietf-snmp&amp;revision=2014-12-10&amp;deviations=ciena-snmp-agent-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-segment-routing-common?module=ietf-sr-cmn&amp;revision=2018-06-25&amp;features=sid-last-hop-behavior</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-sr-policy-types?module=ietf-sr-policy-types&amp;revision=2019-11-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-srv6-types?module=ietf-srv6-types&amp;revision=2017-11-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog?module=ietf-syslog&amp;revision=2016-03-20&amp;features=console-action,buffer-action,buffer-limit-bytes,buffer-limit-messages,file-limit-size,file-limit-duration,terminal-action,terminal-facility-user-logging-config,session-action,session-facility-user-logging-config,selector-sevop-config,selector-match-config,structured-data-config,signed-messages-config&amp;deviations=ciena-ietf-syslog-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog-types?module=ietf-syslog-types&amp;revision=2016-05-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-te-types?module=ietf-te-types&amp;revision=2018-10-08&amp;features=p2mp-te,frr-te,extended-admin-groups,named-path-affinities,named-extended-admin-groups,named-srlg-groups,named-path-constraints,path-optimization-metric,path-optimization-objective-function</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-tls-common?module=ietf-tls-common&amp;revision=2017-10-30&amp;features=tls-1_0,tls-1_1,tls-1_2,tls-ecc,tls-dhe,tls-3des,tls-gcm,tls-sha2</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-twamp?module=ietf-twamp&amp;revision=2017-10-16&amp;features=server,session-reflector&amp;deviations=ciena-ietf-twamp-deviation-saos</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?module=ietf-x509-cert-to-name&amp;revision=2014-12-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-library?module=ietf-yang-library&amp;revision=2016-06-21</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-patch?module=ietf-yang-patch&amp;revision=2017-02-22</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-types?module=ietf-yang-types&amp;revision=2013-07-15</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-cfm?module=mef-cfm&amp;revision=2012-04-16&amp;deviations=mef-cfm-deviation-valimar</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-soam-pm?module=mef-soam-pm&amp;revision=2012-04-16&amp;deviations=mef-soam-pm-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:netmod:notification?module=nc-notifications&amp;revision=2008-07-14</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:notification:1.0?module=notifications&amp;revision=2013-03-15</capability>
+    <capability>http://openconfig.net/yang/aaa?module=openconfig-aaa&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/aaa/types?module=openconfig-aaa-types&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions&amp;revision=2018-10-17</capability>
+    <capability>http://openconfig.net/yang/types/inet?module=openconfig-inet-types&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/interfaces?module=openconfig-interfaces&amp;revision=2017-07-14&amp;deviations=ciena-openconfig-interfaces-deviation</capability>
+    <capability>http://openconfig.net/yang/platform?module=openconfig-platform&amp;revision=2016-12-22&amp;deviations=ciena-openconfig-platform-deviation</capability>
+    <capability>http://openconfig.net/yang/platform-types?module=openconfig-platform-types&amp;revision=2017-08-16</capability>
+    <capability>http://openconfig.net/yang/system/procmon?module=openconfig-procmon&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system?module=openconfig-system&amp;revision=2017-07-06&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://openconfig.net/yang/system/logging?module=openconfig-system-logging&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system/terminal?module=openconfig-system-terminal&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/telemetry?module=openconfig-telemetry&amp;revision=2018-11-21&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://openconfig.net/yang/telemetry-types?module=openconfig-telemetry-types&amp;revision=2018-11-21</capability>
+    <capability>http://openconfig.net/yang/openconfig-types?module=openconfig-types&amp;revision=2018-05-05</capability>
+    <capability>http://openconfig.net/yang/types/yang?module=openconfig-yang-types&amp;revision=2017-07-30</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yang-data-ext?module=yang-data-ext&amp;revision=2017-07-03</capability>
+    <capability>http://netconfcentral.org/ns/yuma-app-common?module=yuma-app-common&amp;revision=2017-07-25</capability>
+    <capability>http://netconfcentral.org/ns/yuma-ncx?module=yuma-ncx&amp;revision=2015-10-16</capability>
+    <capability>http://netconfcentral.org/ns/yuma-time-filter?module=yuma-time-filter&amp;revision=2012-11-15</capability>
+    <capability>http://netconfcentral.org/ns/yuma-types?module=yuma-types&amp;revision=2019-11-29</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-app-common?module=yumaworks-app-common&amp;revision=2019-05-22</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-event-filter?module=yumaworks-event-filter&amp;revision=2014-02-09</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-extensions?module=yumaworks-extensions&amp;revision=2020-03-31</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-getbulk?module=yumaworks-getbulk&amp;revision=2020-10-02</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-ids?module=yumaworks-ids&amp;revision=2014-07-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yumaworks-restconf?module=yumaworks-restconf&amp;revision=2017-07-03</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-system?module=yumaworks-system&amp;revision=2020-10-30</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-term-msg?module=yumaworks-term-msg&amp;revision=2019-05-05</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-types?module=yumaworks-types&amp;revision=2020-03-06</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces-deviation?module=ciena-openconfig-interfaces-deviation&amp;revision=2018-02-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-syslog-deviation?module=ciena-ietf-syslog-deviation&amp;revision=2016-03-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires-deviation?module=ciena-ietf-pseudowires-deviation&amp;revision=2020-09-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:mef-cfm-dev-valimar?module=mef-cfm-deviation-valimar&amp;revision=2020-05-18</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag-deviation?module=ciena-ieee-lag-deviation&amp;revision=2018-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee-lag-dev?module=ciena-ieee-lldp-deviation&amp;revision=2018-04-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp-deviation?module=ciena-ieee-rstp-deviation&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x-deviation?module=ciena-dot1x-deviation&amp;revision=2019-04-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft-deviation?module=ciena-itut-g8032-draft-deviation&amp;revision=2019-05-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-snmp-agent-deviation?module=ciena-snmp-agent-deviation&amp;revision=2021-02-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms-deviation?module=ciena-ietf-alarms-deviation&amp;revision=2018-08-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-deviation?module=ciena-packet-ptp-deviation&amp;revision=2019-10-14</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ietf-twamp-deviation-saos?module=ciena-ietf-twamp-deviation-saos&amp;revision=2015-12-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam-deviation?module=ciena-ip-oam-deviation&amp;revision=2018-11-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping-deviation?module=ciena-oam-ping-deviation&amp;revision=2020-01-29</capability>
+    <capability>http://www.ciena.com/ns/yang/cn-oc-platform-dev?module=ciena-openconfig-platform-deviation&amp;revision=2020-09-25</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn-deviation?module=ciena-evpn-deviation&amp;revision=2020-03-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-dev?module=ciena-packet-xcvr-deviation&amp;revision=2020-09-18</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mef-fd-deviation?module=ciena-mef-fd-deviation&amp;revision=2020-10-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow-deviation?module=ciena-mef-qos-flow-deviation&amp;revision=2021-01-12</capability>
+    <capability>http://www.ciena.com/ns/yang/mef-soam-pm-dev?module=mef-soam-pm-deviation&amp;revision=2020-12-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ieee-port-eoam-dev?module=ciena-ieee-port-eoam-deviation&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-dev?module=ciena-ieee1914-dot3-roe-deviation&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system-dev?module=ciena-openconfig-system-deviation&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp-dev?module=ciena-ntp-deviation&amp;revision=2018-06-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-dev?module=ciena-software-mgmt-deviation&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump-dev?module=ciena-state-dump-deviation&amp;revision=2020-02-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-deviation?module=ciena-bfd-deviation&amp;revision=2020-10-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing-deviation?module=ciena-licensing-deviation&amp;revision=2019-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi-dev?module=ciena-dhcp-multi-deviation&amp;revision=2018-06-26</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-telemetry-deviation?module=ciena-openconfig-telemetry-deviation&amp;revision=2020-03-13</capability>
+    <capability>urn:ietf:params:netconf:capability:yang-library:1.0?revision=2016-06-21&amp;module-set-id=23964</capability>
+  </capabilities>
+  <session-id>60</session-id>
+</hello>
+
+>>>>out 28-Apr-2021::09:04:40.569 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="1">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:04:40.699 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="1"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:04:40.701 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="2">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment>
+            <name>es.2.2975</name>
+            <active-mode>single-active-mode</active-mode>
+            <ethernet-segment-identifier>
+              <mac-based>
+                <system-mac-address>ac:dc:23:23:23:23</system-mac-address>
+              </mac-based>
+            </ethernet-segment-identifier>
+            <logical-port>2</logical-port>
+            <evlag>false</evlag>
+            <df-election>
+              <election-wait-time>3</election-wait-time>
+              <preference>32767</preference>
+              <reversion-hold-time>3</reversion-hold-time>
+              <df-election-method>default</df-election-method>
+              <revertive>true</revertive>
+            </df-election>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance>
+            <id>2975</id>
+            <vpn-target>
+              <route-target>0:65098:2975</route-target>
+              <route-target-type>both</route-target-type>
+            </vpn-target>
+            <vpws-cross-connect-fd>
+              <forwarding-domain>eVPWS.2975</forwarding-domain>
+              <control-word>true</control-word>
+              <local-service-id>2975</local-service-id>
+              <l2mtu>1500</l2mtu>
+              <remote-service-id>2975</remote-service-id>
+            </vpws-cross-connect-fd>
+            <sr-policy>
+              <fallback>enable</fallback>
+            </sr-policy>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd>
+          <name>eVPWS.2975</name>
+          <mode>evpn-vpws</mode>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp>
+          <name>p2v2975</name>
+          <logical-port>2</logical-port>
+          <mtu-size>2000</mtu-size>
+          <stats-collection>on</stats-collection>
+          <classifier-list>v2975</classifier-list>
+          <fd-name>eVPWS.2975</fd-name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier>
+          <name>v2975</name>
+          <filter-entry>
+            <filter-parameter>vtag-stack</filter-parameter>
+            <vtags>
+              <tag>1</tag>
+              <vlan-id>2975</vlan-id>
+            </vtags>
+            <logical-not>false</logical-not>
+          </filter-entry>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:04:40.703 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="3">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:04:41.104 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="2"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:04:41.128 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="3"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:05:06.007 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="4">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:05:06.138 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="4"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:05:06.140 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="5">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment>
+            <name>es.3.3234</name>
+            <active-mode>single-active-mode</active-mode>
+            <ethernet-segment-identifier>
+              <mac-based>
+                <system-mac-address>ac:dc:3e:3e:3e:3e</system-mac-address>
+              </mac-based>
+            </ethernet-segment-identifier>
+            <logical-port>3</logical-port>
+            <evlag>false</evlag>
+            <df-election>
+              <election-wait-time>3</election-wait-time>
+              <preference>32767</preference>
+              <reversion-hold-time>3</reversion-hold-time>
+              <df-election-method>default</df-election-method>
+              <revertive>true</revertive>
+            </df-election>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance>
+            <id>3234</id>
+            <vpn-target>
+              <route-target>0:65098:3234</route-target>
+              <route-target-type>both</route-target-type>
+            </vpn-target>
+            <vpws-cross-connect-fd>
+              <forwarding-domain>eVPWS.3234</forwarding-domain>
+              <control-word>true</control-word>
+              <local-service-id>3234</local-service-id>
+              <l2mtu>1500</l2mtu>
+              <remote-service-id>3234</remote-service-id>
+            </vpws-cross-connect-fd>
+            <sr-policy>
+              <fallback>enable</fallback>
+            </sr-policy>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd>
+          <name>eVPWS.3234</name>
+          <mode>evpn-vpws</mode>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp>
+          <name>p3v3234</name>
+          <logical-port>3</logical-port>
+          <mtu-size>2000</mtu-size>
+          <stats-collection>on</stats-collection>
+          <classifier-list>v3234</classifier-list>
+          <fd-name>eVPWS.3234</fd-name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier>
+          <name>v3234</name>
+          <filter-entry>
+            <filter-parameter>vtag-stack</filter-parameter>
+            <vtags>
+              <tag>1</tag>
+              <vlan-id>3234</vlan-id>
+            </vtags>
+            <logical-not>false</logical-not>
+          </filter-entry>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:05:06.141 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="6">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:05:06.482 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="5"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:05:06.499 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc-reply message-id="6"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:05:37.178 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="7">
+  <close-session/>
+</rpc>
+
+>>>>out 28-Apr-2021::09:05:37.178 user: admin/1093 thandle 14732 hostname cisco-nso device ciena-6 trace-id=7e462d46-98e6-4651-b751-c20fc4b835f1 session-id=60 NCS close
+>>>>out 28-Apr-2021::09:13:08.999 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+  </capabilities>
+</hello>
+
+<<<<in 28-Apr-2021::09:13:09.146 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+    <capability>urn:ietf:params:netconf:base:1.1</capability>
+    <capability>urn:ietf:params:netconf:capability:writable-running:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:rollback-on-error:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:xpath:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:notification:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:interleave:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:partial-lock:1.0</capability>
+    <capability>urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=report-all&amp;also-supported=trim,explicit,report-all-tagged</capability>
+    <capability>urn:yumaworks:params:xml:ns:netconf:config-id?id=281</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&amp;revision=2011-06-01&amp;features=writable-running,rollback-on-error,xpath</capability>
+    <capability>http://ciena.com/ns/yang/ciena-arp?module=ciena-arp&amp;revision=2018-07-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd?module=ciena-bfd&amp;revision=2020-08-19&amp;deviations=ciena-bfd-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-mh?module=ciena-bfd-ip-mh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-ip-sh?module=ciena-bfd-ip-sh&amp;revision=2020-08-24</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls?module=ciena-bfd-mpls&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-mpls-tp?module=ciena-bfd-mpls-tp&amp;revision=2020-01-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-types?module=ciena-bfd-types&amp;revision=2021-01-20&amp;features=accelerated-bfd</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bgp?module=ciena-bgp&amp;revision=2020-10-12&amp;features=bfd</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-bw-calculation-mode?module=ciena-bw-calculation-mode&amp;revision=2016-12-08</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-cfm?module=ciena-cfm&amp;revision=2020-10-08</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-cpri?module=ciena-cpri-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp?module=ciena-dhcp&amp;revision=2017-06-26&amp;deviations=ciena-dhcp-multi-deviation</capability>
+    <capability>http://ciena.com/dhcpl3relay/yang/ciena-dhcp-l3-relay?module=ciena-dhcp-l3-relay&amp;revision=2018-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi?module=ciena-dhcp-multi&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcpv6-client?module=ciena-dhcpv6-client&amp;revision=2019-07-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dns-client?module=ciena-dns-client&amp;revision=2019-12-11</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x?module=ciena-dot1x&amp;revision=2020-01-20&amp;deviations=ciena-dot1x-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-eoam?module=ciena-eoam&amp;revision=2017-12-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn?module=ciena-evpn&amp;revision=2020-12-22&amp;features=evpn-bgp-params,evpn-pbb-params&amp;deviations=ciena-evpn-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ext-lag?module=ciena-ext-lag&amp;revision=2019-10-02&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-fib-state?module=ciena-fib-state&amp;revision=2020-08-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-file-mgmt?module=ciena-file-mgmt&amp;revision=2019-10-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-file-transfer-types?module=ciena-file-transfer-types&amp;revision=2020-01-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-flexe?module=ciena-flexe&amp;revision=2021-02-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag?module=ciena-ieee-lag&amp;revision=2018-01-24&amp;deviations=ciena-ieee-lag-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-ieee-lldp?module=ciena-ieee-lldp&amp;revision=2018-01-24&amp;features=dot1-extension,dot3-extension&amp;deviations=ciena-ieee-lldp-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee:ns:yang:ieee-port-eoam?module=ciena-ieee-port-eoam&amp;revision=2020-09-24&amp;deviations=ciena-ieee-port-eoam-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp?module=ciena-ieee-rstp&amp;revision=2019-09-05&amp;deviations=ciena-ieee-rstp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-augment?module=ciena-ieee1914-dot3-roe-augment&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms?module=ciena-ietf-alarms&amp;revision=2021-01-08</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires?module=ciena-ietf-pseudowires&amp;revision=2020-09-28&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-te?module=ciena-ietf-te&amp;revision=2020-10-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-ip-neighbor?module=ciena-ip-neighbor&amp;revision=2018-02-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam?module=ciena-ip-oam&amp;revision=2020-01-30&amp;deviations=ciena-ip-oam-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-isis?module=ciena-isis&amp;revision=2020-10-28&amp;features=bfd,ldp-igp-sync,fast-reroute,lfa,remote-lfa,multi-topology,prefix-tag</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft?module=ciena-itut-g8032-draft&amp;revision=2020-09-21&amp;deviations=ciena-itut-g8032-draft-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-l2vpn?module=ciena-l2vpn&amp;revision=2018-11-12</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-types?module=ciena-l3-types&amp;revision=2020-08-31</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-ldp?module=ciena-ldp&amp;revision=2020-09-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing?module=ciena-licensing&amp;revision=2019-06-06&amp;deviations=ciena-licensing-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-local-licensing?module=ciena-local-licensing&amp;revision=2020-12-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-management-plane?module=ciena-management-plane&amp;revision=2020-04-03</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-access-flow?module=ciena-mef-access-flow&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier?module=ciena-mef-classifier&amp;revision=2021-01-27&amp;features=filter-parameters-type,vtag-stack-feature,icmp-feature</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-cos-to-frame-map?module=ciena-mef-cos-to-frame-map&amp;revision=2015-07-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos?module=ciena-mef-egress-qos&amp;revision=2020-11-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-egress-qos-binding?module=ciena-mef-egress-qos-binding&amp;revision=2017-02-02</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd?module=ciena-mef-fd&amp;revision=2020-04-08&amp;deviations=ciena-mef-fd-deviation</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-flood-containment-profile?module=ciena-mef-flood-containment-profile&amp;revision=2016-01-13</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp?module=ciena-mef-fp&amp;revision=2020-01-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-frame-to-cos-map?module=ciena-mef-frame-to-cos-map&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-l2cp-profile?module=ciena-mef-l2cp-profile&amp;revision=2020-10-16</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-logical-port?module=ciena-mef-logical-port&amp;revision=2021-01-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-mac-management?module=ciena-mef-mac-management&amp;revision=2019-05-24</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-meter-profile?module=ciena-mef-meter-profile&amp;revision=2020-11-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-mirror-session?module=ciena-mef-mirror-session&amp;revision=2021-02-10</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-pfg-profile?module=ciena-mef-pfg-profile&amp;revision=2016-05-19</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow?module=ciena-mef-qos-flow&amp;revision=2020-10-01&amp;deviations=ciena-mef-qos-flow-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-module?module=ciena-module&amp;revision=2019-01-16</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls?module=ciena-mpls&amp;revision=2020-08-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-ping?module=ciena-mpls-ping&amp;revision=2020-01-30</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mpls-tp-corouted?module=ciena-mpls-tp-corouted&amp;revision=2020-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp?module=ciena-ntp&amp;revision=2020-09-24&amp;deviations=ciena-ntp-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-options?module=ciena-oam-options&amp;revision=2020-12-09</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping?module=ciena-oam-ping&amp;revision=2020-12-04&amp;deviations=ciena-oam-ping-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-controller-data-packets?module=ciena-of-controller-data-packets&amp;revision=2018-09-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-flows-tables?module=ciena-of-flow-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-group-tables?module=ciena-of-group-tables&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-types?module=ciena-of-types&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pn/ciena-of-vfsi?module=ciena-of-vfsi&amp;revision=2018-09-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa?module=ciena-openconfig-aaa&amp;revision=2020-10-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-aaa-types?module=ciena-openconfig-aaa-types&amp;revision=2020-10-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ethernet-port?module=ciena-openconfig-if-ethernet-port&amp;revision=2020-08-20</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-if-ip?module=ciena-openconfig-if-ip&amp;revision=2020-02-17</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces?module=ciena-openconfig-interfaces&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system?module=ciena-openconfig-system&amp;revision=2020-10-29&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-telemetry?module=ciena-openconfig-telemetry&amp;revision=2020-03-13&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ospf?module=ciena-ospf&amp;revision=2020-08-26&amp;features=bfd,router-id</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-configuration?module=ciena-packet-configuration&amp;revision=2020-03-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-otn-port?module=ciena-packet-otn-port&amp;revision=2021-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp?module=ciena-packet-ptp&amp;revision=2020-04-22&amp;deviations=ciena-packet-ptp-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-modem?module=ciena-packet-ptp-modem&amp;revision=2019-11-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-tdm-port?module=ciena-packet-tdm-port&amp;revision=2021-01-28</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-typedefs?module=ciena-packet-typedefs&amp;revision=2020-04-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr?module=ciena-packet-xcvr&amp;revision=2020-05-11&amp;deviations=ciena-packet-xcvr-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-modem?module=ciena-packet-xcvr-modem&amp;revision=2018-05-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-xcvr-pluggable?module=ciena-packet-xcvr-pluggable&amp;revision=2020-05-07</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix?module=ciena-pkix&amp;revision=2020-10-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-transfer?module=ciena-pkix-transfer&amp;revision=2020-12-03</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pkix-types?module=ciena-pkix-types&amp;revision=2018-04-27</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-platform?module=ciena-platform&amp;revision=2020-11-23</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ndpm-data-binning?module=ciena-pm-data-binning&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pm-data-binning-types?module=ciena-pm-data-binning-types&amp;revision=2020-10-09</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-pon-ctrl?module=ciena-pon-ctrl&amp;revision=2020-11-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ppm?module=ciena-ppm&amp;revision=2020-10-12</capability>
+    <capability>http://ciena.com/ns/yang/ciena-pseudowires?module=ciena-pseudowires&amp;revision=2020-09-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-rib?module=ciena-rib&amp;revision=2020-09-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena/ciena-routing-policy?module=ciena-routing-policy&amp;revision=2020-08-31</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-rstp?module=ciena-rstp&amp;revision=2018-05-02</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sat?module=ciena-sat&amp;revision=2019-09-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-soam-pm?module=ciena-soam-pm&amp;revision=2020-03-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt?module=ciena-software-mgmt&amp;revision=2020-12-22&amp;features=rolling-upgrade&amp;deviations=ciena-software-mgmt-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-aug?module=ciena-software-mgmt-augmentation&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr?module=ciena-sr&amp;revision=2020-10-28&amp;features=mapping-server,max-sid-depth</capability>
+    <capability>http://ciena.com/ns/yang/ciena-sr-policy?module=ciena-sr-policy&amp;revision=2020-12-22</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ssh-types?module=ciena-ssh-types&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump?module=ciena-state-dump&amp;revision=2020-02-03&amp;deviations=ciena-state-dump-deviation</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-subsystem-resource?module=ciena-subsystem-resource&amp;revision=2020-03-04</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync?module=ciena-sync&amp;revision=2020-03-19</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-external?module=ciena-sync-external&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-gnss?module=ciena-sync-gnss&amp;revision=2020-02-18</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-ptp?module=ciena-sync-ptp&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-sync-synce?module=ciena-sync-synce&amp;revision=2020-12-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog?module=ciena-syslog&amp;revision=2020-10-16</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-syslog-tls?module=ciena-syslog-tls&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-system?module=ciena-system&amp;revision=2021-01-28</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-system-telemetry?module=ciena-system-telemetry&amp;revision=2020-04-30</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-global?module=ciena-tdm-global&amp;revision=2019-10-17</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-tdm-pseudowire?module=ciena-tdm-pseudowire&amp;revision=2020-09-18</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls?module=ciena-tls&amp;revision=2020-03-23</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-service-profile?module=ciena-tls-service-profile&amp;revision=2019-12-20</capability>
+    <capability>http://www.ciena.com/tls/yang/ciena-tls-types?module=ciena-tls-types&amp;revision=2018-02-15</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-twamp-saos?module=ciena-twamp-saos&amp;revision=2020-12-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-types?module=ciena-types&amp;revision=2019-11-22&amp;features=saos-6x,saos-8x,pm,protocol-filters,pwe-module,vpls-fpga,pbt,mpls,max-vc-l2xforms,max-queue-groups,raps,network-sync,bits-timing,gps-timing,ptp-timing,benchmark,benchmark-reflector,benchmark-generator,benchmark-non-fpga-reflector,benchmark-non-fpga-generator</capability>
+    <capability>http://ciena.com/ns/yang/ciena-underlay-binding?module=ciena-underlay-binding&amp;revision=2020-02-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-vrf?module=ciena-vrf&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ztp?module=ciena-ztp&amp;revision=2019-07-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-bfd-types?module=iana-bfd-types&amp;revision=2018-08-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-crypt-hash?module=iana-crypt-hash&amp;revision=2014-08-06&amp;features=crypt-hash-md5,crypt-hash-sha-256,crypt-hash-sha-512</capability>
+    <capability>urn:ietf:params:xml:ns:yang:iana-if-type?module=iana-if-type&amp;revision=2017-01-19</capability>
+    <capability>urn:ieee:params:xml:ns:yang:ieee-types?module=ieee-types&amp;revision=2015-09-10</capability>
+    <capability>urn:ieee:std:1914.3:yang:ieee1914-dot3?module=ieee1914-dot3-roe&amp;revision=2020-08-10&amp;features=STRUCTURE-AGNOSTIC-TUNNELING-MODE,STRUCTURE-AGNOSTIC-LINE-CODING-AWARE-MODE,SEQUENCE-NUMBER-MODE,TIMESTAMP-MODE,FRACTIONAL-NANOSECOND-ACCURACY&amp;deviations=ciena-ieee1914-dot3-roe-deviation</capability>
+    <capability>urn:ieee:std:802.1Q:yang:ieee802-dot1q-types?module=ieee802-dot1q-types&amp;revision=2018-03-07</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-alarms?module=ietf-alarms&amp;revision=2018-02-01&amp;features=operator-actions,alarm-shelving,alarm-history&amp;deviations=ciena-ietf-alarms-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-ethernet-segment?module=ietf-ethernet-segment&amp;revision=2019-03-09&amp;features=ethernet-segment-bgp-params,ethernet-segment-pbb-params</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2018-08-16</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&amp;revision=2013-07-15</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-interfaces?module=ietf-interfaces&amp;revision=2018-02-20&amp;features=arbitrary-names,pre-provisioning,if-mib</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-acm?module=ietf-netconf-acm&amp;revision=2018-02-14</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?module=ietf-netconf-monitoring&amp;revision=2010-10-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?module=ietf-netconf-notifications&amp;revision=2012-02-06</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:partial-lock:1.0?module=ietf-netconf-partial-lock&amp;revision=2009-10-19</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?module=ietf-netconf-with-defaults&amp;revision=2011-06-01</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-pseudowires?module=ietf-pseudowires&amp;revision=2017-06-26&amp;deviations=ciena-ietf-pseudowires-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf?module=ietf-restconf&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-restconf-monitoring?module=ietf-restconf-monitoring&amp;revision=2017-01-26</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-routing-types?module=ietf-routing-types&amp;revision=2017-06-13</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-snmp?module=ietf-snmp&amp;revision=2014-12-10&amp;deviations=ciena-snmp-agent-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-segment-routing-common?module=ietf-sr-cmn&amp;revision=2018-06-25&amp;features=sid-last-hop-behavior</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-sr-policy-types?module=ietf-sr-policy-types&amp;revision=2019-11-04</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-srv6-types?module=ietf-srv6-types&amp;revision=2017-11-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog?module=ietf-syslog&amp;revision=2016-03-20&amp;features=console-action,buffer-action,buffer-limit-bytes,buffer-limit-messages,file-limit-size,file-limit-duration,terminal-action,terminal-facility-user-logging-config,session-action,session-facility-user-logging-config,selector-sevop-config,selector-match-config,structured-data-config,signed-messages-config&amp;deviations=ciena-ietf-syslog-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-syslog-types?module=ietf-syslog-types&amp;revision=2016-05-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-te-types?module=ietf-te-types&amp;revision=2018-10-08&amp;features=p2mp-te,frr-te,extended-admin-groups,named-path-affinities,named-extended-admin-groups,named-srlg-groups,named-path-constraints,path-optimization-metric,path-optimization-objective-function</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-tls-common?module=ietf-tls-common&amp;revision=2017-10-30&amp;features=tls-1_0,tls-1_1,tls-1_2,tls-ecc,tls-dhe,tls-3des,tls-gcm,tls-sha2</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-twamp?module=ietf-twamp&amp;revision=2017-10-16&amp;features=server,session-reflector&amp;deviations=ciena-ietf-twamp-deviation-saos</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?module=ietf-x509-cert-to-name&amp;revision=2014-12-10</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-library?module=ietf-yang-library&amp;revision=2016-06-21</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-patch?module=ietf-yang-patch&amp;revision=2017-02-22</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ietf-yang-types?module=ietf-yang-types&amp;revision=2013-07-15</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-cfm?module=mef-cfm&amp;revision=2012-04-16&amp;deviations=mef-cfm-deviation-valimar</capability>
+    <capability>http://metroethernetforum.org/ns/yang/mef-soam-pm?module=mef-soam-pm&amp;revision=2012-04-16&amp;deviations=mef-soam-pm-deviation</capability>
+    <capability>urn:ietf:params:xml:ns:netmod:notification?module=nc-notifications&amp;revision=2008-07-14</capability>
+    <capability>urn:ietf:params:xml:ns:netconf:notification:1.0?module=notifications&amp;revision=2013-03-15</capability>
+    <capability>http://openconfig.net/yang/aaa?module=openconfig-aaa&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/aaa/types?module=openconfig-aaa-types&amp;revision=2018-04-12</capability>
+    <capability>http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions&amp;revision=2018-10-17</capability>
+    <capability>http://openconfig.net/yang/types/inet?module=openconfig-inet-types&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/interfaces?module=openconfig-interfaces&amp;revision=2017-07-14&amp;deviations=ciena-openconfig-interfaces-deviation</capability>
+    <capability>http://openconfig.net/yang/platform?module=openconfig-platform&amp;revision=2016-12-22&amp;deviations=ciena-openconfig-platform-deviation</capability>
+    <capability>http://openconfig.net/yang/platform-types?module=openconfig-platform-types&amp;revision=2017-08-16</capability>
+    <capability>http://openconfig.net/yang/system/procmon?module=openconfig-procmon&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system?module=openconfig-system&amp;revision=2017-07-06&amp;deviations=ciena-openconfig-system-deviation</capability>
+    <capability>http://openconfig.net/yang/system/logging?module=openconfig-system-logging&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/system/terminal?module=openconfig-system-terminal&amp;revision=2017-07-06</capability>
+    <capability>http://openconfig.net/yang/telemetry?module=openconfig-telemetry&amp;revision=2018-11-21&amp;deviations=ciena-openconfig-telemetry-deviation</capability>
+    <capability>http://openconfig.net/yang/telemetry-types?module=openconfig-telemetry-types&amp;revision=2018-11-21</capability>
+    <capability>http://openconfig.net/yang/openconfig-types?module=openconfig-types&amp;revision=2018-05-05</capability>
+    <capability>http://openconfig.net/yang/types/yang?module=openconfig-yang-types&amp;revision=2017-07-30</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yang-data-ext?module=yang-data-ext&amp;revision=2017-07-03</capability>
+    <capability>http://netconfcentral.org/ns/yuma-app-common?module=yuma-app-common&amp;revision=2017-07-25</capability>
+    <capability>http://netconfcentral.org/ns/yuma-ncx?module=yuma-ncx&amp;revision=2015-10-16</capability>
+    <capability>http://netconfcentral.org/ns/yuma-time-filter?module=yuma-time-filter&amp;revision=2012-11-15</capability>
+    <capability>http://netconfcentral.org/ns/yuma-types?module=yuma-types&amp;revision=2019-11-29</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-app-common?module=yumaworks-app-common&amp;revision=2019-05-22</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-event-filter?module=yumaworks-event-filter&amp;revision=2014-02-09</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-extensions?module=yumaworks-extensions&amp;revision=2020-03-31</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-getbulk?module=yumaworks-getbulk&amp;revision=2020-10-02</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-ids?module=yumaworks-ids&amp;revision=2014-07-12</capability>
+    <capability>urn:ietf:params:xml:ns:yang:yumaworks-restconf?module=yumaworks-restconf&amp;revision=2017-07-03</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-system?module=yumaworks-system&amp;revision=2020-10-30</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-term-msg?module=yumaworks-term-msg&amp;revision=2019-05-05</capability>
+    <capability>http://yumaworks.com/ns/yumaworks-types?module=yumaworks-types&amp;revision=2020-03-06</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-interfaces-deviation?module=ciena-openconfig-interfaces-deviation&amp;revision=2018-02-28</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-syslog-deviation?module=ciena-ietf-syslog-deviation&amp;revision=2016-03-01</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ietf-pseudowires-deviation?module=ciena-ietf-pseudowires-deviation&amp;revision=2020-09-30</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:mef-cfm-dev-valimar?module=mef-cfm-deviation-valimar&amp;revision=2020-05-18</capability>
+    <capability>urn:ietf:params:xml:ns:yang:ciena-ieee-lag-deviation?module=ciena-ieee-lag-deviation&amp;revision=2018-01-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee-lag-dev?module=ciena-ieee-lldp-deviation&amp;revision=2018-04-06</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ieee-rstp-deviation?module=ciena-ieee-rstp-deviation&amp;revision=2019-09-05</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dot1x-deviation?module=ciena-dot1x-deviation&amp;revision=2019-04-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-itut-g8032-draft-deviation?module=ciena-itut-g8032-draft-deviation&amp;revision=2019-05-20</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-snmp-agent-deviation?module=ciena-snmp-agent-deviation&amp;revision=2021-02-10</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ietf-alarms-deviation?module=ciena-ietf-alarms-deviation&amp;revision=2018-08-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-ptp-deviation?module=ciena-packet-ptp-deviation&amp;revision=2019-10-14</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ciena-ietf-twamp-deviation-saos?module=ciena-ietf-twamp-deviation-saos&amp;revision=2015-12-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-ip-oam-deviation?module=ciena-ip-oam-deviation&amp;revision=2018-11-27</capability>
+    <capability>http://ciena.com/ns/yang/ciena-oam-ping-deviation?module=ciena-oam-ping-deviation&amp;revision=2020-01-29</capability>
+    <capability>http://www.ciena.com/ns/yang/cn-oc-platform-dev?module=ciena-openconfig-platform-deviation&amp;revision=2020-09-25</capability>
+    <capability>http://ciena.com/ns/yang/ciena-evpn-deviation?module=ciena-evpn-deviation&amp;revision=2020-03-25</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-packet-xcvr-dev?module=ciena-packet-xcvr-deviation&amp;revision=2020-09-18</capability>
+    <capability>http://ciena.com/ns/yang/ciena-mef-fd-deviation?module=ciena-mef-fd-deviation&amp;revision=2020-10-20</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-qos-flow-deviation?module=ciena-mef-qos-flow-deviation&amp;revision=2021-01-12</capability>
+    <capability>http://www.ciena.com/ns/yang/mef-soam-pm-dev?module=mef-soam-pm-deviation&amp;revision=2020-12-04</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena-pn:ieee-port-eoam-dev?module=ciena-ieee-port-eoam-deviation&amp;revision=2020-09-24</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ieee1914-dot3-roe-dev?module=ciena-ieee1914-dot3-roe-deviation&amp;revision=2020-10-01</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-openconfig-system-dev?module=ciena-openconfig-system-deviation&amp;revision=2020-09-29</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-ntp-dev?module=ciena-ntp-deviation&amp;revision=2018-06-14</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-software-mgmt-dev?module=ciena-software-mgmt-deviation&amp;revision=2020-12-22</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-state-dump-dev?module=ciena-state-dump-deviation&amp;revision=2020-02-03</capability>
+    <capability>http://ciena.com/ns/yang/ciena-bfd-deviation?module=ciena-bfd-deviation&amp;revision=2020-10-17</capability>
+    <capability>urn:ciena:params:xml:ns:yang:ciena:ciena-licensing-deviation?module=ciena-licensing-deviation&amp;revision=2019-01-15</capability>
+    <capability>http://www.ciena.com/ns/yang/ciena-dhcp-multi-dev?module=ciena-dhcp-multi-deviation&amp;revision=2018-06-26</capability>
+    <capability>http://ciena.com/ns/yang/ciena-openconfig-telemetry-deviation?module=ciena-openconfig-telemetry-deviation&amp;revision=2020-03-13</capability>
+    <capability>urn:ietf:params:netconf:capability:yang-library:1.0?revision=2016-06-21&amp;module-set-id=23964</capability>
+  </capabilities>
+  <session-id>61</session-id>
+</hello>
+
+>>>>out 28-Apr-2021::09:13:09.466 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="1">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:09.600 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="1"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:13:09.603 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="2">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                            nc:operation="delete">
+            <name>es.1.3438</name>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                         nc:operation="delete">
+            <id>3438</id>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>eVPWS.3438</name>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>p1v3438</name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                    nc:operation="delete">
+          <name>v3438</name>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:13:09.605 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="3">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:09.964 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="2"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:13:09.989 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="3"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:13:29.719 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="4">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:29.845 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="4"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:13:29.846 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="5">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                            nc:operation="delete">
+            <name>es.2.2975</name>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                         nc:operation="delete">
+            <id>2975</id>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>eVPWS.2975</name>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>p2v2975</name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                    nc:operation="delete">
+          <name>v2975</name>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:13:29.847 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="6">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:30.204 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="5"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:13:30.224 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="6"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:13:37.878 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="7">
+  <lock>
+    <target>
+      <running/>
+    </target>
+  </lock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:38.006 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="7"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:13:38.011 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="8">
+  <edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <target>
+      <running/>
+    </target>
+    <error-option>rollback-on-error</error-option>
+    <config>
+      <evpn xmlns="http://ciena.com/ns/yang/ciena-evpn">
+        <ethernet-segments>
+          <ethernet-segment xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                            nc:operation="delete">
+            <name>es.3.3234</name>
+          </ethernet-segment>
+        </ethernet-segments>
+        <evpn-instances>
+          <evpn-instance xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                         nc:operation="delete">
+            <id>3234</id>
+          </evpn-instance>
+        </evpn-instances>
+      </evpn>
+      <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+        <fd xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>eVPWS.3234</name>
+        </fd>
+      </fds>
+      <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+        <fp xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+            nc:operation="delete">
+          <name>p3v3234</name>
+        </fp>
+      </fps>
+      <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+        <classifier xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"
+                    nc:operation="delete">
+          <name>v3234</name>
+        </classifier>
+      </classifiers>
+    </config>
+  </edit-config>
+</rpc>
+
+>>>>out 28-Apr-2021::09:13:38.012 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="9">
+  <unlock>
+    <target>
+      <running/>
+    </target>
+  </unlock>
+</rpc>
+
+<<<<in 28-Apr-2021::09:13:38.385 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="8"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+<<<<in 28-Apr-2021::09:13:38.390 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc-reply message-id="9"
+           xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <ok/>
+</rpc-reply>
+
+>>>>out 28-Apr-2021::09:14:09.177 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="10">
+  <close-session/>
+</rpc>
+
+>>>>out 28-Apr-2021::09:14:09.178 user: admin/1115 thandle 14840 hostname cisco-nso device ciena-6 trace-id=394a5810-1ee3-4aa4-a69a-897191c80bba session-id=61 NCS close
