@@ -1,0 +1,17 @@
+module ned-suppress-leafref-in-diff-snippet {
+  namespace "http://tail-f.com/ned/ned-suppress-leafref-in-diff-snippet";
+  prefix ned-suppress-leafref-in-diff-snippet;
+  import tailf-common {
+    prefix tailf;
+  }
+  leaf foo {
+    tailf:non-strict-leafref {
+      path "../bar";
+    }
+    tailf:cli-suppress-leafref-in-diff;
+    type uint32;
+  }
+  leaf bar {
+    type uint32;
+  }
+}

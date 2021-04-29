@@ -6,6 +6,7 @@
       <!-- ############################################ -->
       <!-- CIENA -->
       <!-- ############################################ -->
+      <?if-ned-id saos106-nc-1.0:saos106-nc-1.0?>
       <vrf xmlns="urn:ciena:params:xml:ns:yang:ciena:ciena-vrf">
         <vrfName>{$VRF_NAME}</vrfName>
         <description>L3VPN - eBGP {$PEER_DEVICE_NAME}</description>
@@ -139,6 +140,147 @@
           </vrf>
         </instance>
       </bgp>
+
+      <!-- ############################################ -->
+      <!-- IPI -->
+      <!-- ############################################ -->
+      <?elif-ned-id ipi-ocnos5-nc-1.0:ipi-ocnos5-nc-1.0?>
+      <network-instances xmlns="http://openconfig.net/yang/network-instance">
+        <network-instance>
+          <name>VRF{$VLAN_ID}</name>
+          <config>
+            <name>VRF{$VLAN_ID}</name>
+            <type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:L3VRF</type>
+            <enabled>true</enabled>
+            <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</enabled-address-families>
+            <enabled-address-families xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV6</enabled-address-families>
+            <router-id>{$ROUTER_ID}</router-id>
+            <description>"L3VPN Test Instance {$VLAN_ID}"</description>
+            <route-distinguisher>{$VLAN_ID}:1</route-distinguisher>
+          </config>
+          <protocols>
+            <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+              <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+              <name>DIRECTLY_CONNECTED</name>
+              <config>
+                <identifier>oc-pol-types:DIRECTLY_CONNECTED</identifier>
+                <name>DIRECTLY_CONNECTED</name>
+                <enabled>true</enabled>
+              </config>
+            </protocol>
+            <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+              <identifier>oc-pol-types:BGP</identifier>
+              <name>{$AS_NUM}</name>
+              <bgp>
+                <global>
+                  <config>
+                    <as>{$AS_NUM}</as>
+                  </config>
+                </global>
+              </bgp>
+              <config>
+                <identifier>oc-pol-types:BGP</identifier>
+                <name>{$AS_NUM}</name>
+                <enabled>true</enabled>
+              </config>
+            </protocol>
+          </protocols>
+          <interfaces>
+            <interface>
+              <id>{$LOGICAL_PORT}</id>
+              <config>
+                <interface>{$LOGICAL_PORT}</interface>
+                <id>{$LOGICAL_PORT}</id>
+              </config>
+            </interface>
+          </interfaces>
+          <encapsulation>
+            <config>
+              <label-allocation-mode xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:INSTANCE_LABEL</label-allocation-mode>
+              <encapsulation-type xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types">oc-ni-types:MPLS</encapsulation-type>
+            </config>
+          </encapsulation>
+          <tables xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+            <table xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+              <protocol>oc-pol-types:BGP</protocol>
+              <address-family>oc-types:IPV4</address-family>
+              <config>
+                <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:BGP</protocol>
+                <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+              </config>
+            </table>
+            <table xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+              <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+              <address-family>oc-types:IPV4</address-family>
+              <config>
+                <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:DIRECTLY_CONNECTED</protocol>
+                <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+              </config>
+            </table>            
+            <table xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+              <protocol>oc-pol-types:DIRECTLY_CONNECTED</protocol>
+              <address-family>oc-types:IPV6</address-family>
+              <config>
+                <protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:DIRECTLY_CONNECTED</protocol>
+                <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV6</address-family>
+              </config>
+            </table>            
+          </tables>
+          <table-connections xmlns:oc-types="http://openconfig.net/yang/openconfig-types">
+            <table-connection xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">
+              <src-protocol>oc-pol-types:DIRECTLY_CONNECTED</src-protocol>
+              <dst-protocol>oc-pol-types:BGP</dst-protocol>
+              <address-family>oc-types:IPV4</address-family>
+              <config>
+                <dst-protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:BGP</dst-protocol>
+                <address-family xmlns:oc-types="http://openconfig.net/yang/openconfig-types">oc-types:IPV4</address-family>
+                <dst-instance xmlns="http://www.ipinfusion.com/yang/ocnos/ipi-oc-ni-augments">{$AS_NUM}</dst-instance>
+                <default-import-policy>ACCEPT_ROUTE</default-import-policy>
+                <src-protocol xmlns:oc-pol-types="http://openconfig.net/yang/policy-types">oc-pol-types:DIRECTLY_CONNECTED</src-protocol>
+              </config>
+            </table-connection>
+          </table-connections>
+          <route-targets xmlns="http://www.ipinfusion.com/yang/ocnos/ipi-oc-ni-augments">
+            <route-target>
+              <rt-rd-string>{$VLAN_ID}:1</rt-rd-string>
+              <config>
+                <rt-rd-string>{$VLAN_ID}:1</rt-rd-string>
+                <direction>BOTH</direction>
+              </config>
+            </route-target>
+          </route-targets>                
+        </network-instance>
+      </network-instances>
+      <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface tags="nocreate">
+          <name>{$LOGICAL_PORT}</name>
+          <config>
+            <name>{$LOGICAL_PORT}</name>
+            <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+          </config>
+          <subinterfaces tags="merge">
+            <subinterface>
+              <index>0</index>
+              <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+                <config/>
+                <addresses>
+                  <address>
+                    <ip>{$IF_IP}</ip>
+                    <config>
+                      <ip>{$IF_IP}</ip>
+                      <prefix-length>{$IF_IP_PREFIXLEN}</prefix-length>
+                    </config>
+                  </address>
+                </addresses>
+              </ipv4>
+              <config>
+                <index>0</index>
+              </config>
+            </subinterface>
+          </subinterfaces>
+        </interface>
+      </interfaces>
+      <?end?>
 
       <!-- ############################################ -->
       <!-- HUAWEI -->

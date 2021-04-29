@@ -1,0 +1,4 @@
+export DRNED="/Users/jrendel/work/ned/drned"
+export PYTHONPATH="/Users/jrendel/work/ned/drned":${PYTHONPATH}
+export PYTHONPATH="${PYTHONPATH}":${NCS_DIR}/lib/pyang
+export PATH="${PATH}":/Users/jrendel/work/ned/drned/bin

@@ -1,0 +1,12 @@
+module tailf-ned-nokia-nsp-id {
+  namespace "http://tail-f.com/ned/nokia-nsp-id";
+  prefix nokia-nsp-id;
+
+  import tailf-ncs-ned {
+    prefix ned;
+  }
+
+  identity nokia-nsp {
+    base ned:generic-ned-id;
+  }
+}

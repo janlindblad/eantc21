@@ -1,0 +1,19 @@
+module nokia-nsp-gen {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/nokia-nsp-gen";
+  prefix nokia-nsp-gen;
+
+  import tailf-common {
+    prefix tailf;
+  }
+
+  import tailf-ncs-ned {
+    prefix ned;
+  }
+
+  identity nokia-nsp-gen {
+    tailf:abstract;
+    base ned:generic-ned-id;
+    base ned:netconf-ned-id;
+  }
+}

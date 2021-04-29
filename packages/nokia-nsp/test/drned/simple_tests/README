@@ -1,0 +1,14 @@
+Files in this directory are meant to be be self-contained config-files (file
+suffix .cfg or .txt). Typically a minimal test for a NED update/fix is to put a
+new config file here so it is included in auto-tests.
+
+Currently, there is no explicit naming-convention for files put here, use common
+sense, e.g. including the RT-number for an issue which has one is always a good
+idea.
+
+Example on how to run a test put in this directory:
+
+py.test -s --tb=short -k 'test_template_single[simple_tests/cisco~iosxr~telus~poc.txt]' --device=netsim-0
+
+NOTE: The contents of this directory is not delivered to customers, so
+configurations put here can contain sensitive/customer-specific data.

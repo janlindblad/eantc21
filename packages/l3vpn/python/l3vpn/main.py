@@ -92,6 +92,9 @@ class ServiceCallbacks(Service):
                 VRF_NAME = t(sna.vpn_attachment.vpn_id), # "eantc"
                 VLAN_ID = t(allocate_vlan_id(sna.vpn_attachment.vpn_id)),
                 LOGICAL_PORT = t(pe_topo.interface),#19,
+                ROUTER_ID = t(pe_topo.router_id),#"1.1.1.1",
+                IF_IP_PREFIXLEN = 24,
+
                 SHELF_SLOT = t(pe_topo.shelf_slot),#"1_14",
                 IF_IP = t(sna.ip_connection.ipv4.addresses.provider_address),#"10.19.100.1",
                 AS_NUM = t(pe_topo.as_number),#65432
@@ -100,7 +103,6 @@ class ServiceCallbacks(Service):
                 PEER_DEVICE_NAME = t(pe_topo.connected_to_device),#spirent
                 NODE_ID = t(md5_hash(pe_topo.device_name, modulus_val=990)+10),
                 SERVICE_ID = t(allocate_vlan_id(sna.vpn_attachment.vpn_id)),#100
-
 
                 #DEVICE = pe_topo.device_name,
                 #AS = sna.vpn_attachment.vpn_id,

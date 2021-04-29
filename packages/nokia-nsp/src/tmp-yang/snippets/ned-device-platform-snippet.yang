@@ -1,0 +1,13 @@
+module ned-device-platform-snippet {
+  namespace "http://tail-f.com/ned/ned-device-platform-snippet";
+  prefix ned-device-platform-snippet;
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+  augment "/ncs:devices/ncs:device/ncs:platform" {
+   leaf dummy { type string; }
+  }
+}

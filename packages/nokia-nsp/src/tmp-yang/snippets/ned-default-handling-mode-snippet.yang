@@ -1,0 +1,12 @@
+module ned-default-handling-mode-snippet {
+  namespace "http://tail-f.com/ned/ned-default-handling-mode-snippet";
+  prefix ned-default-handling-mode-snippet;
+  import tailf-common {
+    prefix tailf;
+  }
+  leaf foo {
+    tailf:ned-default-handling trim;
+    type uint32;
+    default 0;
+  }
+}

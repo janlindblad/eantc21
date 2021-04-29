@@ -1,0 +1,11 @@
+module ned-ignore-compare-config-snippet {
+  namespace "http://tail-f.com/ned/ned-ignore-compare-config";
+  prefix ned-ignore-compare-config;
+  import tailf-common {
+    prefix tailf;
+  }
+  leaf foo {
+    tailf:ned-ignore-compare-config;
+    type uint32;
+  }
+}

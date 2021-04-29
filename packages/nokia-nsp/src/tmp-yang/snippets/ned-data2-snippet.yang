@@ -1,0 +1,13 @@
+module ned-data-snippet {
+  namespace "http://tail-f.com/ned/ned-data";
+  prefix ned-data;
+  import tailf-common {
+    prefix tailf;
+  }
+  leaf foo {
+    tailf:ned-data "." {
+      tailf:transaction both;
+    }
+    type uint32;
+  }
+}

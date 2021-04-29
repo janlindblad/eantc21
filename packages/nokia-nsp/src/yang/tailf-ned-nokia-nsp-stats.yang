@@ -1,0 +1,43 @@
+module tailf-ned-nokia-nsp-stats {
+
+   namespace "http://tail-f.com/ned/nokia-nsp/stats";
+   prefix nokia-nsp-stats;
+
+   import tailf-common {
+     prefix tailf;
+   }
+
+
+   /// ========================================================================
+   /// exec
+   /// ========================================================================
+
+  container exec {
+    tailf:info "Execute commands on device";
+
+    // EXAMPLE "generic" get any REST call
+    tailf:action "get-any" {
+      tailf:info "Execute any GET REST call";
+      tailf:actionpoint "ncsinternal" {
+        tailf:internal;
+      }
+      input {
+        leaf url {
+          type string {
+            tailf:info "GET url";
+          }
+        }
+        leaf query {
+          type string {
+            tailf:info "query param, default is: content=nonconfig";
+          }
+        }
+      }
+      output {
+        leaf result {
+          type string;
+        }
+      }
+    }
+  }
+}

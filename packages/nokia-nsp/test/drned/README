@@ -1,0 +1,47 @@
+How to run drned tests on nokia-nsp
+--------------------------------
+
+1. Install pytest and friends
+
+   The installation process depends on your OS and version. If pip is
+   available, the following should work. On debian clones, apt-get may
+   be a better option.
+
+   $ sudo pip install -U pytest
+   $ sudo pip install -U pexpect
+   $ sudo pip install -U lxml
+
+2. Clone drned to a directory parallel to the NED
+
+   $ git t-clone ssh://git@stash.tail-f.com/ned/drned.git
+
+3. Goto drned directory
+
+   $ cd <NED>/test/drned
+
+4. In Makefile, check that the DRNED and NEDDIR variables are
+   correct. Edit otherwise.
+
+5. Load environment variables
+
+   $ source <path-to-ncs-clone>/tailf/env.sh
+   or
+   $ source <path-to-ncs-installation>/ncsrc
+
+   $ make env.sh && source env.sh
+
+6. Start NCS and netsim
+
+   $ make start
+
+7. Run all tests
+
+   $ make 10min 100min 1000min
+
+8. Stop ncs and netsim
+
+   $ make stop
+
+9. Show all make targets
+
+   $ make help

@@ -1,0 +1,18 @@
+<ncs-package xmlns="http://tail-f.com/ns/ncs-packages">
+  <name>nokia-nsp</name>
+  <package-version>1.0.0</package-version>
+  <description>NED package for nokia nsp</description>
+  <component>
+    <name>nokia-nsp</name>
+    <ned>
+      <generic>
+        <ned-id xmlns:nokia-nsp-id="http://tail-f.com/ned/nokia-nsp-id">nokia-nsp-id:nokia-nsp</ned-id>
+        <java-class-name>com.tailf.packages.ned.nsp.NokiaNspRestConfNedGeneric</java-class-name>
+      </generic>
+      <device>
+        <vendor>nokia</vendor>
+      </device>
+    </ned>
+  </component>
+</ncs-package>
+

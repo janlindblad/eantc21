@@ -1,0 +1,165 @@
+<project name="package" basedir="." default="all" xmlns:jacoco="antlib:org.jacoco.ant">
+
+  <property environment="env"/>
+  <property name="ncs_java_source_ver" value="1.7"/>
+  <property name="ncs_java_target_ver" value="1.7"/>
+  <property name="ned.top" value="../../../.."/>
+  <property name="nedcom.top" value="../../../../../nedcom"/>
+  <property name="ned.build.dir" value="${ned.top}/src/java/build"/>
+  <property name="ned.classes.dir" value="${ned.build.dir}/classes"/>
+  <property name="ned.src.dir" value="${ned.top}/src/java/src"/>
+  <property name="ncs.dir" value="${env.NCS_DIR}/java/jar"/>
+  <property name="ned.privatejar.dir" value="${ned.top}/private-jar"/>
+  <property name="nedcom.junitjar.dir" value="${nedcom.top}/junit-jar"/>
+  <property name="nedcom.powermockjar.dir" value="${nedcom.junitjar.dir}/powermockito"/>
+  <property name="nedcom.jacocojar.dir" value="${nedcom.junitjar.dir}/jacoco"/>
+
+  <property name="test.src.dir" value="src"/>
+  <property name="test.build.dir" value="build/test-classes"/>
+  <!-- extra test resources directory -->
+  <property name="test.resources.dir" value="resources" />
+
+
+  <!-- Properties used for unit testing -->
+  <property name="result.dir" location="../.."/>
+  <property name="classes.instr.dir" location="${test.build.dir}/classes-instr"/>
+  <property name="jacoco.report.dir" location="${result.dir}/jacoco-report"/>
+  <property name="jacoco.exec.file" location="${test.build.dir}/jacoco.exec"/>
+  <property name="junit.xml.dir" location="${test.build.dir}/junit-xml"/>
+  <property name="junit.report.dir" location="${result.dir}/junit-report"/>
+  <property name="ned.package.instr.dir" value="${classes.instr.dir}/com/tailf/packages/ned/${package.name}"/>
+
+  <!-- Path id used for unit testing -->
+  <path id="classpath.test">
+    <fileset dir="${classes.instr.dir}" includes="*.class" />
+    <fileset dir="${ned.privatejar.dir}" includes="*.jar" />
+    <fileset dir="${nedcom.junitjar.dir}" includes="*.jar" />
+    <fileset dir="${nedcom.powermockjar.dir}" includes="*.jar" />
+    <fileset dir="${nedcom.jacocojar.dir}" includes="*.jar" />
+    <fileset dir="${ncs.dir}" includes="*.jar" />
+    <pathelement location="${ned.classes.dir}" />
+    <pathelement location="${test.resources.dir}" />
+  </path>
+
+    <!--  Import JaCoCo Ant tasks  -->
+  <taskdef uri="org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+    <classpath path="${nedcom.jacocojar.dir}/jacocoant.jar"/>
+    <classpath path="${nedcom.jacocojar.dir}/jacocoagent.jar"/>
+  </taskdef>
+
+  <!-- Do JaCoCo offline instrumentation of the class files   -->
+  <!-- Must be done after the class files have been compiled  -->
+  <!-- and before the unit tests are executed                 -->
+ <target name="instrument">
+   <mkdir dir="${classes.instr.dir}"/>
+   <copy todir="${ned.package.instr.dir}">
+    <fileset dir="${ned.src.dir}/../../metadata" includes="**/*.*"/>
+  </copy>
+   <jacoco:instrument  destdir="${classes.instr.dir}" xmlns:jacoco="org.jacoco.ant">
+     <fileset dir="${ned.classes.dir}"/>
+   </jacoco:instrument>
+  </target>
+
+  <!-- Build the JUnit test classes -->
+  <target name="test-compile" depends="instrument">
+    <mkdir dir="${test.build.dir}"/>
+    <javac srcdir="${test.src.dir}"
+           destdir="${test.build.dir}"
+           includeantruntime="false"
+           debug="on"
+           debuglevel="lines,vars,source">
+      <classpath refid="classpath.test"/>
+    </javac>
+  </target>
+
+  <!-- Execute the Junit tests together with the JaCoCo coverage agent -->
+  <target name="test" depends="test-compile">
+    <mkdir dir="${junit.xml.dir}"/>
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+      <classpath path="${nedcom.jacocojar.dir}/jacocoant.jar"/>
+    </taskdef>
+    <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+      <classpath path="${classes.instr.dir}"/>
+      <classpath>
+        <!-- Must run tests on the instrumented class files -->
+        <path refid="classpath.test"/>
+      </classpath>
+     </taskdef>
+    <jacoco:coverage destfile="${jacoco.exec.file}" excludes="*">
+      <junit printsummary="on" haltonfailure="yes" fork="true">
+        <assertions>
+          <enable/>
+        </assertions>
+        <classpath path="${classes.instr.dir}"/>
+        <classpath>
+          <path refid="classpath.test"/>
+          <pathelement location="${test.build.dir}"/>
+        </classpath>
+        <formatter type="brief" usefile="false" />
+        <formatter type="xml"/>
+        <batchtest todir="${junit.xml.dir}">
+          <fileset dir="${test.src.dir}" includes="**/*Test.java" />
+        </batchtest>
+      </junit>
+    </jacoco:coverage>
+  </target>
+
+  <!-- Generate test reports -->
+  <target name="report" depends="test">
+    <mkdir dir="${junit.report.dir}"/>
+    <mkdir dir="${jacoco.report.dir}"/>
+    <taskdef uri="antlib:org.jacoco.ant">
+      <classpath path="${nedcom.jacocojar.dir}/jacocoant.jar"/>
+    </taskdef>
+    <!-- Build JaCoCo report -->
+    <jacoco:report xmlns:jacoco="org.jacoco.ant">
+      <executiondata>
+        <file file="${jacoco.exec.file}"/>
+      </executiondata>
+      <structure name="NED JaCoCo Code Coverage">
+        <classfiles>
+          <!-- Use the original class files here -->
+          <fileset dir="${ned.classes.dir}"/>
+        </classfiles>
+        <sourcefiles encoding="UTF-8">
+          <fileset dir="${ned.src.dir}"/>
+        </sourcefiles>
+      </structure>
+      <html destdir="${jacoco.report.dir}/"/>
+    </jacoco:report>
+    <!-- Build JUnit report -->
+    <junitreport todir="${junit.report.dir}">
+      <fileset dir="${junit.xml.dir}">
+        <include name="TEST-*.xml"/>
+      </fileset>
+      <report format="frames" todir="${junit.report.dir}"/>
+    </junitreport>
+  </target>
+
+  <!-- Clean build files -->
+   <target name="clean" description="Delete old build files">
+        <delete includeEmptyDirs="true">
+          <fileset dir="${test.build.dir}" erroronmissingdir="false">
+            <include name="**" />
+          </fileset>
+        </delete>
+   </target>
+
+   <!-- Clean report files -->
+   <target name="clean-reports" description="Delete old test reports">
+     <delete includeEmptyDirs="true">
+       <fileset dir="${jacoco.report.dir}" erroronmissingdir="false">
+         <include name="**" />
+       </fileset>
+       <fileset dir="${junit.report.dir}" erroronmissingdir="false">
+         <include name="**" />
+       </fileset>
+     </delete>
+   </target>
+
+  <!-- All target -->
+  <target name="all" depends="report">
+    <echo message="NED JUnit test report  : ${junit.report.dir}/index.html"/>
+    <echo message="NED JaCoCo test report : ${jacoco.report.dir}/index.html"/>
+  </target>
+</project>

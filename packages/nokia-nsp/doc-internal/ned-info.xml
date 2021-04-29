@@ -1,0 +1,31 @@
+<ned>
+  <name>nokia-nsp</name>
+  <primary-developer>
+    <name>primary_developer_name</name>
+    <email>primary_developer_username@cisco.com</email>
+  </primary-developer>
+  <secondary-developer>
+    <name>secondary_developer_name</name>
+    <email>secondary_developer_username@cisco.com</email>
+  </secondary-developer>
+  <release-status>POC</release-status>
+  <lab-device>NO</lab-device>
+  <device-platform>
+    <device></device>
+  </device-platform>
+  <target-system>
+    <target>
+      <model></model>
+      <os></os>
+      <version></version>
+    </target>
+  </target-system>
+  <test-system>
+    <target>
+      <model></model>
+      <os></os>
+      <version></version>
+    </target>
+  </test-system>
+  <active>false</active>
+</ned>

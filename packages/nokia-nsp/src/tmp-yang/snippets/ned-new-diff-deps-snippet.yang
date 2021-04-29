@@ -1,0 +1,14 @@
+module ned-new-diff-deps-snippet {
+ namespace "http://tail-f.com/ned/ned-clidiff";
+ prefix ned-clidiff;
+ import tailf-common {
+   prefix tailf;
+ }
+ leaf foo {
+   type uint32;
+ }
+ leaf bar {
+   tailf:cli-diff-delete-before "../foo";
+   type uint32;
+ }
+}

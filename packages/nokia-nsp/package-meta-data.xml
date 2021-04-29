@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- This file has been generated. Do NOT edit it.
+     For changes edit the original instead.
+-->
+<ncs-package xmlns="http://tail-f.com/ns/ncs-packages">
+  <name>nokia-nsp-gen-1.0</name>
+  <package-version>1.0.0</package-version>
+  <description>NED package for nokia nsp</description>
+  <component>
+    <name>nokia-nsp</name>
+    <ned>
+      <generic>
+        <ned-id xmlns:id="http://tail-f.com/ns/ned-id/nokia-nsp-gen-1.0">id:nokia-nsp-gen-1.0</ned-id>
+        <java-class-name>com.tailf.packages.ned.nsp.NokiaNspRestConfNedGeneric</java-class-name>
+      </generic>
+      <device>
+        <vendor>nokia</vendor>
+      </device>
+    </ned>
+  </component>
+</ncs-package>

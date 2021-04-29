@@ -1,0 +1,3 @@
+config
+rload merge device/netsim-0/netsim-0.cfg
+commit

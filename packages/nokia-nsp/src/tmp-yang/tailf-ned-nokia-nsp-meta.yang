@@ -1,0 +1,408 @@
+module tailf-ned-nokia-nsp-meta {
+  namespace "http://tailf.com/ned/nokia-nsp/meta";
+  prefix nokia-nsp-meta;
+
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  import tailf-common {
+    prefix tailf;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  // This import is required when building for CDM style NSOs
+  // Is automatically removed by the NED build system when
+  // building for old style NSOs
+  import nokia-nsp-gen {
+    prefix family;
+  }
+
+  revision 2021-04-28 {
+    description
+      "1.0.0
+       See CHANGES";
+  }
+
+  grouping ssl-settings {
+    container ssl {
+      tailf:info "Use SSL for connections towards the RESTCONF device";
+      leaf accept-any {
+        tailf:info "Accept any certificate (unsafe)";
+        description
+          "Accept any SSL certificate presented by the device.
+          Warning! This enables Man in the Middle attacks and
+          should only be used for testing and troubleshooting.";
+        type boolean;
+      }
+    }
+  }
+
+  grouping ssl-certificate-settings {
+    leaf certificate {
+      tailf:info "Use specific DER formated SSL certificate";
+      description
+        "SSL certificate stored in DER format but since it is entered
+          as Base64 it is very similar to PEM but without banners like
+          \"----- BEGIN CERTIFICATE -----\".
+
+          Default uses the default trusted certificates installed in
+          Java JVM.
+
+          An easy way to get the PEM of a server:
+            openssl s_client -connect HOST:PORT
+          ";
+      type binary;
+    }
+  }
+
+  grouping connection-settings {
+    container connection {
+      container authentication {
+        tailf:info "Configure authentication method to use when the NED interacts with the RESTCONF device";
+        leaf method {
+          type enumeration {
+            enum "basic";
+            enum "cas";
+            enum "bearer-token";
+            enum "none";
+          }
+          default "basic";
+        }
+        leaf mode {
+          when "../method='bearer-token'";
+          type enumeration {
+            enum "probe";
+            enum "static-token";
+          }
+        }
+        leaf value {
+          when "../mode='static-token'";
+          type string;
+        }
+        container token-request {
+          when "../mode='probe'";
+          leaf url {
+            tailf:info "URL to request token (default /rest-gateway/rest/api/v1/auth/token). This does not use the base-url";
+            type string;
+            default "/rest-gateway/rest/api/v1/auth/token";
+          }
+        }
+      }
+      uses ssl-settings;
+    }
+  }
+
+  grouping query-grouping {
+    container query {
+      tailf:info "Configure a RESTCONF GET query on for this call point";
+      leaf depth {
+        tailf:info "Used to limit the number of levels of child nodes returned by the server";
+        type union {
+          type uint16;
+          type enumeration {
+            enum "unbounded";
+          }
+        }
+      }
+      leaf fields {
+        tailf:info "Used to identify data nodes within the target resource to be retrieved (see RFC8040 for format details)";
+        type string;
+      }
+    }
+  }
+
+  grouping custom-get-call-points {
+    list custom-get-call-points {
+      tailf:info "Specify schema paths to be used as call points when the NED is doing RESTCONF GET calls";
+      when "../get-method='use-custom-get-callpoints'";
+      key path;
+      leaf path {
+        type string;
+      }
+      uses query-grouping;
+      container list-entry {
+        tailf:info "Configure special handling if call-point corresponds to a list entry";
+        uses query-grouping;
+      }
+    }
+  }
+
+
+
+  grouping trans-id-method-grouping {
+    leaf trans-id-method {
+      tailf:info "Configure how the NED shall calculate the transaction id. "
+        +"Typically used after each commit and for check-sync operations";
+      type enumeration {
+        enum "last-modified-timestamp" {
+          tailf:info "Use the 'Last-Modified' http header in the response" +
+            " from a RESTCONF GET call. Use this setting only with devices that supports it.";
+        }
+        enum "disabled" {
+          tailf:info "Disable the calculation of transaction id completely.";
+        }
+      }
+      default "disabled";
+    }
+  }
+
+  grouping restconf-settings {
+    container restconf {
+      tailf:info "Settings related to the RESTCONF API";
+      leaf url-base {
+        tailf:info "Device RESTCONF API URL base";
+        when "(../profile='none' or ../profile='netsim')";
+        type union {
+          type enumeration {
+            tailf:info "Let the NED auto probe for the correct URL base";
+            enum "auto";
+          }
+          type string;
+        }
+        default "/restconf";
+      }
+      leaf model-discovery {
+        tailf:info "Configure the NED to auto probe for models supported by the device";
+        when "(../profile='none' or ../profile='netsim')";
+        type enumeration {
+          enum "enabled";
+          enum "disabled";
+        }
+        default "enabled";
+      }
+      container config {
+        tailf:info "Settings related to NED/RESTCONF operations on config";
+        when "(../profile='none' or ../profile='netsim')";
+        leaf update-method {
+          tailf:info "Configure NED behaviour when updating config on the device.";
+          type enumeration {
+            enum "patch" {
+              tailf:info "Update using merge. A RESTCONF PATCH call is used";
+            }
+            enum "put" {
+              tailf:info "Update using replace. A RESTCONF PUT call is used";
+            }
+          }
+          default "patch";
+        }
+        leaf get-method {
+          tailf:info "Configure NED behaviour when fetching config from the device when doing sync-from etc.";
+          type enumeration {
+            enum "default" {
+              tailf:info "A full depth RESTCONF GET call is issued on each top node in the config tree";
+            }
+            enum "incremental-with-list-entries-separately" {
+              tailf:info "The NED performs an incremental walk through the config tree and performs a RESTCONF "+
+                "GET with 'depth=1 on each found container/list'. On lists, each entry is fetched separately "+
+                "a full depth RESTCONF GET";
+            }
+            enum "use-custom-get-callpoints" {
+              tailf:info "Configure custom call points in the schema model. These will used as paths when reading "+
+                "operational data";
+            }
+          }
+          default "default";
+        }
+        uses custom-get-call-points;
+      }
+      container live-status {
+        tailf:info "NED settings related to NED/RESTCONF operations for operational data.";
+        when "(../profile='none' or ../profile='netsim')";
+        leaf get-method {
+          tailf:info "Configure NED behaviour when fetching operational data from the device";
+          type enumeration {
+            enum "nearest-container" {
+              tailf:info "Execute a RESTCONF GET using a path representing nearest container / list entry in the requested path";
+            }
+            enum "top-nodes" {
+              tailf:info "Execute a RESTCONF GET using a path representing the top node of the requested path.";
+            }
+            enum "use-custom-get-callpoints" {
+              tailf:info "Configure custom call points in the schema model. These will be used as paths when reading "+
+                "operational data";
+            }
+          }
+          default "nearest-container";
+        }
+        uses custom-get-call-points;
+      }
+      leaf profile {
+        tailf:info "Configure a profile adapted for a certain device.";
+        type enumeration {
+          enum "none";
+          enum "netsim";
+        }
+        default "none";
+      }
+    }
+  }
+
+  grouping live-status-ttl-settings {
+    container live-status {
+      tailf:info "Configure NED settings related to live-status.";
+      leaf time-to-live {
+        tailf:info "Define time-to-live for data fetched from the device"
+          +" via live-status.(default 50)";
+        type int32;
+        default 50;
+      }
+    }
+  }
+
+  grouping log-verbose-grouping {
+    leaf log-verbose {
+      tailf:info "Enabled extra verbose logging in NED (for debugging)";
+      default "false";
+      type boolean;
+    }
+  }
+
+  grouping developer-config-grouping {
+    container developer {
+      tailf:info "Contains settings used by the NED developers";
+      leaf trace-enable {
+        tailf:info "Enable developer tracing. WARNING: may choke NSO with large commits|systems";
+        type boolean;
+        default false;
+      }
+      leaf trace-timestamp {
+        tailf:info "Add timestamp from NED instance in trace messages for debug purpose";
+        type boolean;
+        default false;
+      }
+    }
+  }
+
+  grouping logger-settings-grouping {
+    container logger {
+      tailf:info "Settings for controlling logs generated.";
+
+      leaf java {
+        tailf:info "Toggle logs to be added to ncs-java-vm.log";
+        type boolean;
+        default true;
+      }
+      leaf verbose {
+        tailf:info "Toggle additional verbose logs.";
+        type boolean;
+        default false;
+      }
+      leaf debug {
+        tailf:info "Toggle debug logs for ned development.";
+        type boolean;
+        default false;
+      }
+
+      container format {
+        tailf:info "Settings for controlling format of logs";
+        tailf:cli-compact-syntax;
+        leaf origin {
+          tailf:info "Toggle module & level added to logs.";
+          type boolean;
+          default true;
+        }
+        leaf time-stamp {
+          tailf:info "Toggle time stamps added to logs.";
+          type boolean;
+          default false;
+        }
+      }
+
+      container silent {
+        tailf:info "Settings for silent log storage";
+        tailf:cli-compact-syntax;
+        leaf capacity {
+          tailf:info "Set capacity of logs stored silently";
+          type int32;
+        }
+        leaf manual-reset {
+          tailf:info "Toggle automatic reset of internal log storage.";
+          type boolean;
+          default true;
+        }
+      }
+
+      container connection {
+        tailf:info "Set connection log levels";
+        tailf:cli-compact-syntax;
+
+        leaf verbose {
+          tailf:info "Toggle additional verbose logs.";
+          type boolean;
+          default false;
+        }
+        leaf debug {
+          tailf:info "Toggle debug logs for ned development.";
+          type boolean;
+          default false;
+        }
+        leaf silent {
+          tailf:info "Toggle detailed logs to only be dumped on failure.";
+          type boolean;
+          default true;
+        }
+        leaf mute {
+          tailf:info "Don't store silent debug logs";
+          type boolean;
+          default false;
+        }
+      }
+    }
+  }
+
+  /// ========================================================================
+  /// ned-settings
+  /// ========================================================================
+
+  augment "/ncs:devices/ncs:global-settings/ncs:ned-settings" {
+    container nokia-nsp {
+      uses connection-settings;
+      uses live-status-ttl-settings;
+      uses log-verbose-grouping;
+      uses restconf-settings;
+      uses trans-id-method-grouping;
+      uses developer-config-grouping;
+      //uses logger-settings-grouping;
+    }
+  }
+
+  augment "/ncs:devices/ncs:profiles/ncs:profile/ncs:ned-settings" {
+    container nokia-nsp {
+      uses connection-settings;
+      uses live-status-ttl-settings;
+      uses log-verbose-grouping;
+      uses restconf-settings;
+      uses trans-id-method-grouping;
+      uses developer-config-grouping;
+      //uses logger-settings-grouping;
+    }
+  }
+
+  augment "/ncs:devices/ncs:device/ncs:ned-settings" {
+    // Different 'when' expressions used when building for NSOs with and without CDM support.
+    // The NED build system will automatically 'uncomment' the right one.
+    //
+    // CDM style syntax:
+    when "derived-from(../ncs:device-type/ncs:generic/ncs:ned-id,'family:nokia-nsp-gen')";
+    //
+    // Old style syntax:
+    //when "../ncs:device-type/ncs:generic/ncs:ned-id = 'nokia-nsp-id:nokia-nsp'";
+    container nokia-nsp {
+      uses connection-settings {
+        augment "connection/ssl" {
+          uses ssl-certificate-settings;
+        }
+      }
+      uses live-status-ttl-settings;
+      uses log-verbose-grouping;
+      uses restconf-settings;
+      uses trans-id-method-grouping;
+      uses developer-config-grouping;
+      //uses logger-settings-grouping;
+    }
+  }
+}

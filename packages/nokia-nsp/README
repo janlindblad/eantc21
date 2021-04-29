@@ -1,0 +1,472 @@
+1. Introduction
+---------------
+
+   This document describes the nokia-nsp NED.
+
+   This is a RESTCONF NED that can be used together with devices that
+   support the nokia-nsp YANG models and RESTCONF
+
+   The NED has been successfully tested with the following devices:
+   ??
+   
+
+2. Getting started
+------------------
+
+   Set up the environment in $DIR, change DIR to something suitable
+
+     > tar xvzf ned-nokia-nsp.tgz
+     > mv ned-nokia-nsp $NCS_DIR/packages/neds/
+
+     > export DIR=/tmp/ncs-nokia-nsp
+     > ncs-setup --ned-package $NCS_DIR/packages/neds/nokia-nsp --dest $DIR
+     > cd $DIR
+
+   Start ncs:
+     > ncs
+
+   Start NCS CLI:
+     > ncs_cli -C -u admin
+
+   In the NCS CLI configure the device. Enter configuration mode:
+     # configure
+
+   Set the required configurables, address, remote user data and remote password:
+     # devices device dev-1 address <device address>
+     # devices device dev-1 port <typically 7080>
+     # devices device dev-1 device-type generic ned-id nokia-nsp
+     # devices device dev-1 state admin-state unlocked
+
+     # devices authgroups group nokia-nsp umap admin remote-name <login username>
+     # devices authgroups group nokia-nsp umap admin remote-password <login password>
+     # devices device dev-1 authgroup nokia-nsp
+     # commit
+
+   Additional configurations:
+
+    HTTPS connection:
+
+    Alt 1:
+
+     Accept any SSL certificate presented by the device. This is unsafe
+     and should only be used for testing.
+
+     In the NSO CLI:
+     # devices device dev-1 ned-settings nokia-nsp connection ssl accept-any true
+
+   Alt 2:
+
+     Configure a specific SSL certificate for a device. The certificate
+     shall be entered in DER Base64 format, which is the same as the
+     PEM format but without the banners \"----- BEGIN CERTIFICATE-----\" etc.
+
+     Use the Unix tool 'openssl' to fetch the PEM certificate from a device:
+
+     In a Unix shell:
+     > openssl s_client -connect <device address>:<port>
+
+     In the NCS CLI:
+     # devices device dev-1 ned-settings nokia-nsp connection ssl certificate <Base64 binary>
+
+   Authentication:
+
+    Devices from different vendors use different authentication mechanisms. The NED needs
+    to be configured accordingly via the appropriate NED settings. See section 3 for
+    verified examples. See section 5 for further info.
+
+   Customize RESTCONF settings:
+
+    The NED needs to be configured to work with the certain device it shall connect to.
+    This needs to be done by configuring the RESTCONF specific NED settings.
+    Either select a predefined RESTCONF profile in the NED settings or configure everything
+    manually.
+
+   Try to connect to the device:
+     # devices device dev-1 connect
+
+   Read the configuration from the device:
+     # devices device dev-1 sync-from
+
+   Look at the configuration:
+     # show running-config devices device dev-1
+
+
+3. Example Device Configurations
+----------------------------------
+  This section show some example configurations that have been verified with ???? devices
+  from certain vendors:
+
+  FIXME: Add working device config examples here
+  
+    
+
+4. Using NETSIM With RESTCONF
+--------------------------------
+   NETSIM (ConfD) has a built in RESTCONF server and
+   can easily be configured as a test device
+
+   Configure a NETSIM device instance in NSO like below:
+   devices authgroups group netsim-0
+   default-map remote-name admin
+   default-map remote-password admin
+   !
+   devices device netsim-0
+    address 127.0.0.1
+    port 7080
+    authgroup netsim-0
+    device-type generic ned-id nokia-nsp
+    trace     raw
+    state admin-state unlocked
+    ned-settings nokia-nsp restconf profile netsim
+   
+
+5. NED Settings
+-------------------------
+
+   nokia-nsp connection authentication method
+
+     Configures authentication method to be used when connecting to the device
+     Supported methods:
+      * basic (default)
+      * ??
+      * none
+
+   FIXME: Add your info about your  NEDs auth methods here
+
+   nokia-nsp logger
+
+     Logging in the nokia-nsp NED can be set to different levels of verbosity
+     depending on different modules/phases in the NED.
+
+     The current modules are:
+      * main : Logs the main NED API to NSO.
+      * connection : Logs during the connection phase.
+      * livestats : Logs during live-status interaction.
+      * all : Override flags on other modules.
+
+     Available flags:
+      * verbose : Toggle additional verbose logs.
+      * debug : Toggle debug logs for ned development.
+      * java : Toggle logs to be added to ncs-java-vm.log.
+      * silent : Toggle detailed logs to only be dumped on failure.
+      * mute : Toggle storing debug logs if debug is disabled.
+
+     Format of logs:
+      * origin : Prepend '<module>:<level>' to log message.
+      * time-stamp : Prepend time stamp to log message.
+
+   nokia-nsp live-status time-to-live <seconds>
+
+     Configures the time to live value in seconds for data fetched through the live-status
+     hooks. The default value is 50 seconds.
+
+   nokia-nsp restconf url-base <string>
+
+     Configure the base / prefix of the RESTCONF API URL.
+     Default is "/restconf"
+    
+   nokia-nsp restconf model-discovery <enabled|disabled>
+
+     Configure if the NED shall perform an auto proble for YANG models
+     supported by the device. This API call is part of the RESTCONF specification,
+     but is not supported by all devices.
+     Default is enabled.
+    
+   nokia-nsp restconf config update-method <patch|put>
+
+     Configure the method to be used when the NED is updating config on the
+     device. Two methods are supported by RESTCONF:
+      * patch : Merge the config using a HTTP PATCH call. This is the default.
+      * put : Replace the config using a HTTP PUT call.
+   
+   nokia-nsp restconf config get-method
+
+     Configure the NED behaviour when fetching config from the device when doing sync-from
+     etc.
+
+     The following methods are supported:
+      * default : A full depth RESTCONF GET call is issued towards the device when doing
+                  full sync-from etc. When using partial-sync-from the requested path is
+                  used directly or nearest container. This is the default behaviour.
+                
+      * incremental-with-list-entries-separately :
+                 The NED performs an incremental walk through the config tree and performs
+                 a RESTCONF GET with 'depth=1 on each found container/list. If a list is 
+                 found it will first exceute a GET with depth=1 to fetch all keys. Then 
+                 it does a full depth GET on each list entry. No incremental walk is done
+                 into the list entries.
+   
+      * use-custom-get-callpoints:
+                Configures the NED to only fetch config at certain URLs representing call
+                points that have been configured in the schema. See section 5 for more
+                information.
+              
+   nokia-nsp restconf config custom-get-call-points <string>
+
+     Configure call points in the schema for the NED to use when fetching config.
+     See section 5 for more information.
+
+   nokia-nsp restconf live-status get-method
+
+     Configure the NED behaviour when fetching operational data from the device via
+     the live-status API.
+
+     The following methods are supported:
+      * top-nodes : Configures the NED to execute a RESTCONF GET using an URL representing the
+                    top node of the requested path.
+
+      * nearest-container :
+                    The NED executes a RESTCONF GET using an URL representing nearest container
+                    or list entry in the requested path. This is the default behaviour.
+
+      * use-custom-get-call-points :
+                   Configures the NED to only fetch operational data at certain URLs representing 
+                   call points that have been configured in the schema. See section 5 for more
+                   information.
+
+   nokia-nsp restconf live-status custom-get-call-points <string>
+
+     Configure call points in the schema for the NED to use when fetching operational data.
+     See section 5 for more information.
+
+   nokia-nsp restconf profile
+
+     The NED supports a set of preconfigured RESTCONF profiles. Each profile has been customised 
+     for a certain nokia-nsp device from a certain vendor. A profile configures RESTCONF settings 
+     like url-base, model-discovery, get-methods for config and live-status. It does also setup
+     custom call points for config and live-status when applicable. Furthermore is configures
+     the NED to handle any possible RESTCONF deviations known for the configured device.
+     See section 7 for further information about the preconfigured RESTCONF profiles.
+
+     The following profiles are supported:
+      * none : No profile selected. This is the default setting.
+      * netsim : Use with a netsim (ConfD) target
+      * infinera-tnms : Use with a INFINERA TNMS TR-NBI device
+
+   nokia-nsp restconf deviations
+
+     The NED does include a set of workarounds to handle RESTCONF and/or YANG model deviations that 
+     have been found on some device models from certain vendors. This setting is used to enable such
+     workarounds in the NED. It can only be used when "restconf profile" is set to "none" or
+     "netsim".
+
+     The following workarounds for device deviations can be configured:
+     * ??
+
+   nokia-nsp trans-id-method
+
+    A transaction id is a hash that the NED optionally can calculate upon operations like commit and
+    check-sync. This NED does by default have trans-id calculation disabled.
+    If the NED is connected to a RESTCONF device that supports the "Last-Modified" time stamp it can
+    use this feature to calculate a transaction id.
+
+    The follow methods are currently supported:
+    * last-modified-timestamp
+    * disabled (default)
+ 
+
+6. Configuring Custom Call Points
+----------------------------------
+
+   Many devices supporting the nokia-nsp models have restrictions regarding which URLs that
+   can be used for fetching data from the device. Some points in the data tree can not be 
+   accessed directly at all. Others can only be accessed if a RESTCONF query has been specified. 
+
+   A query is used to instruct the device to limit the scope of the returned data in accordance with
+   a provided specification. This can be a 'depth' parameter which will limit the depth of the
+   return payload to a certain number of levels. It can also be a 'fields' parameter specifying
+   certain nodes in the data tree that shall be returned.
+
+   Another common restriction is that lists in the data tree can not be fetched directly. Such lists
+   can only be fetched entry by entry. To achieve this it is necessary to fetch the key elements in the
+   list first. Typically done by doing a fetch with a narrowing query done to an URL representing a
+   node on a level above the list itself.
+
+   The NED supports configuring custom call points in the data tree for both config and operational data.
+   The feature is very flexible and can be used with any type of nokia-nsp device. Configuring custom call
+   points can however be a complex task and often error prone.
+
+   It is recommended to use one of the preconfigured restconf profiles in the NED settings if applicable.
+   
+   Custom call points are configured via the NED settings. There are separate lists for call points for
+   config and for operational data. The lists are located here:
+
+   nokia-nsp restconf config custom-get-call-points <string>
+   nokia-nsp restconf live-status custom-get-call-points <string>
+
+   The structure of both lists is identical. An entry in any of the lists consists of a schema path that
+   corresponds to the call point. Optionally a query can be specified to limit to scope of the fetch operation
+   on a call point. For list nodes it is possible to configure one query to be used for the list itself and/or
+   one for each entry in the list.
+
+   Examples:
+   A selection of the nokia-nsp schema will be used throughout the examples below.
+
+   FIXME: Change examples accordingly
+
+    tapi-common:context
+                      |-service-interface-point
+                      |-tapi-connectivity:connectivity-context
+                                                             |-connection
+                                                             |-connectivity-service
+                      |-tapi-topology:topology-context
+                                                     |-topology
+                                                              |-link
+                                                              |-node
+
+   The examples will use call points for operational data. The approach is identical for config data.
+   Note that the examples do not map to real relevant use cases.
+                       
+   Example 1:
+   Configure a call point on /tapi-common:context. Limit the scope with a depth=3 query
+
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context
+   # query depth 3
+   # commit
+
+   Example 2:
+   Configure a call point on the /tapi-common:context/service-interface-point list. Query must be
+   list-entry specific since the device does only support the list to be fetched entry by entry.
+   The keys to the list will automatically be fetched by the NED as a result of the call point configured
+   in example 1. The query is set to depth=unbounded, meaning fetch all under this list entry.
+   
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/service-interface-point
+   # list-entry query depth unbounded
+   # commit
+
+   Example 3:
+   Configure a call point on the container /tapi-common:context/tapi-connectivity:connectivity-context.
+   Limit the scope using a field query to only extract the key elements in the sub lists
+   connection and connectivity-service.
+
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-connectivity:connectivity-context
+   # query fields "connectivity-service(uuid);connection(uuid)"
+   # commit
+
+   Example 4:
+   Configure a call point on the container /tapi-common:context/tapi-topology:topology-context with no limitation on
+   the scope.
+
+   Alt 1:
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context
+   # commit
+
+   Alt 2:
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context
+   # query depth unbounded
+   # commit
+
+   Example 5:
+   Configure a call point on the /tapi-common:context/tapi-topology:topology-context/topology/node list. Limit the
+   scope for the list with a query to just return the keys to the list. Add an additional list entry query to fetch
+   all in each entry.
+
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology/node
+   # query field "uuid"
+   # list-entry query depth unbounded
+
+   Example 6:
+   Configure a call point on the /tapi-common:context/tapi-topology:topology-context/topology/link list.
+   Unlimited scope for both list and individual list entries.
+
+   # devices device dev-1 ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology/link
+   # query depth unbounded
+   # list-entry query depth unbounded
+
+   How it works
+   ------------
+   The NED will automatically try to figure out the correct RESTCONF GET operations to be executed for a certain 
+   requested path based on the call points configured. If a requestested node does not map to a call point, the 
+   NED will search upwards in the schema until it finds a call point configured with an appropriate query.
+
+   Using the examples 1 and 2 to illustrate.
+
+   If the requested path is the whole /tapi-common:context/service-interface-point list, the NED will detect that
+   it can not be populated directly. There is only a list-entry query on this call point. The NED will then step
+   upwards to /tapi-common:context and find a new call point with a matching standard query. First RESTCONF GET
+   call will be done on this URL. The NED remembers the list-entry query on the service-interface-point and will
+   obey it afterwards. One RESTCONF call for each list entry found in the list will then be executed.
+
+   The NED will only execute these sequential calls if the first call point has a query with a scope limitation.
+   In this example /tapi-common:context has its scope limited to depth=3. If the scope instead is unlimited, the
+   NED will regard all sub nodes as populated and ignore any call points between the first call point and the
+   requested path.
+
+   If the requested path instead is a certain list entry /tapi-common:context/service-interface-point{"foo"} the
+   NED will execute the RESTCONF GET call immediately on the corresponding URL.
+
+   Definitions & Rules
+   -------------------
+   A call point with no query configured means "standard query=unbound and no list-entry query"
+   A call point with only a list-entry query is regarded as without a standard query
+   A call point representing a list with no scope limitations for list nor entry, shall be configured as
+   "query depth=unbounded list-entry query=unbounded".
+
+   If you have a call point that is unbound but you still want the NED to execute consecutive RESTCONF GET calls on
+   levels below it, then configure it as depth=<some big number>. For example depth=100
+
+7. Preconfigured RESTCONF Profiles
+--------------------------------
+   This section describes the details for each of the preconfigured RESTCONF profiles
+
+   infinera:
+   ---------
+   
+   Corresponds to the following NED setting configuration:
+
+     ned-settings nokia-nsp restconf url-base /trnbi/restconf
+     ned-settings nokia-nsp restconf deviations infinera-tnms true
+     ned-settings nokia-nsp restconf live-status get-method use-custom-get-callpoints
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context
+      query depth 3
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/service-interface-point
+      list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-connectivity:connectivity-context
+      query fields "connectivity-service(uuid;end-point(local-id))"
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-connectivity:connectivity-context/connection
+      list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-connectivity:connectivity-context/connectivity-service
+      list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-equipment:physical-context
+      query fields "device(uuid;name);physical-span(uuid;name)"
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-equipment:physical-context/device
+      list-entry query fields "uuid;name;equipment;access-port(uuid)"
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-equipment:physical-context/device/access-port
+     list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-equipment:physical-context/physical-span
+      list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/nw-topology-service
+      query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology
+      list-entry query depth 3
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology/link
+      list-entry query depth unbounded
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology/node
+      list-entry query fields "owned-node-edge-point(uuid;name)"
+     !
+     ned-settings nokia-nsp restconf live-status custom-get-call-points tapi-common:context/tapi-topology:topology-context/topology/node/owned-node-edge-point
+      list-entry query depth unbounded
+     !
+   
+
+8. Limitations
+--------------
+
+   Limitations related to fetching operational data via the live-status API:
+
+   1. NSO can not handle lists defined in YANG as config false but with no key node specified.
+      Consequently the NED is not able to populate operational data that maps to such lists.
+
+ 
