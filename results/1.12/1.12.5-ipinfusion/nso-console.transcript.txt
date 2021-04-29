@@ -1,0 +1,990 @@
+09:56:11 admin@cisco-nso(config)% devices device ipi-31 sync-from 
+result true
+09:56:42 admin@cisco-nso(config)% devices device ipi-32 sync-from
+result true
+09:56:45 admin@cisco-nso(config)% show full-configuration l3vpn-svc 
+% No entries found.
+09:56:50 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-berlin.xml 
+Loading.
+2.22 KiB parsed in 0.05 sec (41.84 KiB/sec)
+09:57:19 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-frankfurt.xml 
+Loading.
+2.36 KiB parsed in 0.08 sec (29.16 KiB/sec)
+09:57:23 admin@cisco-nso(config)% show c
+l3vpn-svc vpn-services vpn-service ber
+ customer-name EANTC
+!
+l3vpn-svc vpn-services vpn-service fin
+!
+l3vpn-svc vpn-services vpn-service ger
+ customer-name EANTC
+!
+l3vpn-svc vpn-services vpn-service outer
+!
+l3vpn-svc vpn-services vpn-service pol
+!
+l3vpn-svc vpn-services vpn-service sol
+!
+l3vpn-svc sites site berlin
+ locations location lab
+ !
+ devices device ipi-31
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn ger
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-31
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 10.10.10.10
+  ip-connection ipv4 addresses customer-address 10.10.10.11
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id ger
+ !
+!
+l3vpn-svc sites site frankfurt
+ locations location lab
+ !
+ devices device ipi-32
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn ger
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-32
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 20.20.20.20
+  ip-connection ipv4 addresses customer-address 20.20.20.21
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id ger
+ !
+!
+09:57:48 admin@cisco-nso(config)% commit dry-run 
+cli {
+    local-node {
+        data  devices {
+                  device ipi-31 {
+                      config {
+                          oc-if:interfaces {
+                              interface eth2 {
+                                  subinterfaces {
+             +                        subinterface 0 {
+             +                            config {
+             +                                index 0;
+             +                            }
+             +                            ipv4 {
+             +                                addresses {
+             +                                    address 10.10.10.10 {
+             +                                        config {
+             +                                            ip 10.10.10.10;
+             +                                            prefix-length 24;
+             +                                        }
+             +                                    }
+             +                                }
+             +                            }
+             +                        }
+                                  }
+                              }
+                          }
+                          network-instances {
+             +                network-instance VRF3621 {
+             +                    config {
+             +                        name VRF3621;
+             +                        type L3VRF;
+             +                        enabled;
+             +                        description "\"L3VPN Test Instance 3621\"";
+             +                        router-id 1.1.1.1;
+             +                        route-distinguisher 3621:1;
+             +                        enabled-address-families [ IPV6 IPV4 ];
+             +                    }
+             +                    encapsulation {
+             +                        config {
+             +                            encapsulation-type MPLS;
+             +                            label-allocation-mode INSTANCE_LABEL;
+             +                        }
+             +                    }
+             +                    table-connections {
+             +                        table-connection DIRECTLY_CONNECTED BGP IPV4 {
+             +                            config {
+             +                                src-protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV4;
+             +                                dst-protocol BGP;
+             +                                default-import-policy ACCEPT_ROUTE;
+             +                                dst-instance 100;
+             +                            }
+             +                        }
+             +                    }
+             +                    interfaces {
+             +                        interface eth2 {
+             +                            config {
+             +                                id eth2;
+             +                                interface eth2;
+             +                            }
+             +                        }
+             +                    }
+             +                    tables {
+             +                        table BGP IPV4 {
+             +                            config {
+             +                                protocol BGP;
+             +                                address-family IPV4;
+             +                            }
+             +                        }
+             +                        table DIRECTLY_CONNECTED IPV6 {
+             +                            config {
+             +                                protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV6;
+             +                            }
+             +                        }
+             +                        table DIRECTLY_CONNECTED IPV4 {
+             +                            config {
+             +                                protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV4;
+             +                            }
+             +                        }
+             +                    }
+             +                    protocols {
+             +                        protocol oc-pol-types:BGP 100 {
+             +                            config {
+             +                                identifier BGP;
+             +                                name 100;
+             +                                enabled;
+             +                            }
+             +                            bgp {
+             +                                global {
+             +                                    config {
+             +                                        as 100;
+             +                                    }
+             +                                }
+             +                            }
+             +                        }
+             +                        protocol oc-pol-types:DIRECTLY_CONNECTED DIRECTLY_CONNECTED {
+             +                            config {
+             +                                identifier DIRECTLY_CONNECTED;
+             +                                name DIRECTLY_CONNECTED;
+             +                                enabled;
+             +                            }
+             +                        }
+             +                    }
+             +                    route-targets {
+             +                        route-target 3621:1 {
+             +                            config {
+             +                                rt-rd-string 3621:1;
+             +                                direction BOTH;
+             +                            }
+             +                        }
+             +                    }
+             +                }
+                          }
+                      }
+                  }
+                  device ipi-32 {
+                      config {
+                          oc-if:interfaces {
+                              interface eth2 {
+                                  subinterfaces {
+             +                        subinterface 0 {
+             +                            config {
+             +                                index 0;
+             +                            }
+             +                            ipv4 {
+             +                                addresses {
+             +                                    address 20.20.20.20 {
+             +                                        config {
+             +                                            ip 20.20.20.20;
+             +                                            prefix-length 24;
+             +                                        }
+             +                                    }
+             +                                }
+             +                            }
+             +                        }
+                                  }
+                              }
+                          }
+                          network-instances {
+             +                network-instance VRF3621 {
+             +                    config {
+             +                        name VRF3621;
+             +                        type L3VRF;
+             +                        enabled;
+             +                        description "\"L3VPN Test Instance 3621\"";
+             +                        router-id 2.2.2.2;
+             +                        route-distinguisher 3621:1;
+             +                        enabled-address-families [ IPV6 IPV4 ];
+             +                    }
+             +                    encapsulation {
+             +                        config {
+             +                            encapsulation-type MPLS;
+             +                            label-allocation-mode INSTANCE_LABEL;
+             +                        }
+             +                    }
+             +                    table-connections {
+             +                        table-connection DIRECTLY_CONNECTED BGP IPV4 {
+             +                            config {
+             +                                src-protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV4;
+             +                                dst-protocol BGP;
+             +                                default-import-policy ACCEPT_ROUTE;
+             +                                dst-instance 100;
+             +                            }
+             +                        }
+             +                    }
+             +                    interfaces {
+             +                        interface eth2 {
+             +                            config {
+             +                                id eth2;
+             +                                interface eth2;
+             +                            }
+             +                        }
+             +                    }
+             +                    tables {
+             +                        table BGP IPV4 {
+             +                            config {
+             +                                protocol BGP;
+             +                                address-family IPV4;
+             +                            }
+             +                        }
+             +                        table DIRECTLY_CONNECTED IPV6 {
+             +                            config {
+             +                                protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV6;
+             +                            }
+             +                        }
+             +                        table DIRECTLY_CONNECTED IPV4 {
+             +                            config {
+             +                                protocol DIRECTLY_CONNECTED;
+             +                                address-family IPV4;
+             +                            }
+             +                        }
+             +                    }
+             +                    protocols {
+             +                        protocol oc-pol-types:BGP 100 {
+             +                            config {
+             +                                identifier BGP;
+             +                                name 100;
+             +                                enabled;
+             +                            }
+             +                            bgp {
+             +                                global {
+             +                                    config {
+             +                                        as 100;
+             +                                    }
+             +                                }
+             +                            }
+             +                        }
+             +                        protocol oc-pol-types:DIRECTLY_CONNECTED DIRECTLY_CONNECTED {
+             +                            config {
+             +                                identifier DIRECTLY_CONNECTED;
+             +                                name DIRECTLY_CONNECTED;
+             +                                enabled;
+             +                            }
+             +                        }
+             +                    }
+             +                    route-targets {
+             +                        route-target 3621:1 {
+             +                            config {
+             +                                rt-rd-string 3621:1;
+             +                                direction BOTH;
+             +                            }
+             +                        }
+             +                    }
+             +                }
+                          }
+                      }
+                  }
+              }
+              l3vpn-svc {
+                  vpn-services {
+             +        vpn-service ber {
+             +            customer-name EANTC;
+             +        }
+             +        vpn-service fin {
+             +        }
+             +        vpn-service ger {
+             +            customer-name EANTC;
+             +        }
+             +        vpn-service outer {
+             +        }
+             +        vpn-service pol {
+             +        }
+             +        vpn-service sol {
+             +        }
+                  }
+                  sites {
+             +        site berlin {
+             +            locations {
+             +                location lab;
+             +            }
+             +            devices {
+             +                device ipi-31 {
+             +                    location lab;
+             +                }
+             +            }
+             +            management {
+             +                type provider-managed;
+             +            }
+             +            vpn-policies {
+             +                vpn-policy vpn1 {
+             +                    entries 1 {
+             +                        vpn ger {
+             +                            site-role any-to-any-role;
+             +                        }
+             +                    }
+             +                }
+             +            }
+             +            site-network-accesses {
+             +                site-network-access 1 {
+             +                    device-reference ipi-31;
+             +                    ip-connection {
+             +                        ipv4 {
+             +                            address-allocation-type static-address;
+             +                            addresses {
+             +                                provider-address 10.10.10.10;
+             +                                customer-address 10.10.10.11;
+             +                                prefix-length 24;
+             +                            }
+             +                        }
+             +                    }
+             +                    service {
+             +                        svc-input-bandwidth 1000;
+             +                        svc-output-bandwidth 1000;
+             +                        svc-mtu 2000;
+             +                    }
+             +                    vpn-attachment {
+             +                        vpn-id ger;
+             +                    }
+             +                }
+             +            }
+             +        }
+             +        site frankfurt {
+             +            locations {
+             +                location lab;
+             +            }
+             +            devices {
+             +                device ipi-32 {
+             +                    location lab;
+             +                }
+             +            }
+             +            management {
+             +                type provider-managed;
+             +            }
+             +            vpn-policies {
+             +                vpn-policy vpn1 {
+             +                    entries 1 {
+             +                        vpn ger {
+             +                            site-role any-to-any-role;
+             +                        }
+             +                    }
+             +                }
+             +            }
+             +            site-network-accesses {
+             +                site-network-access 1 {
+             +                    device-reference ipi-32;
+             +                    ip-connection {
+             +                        ipv4 {
+             +                            address-allocation-type static-address;
+             +                            addresses {
+             +                                provider-address 20.20.20.20;
+             +                                customer-address 20.20.20.21;
+             +                                prefix-length 24;
+             +                            }
+             +                        }
+             +                    }
+             +                    service {
+             +                        svc-input-bandwidth 1000;
+             +                        svc-output-bandwidth 1000;
+             +                        svc-mtu 2000;
+             +                    }
+             +                    vpn-attachment {
+             +                        vpn-id ger;
+             +                    }
+             +                }
+             +            }
+             +        }
+                  }
+              }
+    }
+}
+09:57:53 admin@cisco-nso(config)% commit
+Commit complete.
+09:58:29 admin@cisco-nso(config)% devices device ipi-31 compare-config      
+diff 
+ devices {
+     device ipi-31 {
+         config {
+             network-instances {
+                 network-instance default {
+                     interfaces {
+-                        interface eth2 {
+-                            config {
+-                                id eth2;
+-                                interface eth2;
+-                            }
+-                        }
+                     }
+                 }
+             }
+         }
+     }
+ }
+
+09:58:43 admin@cisco-nso(config)% devices device ipi-32 compare-config
+diff 
+ devices {
+     device ipi-32 {
+         config {
+             network-instances {
+                 network-instance default {
+                     interfaces {
+-                        interface eth2 {
+-                            config {
+-                                id eth2;
+-                                interface eth2;
+-                            }
+-                        }
+                     }
+                 }
+             }
+         }
+     }
+ }
+
+09:59:12 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-             
+Possible completions:
+  <filename/terminal>  cfg-1.12.ciena.3x.xml  cfg-1.12.ciena.xml  cfg-berlin.xml  cfg-frankfurt.xml  cfg-helsinki.xml  cfg-katowice.xml  
+  cfg-mercury.xml      cfg-neptune.xml        cfg-pet.xml         cfg-sfo.xml     cfg-tampere.xml    cfg-topo.xml      cfg-uranus.xml    
+  cfg-venus.xml        cfg-warsaw.xml         
+09:59:12 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-warsaw.xml 
+Loading.
+2.42 KiB parsed in 0.05 sec (44.78 KiB/sec)
+10:04:02 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-katowice.xml 
+Loading.
+2.36 KiB parsed in 0.07 sec (30.97 KiB/sec)
+10:04:05 admin@cisco-nso(config)% show c
+l3vpn-svc sites site katowice
+ locations location lab
+ !
+ devices device ipi-32
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn pol
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-32
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 21.21.21.20
+  ip-connection ipv4 addresses customer-address 21.21.21.21
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id pol
+ !
+!
+l3vpn-svc sites site warsaw
+ locations location lab
+ !
+ devices device ipi-31
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn pol
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-31
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 11.11.11.10
+  ip-connection ipv4 addresses customer-address 11.11.11.11
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id pol
+ !
+!
+10:04:07 admin@cisco-nso(config)% commit
+Commit complete.
+10:04:27 admin@cisco-nso(config)% devices device ipi-32 compare-config     
+diff 
+ devices {
+     device ipi-32 {
+         config {
+             network-instances {
+                 network-instance default {
+                     interfaces {
+-                        interface eth2 {
+-                            config {
+-                                id eth2;
+-                                interface eth2;
+-                            }
+-                        }
+-                        interface eth3 {
+-                            config {
+-                                id eth3;
+-                                interface eth3;
+-                            }
+-                        }
+                     }
+                 }
+             }
+         }
+     }
+ }
+
+10:04:33 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-tampere.xml 
+Loading.
+2.36 KiB parsed in 0.05 sec (43.19 KiB/sec)
+10:17:23 admin@cisco-nso(config)% load merge configs/l3vpn/cfg-helsinki.xml 
+Loading.
+2.43 KiB parsed in 0.07 sec (32.77 KiB/sec)
+10:17:26 admin@cisco-nso(config)% show c
+l3vpn-svc sites site helsinki
+ locations location lab
+ !
+ devices device ipi-31
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn fin
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-31
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 12.12.12.10
+  ip-connection ipv4 addresses customer-address 12.12.12.11
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id fin
+ !
+!
+l3vpn-svc sites site tampere
+ locations location lab
+ !
+ devices device ipi-32
+  location lab
+ !
+ management type provider-managed
+ vpn-policies vpn-policy vpn1
+  entries 1
+   vpn fin
+    site-role any-to-any-role
+   !
+  !
+ !
+ site-network-accesses site-network-access 1
+  device-reference ipi-32
+  ip-connection ipv4 address-allocation-type static-address
+  ip-connection ipv4 addresses provider-address 22.22.22.20
+  ip-connection ipv4 addresses customer-address 22.22.22.21
+  ip-connection ipv4 addresses prefix-length 24
+  service svc-input-bandwidth 1000
+  service svc-output-bandwidth 1000
+  service svc-mtu      2000
+  vpn-attachment vpn-id fin
+ !
+!
+10:17:28 admin@cisco-nso(config)% commit 
+Commit complete.
+10:17:51 admin@cisco-nso(config)% no l3vpn-svc sites site berlin 
+10:20:30 admin@cisco-nso(config)% no l3vpn-svc sites site frankfurt 
+10:20:33 admin@cisco-nso(config)% commit dry-run 
+cli {
+    local-node {
+        data  devices {
+                  device ipi-31 {
+                      config {
+                          oc-if:interfaces {
+                              interface eth2 {
+                                  subinterfaces {
+             -                        subinterface 0 {
+             -                            config {
+             -                                index 0;
+             -                            }
+             -                            ipv4 {
+             -                                addresses {
+             -                                    address 10.10.10.10 {
+             -                                        config {
+             -                                            ip 10.10.10.10;
+             -                                            prefix-length 24;
+             -                                        }
+             -                                    }
+             -                                }
+             -                            }
+             -                        }
+                                  }
+                              }
+                          }
+                          network-instances {
+             -                network-instance VRF3621 {
+             -                    config {
+             -                        name VRF3621;
+             -                        type L3VRF;
+             -                        enabled;
+             -                        description "\"L3VPN Test Instance 3621\"";
+             -                        router-id 1.1.1.1;
+             -                        route-distinguisher 3621:1;
+             -                        enabled-address-families [ IPV6 IPV4 ];
+             -                    }
+             -                    encapsulation {
+             -                        config {
+             -                            encapsulation-type MPLS;
+             -                            label-allocation-mode INSTANCE_LABEL;
+             -                        }
+             -                    }
+             -                    table-connections {
+             -                        table-connection DIRECTLY_CONNECTED BGP IPV4 {
+             -                            config {
+             -                                src-protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV4;
+             -                                dst-protocol BGP;
+             -                                default-import-policy ACCEPT_ROUTE;
+             -                                dst-instance 100;
+             -                            }
+             -                        }
+             -                    }
+             -                    interfaces {
+             -                        interface eth2 {
+             -                            config {
+             -                                id eth2;
+             -                                interface eth2;
+             -                            }
+             -                        }
+             -                    }
+             -                    tables {
+             -                        table BGP IPV4 {
+             -                            config {
+             -                                protocol BGP;
+             -                                address-family IPV4;
+             -                            }
+             -                        }
+             -                        table DIRECTLY_CONNECTED IPV6 {
+             -                            config {
+             -                                protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV6;
+             -                            }
+             -                        }
+             -                        table DIRECTLY_CONNECTED IPV4 {
+             -                            config {
+             -                                protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV4;
+             -                            }
+             -                        }
+             -                    }
+             -                    protocols {
+             -                        protocol oc-pol-types:BGP 100 {
+             -                            config {
+             -                                identifier BGP;
+             -                                name 100;
+             -                                enabled;
+             -                            }
+             -                            bgp {
+             -                                global {
+             -                                    config {
+             -                                        as 100;
+             -                                    }
+             -                                }
+             -                            }
+             -                        }
+             -                        protocol oc-pol-types:DIRECTLY_CONNECTED DIRECTLY_CONNECTED {
+             -                            config {
+             -                                identifier DIRECTLY_CONNECTED;
+             -                                name DIRECTLY_CONNECTED;
+             -                                enabled;
+             -                            }
+             -                        }
+             -                    }
+             -                    route-targets {
+             -                        route-target 3621:1 {
+             -                            config {
+             -                                rt-rd-string 3621:1;
+             -                                direction BOTH;
+             -                            }
+             -                        }
+             -                    }
+             -                }
+                          }
+                      }
+                  }
+                  device ipi-32 {
+                      config {
+                          oc-if:interfaces {
+                              interface eth2 {
+                                  subinterfaces {
+             -                        subinterface 0 {
+             -                            config {
+             -                                index 0;
+             -                            }
+             -                            ipv4 {
+             -                                addresses {
+             -                                    address 20.20.20.20 {
+             -                                        config {
+             -                                            ip 20.20.20.20;
+             -                                            prefix-length 24;
+             -                                        }
+             -                                    }
+             -                                }
+             -                            }
+             -                        }
+                                  }
+                              }
+                          }
+                          network-instances {
+             -                network-instance VRF3621 {
+             -                    config {
+             -                        name VRF3621;
+             -                        type L3VRF;
+             -                        enabled;
+             -                        description "\"L3VPN Test Instance 3621\"";
+             -                        router-id 2.2.2.2;
+             -                        route-distinguisher 3621:1;
+             -                        enabled-address-families [ IPV6 IPV4 ];
+             -                    }
+             -                    encapsulation {
+             -                        config {
+             -                            encapsulation-type MPLS;
+             -                            label-allocation-mode INSTANCE_LABEL;
+             -                        }
+             -                    }
+             -                    table-connections {
+             -                        table-connection DIRECTLY_CONNECTED BGP IPV4 {
+             -                            config {
+             -                                src-protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV4;
+             -                                dst-protocol BGP;
+             -                                default-import-policy ACCEPT_ROUTE;
+             -                                dst-instance 100;
+             -                            }
+             -                        }
+             -                    }
+             -                    interfaces {
+             -                        interface eth2 {
+             -                            config {
+             -                                id eth2;
+             -                                interface eth2;
+             -                            }
+             -                        }
+             -                    }
+             -                    tables {
+             -                        table BGP IPV4 {
+             -                            config {
+             -                                protocol BGP;
+             -                                address-family IPV4;
+             -                            }
+             -                        }
+             -                        table DIRECTLY_CONNECTED IPV6 {
+             -                            config {
+             -                                protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV6;
+             -                            }
+             -                        }
+             -                        table DIRECTLY_CONNECTED IPV4 {
+             -                            config {
+             -                                protocol DIRECTLY_CONNECTED;
+             -                                address-family IPV4;
+             -                            }
+             -                        }
+             -                    }
+             -                    protocols {
+             -                        protocol oc-pol-types:BGP 100 {
+             -                            config {
+             -                                identifier BGP;
+             -                                name 100;
+             -                                enabled;
+             -                            }
+             -                            bgp {
+             -                                global {
+             -                                    config {
+             -                                        as 100;
+             -                                    }
+             -                                }
+             -                            }
+             -                        }
+             -                        protocol oc-pol-types:DIRECTLY_CONNECTED DIRECTLY_CONNECTED {
+             -                            config {
+             -                                identifier DIRECTLY_CONNECTED;
+             -                                name DIRECTLY_CONNECTED;
+             -                                enabled;
+             -                            }
+             -                        }
+             -                    }
+             -                    route-targets {
+             -                        route-target 3621:1 {
+             -                            config {
+             -                                rt-rd-string 3621:1;
+             -                                direction BOTH;
+             -                            }
+             -                        }
+             -                    }
+             -                }
+                          }
+                      }
+                  }
+              }
+              l3vpn-svc {
+                  sites {
+             -        site berlin {
+             -            locations {
+             -                location lab;
+             -            }
+             -            devices {
+             -                device ipi-31 {
+             -                    location lab;
+             -                }
+             -            }
+             -            management {
+             -                type provider-managed;
+             -            }
+             -            vpn-policies {
+             -                vpn-policy vpn1 {
+             -                    entries 1 {
+             -                        vpn ger {
+             -                            site-role any-to-any-role;
+             -                        }
+             -                    }
+             -                }
+             -            }
+             -            site-network-accesses {
+             -                site-network-access 1 {
+             -                    device-reference ipi-31;
+             -                    ip-connection {
+             -                        ipv4 {
+             -                            address-allocation-type static-address;
+             -                            addresses {
+             -                                provider-address 10.10.10.10;
+             -                                customer-address 10.10.10.11;
+             -                                prefix-length 24;
+             -                            }
+             -                        }
+             -                    }
+             -                    service {
+             -                        svc-input-bandwidth 1000;
+             -                        svc-output-bandwidth 1000;
+             -                        svc-mtu 2000;
+             -                    }
+             -                    vpn-attachment {
+             -                        vpn-id ger;
+             -                    }
+             -                }
+             -            }
+             -        }
+             -        site frankfurt {
+             -            locations {
+             -                location lab;
+             -            }
+             -            devices {
+             -                device ipi-32 {
+             -                    location lab;
+             -                }
+             -            }
+             -            management {
+             -                type provider-managed;
+             -            }
+             -            vpn-policies {
+             -                vpn-policy vpn1 {
+             -                    entries 1 {
+             -                        vpn ger {
+             -                            site-role any-to-any-role;
+             -                        }
+             -                    }
+             -                }
+             -            }
+             -            site-network-accesses {
+             -                site-network-access 1 {
+             -                    device-reference ipi-32;
+             -                    ip-connection {
+             -                        ipv4 {
+             -                            address-allocation-type static-address;
+             -                            addresses {
+             -                                provider-address 20.20.20.20;
+             -                                customer-address 20.20.20.21;
+             -                                prefix-length 24;
+             -                            }
+             -                        }
+             -                    }
+             -                    service {
+             -                        svc-input-bandwidth 1000;
+             -                        svc-output-bandwidth 1000;
+             -                        svc-mtu 2000;
+             -                    }
+             -                    vpn-attachment {
+             -                        vpn-id ger;
+             -                    }
+             -                }
+             -            }
+             -        }
+                  }
+              }
+    }
+}
+10:20:41 admin@cisco-nso(config)% commit
+Commit complete.
+10:21:11 admin@cisco-nso(config)% no l3vpn-svc sites site warsaw   
+10:22:29 admin@cisco-nso(config)% no l3vpn-svc sites site katowice 
+10:22:31 admin@cisco-nso(config)% commit
+Commit complete.
+10:22:36 admin@cisco-nso(config)% no l3vpn-svc 
+10:24:14 admin@cisco-nso(config)% show c
+no l3vpn-svc vpn-services vpn-service ber
+l3vpn-svc sites site helsinki
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn fin
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+l3vpn-svc sites site tampere
+ vpn-policies vpn-policy vpn1
+  entries 1
+   no vpn fin
+  !
+ !
+ no site-network-accesses site-network-access 1
+!
+no l3vpn-svc vpn-services vpn-service fin
+no l3vpn-svc vpn-services vpn-service ger
+no l3vpn-svc vpn-services vpn-service outer
+no l3vpn-svc vpn-services vpn-service pol
+no l3vpn-svc vpn-services vpn-service sol
+no l3vpn-svc sites site helsinki
+no l3vpn-svc sites site tampere
+10:24:16 admin@cisco-nso(config)% commit
+Commit complete.
+10:24:22 admin@cisco-nso(config)% devices device ipi-31 compare-config 
+10:25:24 admin@cisco-nso(config)% devices device ipi-32 compare-config
+10:25:27 admin@cisco-nso(config)% 
