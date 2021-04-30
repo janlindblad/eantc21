@@ -1,0 +1,357 @@
+admin@ncs(config)# 
+admin@ncs(config)# devices device ipi-31 sync-f
+result true
+admin@ncs(config)# devices device ipi-32 sync-f
+result true
+admin@ncs(config)# load merge configs/ipi/1.5/ipi31.xml 
+Loading.
+1.42 KiB parsed in 0.01 sec (80.33 KiB/sec)
+admin@ncs(config)# load merge configs/ipi/1.5/ipi3      
+Possible completions:
+  <filename/terminal>  ipi31.xml  ipi32.xml
+admin@ncs(config)# load merge configs/ipi/1.5/ipi32.xml 
+Loading.
+1.42 KiB parsed in 0.01 sec (123.63 KiB/sec)
+admin@ncs(config)# show c
+devices device ipi-31
+ config
+  oc-if:interfaces interface eth2
+   config mtu 2000
+   config disabled
+   subinterfaces subinterface 0
+    config index 0
+   !
+   subinterfaces subinterface 0
+    ipv4 addresses address 10.10.10.10
+     config ip 10.10.10.10
+    !
+    ipv4 addresses address 10.10.10.10
+     config prefix-length 24
+    !
+    ipv4 config mtu 2000
+   !
+  !
+ !
+!
+devices device ipi-32
+ config
+  oc-if:interfaces interface eth2
+   config mtu 2000
+   config disabled
+   subinterfaces subinterface 0
+    config index 0
+   !
+   subinterfaces subinterface 0
+    ipv4 addresses address 20.20.20.20
+     config ip 20.20.20.20
+    !
+    ipv4 addresses address 20.20.20.20
+     config prefix-length 24
+    !
+    ipv4 config mtu 2000
+   !
+  !
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# load merge configs/ipi/
+Possible completions:
+  <filename/terminal>  .DS_Store  1.12/  1.5/
+admin@ncs(config)# load merge configs/ipi/1.5/ipi31.xml 
+Loading.
+1.42 KiB parsed in 0.01 sec (120.94 KiB/sec)
+admin@ncs(config)# load merge configs/ipi/1.5/ipi32.xml
+Loading.
+1.42 KiB parsed in 0.01 sec (96.31 KiB/sec)
+admin@ncs(config)# show c
+devices device ipi-31
+ config
+  oc-if:interfaces interface eth2
+   config enabled
+  !
+ !
+!
+devices device ipi-32
+ config
+  oc-if:interfaces interface eth2
+   config enabled
+  !
+ !
+!
+admin@ncs(config)# comm
+Commit complete.
+admin@ncs(config)# devices device ipi-31 compare-config 
+diff 
+ devices {
+     device ipi-31 {
+         config {
+             oc-if:interfaces {
+                 interface eth2 {
+                     config {
+-                        enabled;
+                     }
+                 }
+             }
+         }
+     }
+ }
+
+admin@ncs(config)# rollback c
+admin@ncs(config)# show c
+devices device ipi-31
+ config
+  oc-if:interfaces interface eth2
+   config disabled
+  !
+ !
+!
+devices device ipi-32
+ config
+  oc-if:interfaces interface eth2
+   config disabled
+  !
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# rollback 
+Possible completions:
+  configuration   Roll back database to last committed version
+  selective       Apply a single rollback delta
+admin@ncs(config)# rollback configuration 10
+Possible completions: (first 100)
+  10001   2021-04-15 15:44:14 by system via system
+  10002   2021-04-15 15:47:12 by admin via cli
+  10003   2021-04-15 15:47:20 by admin via cli
+  10004   2021-04-15 15:50:23 by admin via cli
+  10005   2021-04-15 15:50:51 by admin via cli
+  10006   2021-04-15 16:53:59 by admin via cli
+  10007   2021-04-15 17:05:56 by admin via cli
+  10008   2021-04-15 17:08:39 by admin via cli
+  10009   2021-04-16 14:20:32 by admin via cli
+  10010   2021-04-16 15:03:41 by admin via cli
+  10011   2021-04-20 07:06:18 by admin via cli
+  10012   2021-04-21 06:59:43 by admin via cli
+  10013   2021-04-21 10:42:30 by admin via cli
+  10014   2021-04-21 10:42:41 by admin via cli
+  10015   2021-04-21 10:42:57 by admin via cli
+  10016   2021-04-21 10:49:42 by admin via cli
+  10017   2021-04-21 10:50:36 by admin via cli
+  10018   2021-04-21 15:30:38 by admin via cli
+  10019   2021-04-21 15:31:46 by admin via cli
+  10020   2021-04-21 15:35:52 by admin via cli
+  10021   2021-04-21 15:36:19 by admin via cli
+  10022   2021-04-21 15:36:29 by admin via cli
+  10023   2021-04-21 15:39:52 by admin via cli
+  10024   2021-04-21 15:46:27 by admin via cli
+  10025   2021-04-21 16:09:10 by admin via cli
+  10026   2021-04-21 16:22:00 by admin via cli
+  10027   2021-04-21 16:41:08 by admin via cli
+  10028   2021-04-21 17:46:24 by admin via cli
+  10029   2021-04-21 17:46:44 by admin via cli
+  10030   2021-04-22 07:16:06 by admin via cli
+  10031   2021-04-22 18:15:27 by admin via cli
+  10032   2021-04-23 09:28:37 by admin via cli
+  10033   2021-04-23 09:34:18 by admin via cli
+  10034   2021-04-23 09:35:23 by admin via cli
+  10035   2021-04-23 09:45:40 by admin via cli
+  10036   2021-04-23 09:57:06 by admin via cli
+  10037   2021-04-23 11:30:12 by admin via cli
+  10038   2021-04-23 13:55:49 by admin via cli
+  10039   2021-04-23 13:58:57 by admin via cli
+  10040   2021-04-23 14:04:42 by admin via cli
+  10041   2021-04-23 14:22:43 by admin via cli
+  10042   2021-04-23 14:23:26 by admin via cli
+  10043   2021-04-23 14:33:27 by admin via cli
+  10044   2021-04-23 14:34:30 by admin via cli
+  10045   2021-04-23 14:42:39 by admin via cli
+  10046   2021-04-23 14:42:47 by admin via cli
+  10047   2021-04-23 14:43:33 by admin via cli
+  10048   2021-04-23 14:43:37 by admin via cli
+  10049   2021-04-23 14:43:47 by admin via cli
+  10050   2021-04-23 14:44:02 by admin via cli
+  10051   2021-04-23 14:44:40 by admin via cli
+  10052   2021-04-23 14:45:14 by admin via cli
+  10053   2021-04-23 15:02:01 by admin via cli
+  10054   2021-04-23 15:03:52 by admin via cli
+  10055   2021-04-24 06:22:23 by admin via netconf
+  10056   2021-04-24 06:24:00 by admin via netconf
+  10057   2021-04-24 06:25:21 by admin via netconf
+  10058   2021-04-24 06:33:59 by admin via netconf
+  10059   2021-04-24 06:37:44 by admin via netconf
+  10060   2021-04-24 06:38:51 by admin via netconf
+  10061   2021-04-24 06:39:43 by admin via netconf
+  10062   2021-04-24 06:40:31 by admin via netconf
+  10063   2021-04-24 06:54:56 by admin via netconf
+  10064   2021-04-24 07:01:49 by admin via netconf
+  10065   2021-04-24 07:03:38 by admin via netconf
+  10066   2021-04-24 07:04:16 by admin via netconf
+  10067   2021-04-24 07:10:49 by admin via netconf
+  10068   2021-04-24 07:38:25 by admin via netconf
+  10069   2021-04-24 07:38:28 by admin via netconf
+  10070   2021-04-24 07:38:31 by admin via netconf
+  10071   2021-04-24 07:39:48 by admin via netconf
+  10072   2021-04-24 07:39:48 by admin via netconf
+  10073   2021-04-24 07:41:33 by admin via netconf
+  10074   2021-04-24 07:42:45 by admin via netconf
+  10075   2021-04-24 07:42:49 by admin via netconf
+  10076   2021-04-24 07:42:51 by admin via netconf
+  10077   2021-04-24 07:43:03 by admin via netconf
+  10078   2021-04-24 07:43:03 by admin via netconf
+  10079   2021-04-24 07:43:05 by admin via netconf
+  10080   2021-04-24 16:59:46 by admin via netconf
+  10081   2021-04-24 17:01:06 by admin via netconf
+  10082   2021-04-24 17:05:28 by admin via netconf
+  10083   2021-04-24 17:06:55 by admin via netconf
+  10084   2021-04-24 17:08:58 by admin via netconf
+  10085   2021-04-24 17:25:48 by admin via netconf
+  10086   2021-04-24 17:26:32 by admin via netconf
+  10087   2021-04-24 17:27:13 by admin via netconf
+  10088   2021-04-24 17:27:34 by admin via netconf
+  10089   2021-04-24 17:28:02 by admin via netconf
+  10090   2021-04-24 17:28:15 by admin via netconf
+  10091   2021-04-24 17:30:29 by admin via netconf
+  10092   2021-04-24 19:02:00 by admin via netconf
+  10093   2021-04-24 19:04:00 by admin via netconf
+  10094   2021-04-24 19:04:42 by admin via netconf
+  10095   2021-04-24 19:14:24 by admin via netconf
+  10096   2021-04-24 19:14:46 by admin via netconf
+  10097   2021-04-24 19:18:30 by admin via netconf
+  10098   2021-04-24 19:18:57 by admin via netconf
+  10099   2021-04-24 19:18:57 by admin via netconf
+  10100   2021-04-24 19:18:58 by admin via netconf
+admin@ncs(config)# rollback configuration 11
+                                          ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# rollback configuration 105
+                                          ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# rollback configuration 104
+                                          ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# rollback configuration 103
+                                          ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# rollback configuration 102
+Possible completions:
+  10200   2021-04-27 15:15:18 by admin via cli
+  10201   2021-04-27 15:15:42 by admin via cli
+  10202   2021-04-27 15:28:11 by admin via cli
+  10203   2021-04-27 15:30:28 by admin via cli
+  10204   2021-04-27 15:33:23 by admin via cli
+  10205   2021-04-27 15:35:03 by admin via cli
+  10206   2021-04-27 15:37:22 by admin via cli
+  10207   2021-04-27 17:54:06 by admin via cli
+  10208   2021-04-27 18:49:48 by admin via netconf
+  10209   2021-04-27 18:50:08 by admin via netconf
+  10210   2021-04-27 18:50:46 by admin via netconf
+  10211   2021-04-27 18:52:58 by admin via netconf
+  10212   2021-04-27 18:53:15 by admin via netconf
+  10213   2021-04-27 18:54:12 by admin via netconf
+  10214   2021-04-27 18:54:25 by admin via netconf
+  10215   2021-04-27 18:54:32 by admin via netconf
+  10216   2021-04-27 18:54:42 by admin via netconf
+  10217   2021-04-28 07:56:16 by admin via cli
+  10218   2021-04-28 08:21:36 by admin via cli
+  10219   2021-04-28 08:21:41 by admin via cli
+  10220   2021-04-28 08:28:09 by admin via cli
+  10221   2021-04-28 08:57:36 by admin via cli
+  10222   2021-04-28 09:00:16 by admin via netconf
+  10223   2021-04-28 09:04:38 by admin via netconf
+  10224   2021-04-28 09:05:03 by admin via netconf
+  10225   2021-04-28 09:07:40 by admin via cli
+  10226   2021-04-28 09:08:35 by admin via netconf
+  10227   2021-04-28 09:13:07 by admin via netconf
+  10228   2021-04-28 09:13:29 by admin via netconf
+  10229   2021-04-28 09:13:37 by admin via netconf
+  10230   2021-04-28 11:26:57 by admin via cli
+  10231   2021-04-28 11:48:58 by admin via cli
+  10232   2021-04-28 11:59:26 by admin via cli
+  10233   2021-04-28 14:11:02 by admin via cli
+  10234   2021-04-28 14:11:10 by admin via cli
+  10235   2021-04-28 14:18:45 by admin via cli
+  10236   2021-04-28 14:20:09 by admin via cli
+  10237   2021-04-28 14:42:04 by admin via cli
+  10238   2021-04-29 06:53:50 by admin via cli
+  10239   2021-04-29 06:54:08 by admin via cli
+  10240   2021-04-29 07:11:42 by admin via cli
+  10241   2021-04-29 07:36:23 by admin via cli
+  10242   2021-04-29 07:36:26 by admin via cli
+  10243   2021-04-29 07:36:33 by admin via cli
+  10244   2021-04-29 07:38:32 by admin via cli
+  10245   2021-04-29 07:40:35 by admin via cli
+  10246   2021-04-29 07:58:01 by admin via cli
+  10247   2021-04-29 08:14:24 by admin via cli
+  10248   2021-04-29 08:15:33 by admin via cli
+  10249   2021-04-29 08:15:58 by admin via cli
+  10250   2021-04-29 08:17:34 by admin via cli
+  10251   2021-04-29 08:18:00 by admin via cli
+  10252   2021-04-29 08:21:34 by admin via cli
+  10253   2021-04-29 08:23:38 by admin via cli
+  10254   2021-04-29 08:24:07 by admin via cli
+  10255   2021-04-29 08:26:27 by admin via cli
+  10256   2021-04-29 08:36:05 by admin via cli
+  10257   2021-04-29 08:41:06 by admin via cli
+  10258   2021-04-29 09:10:45 by admin via cli
+  10259   2021-04-29 09:23:58 by admin via cli
+  10260   2021-04-29 09:24:17 by admin via cli
+  10261   2021-04-29 09:25:49 by admin via cli
+  10262   2021-04-29 09:28:40 by admin via cli
+  10263   2021-04-29 09:29:55 by admin via cli
+  10264   2021-04-29 09:31:27 by admin via cli
+  10265   2021-04-29 09:33:04 by admin via cli
+  10266   2021-04-29 09:33:30 by admin via cli
+  10267   2021-04-29 09:41:23 by admin via cli
+  10268   2021-04-29 09:42:06 by admin via cli
+  10269   2021-04-29 09:48:19 by admin via cli
+  10270   2021-04-29 09:48:47 by admin via cli
+  10271   2021-04-29 09:49:08 by admin via cli
+  10272   2021-04-29 09:58:27 by admin via cli
+  10273   2021-04-29 10:04:25 by admin via cli
+  10274   2021-04-29 10:17:49 by admin via cli
+  10275   2021-04-29 10:21:10 by admin via cli
+  10276   2021-04-29 10:22:35 by admin via cli
+  10277   2021-04-29 10:24:21 by admin via cli
+  10278   2021-04-29 17:30:10 by admin via cli
+  10279   2021-04-29 17:31:05 by admin via cli
+  10280   2021-04-29 17:33:50 by admin via cli
+  10281   2021-04-30 05:50:27 by admin via cli
+  10282   2021-04-30 05:50:31 by admin via cli
+  10283   2021-04-30 05:51:20 by admin via cli
+  10284   2021-04-30 05:51:39 by admin via cli
+  10285   2021-04-30 08:13:12 by admin via cli
+  10286   2021-04-30 08:13:18 by admin via cli
+  10287   2021-04-30 08:15:21 by admin via cli
+  10288   2021-04-30 08:22:43 by admin via cli
+  10289   2021-04-30 08:43:48 by admin via cli
+  10290   2021-04-30 08:46:08 by admin via cli
+  10291   2021-04-30 08:48:08 by admin via cli
+  10292   2021-04-30 08:56:21 by admin via cli
+  <cr>    latest
+admin@ncs(config)# rollback configuration 10290 
+admin@ncs(config)# show c
+devices device ipi-31
+ config
+  oc-if:interfaces interface eth2
+   no config mtu 2000
+   no config disabled
+   no subinterfaces subinterface 0
+  !
+ !
+!
+devices device ipi-32
+ config
+  oc-if:interfaces interface eth2
+   no config mtu 2000
+   no config disabled
+   no subinterfaces subinterface 0
+  !
+ !
+!
+admin@ncs(config)# comm
+Commit complete.
+admin@ncs(config)# devices device ipi-31 compare-config
+admin@ncs(config)# devices device ipi-32 compare-config
+admin@ncs(config)# 
+admin@ncs(config)# 

@@ -1,0 +1,13 @@
+module nokia-nsp-l3vpn-nc-1.0 {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/nokia-nsp-l3vpn-nc-1.0";
+  prefix nokia-nsp-l3vpn-nc-1.0;
+
+  import nokia-nsp-l3vpn-nc {
+    prefix family;
+  }
+
+  identity nokia-nsp-l3vpn-nc-1.0 {
+    base family:nokia-nsp-l3vpn-nc;
+  }
+}

@@ -1,0 +1,405 @@
+admin@ncs(config)# 
+admin@ncs(config)# devices device ciena-5 sync-f
+result true
+admin@ncs(config)# devices device ciena-6 sync-f
+result true
+admin@ncs(config)# load merge configs/ciena/1.4/
+Possible completions:
+  <filename/terminal>  5164-1-base.xml  5164-2-base.xml  5164-RSim-1-base.xml  EANTC-5164.zip  cfg-5.xml  cfg-6.xml  ciena-6.xml
+admin@ncs(config)# load merge configs/ciena/1.4/cfg-5.xml 
+Loading.
+10.44 KiB parsed in 0.04 sec (239.75 KiB/sec)
+admin@ncs(config)# load merge configs/ciena/1.4/cfg-6.xml
+Loading.
+10.44 KiB parsed in 0.03 sec (306.61 KiB/sec)
+admin@ncs(config)# show c
+devices device ciena-5
+ config
+  bgp instance 65432
+   router-id       5.5.5.5
+   mpls-resolution true
+   address-family vpnv4 unicast
+    route-reflector false
+   !
+   address-family l2vpn evpn
+   !
+   peer 6.6.6.6
+    remote-as               65432
+   !
+  !
+  oc-if:interfaces interface lb0
+   config name lb0
+  !
+  oc-if:interfaces interface lb0
+   config type  loopback
+   config admin-status true
+   config role  data
+   config vrfName default
+   ipv4 addresses address 5.5.5.5
+    config ip 5.5.5.5
+   !
+   ipv4 addresses address 5.5.5.5
+    config prefix-length 32
+   !
+  !
+  bgp instance 65432
+   peer 6.6.6.6
+    update-source-interface lb0
+    address-family vpnv4 unicast
+     activate               true
+     route-reflector-client false
+    !
+    address-family l2vpn evpn
+     activate               true
+     route-reflector-client false
+    !
+   !
+  !
+  isis instance master
+   distance         115
+   dynamic-hostname true
+   net              [ 49.a001.0050.0500.5005.00 ]
+   level-type       level-1
+   interfaces interface lb0
+    interface-type broadcast
+    level-type     level-1
+   !
+  !
+  oc-if:interfaces interface to16006
+   config name to16006
+  !
+  oc-if:interfaces interface to16006
+   config mtu       9136
+   config type      ip
+   config admin-status true
+   config role      data
+   config vrfName   default
+   config frame-to-cos-map default-f2c
+   config cos-to-frame-map default-c2f
+   config stats-collection on
+  !
+  fds fd 20.5.6.0/30
+   mode vpls
+  !
+  oc-if:interfaces interface to16006
+   config underlay-binding config fd 20.5.6.0/30
+   ipv4 addresses address 20.5.6.1
+    config ip 20.5.6.1
+   !
+   ipv4 addresses address 20.5.6.1
+    config prefix-length 30
+   !
+  !
+  isis instance master
+   interfaces interface to16006
+    interface-type point-to-point
+    level-type     level-1
+   !
+  !
+  oc-if:interfaces interface to16006b
+   config name to16006b
+  !
+  oc-if:interfaces interface to16006b
+   config mtu       9136
+   config type      ip
+   config admin-status true
+   config role      data
+   config vrfName   default
+   config frame-to-cos-map default-f2c
+   config cos-to-frame-map default-c2f
+   config stats-collection on
+  !
+  fds fd 20.5.6.4/30
+   mode vpls
+  !
+  oc-if:interfaces interface to16006b
+   config underlay-binding config fd 20.5.6.4/30
+   ipv4 addresses address 20.5.6.5
+    config ip 20.5.6.5
+   !
+   ipv4 addresses address 20.5.6.5
+    config prefix-length 30
+   !
+  !
+  isis instance master
+   interfaces interface to16006b
+    interface-type point-to-point
+    level-type     level-1
+   !
+   mpls-te router-id 5.5.5.5
+   mpls-te level-type level-1
+   segment-routing enabled
+   segment-routing srgb 16000 23999
+   !
+   segment-routing bindings advertise false
+   segment-routing bindings receive true
+  !
+  mpls interfaces interface lb0
+   label-switching true
+  !
+  mpls interfaces interface to16006
+   label-switching true
+  !
+  mpls interfaces interface to16006b
+   label-switching true
+  !
+  segment-routing connected-prefix-sid-map 5.5.5.5/32
+   interface  lb0
+   value-type index
+   start-sid  5
+  !
+  classifiers classifier untagged
+   filter-entry vtag-stack
+    logical-not                      false
+    untagged-exclude-priority-tagged false
+   !
+  !
+  fps fp p4untagged
+   fd-name                    20.5.6.0/30
+   logical-port               4
+   mtu-size                   2000
+   frame-to-cos-map           default-f2c
+   cos-to-frame-map           default-c2f
+   classifier-list            [ untagged ]
+   classifier-list-precedence 10
+   stats-collection           on
+  !
+  fps fp p5untagged
+   fd-name                    20.5.6.4/30
+   logical-port               5
+   mtu-size                   2000
+   frame-to-cos-map           default-f2c
+   cos-to-frame-map           default-c2f
+   classifier-list            [ untagged ]
+   classifier-list-precedence 10
+   stats-collection           on
+  !
+ !
+!
+devices device ciena-6
+ config
+  bgp instance 65432
+   router-id       6.6.6.6
+   mpls-resolution true
+   address-family vpnv4 unicast
+    route-reflector false
+   !
+   address-family l2vpn evpn
+   !
+   peer 5.5.5.5
+    remote-as               65432
+   !
+  !
+  oc-if:interfaces interface lb0
+   config name lb0
+  !
+  oc-if:interfaces interface lb0
+   config type  loopback
+   config admin-status true
+   config role  data
+   config vrfName default
+   ipv4 addresses address 6.6.6.6
+    config ip 6.6.6.6
+   !
+   ipv4 addresses address 6.6.6.6
+    config prefix-length 32
+   !
+  !
+  bgp instance 65432
+   peer 5.5.5.5
+    update-source-interface lb0
+    address-family vpnv4 unicast
+     activate               true
+     route-reflector-client false
+    !
+    address-family l2vpn evpn
+     activate               true
+     route-reflector-client false
+    !
+   !
+  !
+  isis instance master
+   distance         115
+   dynamic-hostname true
+   net              [ 49.a001.0060.0600.6006.00 ]
+   level-type       level-1
+   interfaces interface lb0
+    interface-type broadcast
+    level-type     level-1
+   !
+  !
+  oc-if:interfaces interface to16005
+   config name to16005
+  !
+  oc-if:interfaces interface to16005
+   config mtu       9136
+   config type      ip
+   config admin-status true
+   config role      data
+   config vrfName   default
+   config frame-to-cos-map default-f2c
+   config cos-to-frame-map default-c2f
+   config stats-collection on
+  !
+  fds fd 20.5.6.0/30
+   mode vpls
+  !
+  oc-if:interfaces interface to16005
+   config underlay-binding config fd 20.5.6.0/30
+   ipv4 addresses address 20.5.6.2
+    config ip 20.5.6.2
+   !
+   ipv4 addresses address 20.5.6.2
+    config prefix-length 30
+   !
+  !
+  isis instance master
+   interfaces interface to16005
+    interface-type point-to-point
+    level-type     level-1
+   !
+  !
+  oc-if:interfaces interface to16005b
+   config name to16005b
+  !
+  oc-if:interfaces interface to16005b
+   config mtu       9136
+   config type      ip
+   config admin-status true
+   config role      data
+   config vrfName   default
+   config frame-to-cos-map default-f2c
+   config cos-to-frame-map default-c2f
+   config stats-collection on
+  !
+  fds fd 20.5.6.4/30
+   mode vpls
+  !
+  oc-if:interfaces interface to16005b
+   config underlay-binding config fd 20.5.6.4/30
+   ipv4 addresses address 20.5.6.6
+    config ip 20.5.6.6
+   !
+   ipv4 addresses address 20.5.6.6
+    config prefix-length 30
+   !
+  !
+  isis instance master
+   interfaces interface to16005b
+    interface-type point-to-point
+    level-type     level-1
+   !
+   mpls-te router-id 6.6.6.6
+   mpls-te level-type level-1
+   segment-routing enabled
+   segment-routing srgb 16000 23999
+   !
+   segment-routing bindings advertise false
+   segment-routing bindings receive true
+  !
+  mpls interfaces interface lb0
+   label-switching true
+  !
+  mpls interfaces interface to16005
+   label-switching true
+  !
+  mpls interfaces interface to16005b
+   label-switching true
+  !
+  segment-routing connected-prefix-sid-map 6.6.6.6/32
+   interface  lb0
+   value-type index
+   start-sid  6
+  !
+  classifiers classifier untagged
+   filter-entry vtag-stack
+    logical-not                      false
+    untagged-exclude-priority-tagged false
+   !
+  !
+  fps fp p4untagged
+   fd-name                    20.5.6.0/30
+   logical-port               4
+   mtu-size                   2000
+   frame-to-cos-map           default-f2c
+   cos-to-frame-map           default-c2f
+   classifier-list            [ untagged ]
+   classifier-list-precedence 10
+   stats-collection           on
+  !
+  fps fp p5untagged
+   fd-name                    20.5.6.4/30
+   logical-port               5
+   mtu-size                   2000
+   frame-to-cos-map           default-f2c
+   cos-to-frame-map           default-c2f
+   classifier-list            [ untagged ]
+   classifier-list-precedence 10
+   stats-collection           on
+  !
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# rollback c
+admin@ncs(config)# show c
+devices device ciena-5
+ config
+  bgp instance 65432
+   peer 6.6.6.6
+    no address-family l2vpn evpn
+    no address-family vpnv4 unicast
+   !
+  !
+  no bgp instance 65432
+  no isis instance master
+  no mpls interfaces interface lb0
+  no mpls interfaces interface to16006
+  no mpls interfaces interface to16006b
+  no segment-routing connected-prefix-sid-map 5.5.5.5/32
+  no oc-if:interfaces interface lb0
+  no oc-if:interfaces interface to16006
+  no oc-if:interfaces interface to16006b
+  no fps fp p4untagged
+  no fps fp p5untagged
+  no classifiers classifier untagged
+  no fds fd 20.5.6.0/30
+  no fds fd 20.5.6.4/30
+ !
+!
+devices device ciena-6
+ config
+  no bgp instance 65432
+  no isis instance master
+  no mpls interfaces interface lb0
+  no mpls interfaces interface to16005
+  no mpls interfaces interface to16005b
+  no segment-routing connected-prefix-sid-map 6.6.6.6/32
+  no oc-if:interfaces interface lb0
+  no oc-if:interfaces interface to16005
+  no oc-if:interfaces interface to16005b
+  no classifiers classifier untagged
+  no fds fd 20.5.6.0/30
+  no fds fd 20.5.6.4/30
+  no fps fp p4untagged
+  no fps fp p5untagged
+ !
+!
+admin@ncs(config)# commit
+Commit complete.
+admin@ncs(config)# devices device ciena-5 co 
+Possible completions:
+  commit-queue        Control settings for the commit queue
+  compare-config      Compare the actual device config with the NCS copy
+  config              NCS copy of the device configuration
+  connect             Connect to the device
+  connect-retries     Retry connect on transient errors
+  connect-timeout     Timeout in seconds for new connections
+  copy-capabilities   Note: this action overwrites existing list of capabilities.
+admin@ncs(config)# devices device ciena-5 compp
+                                          ^
+% Invalid input detected at '^' marker.
+admin@ncs(config)# devices device ciena-5 compare-config 
+admin@ncs(config)# devices device ciena-6 compare-config
+admin@ncs(config)# 
+admin@ncs(config)# 

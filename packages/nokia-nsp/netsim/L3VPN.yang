@@ -1,0 +1,89 @@
+module L3VPN {
+  namespace "http://www.nokia.com/management-solutions/L3VPN";
+  prefix "L3VPN";
+  import nokia-types { prefix nokia-types; }  
+  import ibn { prefix ibn; }
+  organization "NOKIA Corp";
+  contact "";
+  description "";
+  revision "2021-04-26" {
+    description "Initial revision.";
+  }
+
+  augment /ibn:ibn/ibn:intent/ibn:intent-specific-data {
+    container L3VPN {
+      list nodes {
+        key "ne-id";
+        
+        leaf ne-id {
+          type string;
+        }
+        
+        leaf vrf-description {
+          type string;
+        }
+
+        leaf routerId {
+          type string;
+        }
+        
+        leaf RD {
+          type string;
+        }
+
+        leaf RT {
+          type string;
+        }
+        
+        container InterfaceParameters {
+          list interfaces {
+            key "interface-name";
+            
+            leaf interface-name {
+              type string;
+            }
+            leaf type {
+              type string;
+            }
+            leaf port {
+              type string;
+            }
+            leaf vlan {
+              type uint32;
+            }
+            leaf port-mtu {
+              type uint32;
+            }
+            leaf admin-enabled {
+              type boolean;
+            }
+            leaf ipAddress {
+              type nokia-types:ip-address;
+            }      
+            leaf mask {
+              type uint32;
+            }
+          }
+        }
+        
+        container ProtocolParameters {
+          leaf local-AS {
+            type uint32;
+          }
+          leaf peer-address {
+            type nokia-types:ip-address;
+          }
+          leaf peer-description {
+            type string;
+          }
+          leaf remote-AS {
+            type uint32;
+          }
+          leaf peer-admin-enabled {
+            type boolean;
+          }
+        }
+      }
+    }
+  }
+}

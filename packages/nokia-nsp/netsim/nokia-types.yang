@@ -1,0 +1,76 @@
+module nokia-types {
+  namespace "http://www.nokia.com/management-solutions/nokia-types";
+  prefix nokia-types;
+  organization "NOKIA Corp";
+  contact "";
+  description "";
+
+  revision 2019-10-08 {
+    description "Initial revision.";
+  }
+  
+  typedef ipv4-address {
+    type string {
+      pattern
+        '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}'
+          + '([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])'
+          + '(%[\p{N}\p{L}]+)?';
+    }
+    description
+      "The ipv4-address type represents an IPv4 address in
+      dotted-quad notation.  The IPv4 address may include a zone
+      index, separated by a % sign.
+
+      The zone index is used to disambiguate identical address
+      values.  For link-local addresses, the zone index will
+      typically be the interface index number or the name of an
+      interface.  If the zone index is not present, the default
+      zone of the device will be used.
+
+      The canonical format for the zone index is the numerical
+      format";
+  }
+
+  typedef ipv6-address {
+    type string {
+      pattern
+        '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}'
+          + '((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|'
+          + '(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}'
+          + '(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))'
+          + '(%[\p{N}\p{L}]+)?';
+      pattern
+        '(([^:]+:){6}(([^:]+:[^:]+)|(.*\..*)))|'
+          + '((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?)'
+          + '(%.+)?';
+    }
+    description
+      "The ipv6-address type represents an IPv6 address in full,
+      mixed, shortened, and shortened-mixed notation.  The IPv6
+      address may include a zone index, separated by a % sign.
+
+      The zone index is used to disambiguate identical address
+      values.  For link-local addresses, the zone index will
+      typically be the interface index number or the name of an
+      interface.  If the zone index is not present, the default
+      zone of the device will be used.
+
+      The canonical format of IPv6 addresses uses the textual
+      representation defined in Section 4 of RFC 5952.  The
+      canonical format for the zone index is the numerical
+      format as described in Section 11.2 of RFC 4007.";
+      reference
+        "RFC 4291: IP Version 6 Addressing Architecture
+         RFC 4007: IPv6 Scoped Address Architecture
+         RFC 5952: A Recommendation for IPv6 Address Text
+            Representation";
+  }
+
+  
+  typedef ip-address {
+    type union {
+      type ipv4-address;
+      type ipv6-address;
+    }
+  } 
+}

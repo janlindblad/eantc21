@@ -1,0 +1,48 @@
+<devices xmlns="http://tail-f.com/ns/ncs">
+ <device>
+  <name>ipi-31</name>
+  <config
+        xmlns:oc-types="http://openconfig.net/yang/openconfig-types"
+        xmlns:oc-pol-types="http://openconfig.net/yang/policy-types"
+        xmlns:oc-ni-types="http://openconfig.net/yang/network-instance-types"
+        xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+      <interface>
+        <name>eth2</name>
+        <config>
+          <name>eth2</name>
+          <enabled>true</enabled>
+          <mtu>2000</mtu>
+          <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+        </config>
+        <subinterfaces>
+          <subinterface>
+            <index>0</index>
+            <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
+              <config>
+                <mtu>2000</mtu>
+              </config>
+              <config/>
+              <addresses>
+                <address>
+                  <ip>10.10.10.10</ip>
+                  <config>
+                    <ip>10.10.10.10</ip>
+                    <prefix-length>24</prefix-length>
+                  </config>
+                </address>
+              </addresses>
+            </ipv4>
+            <config>
+              <index>0</index>
+            </config>
+          </subinterface>
+        </subinterfaces>
+      </interface>
+    </interfaces>
+
+  </config>
+ </device>
+</devices>
+

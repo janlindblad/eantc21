@@ -1,0 +1,28 @@
+module ibn {
+  namespace "http://www.nokia.com/ibn";
+  prefix "ibn";
+  revision "2021-04-26" {
+    description "Initial revision.";
+  }
+
+  container ibn {
+    list intent {
+      key target;
+
+      leaf target {
+        type string;
+      }
+      leaf intent-type {
+        type string;
+      }
+      leaf intent-type-version {
+        type uint32;
+      }
+      leaf required-network-state {
+        type string;
+      }
+      container intent-specific-data {
+      }
+    }
+  }
+}

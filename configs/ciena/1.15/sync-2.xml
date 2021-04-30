@@ -1,0 +1,59 @@
+<config>
+  <sync xmlns="http://www.ciena.com/ns/yang/ciena-sync">
+    <global>
+      <network-option>option-1</network-option>
+      <reversion-mode>revertive</reversion-mode>
+      <wait-to-restore>5</wait-to-restore>
+    </global>
+    <ptp-global xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">
+      <profile>g.8275.1</profile>
+      <clock-type>bc</clock-type>
+      <timestamp-mode>one-step</timestamp-mode>
+    </ptp-global>
+    <input-references>
+      <synce-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce">
+        <name>f_in4</name>
+        <interface>4</interface>
+        <priority>10</priority>
+      </synce-input-reference>
+      <synce-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce">
+        <name>f_in5</name>
+        <interface>5</interface>
+        <priority>20</priority>
+      </synce-input-reference>
+      <ptp-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">
+      	<name>p_in4</name>
+      	<interface>4</interface>
+      	<priority>40</priority>
+      </ptp-input-reference>
+      <ptp-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">
+        <name>p_in5</name>
+        <interface>5</interface>
+        <priority>50</priority>
+      </ptp-input-reference>
+    </input-references>
+    <output-references>
+      <ptp-output-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">
+        <name>p_out1</name>
+        <interface>1</interface>
+      </ptp-output-reference>
+      <synce-output-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce">
+        <name>f_out1</name>
+        <interface>1</interface>
+      </synce-output-reference>
+    </output-references>
+    <protection-groups>
+        <frequency-protection-group>
+          <name>FqGroup</name>
+          <threshold-quality-level xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce" xmlns:sync="http://www.ciena.com/ns/yang/ciena-sync">sync:sec</threshold-quality-level>
+          <synce-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce">f_in4</synce-input-reference>
+          <synce-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-synce">f_in5</synce-input-reference>
+		    </frequency-protection-group>
+        <phase-protection-group>
+			    <name>PhiGroup</name>
+			    <ptp-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">p_in4</ptp-input-reference>
+          <ptp-input-reference xmlns="http://www.ciena.com/ns/yang/ciena-sync-ptp">p_in5</ptp-input-reference>
+			</phase-protection-group>
+		</protection-groups>
+  </sync>
+</config>

@@ -1,0 +1,56 @@
+{
+    "ibn:intent":{
+        "target": "113",
+        "intent-type": "L3VPN",
+        "intent-type-version": 1,
+        "required-network-state": "active",
+        "intent-specific-data": {
+                        "L3VPN:L3VPN": {
+                            "nodes": [
+                                {
+                                    "RD": "65001:10",
+                                    "InterfaceParameters": {
+                                        "interfaces": [
+                                            {
+                                                "port": "GigabitEthernet0/0/0/2",
+                                                "interface-name": "darkBlue",
+                                                "ipAddress": "40.2.1.1",
+                                                "port-mtu": 2000,
+                                                "mask": 30
+                                            }
+                                        ]
+                                    },
+                                    "ProtocolParameters": {
+                                        "peer-address": "40.2.1.2",
+                                        "remote-AS": 123,
+                                        "local-AS": 65001
+                                    },
+                                    "ne-id": "10.20.0.101"
+                                },
+                                {
+                                    "RD": "65001:10",
+                                    "InterfaceParameters": {
+                                        "interfaces": [
+                                            {
+                                                "port": "GigabitEthernet0/0/0/2",
+                                                "admin-enabled": true,
+                                                "interface-name": "lightBlue",
+                                                "ipAddress": "30.2.1.1",
+                                                "port-mtu": 2000,
+                                                "mask": 30
+                                            }
+                                        ]
+                                    },
+                                    "ProtocolParameters": {
+                                        "remote-AS": 123,
+                                        "peer-address": "30.2.1.2",
+                                        "local-AS": 65001
+                                    },
+                                    "ne-id": "10.20.0.100"
+                                }
+                            ]
+                        }
+                    }
+        }
+    }
+}

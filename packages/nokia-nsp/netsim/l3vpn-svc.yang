@@ -1,0 +1,248 @@
+module l3vpn-svc {
+  namespace "http://www.nokia.com/ietf-l3vpn-ntw:l3vpn-ntw/vpn-services";
+  prefix "l3vpn-svc";  
+  organization "NOKIA Corp";
+  contact "";
+  description "";
+  revision "2021-04-26" {
+    description "Initial revision.";
+  }
+  
+  container l3vpn-svc {
+    container vpn-services {
+	
+	  list vpn-service {
+	    key "vpn-id";
+		
+		leaf vpn-id {
+		  type string;
+		}
+		leaf rd {
+		  type string;
+		}
+		container vpn-targets {
+		  list vpn-target {
+		    key "route-target";
+			
+			leaf route-target {
+			  type string;
+			}
+			leaf route-target-type {
+			 type string;
+			}
+		  
+		  }
+		
+		}		
+		
+	  } //service list
+  }//vpn-services
+  
+  
+  container sites {
+    list site {
+	  key "site-id";
+	  leaf site-id {
+	    type string;
+	  }
+	  container locations {
+	   list location {
+	     key "location-id";
+		 leaf location-id {
+		   type string;
+		 }
+	   }  //location list end
+	  }//end of locations
+	  
+	  container devices {
+	    list device {
+		  key "device-id";
+		  leaf device-id {
+		    type string;
+		  }
+		  leaf location {
+		    type string;
+		  }
+		}
+	  
+	  } //end of devices container
+	  
+	  container management {
+	    leaf type {
+		  type string;
+		}
+	  } //end of management container
+	  
+	  container vpn-policies {
+	  
+	    list vpn-policy {
+		  key "vpn-policy-id";
+		  
+		  leaf vpn-policy-id {
+		   type int16;
+		  }
+		  
+		  container entries {
+		   leaf id {
+		     type int16;
+		   }
+		   container vpn {
+		    leaf vpn-id {
+		      type string;
+		    }
+			leaf router-id {
+		      type string;
+		    }
+			leaf autonomous-system {
+		      type string;
+		    }
+			
+			leaf site-role {
+		      type string;
+		    }
+		   }//enf of vpn container 
+		   
+		  
+		  }//end of entries container 
+		
+		}
+	  
+	  }//end of VPN polocies container
+	  
+	  container site-bearer {
+	    leaf port-id {
+	     type string;
+	   }
+	  
+	  }//end of site-bearer container
+	  
+	  
+	  
+	  
+	  
+	  container site-network-accesses {
+	    list site-network-access {
+		  key "site-network-access-id";
+		  
+		  leaf site-network-access-id {
+		    type string;
+		  }
+		  
+		  container status {
+		    leaf admin-enabled {
+		    type boolean;
+		    }
+		  }
+		  
+		  container bearer {
+		  
+		  container connection {
+		    leaf encapsulation-type {
+			 type string;
+			}
+			
+			container tagged-interface {
+			  container dot1q-vlan-tagged {
+			    leaf cvlan-id {
+			     type string;
+			    }
+				leaf tq-type {
+			     type string;
+			    }
+			  }//end of dot1 tagged container
+			  leaf type {
+			    type string;
+			  }
+			} //end of tagged container
+		  
+		  }		  
+		  
+		  }//end of Bearer container 
+		  
+		 container ip-connection{
+                     container ipv4 {
+                                    leaf address-allocation-type {
+									  type string;
+									}
+									container addresses {
+                                            leaf prefix-length {
+											 type string;
+											}
+                                            leaf provider-address{
+											 type string;
+											}
+                                        }
+								}                                   
+           
+		   }//end of IP 
+		   
+		   
+		   container routing-protocols { 
+		     list routing-protocol {
+			   key "type";
+			   
+			   leaf type { 
+			     type string;
+				 }
+				leaf address-family { 
+			     type string;
+				 }
+
+                leaf peer-as { 
+			     type string;
+				 } 
+                leaf peer-address { 
+			     type string;
+				 } 
+				 leaf peer-description { 
+			     type string;
+				 } 
+				 leaf peer-status { 
+			     type string;
+				 } 
+ 				 
+				 
+			 
+			 }
+		   
+		   } //end of routing-protocols
+		   
+		   
+		leaf device-reference {
+		  type string;
+		}
+		   
+		container service {
+		  leaf svc-input-bandwidth { 
+			     type string;
+				 } 
+		  leaf svc-output-bandwidth { 
+			     type string;
+				 } 
+		  leaf svc-mtu { 
+			     type int16;
+				 } 
+		 
+		} // end of service container
+		
+		container vpn-attachment {
+		  leaf vpn-id {
+		    type string;
+		  }
+		} 
+		
+		} // end of SNA list
+	  
+	  }//end of SNA container
+	  
+	  
+	
+	} //end of site list
+  
+  }//End of sites
+  
+  
+  
+  
+  }//l3vpn-svc
+}

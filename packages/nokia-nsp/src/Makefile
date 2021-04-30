@@ -1,7 +1,7 @@
 # Set MAIN YANG module to empty in case the NED will handle multiple models
 # This is typically the case with RESTCONF NEDs for devices supporting IETF
 # models. 
-MAIN_YANG_MODULE = tailf-ned-nokia-nsp.yang
+MAIN_YANG_MODULE = ibn.yang
 PACKAGE_NAME=nsp
 
 # If the NED supports extra stats models in addition to the
